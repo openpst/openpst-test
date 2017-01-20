@@ -33,12 +33,20 @@ namespace OpenPST {
                 	}
                 }
                 
+                /**
+                * @brief Set the target endianess
+                *
+                * @param PacketEndianess e
+                * @return void
+                */
                 void setTargetEndianess(PacketEndianess e) {
                 	endianT = e;
                 }
 
                 /**
+                * @brief Get the target endianess
                 *
+                * @return PacketEndianess
                 */
                 PacketEndianess getTargetEndianess() {
                 	return endianT;
