@@ -3,6 +3,7 @@
 #include <vector>
 #include <stdint.h>
 #include <algorithm>
+#include <stdexcept>
 
 namespace OpenPST {
     namespace Serial {
@@ -17,9 +18,10 @@ namespace OpenPST {
         	protected:
         		PacketEndianess endianT;
         		PacketEndianess endianH;
-        		Packet* response = nullptr;
-        		bool sent = false;
-        		// uint8_t* data = nullptr;
+        		std::vector<uint8_t> data;
+        		bool responseExpected = true;
+        		Packet* response 	  = nullptr;
+
             public:
                 
                 Packet(PacketEndianess endianT = kPacketEndianessLittle, PacketEndianess endianH = kPacketEndianessLittle);
@@ -57,38 +59,62 @@ namespace OpenPST {
                 PacketEndianess getHostEndianess();
 
                 /**
-                *
+                * @brief Get the flag that this packet will require a response
+                * @return bool
                 */
-                bool isSent();
+                bool getResponseExpected();
 
                 /**
-                *
+                * @brief Set the flag that this packet will require a response
+                * @param bool 
+                * @return void
                 */
-                void setSent(bool s);
+                void setResponseExpected(bool v);
 
-
-
-                /*
-                uint8_t  read8(uint8_t* src);
-                uint16_t read16(uint8_t* src);
-                uint32_t read32(uint8_t* src);
-                uint64_t read64(uint8_t* src);
-                uint64_t read(uint8_t* src, size_t available, uint8_t* dest, size_t amount);
-
-                void write8(uint8_t v, uint8_t* dest);
-                void write16(uint16_t v, uint8_t* dest);
-                void write32(uint32_t v, uint8_t* dest);
-                void write64(uint64_t v, uint8_t* dest);
-                void write(uint8_t* src, size_t amount, uint8_t* dest, size_t available);
-                
-
-                virtual std::vector<uint8_t> pack() = 0;
-     
-                virtual Packet* unpack(std::vector<uint8_t>& data) = 0;
-*/
+                /**
+                * @brief Get ther response packet, if it has been unpacked
+                */
                 Packet* getResponse();
 
+                /**
+                * @brief Read primitive type T from the data buffer at offset
+                * @throws std::out_of_range 
+                * @return T
+                */
+                template <class T> T read(int offset);
+
+                /**
+                * @brief Write primitive type T into the data buffer at offset
+                * @return void
+                */
+                template <class T> void write(T value, int offset);
+                
+                /**
+                * @brief Write specified amount of bytes from src into the data buffer at offset
+                * @return void
+                */
+                void write(uint8_t* src, size_t amount, int offset);
+
+                /**
+                * @brief Validate the data in the packet buffer
+                */
+                //virtual void validate();
+
+                /**
+                * @brief Prepare the data before sending, making and final adjustments
+                */
+                //virtual void prepare();
+
+                /**
+                * @brief Unpack the response buffer into a response Packet
+                */
+                //virtual void unpack(std::vector<uint8_t>& data) = 0;
+
             protected:
+            	/**
+            	* @brief Byte swap primititve type T
+            	* @return T
+            	*/
             	template <class T> T swap(T i);
         };
     }

@@ -31,12 +31,14 @@ PacketEndianess Packet::getHostEndianess() {
 	return endianH;
 }
 
-bool Packet::isSent() {
-	return sent;
+bool Packet::getResponseExpected()
+{
+	return responseExpected;
 }
 
-void Packet::setSent(bool s) {
-	sent = s;
+void setResponseExpected(bool v)
+{
+	responseExpected = v;
 }
 
 Packet* Packet::getResponse() {
@@ -45,8 +47,7 @@ Packet* Packet::getResponse() {
 
 template <class T> T Packet::swap(T i)
 {
-	// don't flip a byte
-	// don't flip anything greater than uint64_t
+	// don't flip a byte or anything greater than uint64_t
 	if (sizeof(T) > sizeof(uint64_t) || sizeof(T) == sizeof(uint8_t)) {
 		return i;
 	}
@@ -58,4 +59,30 @@ template <class T> T Packet::swap(T i)
 		reinterpret_cast<unsigned char*>(&ret) + sizeof(T)
 	);
 	return ret;
+}
+
+template <class T> T Packet::read(int offset)
+{
+	if (offset > data.size() || offset + sizeof(T) > data.size()) {
+		throw std::out_of_range("Attempted to read outside of the packet data buffer");
+	}
+
+	return reinterpret_cast<T>(*(&data[offset]));
+}
+
+
+template <class T> void Packet::write(T value, int offset)
+{
+
+	//if (offset > data.size() || offset + sizeof(T) > data.size()) {
+	//	throw std::out_of_range("Attempted to write outside the packet data buffer");
+	//}
+
+	std::copy(&value, ((&value) + sizeof(T)), data[offset]);
+}
+
+
+void Packet::write(uint8_t* src, size_t amount, int offset)
+{
+
 }
