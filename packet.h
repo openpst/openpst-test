@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <stdint.h>
+#include <algorithm>
 
 namespace OpenPST {
     namespace Serial {
@@ -76,9 +77,10 @@ namespace OpenPST {
                 	sent = s;
                 }
 
-                u16 flip(uint16_t i);
-                u32 flip(uint32_t i);
-                u64 flip(uint64_t i);
+                Packet* getResponse() {
+                	return response;
+                }
+
                 /**
                 *
                 */
@@ -88,7 +90,24 @@ namespace OpenPST {
                 *
                 */
                 //virtual Packet* unpack(std::vector<uint8_t>& data) = 0;
- 
+
+            protected:
+            	template <class T> T swap(T i)
+            	{
+            		// don't flip a byte
+            		// don't flip anything greater than uint64_t
+            		if (sizeof(T) > sizeof(uint64_t) || sizeof(T) == sizeof(uint8_t)) {
+            			return i;
+            		}
+
+					T ret = i;
+
+					std::reverse(
+						reinterpret_cast<unsigned char*>(&ret), 
+						reinterpret_cast<unsigned char*>(&ret) + sizeof(T)
+					);
+					return ret;
+				}
         };
     }
 }
