@@ -1,4 +1,4 @@
-#include "serial_queue.h"
+#include "serial/serial_queue.h"
 
 using namespace OpenPST::Serial;
 

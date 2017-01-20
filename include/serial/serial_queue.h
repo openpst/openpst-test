@@ -1,7 +1,7 @@
 #pragma once
 
 #include <deque>
-#include "packet.h"
+#include "serial/packet.h"
 
 namespace OpenPST {
     namespace Serial {

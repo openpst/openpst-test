@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vector>
-#include "response_packet.h"
+#include "serial/response_packet.h"
 
 using OpenPST::Serial::ResponsePacket;
 

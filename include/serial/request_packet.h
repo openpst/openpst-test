@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vector>
-#include "packet.h"
+#include "serial/packet.h"
 
 using OpenPST::Serial::Packet;
 
