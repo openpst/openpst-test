@@ -73,10 +73,9 @@ template <class T> T Packet::read(int offset)
 
 template <class T> void Packet::write(T value, int offset)
 {
-
-	//if (offset > data.size() || offset + sizeof(T) > data.size()) {
-	//	throw std::out_of_range("Attempted to write outside the packet data buffer");
-	//}
+	if (data.size() < offset + sizeof(T)) {
+		data.reserve(data.size() + (data.size() - offset) + sizeof(T));
+	}
 
 	std::copy(&value, ((&value) + sizeof(T)), data[offset]);
 }
