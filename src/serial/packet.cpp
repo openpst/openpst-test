@@ -36,7 +36,7 @@ bool Packet::getResponseExpected()
 	return responseExpected;
 }
 
-void setResponseExpected(bool v)
+void Packet::setResponseExpected(bool v)
 {
 	responseExpected = v;
 }
