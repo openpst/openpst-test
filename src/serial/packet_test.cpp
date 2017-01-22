@@ -13,12 +13,11 @@ StreamingDloadPacket()
     // set the defaults
     setCommand(kStreamingDloadHello);
     setMagic("QCOM fast download protocol host");
-    setVersion(0x01);    
+    setVersion(0x05);    
     setCompatibleVersion(0x02);    
-    setVersion(0x03); 
     setFeatureBits(0x19);
 }
- 
+
 PacketTest::~PacketTest()
 {
 
@@ -32,23 +31,12 @@ void PacketTest::setMagic(const std::string& magic)
 		throw std::invalid_argument("Magic exceeds max size");
 	}
 
-	size_t offset = getFieldOffset("magic");
-
-	for (int i = 0; i < magic.size(); i++) {
-		write<uint8_t>(magic[i], offset + i);
-	}
+	write(magic, getFieldOffset("magic"));
 }
 
 std::string PacketTest::getMagic()
 {
-	std::string ret = "";
-	size_t offset = getFieldOffset("magic");
-	for (int i = 0; i < STREAMING_DLOAD_MAGIC_SIZE; i++) {
-		if (read<uint8_t>(offset + i) == 0x00) break;
-		ret += read<uint8_t>(offset + i);
-	}
-
-	return ret;
+	return read()
 }
 
 void PacketTest::setVersion(uint8_t version)

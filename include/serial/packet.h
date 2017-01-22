@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <stdexcept>
 #include <iostream>
+#include <cassert>
 
 namespace OpenPST {
     namespace Serial {
@@ -204,9 +205,9 @@ namespace OpenPST {
                 //virtual void validate();
 
                 /**
-                * @brief Prepare the data before sending, making and final adjustments
+                * @brief Prepare the data before sending, making and final adjustments, for example crc
                 */
-                //virtual void prepare();
+                virtual void prepare() {}
 
                 /**
                 * @brief Unpack the response buffer into a response Packet
@@ -216,11 +217,14 @@ namespace OpenPST {
             protected:
                 /**
                 * @brief Read primitive type T from the data buffer at offset
+                * @param off_t offset
                 * @throws std::out_of_range 
                 * @return T
                 */
-                template <class T> inline T read(size_t offset) 
+                template <class T> inline T read(off_t offset) 
                 {
+                    assert(std::is_fundamental<T>::value);
+
                     if (offset > data.size() || offset + sizeof(T) > data.size()) {
                         throw std::out_of_range("Attempted to read outside of the packet data buffer");
                     }
@@ -228,30 +232,66 @@ namespace OpenPST {
                     return reinterpret_cast<T>(*(&data[offset]));
                 }
 
+                std::string read(size_t size, off_t offset) 
+                {
+                    std::string ret = "";
+
+                    if (offset > data.size() || offset + size > data.size()) {
+                        throw std::out_of_range("Attempted to read outside of the packet data buffer");
+                    }
+
+                    std::copy(&data[offset], &data[offset + size], &ret[0]);
+
+                    return ret;
+                }
+
                 /**
                 * @brief Write primitive type T into the data buffer at offset
+                * @param const T& value
+                * @param off_t offset
                 * @return void
                 */
-                template <class T> inline void write(const T& value, size_t offset)
+                template <class T> inline void write(const T& value, off_t offset)
                 {
+                    assert(std::is_fundamental<T>::value);
+                    
                     if (data.size() < offset + sizeof(T)) {
                         data.resize(data.size() + (data.size() - offset) + sizeof(T));
-                        //std::cout << "NEW SIZE: " << data.size() << std::endl;
                     }
                     
-                    data.insert(data.begin() + offset, &value, ((&value) + sizeof(T)));
+                    std::copy(&value, ((&value) + sizeof(T)), data.begin() + offset);
+                }
+
+                /**
+                * @brief Write string in the data buffer at offset
+                * @return void
+                */
+                inline void write(const std::string& str, off_t offset)
+                {   
+                    if (data.size() < offset + str.size()) {
+                        data.resize(data.size() + (data.size() - offset) + str.size());
+                    }
+                    
+                    std::copy(str.begin(), str.end(), data.begin() + offset);
                 }
 
                 /**
                 * @brief Write specified amount of bytes from src into the data buffer at offset
                 * @return void
                 */
-                inline void write(uint8_t* src, size_t amount, size_t offset);
+                inline void write(uint8_t* src, size_t amount, off_t offset)
+                {
+                    if (data.size() < offset + amount) {
+                        data.resize(data.size() + (data.size() - offset) + amount);
+                    }
+
+                    std::copy(src, src + amount, data.begin() + offset);
+                }
 
                 /**
                 * @brief Get a fields starting offset in the packet data buffer
                 */
-                inline int getFieldOffset(const std::string& name) 
+                inline off_t getFieldOffset(const std::string& name) 
                 {
                     int ret = 0;
 
@@ -275,20 +315,17 @@ namespace OpenPST {
             	* @brief Byte swap primititve type T
             	* @return T
             	*/
-            	//template <class T> inline T swap(T i);
                 template <class T> inline T swap(T i)
                 {
-                    // don't flip a byte or anything greater than uint64_t
-                    if (sizeof(T) > sizeof(uint64_t) || sizeof(T) == sizeof(uint8_t)) {
-                        return i;
-                    }
-
-                    T ret = i;
+                    assert(std::is_fundamental<T>::value);
+                    
+                    T ret = i;        
 
                     std::reverse(
                         reinterpret_cast<unsigned char*>(&ret), 
                         reinterpret_cast<unsigned char*>(&ret) + sizeof(T)
                     );
+
                     return ret;
                 }
         };

@@ -19,11 +19,16 @@ int main(int argc, char* argv[])
 
 	PacketFieldMeta* t = packet.getField("command");
 	
-	std::vector<uint8_t> t2 = packet.getData();
 
-	hexdump((uint8_t*)&t2[0], t2.size());
+	hexdump((uint8_t*)&packet.getData()[0], packet.getData().size());
 
 	std::cout << packet.getMagic() << std::endl;
+	
+	hexdump((uint8_t*)&packet.getData()[0], packet.getData().size());
+
+	packet.prepare();
+
+
 /*
     std::cout << "isPrimitiveType(Foo): " << std::boolalpha
         << isPrimitiveType(data) << std::endl;

@@ -4,9 +4,11 @@
 #include <stdint.h>
 #include <algorithm>
 #include <stdexcept>
+#include <iostream>
 #include "qualcomm/streaming_dload.h"
 #include "qualcomm/hdlc_encoder.h"
 #include "serial/packet.h"
+#include "util/hexdump.h"
 
 using namespace OpenPST::Serial;
 
@@ -44,10 +46,14 @@ namespace OpenPST {
                 {
                     write<uint8_t>(command, getFieldOffset("command"));
                 }
-                
+
                 uint8_t getCommand()
                 {
                     return read<uint8_t>(getFieldOffset("command")); 
+                }
+
+                void prepare() override {
+                    encoder.encode(data);
                 }
 
         };

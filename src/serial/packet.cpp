@@ -60,16 +60,6 @@ size_t Packet::getMaxDataSize()
 	return 0;
 }
 
-void Packet::write(uint8_t* src, size_t amount, size_t offset)
-{
-    if (data.size() < offset + amount) {
-        data.resize(data.size() + (data.size() - offset) + amount);
-        std::cout << "NEW SIZE (raw): " << data.size() << std::endl;
-    }
-    
-    data.insert(data.begin() + offset, src, src + amount);
-}
-
 void Packet::addField(const std::string& name, PacketFieldType type, size_t size)
 {
 	PacketFieldMeta field;
@@ -110,13 +100,13 @@ void Packet::addField(PacketFieldMeta field)
 		throw std::invalid_argument("Invalid field type");
 	} else if (!field.name.size()) {
 		throw std::invalid_argument("Field name must be set");
+	} else if(hasField(field.name)) {
+		throw std::invalid_argument("Field already exists");
 	}
 
 	data.resize(data.size() + field.size, 0);
 
 	fieldMeta.push_back(field);
-
-
 }
 
 const std::vector<PacketFieldMeta>& Packet::getFields()
@@ -128,7 +118,6 @@ size_t Packet::size()
 {
 	return data.size();
 }
-
 
 size_t Packet::getFieldMetaSize()
 {
