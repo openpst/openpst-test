@@ -2,11 +2,11 @@
 
 using namespace OpenPST::Serial;
 
-Packet::Packet(PacketEndianess endianT, PacketEndianess endianH) : 
-	endianT(endianT), 
-	endianH(endianH) 
+Packet::Packet(size_t maxDataSize) : maxDataSize(maxDataSize)
 {
-
+	if (maxDataSize > 0) {
+		data.reserve(maxDataSize);
+	}
 }
 
 Packet::~Packet(){
@@ -31,6 +31,16 @@ PacketEndianess Packet::getHostEndianess() {
 	return endianH;
 }
 
+PacketTargetArch Packet::getTargetArch()
+{
+	return archT;
+}
+
+void Packet::setTargetArch(PacketTargetArch arch)
+{
+	archT = arch;
+}
+
 bool Packet::getResponseExpected()
 {
 	return responseExpected;
@@ -45,43 +55,91 @@ Packet* Packet::getResponse() {
 	return response;
 }
 
-template <class T> T Packet::swap(T i)
+size_t Packet::getMaxDataSize()
 {
-	// don't flip a byte or anything greater than uint64_t
-	if (sizeof(T) > sizeof(uint64_t) || sizeof(T) == sizeof(uint8_t)) {
-		return i;
+	return 0;
+}
+
+void Packet::write(uint8_t* src, size_t amount, size_t offset)
+{
+    if (data.size() < offset + amount) {
+        data.resize(data.size() + (data.size() - offset) + amount);
+        std::cout << "NEW SIZE (raw): " << data.size() << std::endl;
+    }
+    
+    data.insert(data.begin() + offset, src, src + amount);
+}
+
+void Packet::addField(const std::string& name, PacketFieldType type, size_t size)
+{
+	PacketFieldMeta field;
+	field.type   = type;
+	field.name   = name;
+	field.size   = size;
+	
+	addField(field);
+}
+
+bool Packet::hasField(const std::string& name)
+{
+	for (auto &f : fieldMeta) {
+		if (f.name.compare(name) == 0) {
+			return true;
+		}
 	}
 
-	T ret = i;
+	return false;
+}
 
-	std::reverse(
-		reinterpret_cast<unsigned char*>(&ret), 
-		reinterpret_cast<unsigned char*>(&ret) + sizeof(T)
-	);
+PacketFieldMeta* Packet::getField(const std::string& name)
+{
+	for (auto &f : fieldMeta) {
+		if (f.name.compare(name) == 0) {
+			return &f;
+		}
+	}
+	
+	throw std::invalid_argument("Field not found");
+}
+
+void Packet::addField(PacketFieldMeta field)
+{
+	if (!field.size) {
+		throw std::invalid_argument("Invalid field size");
+	} else if ( kPacketFieldTypeLast <= field.type) {
+		throw std::invalid_argument("Invalid field type");
+	} else if (!field.name.size()) {
+		throw std::invalid_argument("Field name must be set");
+	}
+
+	data.resize(data.size() + field.size, 0);
+
+	fieldMeta.push_back(field);
+
+
+}
+
+const std::vector<PacketFieldMeta>& Packet::getFields()
+{
+	return fieldMeta;
+}
+
+size_t Packet::size()
+{
+	return data.size();
+}
+
+
+size_t Packet::getFieldMetaSize()
+{
+	size_t ret = 0;
+	for (auto &f : fieldMeta) {
+		ret += f.size;
+	}
 	return ret;
 }
 
-template <class T> T Packet::read(int offset)
-{
-	if (offset > data.size() || offset + sizeof(T) > data.size()) {
-		throw std::out_of_range("Attempted to read outside of the packet data buffer");
-	}
-
-	return reinterpret_cast<T>(*(&data[offset]));
-}
-
-
-template <class T> void Packet::write(T value, int offset)
-{
-	if (data.size() < offset + sizeof(T)) {
-		data.reserve(data.size() + (data.size() - offset) + sizeof(T));
-	}
-
-	std::copy(&value, ((&value) + sizeof(T)), data[offset]);
-}
-
-
-void Packet::write(uint8_t* src, size_t amount, int offset)
-{
-
-}
+ const std::vector<uint8_t>& Packet::getData()
+ {
+ 	return data;
+ }

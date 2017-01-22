@@ -9,20 +9,20 @@
 using OpenPST::QC::StreamingDloadPacket;
 
 namespace OpenPST {
-    namespace QC {
+    namespace Serial {
     	
-        class StreamingDloadHelloRequest : public StreamingDloadPacket
+        class PacketTest : public StreamingDloadPacket
         {
             public:
                 /**
                 * @brief Constructor
                 */
-                StreamingDloadHelloRequest();
+                PacketTest();
                 
                 /**
                 * @brief Destructor
                 */
-                ~StreamingDloadHelloRequest();
+                ~PacketTest();
 
                 /**
                 * @brief Set the hello magic string. Max length (excluding terminator) 
