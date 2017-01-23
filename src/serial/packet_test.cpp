@@ -36,7 +36,7 @@ void PacketTest::setMagic(const std::string& magic)
 
 std::string PacketTest::getMagic()
 {
-	return read()
+	return read(getFieldOffset("magic"), STREAMING_DLOAD_MAGIC_SIZE);
 }
 
 void PacketTest::setVersion(uint8_t version)

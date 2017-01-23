@@ -25,15 +25,17 @@ namespace OpenPST {
                 ~PacketTest();
 
                 /**
-                * @brief Set the hello magic string. Max length (excluding terminator) 
+                * @brief Set the hello magic string (https://www.youtube.com/watch?v=hwSXm8BZvAU)
+                *       Max length (excluding terminator) 
                 *       is STREAMING_DLOAD_MAGIC_SIZE
                 * @param const std::string& magic
+                * @throws std::invalid_argument when over max size or empty
                 * @return void
                 */
                 void setMagic(const std::string& magic);
 
                 /**
-                * @brief Get the current hello magic 
+                * @brief Get the current hello magic (https://www.youtube.com/watch?v=hwSXm8BZvAU)
                 * @return std::string
                 */
                 std::string getMagic();

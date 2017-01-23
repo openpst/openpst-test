@@ -49,9 +49,6 @@ namespace OpenPST {
                 
                 /* @var Architecture of the target device */
                 PacketTargetArch archT = kPacketTargetArchUnknown;
-
-                /* @var The underlying data of the packet to be sent */
-                std::vector<uint8_t> data;
                 
                 /* @var The maximum size the data occupy */
                 size_t maxDataSize    = 0;
@@ -63,6 +60,9 @@ namespace OpenPST {
                 Packet* response = nullptr;
 
                 std::vector<PacketFieldMeta> fieldMeta;
+            public:
+                /* @var The underlying data of the packet to be sent */
+                std::vector<uint8_t> data;
             public:
                 /**
                 * @brief Constructor
@@ -232,16 +232,38 @@ namespace OpenPST {
                     return reinterpret_cast<T>(*(&data[offset]));
                 }
 
-                std::string read(size_t size, off_t offset) 
+                inline std::string readstd::ofstream& file, off_t offset) 
+
+                /**
+                * @brief Read string from the data buffer at offset until 0x00
+                * @param off_t offset
+                * @throws std::out_of_range 
+                * @return T
+                */
+                inline std::string read(size_t amount, off_t offset) 
                 {
                     std::string ret = "";
 
-                    if (offset > data.size() || offset + size > data.size()) {
+                    if (offset > data.size() || offset + amount > data.size()) {
                         throw std::out_of_range("Attempted to read outside of the packet data buffer");
                     }
 
-                    std::copy(&data[offset], &data[offset + size], &ret[0]);
+                    for (int i = 0; i < amount; i++) {
+                        if (i == 0x00) {    
+                            std::count << "AYE" << std::endl;
+                            break;
+                        } else {
+                            std::count << "AYE2" << std::endl;
+                        }
+                        ret.append(reinterpret_cast<char *>(&data[offset + i]));
+                    //TODO problemos here mi amigo
 
+                    /*std::copy(
+                        data.begin() + offset, 
+                        data.begin() + offset + amount, 
+                        &ret[0]
+                    );
+*/
                     return ret;
                 }
 
