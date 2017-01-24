@@ -94,7 +94,7 @@ PacketFieldMeta* Packet::getField(const std::string& name)
 
 void Packet::addField(PacketFieldMeta field)
 {
-	if (!field.size) {
+	if (!field.size && field.type != kPacketFieldTypeVariant) {
 		throw std::invalid_argument("Invalid field size");
 	} else if ( kPacketFieldTypeLast <= field.type) {
 		throw std::invalid_argument("Invalid field type");
@@ -104,7 +104,20 @@ void Packet::addField(PacketFieldMeta field)
 		throw std::invalid_argument("Field already exists");
 	}
 
-	data.resize(data.size() + field.size, 0);
+	if (field.type == kPacketFieldTypeVariant && field.size != 1) {
+		field.size = 1;
+	}
+
+	/*if (field.type == kPacketFieldTypeVariant) {
+		for (auto &f : fieldMeta) {
+			if (f.type == kPacketFieldTypeVariant) {
+				throw std::invalid_argument("A variant field already exists. We currently only support one a");
+			}
+		}
+	}*/
+	
+	std::cout << field.name << std::endl;
+	resize(data.size() + field.size);
 
 	fieldMeta.push_back(field);
 }

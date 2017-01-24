@@ -6,6 +6,9 @@
 #include <stdexcept>
 #include <iostream>
 #include <cassert>
+#include <fstream>
+#include <iterator>
+#include <sstream>
 
 namespace OpenPST {
     namespace Serial {
@@ -194,7 +197,7 @@ namespace OpenPST {
                 size_t getFieldMetaSize();
 
                 /**
-                * @brief Get the underlying data buffer
+                * @brief Get a const reference to the underlying data buffer
                 * @return const std::vector<uint8_t>&
                 */
                 const std::vector<uint8_t>& getData();
@@ -232,22 +235,20 @@ namespace OpenPST {
                     return reinterpret_cast<T>(*(&data[offset]));
                 }
 
-                inline std::string readstd::ofstream& file, off_t offset) 
-
                 /**
                 * @brief Read string from the data buffer at offset until 0x00
                 * @param off_t offset
                 * @throws std::out_of_range 
                 * @return T
                 */
-                inline std::string read(size_t amount, off_t offset) 
+                inline std::string read(size_t size, off_t offset) 
                 {
                     std::string ret = "";
 
-                    if (offset > data.size() || offset + amount > data.size()) {
+                    if (offset > data.size() || offset + size > data.size()) {
                         throw std::out_of_range("Attempted to read outside of the packet data buffer");
                     }
-
+/*
                     for (int i = 0; i < amount; i++) {
                         if (i == 0x00) {    
                             std::count << "AYE" << std::endl;
@@ -258,7 +259,7 @@ namespace OpenPST {
                         ret.append(reinterpret_cast<char *>(&data[offset + i]));
                     //TODO problemos here mi amigo
 
-                    /*std::copy(
+                    std::copy(
                         data.begin() + offset, 
                         data.begin() + offset + amount, 
                         &ret[0]
@@ -278,7 +279,7 @@ namespace OpenPST {
                     assert(std::is_fundamental<T>::value);
                     
                     if (data.size() < offset + sizeof(T)) {
-                        data.resize(data.size() + (data.size() - offset) + sizeof(T));
+                        resize(data.size() + (data.size() - offset) + sizeof(T));
                     }
                     
                     std::copy(&value, ((&value) + sizeof(T)), data.begin() + offset);
@@ -291,23 +292,91 @@ namespace OpenPST {
                 inline void write(const std::string& str, off_t offset)
                 {   
                     if (data.size() < offset + str.size()) {
-                        data.resize(data.size() + (data.size() - offset) + str.size());
+                        resize(data.size() + (data.size() - offset) + str.size());
                     }
                     
                     std::copy(str.begin(), str.end(), data.begin() + offset);
                 }
 
                 /**
-                * @brief Write specified amount of bytes from src into the data buffer at offset
+                * @brief Write specified size of bytes from src into the data buffer at offset
                 * @return void
                 */
-                inline void write(uint8_t* src, size_t amount, off_t offset)
+                inline void write(uint8_t* src, size_t size, off_t offset)
                 {
-                    if (data.size() < offset + amount) {
-                        data.resize(data.size() + (data.size() - offset) + amount);
+                    if (data.size() < offset + size) {
+                        resize(data.size() + (data.size() - offset) + size);
+                    }
+                    
+                    PacketFieldMeta* field = getFieldFromOffset(offset);
+
+                    if (field != nullptr) {
+                    	if (field->type == kPacketFieldTypeVariant) {
+                    		field->size = size;
+                    	} else if (field->size < size) {
+                    		throw std::overflow_error("Requested size exceeds field size");
+                    	}                    	
                     }
 
-                    std::copy(src, src + amount, data.begin() + offset);
+                    std::copy(src, src + size, data.begin() + offset);
+                }
+
+                /**
+                * @brief Write file content in the data buffer at offset
+                * @param std::ifstream&
+                * @param size_t
+                * @param off_t
+                * @return void
+                */
+                inline void write(std::ifstream& file, size_t size, off_t offset)
+                {   
+                	auto cur = file.cur;
+                    
+                	file.seekg(cur, file.end);
+
+                	off_t endOffset = file.tellg();
+
+                	file.seekg(cur, file.beg);
+
+                	if (endOffset < size) {
+                		throw std::overflow_error("Requested size exceeds file size from its current position in the stream");
+                	}     
+
+                    if (data.size() < offset + size) {
+                        resize(data.size() + (data.size() - offset) + size);
+                    }
+
+                    PacketFieldMeta* field = getFieldFromOffset(offset);
+
+                    if (field != nullptr) {
+                    	if (field->type == kPacketFieldTypeVariant) {
+                    		field->size = size;
+                    	} else if (field->size < size) {
+                    		throw std::overflow_error("Requested size exceeds field size");
+                    	}                    	
+                    }
+
+                    if (!file.read(reinterpret_cast<char*>(&data[offset]), size)) {
+                    	std::stringstream ss;
+                    	ss << "Error reading from file. Expected " << size << " but read " << file.gcount();
+                    	throw std::runtime_error(ss.str());
+                    }
+				}
+
+                /**
+                * @brief Resize data buffer
+                * @param size_t size
+                * @throws std::exception when size is over the declared max size (unless max size is 0)
+                * @return void
+                */
+                inline void resize(size_t size) {
+                	if (getMaxDataSize() > 0 && size > getMaxDataSize()) {
+                		throw std::overflow_error("Resize exceeds max allowed size");
+                	}
+
+                	std::cout << "Resizing data from " << data.size() << " to " << size << std::endl;
+
+                	data.resize(size);
                 }
 
                 /**
@@ -331,6 +400,47 @@ namespace OpenPST {
                     }
 
                     return ret;
+                }
+
+                /**
+                * @brief 
+                */
+                inline size_t getFieldSize(const std::string& name) 
+                {
+                    int ret = 0;
+
+                    if (!hasField(name)) {
+                        throw std::invalid_argument("Field does not exist");
+                    }
+
+                    PacketFieldMeta* field = getField(name);
+
+                    for (auto &f : getFields()) {       
+                        if (f.name.compare(field->name) == 0) {
+                            ret = field->size;
+                            break;
+                        }
+                    }
+
+                    return ret;
+                }
+
+                /**
+                * @brief 
+                */
+                inline PacketFieldMeta* getFieldFromOffset(off_t offset) 
+                {
+                	
+                	off_t c = 0;
+
+                    for (auto &f : fieldMeta) {
+                    	if (c == offset) {
+                    		return &f;
+                    	}
+                    	c += f.size;
+                    }
+
+                    return nullptr;
                 }
 
             	/**

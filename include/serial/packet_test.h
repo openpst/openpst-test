@@ -79,6 +79,8 @@ namespace OpenPST {
                 */
                 uint8_t getFeatureBits();
 
+                void setDtest(std::ifstream& file, size_t amount);
+
         };
     }
 }
