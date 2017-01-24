@@ -247,7 +247,9 @@ namespace OpenPST {
                         throw std::out_of_range("Attempted to read outside of the packet data buffer");
                     }
 
-                    return reinterpret_cast<T>(*(&data[offset]));
+                    T* ret = reinterpret_cast<T*>(&data[offset]);
+
+                    return *ret;
                 }
 
                 /**
@@ -273,17 +275,20 @@ namespace OpenPST {
                 * @param off_t offset
                 * @return void
                 */
-                template <class T> inline void write(const std::string& fieldName, const T& value)
+                template <class T> inline void write(const std::string& fieldName, T value)
                 {
                     assert(std::is_fundamental<T>::value);
                     
+                    T v = value;
+
                     auto field = getField(fieldName);
 
                     if (field->type != kPacketFieldTypeVariant && field->size > sizeof(T)) {
                         throw std::invalid_argument("Write data is larger than static field size");
                     }
+std::cout << v << " p: " << std::hex << &v << " " << ((&v) + sizeof(T)) << std::endl;
 
-                    std::copy(&value, ((&value) + sizeof(T)), data.begin() + getFieldOffset(field->name));
+                    std::copy(&v, ((&v) + sizeof(T)), data.begin() + getFieldOffset(field->name));
                 }
 
                 /**
