@@ -1,4 +1,5 @@
 #include "serial/packet_test.h"
+#include "util/hexdump.h"
 
 using namespace OpenPST::Serial;
 
@@ -9,9 +10,20 @@ StreamingDloadPacket()
     addField("version", kPacketFieldTypePrimitive, sizeof(uint8_t));
     addField("compatible_version", kPacketFieldTypePrimitive, sizeof(uint8_t));
     addField("feature_bits", kPacketFieldTypePrimitive, sizeof(uint8_t));
+    addField("dtest", kPacketFieldTypeVariant, 0);    
+    addField("feature_bits2", kPacketFieldTypePrimitive, sizeof(uint8_t));
 
-    addField("dtest", kPacketFieldTypeVariant, 1);
-    
+	std::cout << "Packet defines the following fields:" << std::endl;
+
+	for (auto &f : getFields()) {
+		std::cout << "\t" << f.name << " size: " << f.size << std::endl;
+	}
+
+	std::cout << std::endl;
+
+    std::cout << "Dump before values: " << size() << std::endl;
+    hexdump((uint8_t*)&data[0], data.size());
+
     //addField("feature_bits2", kPacketFieldTypePrimitive, sizeof(uint8_t));
 
     // set the defaults
@@ -24,6 +36,11 @@ StreamingDloadPacket()
 		STREAMING_DLOAD_FEATURE_BIT_NAND_BOOT_LOADER | STREAMING_DLOAD_FEATURE_BIT_MULTI_IMAGE |
 		STREAMING_DLOAD_FEATURE_BIT_SECTOR_ADDRESSES
 	);
+    setFeatureBits2(0xAA);
+
+
+    std::cout << "Dump after defaults: " << size() << std::endl;
+    hexdump((uint8_t*)&data[0], data.size());
 }
 
 PacketTest::~PacketTest()
@@ -39,17 +56,17 @@ void PacketTest::setMagic(const std::string& magic)
 		throw std::invalid_argument("Magic exceeds max size");
 	}
 
-	write(magic, getFieldOffset("magic"));
+	write("magic", magic);
 }
 
 std::string PacketTest::getMagic()
 {
-	return read(getFieldOffset("magic"), STREAMING_DLOAD_MAGIC_SIZE);
+	return read(STREAMING_DLOAD_MAGIC_SIZE, getFieldOffset("magic"));
 }
 
 void PacketTest::setVersion(uint8_t version)
 {
-	write<uint8_t>(version, getFieldOffset("version"));
+	write<uint8_t>("version", version);
 }
 
 uint8_t PacketTest::getVersion()
@@ -59,7 +76,7 @@ uint8_t PacketTest::getVersion()
 
 void PacketTest::setCompatibleVersion(uint8_t compatibleVersion)
 {
-	write<uint8_t>(compatibleVersion, getFieldOffset("compatible_version"));
+	write<uint8_t>("compatible_version", compatibleVersion);
 }
 
 uint8_t PacketTest::getCompatibleVersion()
@@ -69,7 +86,7 @@ uint8_t PacketTest::getCompatibleVersion()
 
 void PacketTest::setFeatureBits(uint8_t featureBits)
 {
-	write<uint8_t>(featureBits, getFieldOffset("feature_bits"));
+	write<uint8_t>("feature_bits", featureBits);
 }
 
 uint8_t PacketTest::getFeatureBits()
@@ -77,7 +94,12 @@ uint8_t PacketTest::getFeatureBits()
 	return read<uint8_t>(getFieldOffset("feature_bits"));
 }
 
-void PacketTest::setDtest(std::ifstream& file, size_t amount)
+void PacketTest::setDtest(std::ifstream& file, size_t size)
 {
-    write(file, amount, getFieldOffset("dtest"));
+    write("dtest", file, size);
+}
+
+void PacketTest::setFeatureBits2(uint8_t featureBits2)
+{
+	write<uint8_t>("feature_bits2", featureBits2);
 }

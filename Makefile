@@ -12,9 +12,13 @@ default:
 		-I./src -std=gnu++11 $(CXX_FLAGS) \
 		./../libopenpst/src/qualcomm/hdlc_encoder.cpp \
 		./../libopenpst/src/util/hexdump.cpp \
+		-DNO_POD_PACKET_STRUCTURES \
 		./src/serial/serial_queue.cpp \
 		./src/serial/packet.cpp \
 		./src/serial/packet_test.cpp \
+		./src/qualcomm/packet/streaming_dload_hello_request.cpp \
+		./src/qualcomm/packet/sahara_hello_request.cpp \
+		./src/qualcomm/packet/sahara_hello_response.cpp \
 		./src/main.cpp -o build/test 
 clean:
 	rm -rf build/*

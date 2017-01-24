@@ -81,12 +81,39 @@ bool Packet::hasField(const std::string& name)
 	return false;
 }
 
+bool Packet::hasField(int index)
+{
+	int i = 0;
+	for (auto &f : fieldMeta) {
+		if (i == index) {
+			return true;
+		}
+		i++;
+	}
+
+	return false;
+}
+
+
 PacketFieldMeta* Packet::getField(const std::string& name)
 {
 	for (auto &f : fieldMeta) {
 		if (f.name.compare(name) == 0) {
 			return &f;
 		}
+	}
+	
+	throw std::invalid_argument("Field not found");
+}
+
+PacketFieldMeta* Packet::getField(int index)
+{
+	int i = 0;
+	for (auto &f : fieldMeta) {
+		if (i == index) {
+			return &f;
+		}
+		i++;
 	}
 	
 	throw std::invalid_argument("Field not found");
@@ -104,21 +131,15 @@ void Packet::addField(PacketFieldMeta field)
 		throw std::invalid_argument("Field already exists");
 	}
 
-	if (field.type == kPacketFieldTypeVariant && field.size != 1) {
-		field.size = 1;
-	}
-
-	/*if (field.type == kPacketFieldTypeVariant) {
-		for (auto &f : fieldMeta) {
-			if (f.type == kPacketFieldTypeVariant) {
-				throw std::invalid_argument("A variant field already exists. We currently only support one a");
-			}
-		}
-	}*/
+	// fill in zero'ed data
+	if (field.size > 0) {
+        data.insert(
+            data.begin() + getFieldMetaSize(),
+            field.size,
+            0x00
+        );
+    }
 	
-	std::cout << field.name << std::endl;
-	resize(data.size() + field.size);
-
 	fieldMeta.push_back(field);
 }
 
@@ -141,7 +162,7 @@ size_t Packet::getFieldMetaSize()
 	return ret;
 }
 
- const std::vector<uint8_t>& Packet::getData()
- {
- 	return data;
- }
+const std::vector<uint8_t>& Packet::getData()
+{
+	return data;
+}

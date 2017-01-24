@@ -80,6 +80,7 @@ namespace OpenPST {
                 uint8_t getFeatureBits();
 
                 void setDtest(std::ifstream& file, size_t amount);
+                void setFeatureBits2(uint8_t featureBits2);
 
         };
     }

@@ -169,12 +169,27 @@ namespace OpenPST {
                 bool hasField(const std::string& name);
 
                 /**
-                * @brief Get a declared field meta information
+                * @brief Check if a field exists by index
+                * @param const std::string& name
+                * @return bool
+                */
+                bool hasField(int index);
+
+                /**
+                * @brief Get a declared field meta information by name
                 * @param const std::string& name
                 * @throws std::invalid_argument
                 * @return const PacketFieldMeta*
                 */
                 PacketFieldMeta* getField(const std::string& name);
+                
+                /**
+                * @brief Get a declared field meta information by zero based index
+                * @param int index
+                * @throws std::invalid_argument
+                * @return const PacketFieldMeta*
+                */
+                PacketFieldMeta* getField(int index);
 
                 /**
                 * @brief Get all declared field meta information.
@@ -228,7 +243,7 @@ namespace OpenPST {
                 {
                     assert(std::is_fundamental<T>::value);
 
-                    if (offset > data.size() || offset + sizeof(T) > data.size()) {
+                    if ((offset + sizeof(T)) > data.size()) {
                         throw std::out_of_range("Attempted to read outside of the packet data buffer");
                     }
 
@@ -236,35 +251,19 @@ namespace OpenPST {
                 }
 
                 /**
-                * @brief Read string from the data buffer at offset until 0x00
+                * @brief Read string from the data buffer at offset until 0x00 or end of buffer
                 * @param off_t offset
                 * @throws std::out_of_range 
                 * @return T
                 */
                 inline std::string read(size_t size, off_t offset) 
                 {
-                    std::string ret = "";
-
-                    if (offset > data.size() || offset + size > data.size()) {
+                    if ((offset + size) > data.size()) {
                         throw std::out_of_range("Attempted to read outside of the packet data buffer");
                     }
-/*
-                    for (int i = 0; i < amount; i++) {
-                        if (i == 0x00) {    
-                            std::count << "AYE" << std::endl;
-                            break;
-                        } else {
-                            std::count << "AYE2" << std::endl;
-                        }
-                        ret.append(reinterpret_cast<char *>(&data[offset + i]));
-                    //TODO problemos here mi amigo
 
-                    std::copy(
-                        data.begin() + offset, 
-                        data.begin() + offset + amount, 
-                        &ret[0]
-                    );
-*/
+                    std::string ret( data.begin() + offset, data.begin() + offset + size );
+
                     return ret;
                 }
 
@@ -274,51 +273,51 @@ namespace OpenPST {
                 * @param off_t offset
                 * @return void
                 */
-                template <class T> inline void write(const T& value, off_t offset)
+                template <class T> inline void write(const std::string& fieldName, const T& value)
                 {
                     assert(std::is_fundamental<T>::value);
                     
-                    if (data.size() < offset + sizeof(T)) {
-                        resize(data.size() + (data.size() - offset) + sizeof(T));
+                    auto field = getField(fieldName);
+
+                    if (field->type != kPacketFieldTypeVariant && field->size > sizeof(T)) {
+                        throw std::invalid_argument("Write data is larger than static field size");
                     }
-                    
-                    std::copy(&value, ((&value) + sizeof(T)), data.begin() + offset);
+
+                    std::copy(&value, ((&value) + sizeof(T)), data.begin() + getFieldOffset(field->name));
                 }
 
                 /**
                 * @brief Write string in the data buffer at offset
                 * @return void
                 */
-                inline void write(const std::string& str, off_t offset)
+                inline void write(const std::string& fieldName, const std::string& str)
                 {   
-                    if (data.size() < offset + str.size()) {
-                        resize(data.size() + (data.size() - offset) + str.size());
+                    auto field = getField(fieldName);
+
+                    if (field->type != kPacketFieldTypeVariant && field->size > str.size()) {
+                        throw std::invalid_argument("Write data is larger than static field size");
+                    } else if(field->type == kPacketFieldTypeVariant && field->size != str.size()) {
+                        resizeField(field, str.size());
                     }
-                    
-                    std::copy(str.begin(), str.end(), data.begin() + offset);
+
+                    std::copy(str.begin(), str.end(), data.begin() + getFieldOffset(fieldName));
                 }
 
                 /**
                 * @brief Write specified size of bytes from src into the data buffer at offset
                 * @return void
                 */
-                inline void write(uint8_t* src, size_t size, off_t offset)
+                inline void write(const std::string& fieldName, uint8_t* src, size_t size)
                 {
-                    if (data.size() < offset + size) {
-                        resize(data.size() + (data.size() - offset) + size);
-                    }
+                    auto field = getField(fieldName);
                     
-                    PacketFieldMeta* field = getFieldFromOffset(offset);
-
-                    if (field != nullptr) {
-                    	if (field->type == kPacketFieldTypeVariant) {
-                    		field->size = size;
-                    	} else if (field->size < size) {
-                    		throw std::overflow_error("Requested size exceeds field size");
-                    	}                    	
+                    if (field->type != kPacketFieldTypeVariant && field->size > size) {
+                        throw std::invalid_argument("Write data is larger than static field size");
+                    } else if(field->type == kPacketFieldTypeVariant && field->size != size) {
+                        resizeField(field, size);
                     }
 
-                    std::copy(src, src + size, data.begin() + offset);
+                    std::copy(src, src + size, data.begin() + getFieldOffset(fieldName));
                 }
 
                 /**
@@ -328,35 +327,31 @@ namespace OpenPST {
                 * @param off_t
                 * @return void
                 */
-                inline void write(std::ifstream& file, size_t size, off_t offset)
+                inline void write(const std::string& fieldName, std::ifstream& file, size_t size)
                 {   
-                	auto cur = file.cur;
+                    auto field = getField(fieldName);
+                    
+                    if (field->type != kPacketFieldTypeVariant && field->size > size) {
+                        throw std::invalid_argument("Write data is larger than static field size");
+                    }
+
+                    auto cur = file.cur;
                     
                 	file.seekg(cur, file.end);
 
-                	off_t endOffset = file.tellg();
+                	off_t end = file.tellg();
 
                 	file.seekg(cur, file.beg);
 
-                	if (endOffset < size) {
+                	if (end < size) {
                 		throw std::overflow_error("Requested size exceeds file size from its current position in the stream");
                 	}     
-
-                    if (data.size() < offset + size) {
-                        resize(data.size() + (data.size() - offset) + size);
+                    
+                    if(field->type == kPacketFieldTypeVariant && field->size != size) {
+                        resizeField(field, size);
                     }
 
-                    PacketFieldMeta* field = getFieldFromOffset(offset);
-
-                    if (field != nullptr) {
-                    	if (field->type == kPacketFieldTypeVariant) {
-                    		field->size = size;
-                    	} else if (field->size < size) {
-                    		throw std::overflow_error("Requested size exceeds field size");
-                    	}                    	
-                    }
-
-                    if (!file.read(reinterpret_cast<char*>(&data[offset]), size)) {
+                    if (!file.read(reinterpret_cast<char*>(&data[getFieldOffset(fieldName)]), size)) {
                     	std::stringstream ss;
                     	ss << "Error reading from file. Expected " << size << " but read " << file.gcount();
                     	throw std::runtime_error(ss.str());
@@ -364,19 +359,44 @@ namespace OpenPST {
 				}
 
                 /**
-                * @brief Resize data buffer
+                * @brief Resize a field in the data buffer, for kPacketFieldTypeVariant fields only
                 * @param size_t size
-                * @throws std::exception when size is over the declared max size (unless max size is 0)
+                * @param const std::string& fieldName The field requiring size increase
+                * @throws std::overflow_error when size is over the declared max size (unless max size is 0)
                 * @return void
                 */
-                inline void resize(size_t size) {
-                	if (getMaxDataSize() > 0 && size > getMaxDataSize()) {
-                		throw std::overflow_error("Resize exceeds max allowed size");
-                	}
+                inline void resizeField(const std::string& fieldName, size_t size) {
+                    return resizeField(getField(fieldName), size);
+                }
 
-                	std::cout << "Resizing data from " << data.size() << " to " << size << std::endl;
+                inline void resizeField(PacketFieldMeta* field, size_t size) {
+                    if (field->type != kPacketFieldTypeVariant) {
+                        throw std::overflow_error("Field resize only for kPacketFieldTypeVariant type");
+                    } else if (getMaxDataSize() > 0 && ((data.size() - field->size) + size) > getMaxDataSize()) {
+                        throw std::overflow_error("Field resize exceeds max allowed size");
+                    }
 
-                	data.resize(size);
+                    off_t offset = getFieldOffset(field->name);
+
+                    if (field->size > size) {
+                        size_t diff = field->size - size;
+                        std::cout << "Erasing " << diff << std::endl;
+                        data.erase(
+                            data.begin() + offset + diff,
+                            data.begin() + offset + field->size
+                        );
+                        field->size = size;
+                    } else {
+                        size_t diff = size - field->size;
+                        std::cout << "Adding " << diff << std::endl;
+                        data.insert(
+                            data.begin() + offset + field->size,
+                            diff,
+                            0x00
+                        );
+                    }
+
+                    field->size = size;
                 }
 
                 /**
@@ -403,23 +423,26 @@ namespace OpenPST {
                 }
 
                 /**
-                * @brief 
+                * @brief Get a fields starting offset in the packet data buffer by field zero-based index
                 */
-                inline size_t getFieldSize(const std::string& name) 
+                inline off_t getFieldOffset(int index) 
                 {
-                    int ret = 0;
+                    off_t ret = 0;
 
-                    if (!hasField(name)) {
+                    if (!hasField(index)) {
                         throw std::invalid_argument("Field does not exist");
                     }
 
-                    PacketFieldMeta* field = getField(name);
+                    auto field = getField(index);
+
+                    int i = 0;
 
                     for (auto &f : getFields()) {       
-                        if (f.name.compare(field->name) == 0) {
-                            ret = field->size;
+                        if (i == index) {
                             break;
                         }
+                        ret += f.size;
+                        i++;
                     }
 
                     return ret;
@@ -428,19 +451,37 @@ namespace OpenPST {
                 /**
                 * @brief 
                 */
-                inline PacketFieldMeta* getFieldFromOffset(off_t offset) 
+                inline size_t getFieldSize(int index) 
                 {
-                	
-                	off_t c = 0;
+                    PacketFieldMeta* field = getField(index);
 
-                    for (auto &f : fieldMeta) {
-                    	if (c == offset) {
-                    		return &f;
-                    	}
-                    	c += f.size;
+                    int i = 0;
+
+                    for (auto &f : getFields()) {       
+                        if (i == index) {
+                            return field->size;
+                        }
+                        i++;
                     }
 
-                    return nullptr;
+                    throw std::invalid_argument("Field does not exist");
+                }
+
+                /**
+                * @brief 
+                */
+                inline size_t getFieldSize(const std::string& name) 
+                {
+
+                    PacketFieldMeta* field = getField(name);
+
+                    for (auto &f : getFields()) {       
+                        if (f.name.compare(field->name) == 0) {
+                            return field->size;
+                        }
+                    }
+
+                    throw std::invalid_argument("Field does not exist");
                 }
 
             	/**

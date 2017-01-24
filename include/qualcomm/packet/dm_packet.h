@@ -1,21 +1,15 @@
 #pragma once
 
-#include <vector>
-#include <stdint.h>
-#include <algorithm>
-#include <stdexcept>
-#include <iostream>
-#include "qualcomm/streaming_dload.h"
-#include "qualcomm/dm.h"
 #include "serial/packet.h"
-#include "util/hexdump.h"
+#include "qualcomm/dm.h"
+#include "qualcomm/hdlc_encoder.h"
 
 using namespace OpenPST::Serial;
 
 namespace OpenPST {
     namespace QC {
     	
-        class QcdmPacket : public Packet
+        class DmPacket : public Packet
         {
             protected:
                 HdlcEncoder encoder;
@@ -24,7 +18,7 @@ namespace OpenPST {
                 /**
                 * @brief Constructor
                 */
-                QcdmPacket() : Packet(getMaxDataSize()) 
+                DmPacket() : Packet(getMaxDataSize()) 
                 {
                    addField("command", kPacketFieldTypePrimitive, sizeof(uint8_t));
                 }
@@ -32,9 +26,9 @@ namespace OpenPST {
                 /**
                 * @brief Destructor
                 */
-                ~QcdmPacket() 
+                ~DmPacket()
                 {
-
+                    
                 }
 
                 size_t getMaxDataSize() override 

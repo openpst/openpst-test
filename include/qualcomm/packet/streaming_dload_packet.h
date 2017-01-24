@@ -1,14 +1,8 @@
 #pragma once
 
-#include <vector>
-#include <stdint.h>
-#include <algorithm>
-#include <stdexcept>
-#include <iostream>
+#include "serial/packet.h"
 #include "qualcomm/streaming_dload.h"
 #include "qualcomm/hdlc_encoder.h"
-#include "serial/packet.h"
-#include "util/hexdump.h"
 
 using namespace OpenPST::Serial;
 
@@ -44,7 +38,7 @@ namespace OpenPST {
 
                 void setCommand(uint8_t command)
                 {
-                    write<uint8_t>(command, getFieldOffset("command"));
+                    write<uint8_t>("command", command);
                 }
 
                 uint8_t getCommand()
