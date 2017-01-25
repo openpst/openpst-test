@@ -55,3 +55,6 @@ uint32_t SaharaHelloRequest::getMaxCommandPacketSize()
 }
 
 
+void SaharaHelloRequest::unpack(std::vector<uint8_t>& data)  {
+                    
+}

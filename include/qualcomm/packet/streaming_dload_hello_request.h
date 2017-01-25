@@ -79,6 +79,11 @@ namespace OpenPST {
                 */
                 uint8_t getFeatureBits();
 
+                /**
+                * @override Packet::unpack()
+                */
+                void unpack(std::vector<uint8_t>& data) override;
+
         };
     }
 }

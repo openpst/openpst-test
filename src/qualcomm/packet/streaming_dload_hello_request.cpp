@@ -72,3 +72,7 @@ uint8_t StreamingDloadHelloRequest::getFeatureBits()
 {
 	return read<uint8_t>(getFieldOffset("feature_bits"));
 }
+
+void StreamingDloadHelloRequest::unpack(std::vector<uint8_t>& data)  {
+                    
+}

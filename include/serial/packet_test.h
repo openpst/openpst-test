@@ -82,6 +82,13 @@ namespace OpenPST {
                 void setDtest(std::ifstream& file, size_t amount);
                 void setFeatureBits2(uint8_t featureBits2);
 
+                /**
+                * @override Packet::unpack()
+                */
+                void unpack(std::vector<uint8_t>& data) override  {
+                    
+                }
+
         };
     }
 }

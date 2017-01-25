@@ -63,6 +63,10 @@ namespace OpenPST {
                 */
                 uint32_t getMaxCommandPacketSize();
 
+                /**
+                * @override Packet::unpack()
+                */
+                void unpack(std::vector<uint8_t>& data) override;
         };
     }
 }

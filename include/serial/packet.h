@@ -220,17 +220,17 @@ namespace OpenPST {
                 /**
                 * @brief Validate the data in the packet buffer
                 */
-                //virtual void validate();
+                virtual void validate() {}
 
                 /**
-                * @brief Prepare the data before sending, making and final adjustments, for example crc
+                * @brief Prepare the packet before sending, making and final adjustments, for example crc
                 */
                 virtual void prepare() {}
 
                 /**
-                * @brief Unpack the response buffer into a response Packet
+                * @brief Unpack a buffer into the packet
                 */
-                //virtual void unpack(std::vector<uint8_t>& data) = 0;
+                virtual void unpack(std::vector<uint8_t>& data) = 0;
 
             protected:
                 /**

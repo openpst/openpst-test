@@ -55,3 +55,7 @@ uint32_t SaharaHelloResponse::getMaxCommandPacketSize()
 {
     return read<uint32_t>(getFieldOffset("max_command_packet_size"));
 }
+
+void SaharaHelloResponse::unpack(std::vector<uint8_t>& data)  {
+                    
+}
