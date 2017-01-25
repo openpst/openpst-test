@@ -130,14 +130,10 @@ void Packet::addField(PacketFieldMeta field)
 	} else if(hasField(field.name)) {
 		throw std::invalid_argument("Field already exists");
 	}
-
-	// fill in zero'ed data
+	
 	if (field.size > 0) {
-        data.insert(
-            data.begin() + getFieldMetaSize(),
-            field.size,
-            0x00
-        );
+        // fill in zero'ed data
+        data.insert(data.begin() + getFieldMetaSize(), field.size, 0x00);
     }
 	
 	fieldMeta.push_back(field);

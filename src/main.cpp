@@ -16,14 +16,16 @@ int main(int argc, char* argv[])
 	SerialQueue sq;
 
 	SaharaHelloRequest packet;
-	packet.setCommand(0x00000002);
+	
+	packet.setTargetEndianess(kPacketEndianessBig);
+
 	std::cout << "Packet ending data: " << packet.size() << std::endl;
 
 	hexdump((uint8_t*)&packet.getData()[0], packet.size());
 
-	std::cout << std::endl; 
+	std::cout << std::endl;
 
-	packet.prepare();
+ 	packet.prepare();
 
     std::cout << "Prepared Data: " << packet.size() << std::endl;
     hexdump((uint8_t*)&packet.getData()[0], packet.size());

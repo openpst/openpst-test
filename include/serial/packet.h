@@ -247,9 +247,13 @@ namespace OpenPST {
                         throw std::out_of_range("Attempted to read outside of the packet data buffer");
                     }
 
-                    T* ret = reinterpret_cast<T*>(&data[offset]);
+                    T* p = reinterpret_cast<T*>(&data[offset]);
+                    
+                    if (sizeof(T) != sizeof(uint8_t) && getTargetEndianess() != getHostEndianess()) {
+                    	return swap<T>(*p);
+                    }
 
-                    return *ret;
+                    return *p;
                 }
 
                 /**
@@ -275,20 +279,23 @@ namespace OpenPST {
                 * @param off_t offset
                 * @return void
                 */
-                template <class T> inline void write(const std::string& fieldName, T value)
+                template <class T> inline void write(const std::string& fieldName, const T& value)
                 {
                     assert(std::is_fundamental<T>::value);
                     
-                    T v = value;
-
                     auto field = getField(fieldName);
 
                     if (field->type != kPacketFieldTypeVariant && field->size > sizeof(T)) {
                         throw std::invalid_argument("Write data is larger than static field size");
                     }
-std::cout << v << " p: " << std::hex << &v << " " << ((&v) + sizeof(T)) << std::endl;
+					
+                    T* p = reinterpret_cast<T*>(&data[getFieldOffset(field->name)]);
 
-                    std::copy(&v, ((&v) + sizeof(T)), data.begin() + getFieldOffset(field->name));
+                    if (sizeof(T) != sizeof(uint8_t) && getTargetEndianess() != getHostEndianess()) {
+                    	*p = swap<T>(value);
+                    } else {
+                    	*p = value;
+                    }
                 }
 
                 /**
@@ -385,20 +392,10 @@ std::cout << v << " p: " << std::hex << &v << " " << ((&v) + sizeof(T)) << std::
 
                     if (field->size > size) {
                         size_t diff = field->size - size;
-                        std::cout << "Erasing " << diff << std::endl;
-                        data.erase(
-                            data.begin() + offset + diff,
-                            data.begin() + offset + field->size
-                        );
-                        field->size = size;
+                        data.erase(data.begin() + offset + diff, data.begin() + offset + field->size);
                     } else {
                         size_t diff = size - field->size;
-                        std::cout << "Adding " << diff << std::endl;
-                        data.insert(
-                            data.begin() + offset + field->size,
-                            diff,
-                            0x00
-                        );
+                        data.insert(data.begin() + offset + field->size, diff, 0x00);
                     }
 
                     field->size = size;
