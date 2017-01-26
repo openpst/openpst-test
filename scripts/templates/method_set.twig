@@ -1,0 +1,58 @@
+{% if '[]' in field_type %}
+{% if field_allowed_setters %}
+{% for setter in field_allowed_setters %}
+{% if setter == 'file' %}
+void {{class_name}}::set{{field_name_camel}}(std::ifstream& file, size_t size);
+{
+    write("{{field_name}}", file, size);
+}
+{% elseif setter == 'raw' %}
+void {{class_name}}::set{{field_name_camel}}(uint8_t* data, size_t size);
+{
+    write("{{field_name}}", data, size);
+}
+{% elseif setter == 'string' %}
+void {{class_name}}::set{{field_name_camel}}(const std::string& {{field_name_lower_camel}});
+{
+    write("{{field_name}}", {{field_name_lower_camel}});
+}
+{% endif %}
+{% endfor %}
+{% else %}
+void {{class_name}}::set{{field_name_camel}}(uint8_t* data, size_t size);
+{
+    write("{{field_name}}", data, size);
+}
+{% endif %}
+{% elseif field_type == 'variable' %}
+{% if field_allowed_setters %}
+{% for setter in field_allowed_setters %}
+{% if setter == 'file' %}
+void {{class_name}}::set{{field_name_camel}}(std::ifstream& file, size_t size);
+{
+    write("{{field_name}}", file, size);
+}
+{% elseif setter == 'raw' %}
+void {{class_name}}::set{{field_name_camel}}(uint8_t* data, size_t size);
+{
+    write("{{field_name}}", data, size);
+}
+{% elseif setter == 'string' %}
+void {{class_name}}::set{{field_name_camel}}(const std::string& {{field_name_lower_camel}});
+{
+    write("{{field_name}}", {{field_name_lower_camel}});
+}
+{% endif %}
+{% endfor %}
+{% else %}
+void {{class_name}}::set{{field_name_camel}}(uint8_t* data, size_t size);
+{
+    write("{{field_name}}", data, size);
+}
+{% endif %}
+{% else %}
+void {{class_name}}::set{{field_name_camel}}({{field_type}} {{field_name_lower_camel}})
+{
+    write<{{field_type}}>("{{field_name}}", {{field_name_lower_camel}});
+}
+{% endif %}

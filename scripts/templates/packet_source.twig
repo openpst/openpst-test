@@ -1,0 +1,43 @@
+#include "{{path}}/{{header_filename}}.h"
+
+{{class_name}}::{{class_name}}() : {{extends_class_name}}()
+{
+{% for field in fields %}
+{% if '[]' in field.field_type %}
+	addField("{{field.field_name}}", kPacketFieldTypeArray, {%if field.size_const %}{{field.size_const}}{%else%}{{field.field_size}}{%endif%});
+{% elseif field.field_type == 'variable' %}
+	addField("{{field.field_name}}", kPacketFieldTypeVariant, {{field.field_size}});
+{% else %}
+	addField("{{field.field_name}}", kPacketFieldTypePrimitive, sizeof({{field.field_type}}));
+{% endif %}
+{% endfor %}
+}
+
+{{class_name}}::~{{class_name}}()
+{
+
+}
+
+{% for field in fields %}
+{% include 'method_get.twig' with {
+    'field_type'  : field.field_type,
+	'field_size'  : field.field_size,
+	'field_name'  : field.field_name,
+	'field_name_camel'  : field.field_name_camel,
+	'field_name_lower_camel'  : field.field_name_lower_camel,
+	'field_size_const'  : field.size_const,
+	'field_allowed_setters' : field.allowed_setters,
+	'field_allowed_getters' : field.allowed_getters
+} %}
+                
+{% include 'method_set.twig' with {
+    'field_type'  : field.field_type,
+	'field_size'  : field.field_size,
+	'field_name'  : field.field_name,
+	'field_name_camel'  : field.field_name_camel,
+	'field_name_lower_camel'  : field.field_name_lower_camel,
+	'field_size_const'  : field.size_const,
+	'field_allowed_setters' : field.allowed_setters,
+	'field_allowed_getters' : field.allowed_getters
+} %}
+{% endfor %}

@@ -1,0 +1,14 @@
+{
+    "name": "ghassani/scripts",
+    "description": "LOL",
+    "require": {
+        "twig/twig": "1.31.0"
+    },
+    "authors": [
+        {
+            "name": "Gassan Idriss",
+            "email": "ghassani@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}

@@ -1,0 +1,55 @@
+{% if '[]' in field_type %}
+{% if field_allowed_getters %}
+{% for getter in field_allowed_getters %}
+{% if getter == 'vector' %}
+                /**
+                * @brief Get {{field_name}}
+                * @return {{field_type}}
+                */
+                std::vector<uint8_t> get{{field_name_camel}}();
+{% elseif getter == 'string' %}
+                /**
+                * @brief Get {{field_name}}
+                * @return std::string
+                */
+                std::string get{{field_name_camel}}();
+{% endif %}
+{% endfor %}
+{% else %}
+                /**
+                * @brief Get {{field_name}}
+                * @return std::vector<uint8_t>
+                */
+                std::vector<uint8_t> get{{field_name_camel}}();
+{% endif %}
+{% elseif field_type == 'variable' %}
+{% if field_allowed_getters %}
+{% for getter in field_allowed_getters %}
+{% if getter == 'vector' %}
+                /**
+                * @brief Get {{field_name}}
+                * @return std::vector<uint8_t>
+                */
+                std::vector<uint8_t> get{{field_name_camel}}();
+{% elseif getter == 'string' %}
+                /**
+                * @brief Get {{field_name}}
+                * @return std::string
+                */
+                std::string get{{field_name_camel}}();
+{% endif %}
+{% endfor %}
+{% else %}
+                /**
+                * @brief Get {{field_name}}
+                * @return std::vector<uint8_t>
+                */
+                std::vector<uint8_t> get{{field_name_camel}}();
+{% endif %}
+{% else %}
+                /**
+                * @brief Get {{field_name}}
+                * @return {{field_type}}
+                */
+                {{field_type}} get{{field_name_camel}}();
+{% endif %}
