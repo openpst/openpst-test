@@ -41,7 +41,7 @@ void Packet::setTargetArch(PacketTargetArch arch)
 	archT = arch;
 }
 
-bool Packet::getResponseExpected()
+bool Packet::isResponseExpected()
 {
 	return responseExpected;
 }
@@ -158,7 +158,8 @@ size_t Packet::getFieldMetaSize()
 	return ret;
 }
 
-const std::vector<uint8_t>& Packet::getData()
+std::vector<uint8_t>& Packet::getData()
 {
 	return data;
 }
+

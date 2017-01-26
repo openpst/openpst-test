@@ -1,55 +1,55 @@
-{% if '[]' in field_type %}
-{% if field_allowed_getters %}
-{% for getter in field_allowed_getters %}
+{% if '[]' in field.type %}
+{% if field.allowed_getters %}
+{% for getter in field.allowed_getters %}
 {% if getter == 'vector' %}
                 /**
-                * @brief Get {{field_name}}
-                * @return {{field_type}}
+                * @brief Get {{field.name}}
+                * @return {{field.type}}
                 */
-                std::vector<uint8_t> get{{field_name_camel}}();
+                std::vector<uint8_t> get{{field.name_camel}}();
 {% elseif getter == 'string' %}
                 /**
-                * @brief Get {{field_name}}
+                * @brief Get {{field.name}}
                 * @return std::string
                 */
-                std::string get{{field_name_camel}}();
+                std::string get{{field.name_camel}}();
 {% endif %}
 {% endfor %}
 {% else %}
                 /**
-                * @brief Get {{field_name}}
+                * @brief Get {{field.name}}
                 * @return std::vector<uint8_t>
                 */
-                std::vector<uint8_t> get{{field_name_camel}}();
+                std::vector<uint8_t> get{{field.name_camel}}();
 {% endif %}
-{% elseif field_type == 'variable' %}
-{% if field_allowed_getters %}
-{% for getter in field_allowed_getters %}
+{% elseif field.type == 'variable' %}
+{% if field.allowed_getters %}
+{% for getter in field.allowed_getters %}
 {% if getter == 'vector' %}
                 /**
-                * @brief Get {{field_name}}
+                * @brief Get {{field.name}}
                 * @return std::vector<uint8_t>
                 */
-                std::vector<uint8_t> get{{field_name_camel}}();
+                std::vector<uint8_t> get{{field.name_camel}}();
 {% elseif getter == 'string' %}
                 /**
-                * @brief Get {{field_name}}
+                * @brief Get {{field.name}}
                 * @return std::string
                 */
-                std::string get{{field_name_camel}}();
+                std::string get{{field.name_camel}}();
 {% endif %}
 {% endfor %}
 {% else %}
                 /**
-                * @brief Get {{field_name}}
+                * @brief Get {{field.name}}
                 * @return std::vector<uint8_t>
                 */
-                std::vector<uint8_t> get{{field_name_camel}}();
+                std::vector<uint8_t> get{{field.name_camel}}();
 {% endif %}
 {% else %}
                 /**
-                * @brief Get {{field_name}}
-                * @return {{field_type}}
+                * @brief Get {{field.name}}
+                * @return {{field.type}}
                 */
-                {{field_type}} get{{field_name_camel}}();
+                {{field.type}} get{{field.name_camel}}();
 {% endif %}

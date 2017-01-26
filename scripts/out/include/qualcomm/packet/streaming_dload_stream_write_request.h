@@ -1,6 +1,16 @@
+/**
+* LICENSE PLACEHOLDER
+*
+* @file streaming_dload_stream_write_request.h
+* @package openpst/libopenpst
+* @brief 
+*
+* @author Gassan Idriss <ghassani@gmail.com>
+*/
+
 #pragma once
 
-#include "serial/streaming_dload_stream_write_request.h"
+#include "qualcomm/packet/streaming_dload_packet.h"
 
 using OpenPST::QC::StreamingDloadPacket;
 
@@ -40,11 +50,26 @@ namespace OpenPST {
                 
                 /**
                 * @brief Set data
+                * @param std::ifstream& file
+                * @param size_t size
+                * @return void
+                */
+                void setData(std::ifstream& file, size_t size);
+                /**
+                * @brief Set data
                 * @param uint8_t* data
                 * @param size_t data
                 * @return void
                 */
                 void setData(uint8_t* data, size_t size);
+                /**
+                * @brief Set data
+                * @param const std::string& data
+                * @return void
+                */
+                void setData(const std::string& data);
+
+            void unpack(std::vector<uint8_t>& data) override;
 
         };
     }

@@ -1,6 +1,16 @@
+/**
+* LICENSE PLACEHOLDER
+*
+* @file streaming_dload_stream_write_response.h
+* @package openpst/libopenpst
+* @brief 
+*
+* @author Gassan Idriss <ghassani@gmail.com>
+*/
+
 #pragma once
 
-#include "serial/streaming_dload_stream_write_response.h"
+#include "qualcomm/packet/streaming_dload_packet.h"
 
 using OpenPST::QC::StreamingDloadPacket;
 
@@ -32,6 +42,8 @@ namespace OpenPST {
                 * @return void
                 */
                 void setAddress(uint32_t address);
+
+            void unpack(std::vector<uint8_t>& data) override;
 
         };
     }

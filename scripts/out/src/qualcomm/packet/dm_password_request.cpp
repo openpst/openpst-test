@@ -1,8 +1,19 @@
-#include "/.h"
+/**
+* LICENSE PLACEHOLDER
+*
+* @file dm_password_request.cpp
+* @package openpst/libopenpst
+* @brief 
+*
+* @author Gassan Idriss <ghassani@gmail.com>
+*/
+
+#include "qualcomm/packet/dm_password_request.h"
 
 DmPasswordRequest::DmPasswordRequest() : DmPacket()
 {
-	addField("password", kPacketFieldTypeArray, DIAG_PASSWORD_LENGTH);
+	addField("password", kPacketFieldTypePrimitive, sizeof(uint8_t[]));
+
 }
 
 DmPasswordRequest::~DmPasswordRequest()
@@ -26,4 +37,9 @@ void DmPasswordRequest::setPassword(uint8_t* data, size_t size);
 void DmPasswordRequest::setPassword(const std::string& password);
 {
     write("password", password);
+}
+
+void DmPasswordRequest::unpack(std::vector<uint8_t>& data)
+{
+	
 }

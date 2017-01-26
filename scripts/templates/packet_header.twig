@@ -1,3 +1,13 @@
+/**
+* LICENSE PLACEHOLDER
+*
+* @file {{file_name}}.h
+* @package openpst/libopenpst
+* @brief {{description}}
+*
+* @author Gassan Idriss <ghassani@gmail.com>
+*/
+
 #pragma once
 
 #include "{{extends_path}}/{{extends_header_filename}}.h"
@@ -21,28 +31,12 @@ namespace OpenPST {
                 ~{{class_name}}();
 
 {% for field in fields %}
-{% include 'method_get_declaration.twig' with {
-    'field_type'  : field.field_type,
-	'field_size'  : field.field_size,
-	'field_name'  : field.field_name,
-	'field_name_camel'  : field.field_name_camel,
-	'field_name_lower_camel'  : field.field_name_lower_camel,
-	'field_size_cost'  : field.size_cost,
-	'field_allowed_setters' : field.allowed_setters,
-	'field_allowed_getters' : field.allowed_getters
-} %}
+{% include 'method_get_declaration.twig' %}
                 
-{% include 'method_set_declaration.twig' with {
-    'field_type'  : field.field_type,
-	'field_size'  : field.field_size,
-	'field_name'  : field.field_name,
-	'field_name_camel'  : field.field_name_camel,
-	'field_name_lower_camel'  : field.field_name_lower_camel,
-	'field_size_cost'  : field.size_cost,
-	'field_allowed_setters' : field.allowed_setters,
-	'field_allowed_getters' : field.allowed_getters
-} %}
+{% include 'method_set_declaration.twig' %}
 {% endfor %}
+
+            void unpack(std::vector<uint8_t>& data) override;
 
         };
     }

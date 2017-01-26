@@ -1,8 +1,19 @@
-#include "/.h"
+/**
+* LICENSE PLACEHOLDER
+*
+* @file dm_spc_response.cpp
+* @package openpst/libopenpst
+* @brief 
+*
+* @author Gassan Idriss <ghassani@gmail.com>
+*/
+
+#include "qualcomm/packet/dm_spc_response.h"
 
 DmSpcResponse::DmSpcResponse() : DmPacket()
 {
 	addField("status", kPacketFieldTypePrimitive, sizeof(uint8_t));
+
 }
 
 DmSpcResponse::~DmSpcResponse()
@@ -18,4 +29,9 @@ uint8_t DmSpcResponse::getStatus()
 void DmSpcResponse::setStatus(uint8_t status)
 {
     write<uint8_t>("status", status);
+}
+
+void DmSpcResponse::unpack(std::vector<uint8_t>& data)
+{
+	
 }

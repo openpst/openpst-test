@@ -1,9 +1,21 @@
-#include "/.h"
+/**
+* LICENSE PLACEHOLDER
+*
+* @file sahara_memory_read_request.cpp
+* @package openpst/libopenpst
+* @brief 
+*
+* @author Gassan Idriss <ghassani@gmail.com>
+*/
+
+#include "qualcomm/packet/sahara_memory_read_request.h"
 
 SaharaMemoryReadRequest::SaharaMemoryReadRequest() : SaharaPacket()
 {
 	addField("address", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("size", kPacketFieldTypePrimitive, sizeof(uint32_t));
+
+	setCommand(kSaharaCommandMemoryRead);
 }
 
 SaharaMemoryReadRequest::~SaharaMemoryReadRequest()
@@ -28,4 +40,9 @@ uint32_t SaharaMemoryReadRequest::getSize()
 void SaharaMemoryReadRequest::setSize(uint32_t size)
 {
     write<uint32_t>("size", size);
+}
+
+void SaharaMemoryReadRequest::unpack(std::vector<uint8_t>& data)
+{
+	
 }

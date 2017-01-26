@@ -1,9 +1,21 @@
-#include "/.h"
+/**
+* LICENSE PLACEHOLDER
+*
+* @file sahara_client_command_response.cpp
+* @package openpst/libopenpst
+* @brief 
+*
+* @author Gassan Idriss <ghassani@gmail.com>
+*/
+
+#include "qualcomm/packet/sahara_client_command_response.h"
 
 SaharaClientCommandResponse::SaharaClientCommandResponse() : SaharaPacket()
 {
 	addField("client_command", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("size", kPacketFieldTypePrimitive, sizeof(uint32_t));
+
+	setCommand(kSaharaCommandExecuteResponse);
 }
 
 SaharaClientCommandResponse::~SaharaClientCommandResponse()
@@ -28,4 +40,9 @@ uint32_t SaharaClientCommandResponse::getSize()
 void SaharaClientCommandResponse::setSize(uint32_t size)
 {
     write<uint32_t>("size", size);
+}
+
+void SaharaClientCommandResponse::unpack(std::vector<uint8_t>& data)
+{
+	
 }

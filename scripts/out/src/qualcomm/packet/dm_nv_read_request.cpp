@@ -1,9 +1,20 @@
-#include "/.h"
+/**
+* LICENSE PLACEHOLDER
+*
+* @file dm_nv_read_request.cpp
+* @package openpst/libopenpst
+* @brief 
+*
+* @author Gassan Idriss <ghassani@gmail.com>
+*/
+
+#include "qualcomm/packet/dm_nv_read_request.h"
 
 DmNvReadRequest::DmNvReadRequest() : DmPacket()
 {
 	addField("nv_item", kPacketFieldTypePrimitive, sizeof(uint16_t));
-	addField("data", kPacketFieldTypeArray, DIAG_NV_ITEM_SIZE);
+	addField("data", kPacketFieldTypePrimitive, sizeof(uint8_t[]));
+
 }
 
 DmNvReadRequest::~DmNvReadRequest()
@@ -28,4 +39,9 @@ std::vector<uint8_t> DmNvReadRequest::getData()
 void DmNvReadRequest::setData(uint8_t* data, size_t size);
 {
     write("data", data, size);
+}
+
+void DmNvReadRequest::unpack(std::vector<uint8_t>& data)
+{
+	
 }

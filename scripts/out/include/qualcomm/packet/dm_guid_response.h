@@ -1,6 +1,16 @@
+/**
+* LICENSE PLACEHOLDER
+*
+* @file dm_guid_response.h
+* @package openpst/libopenpst
+* @brief 
+*
+* @author Gassan Idriss <ghassani@gmail.com>
+*/
+
 #pragma once
 
-#include "serial/dm_guid_response.h"
+#include "qualcomm/packet/dm_packet.h"
 
 using OpenPST::QC::DmPacket;
 
@@ -44,6 +54,8 @@ namespace OpenPST {
                 * @return void
                 */
                 void setGuid(const std::string& guid);
+
+            void unpack(std::vector<uint8_t>& data) override;
 
         };
     }

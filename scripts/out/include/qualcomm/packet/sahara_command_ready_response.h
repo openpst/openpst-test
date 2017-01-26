@@ -1,6 +1,16 @@
+/**
+* LICENSE PLACEHOLDER
+*
+* @file sahara_command_ready_response.h
+* @package openpst/libopenpst
+* @brief 
+*
+* @author Gassan Idriss <ghassani@gmail.com>
+*/
+
 #pragma once
 
-#include "serial/sahara_command_ready_response.h"
+#include "qualcomm/packet/sahara_packet.h"
 
 using OpenPST::QC::SaharaPacket;
 
@@ -32,6 +42,8 @@ namespace OpenPST {
                 * @return void
                 */
                 void setImageTxStatus(uint32_t imageTxStatus);
+
+            void unpack(std::vector<uint8_t>& data) override;
 
         };
     }

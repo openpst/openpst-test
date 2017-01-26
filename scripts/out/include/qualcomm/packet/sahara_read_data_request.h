@@ -1,6 +1,16 @@
+/**
+* LICENSE PLACEHOLDER
+*
+* @file sahara_read_data_request.h
+* @package openpst/libopenpst
+* @brief 
+*
+* @author Gassan Idriss <ghassani@gmail.com>
+*/
+
 #pragma once
 
-#include "serial/sahara_read_data_request.h"
+#include "qualcomm/packet/sahara_packet.h"
 
 using OpenPST::QC::SaharaPacket;
 
@@ -56,6 +66,8 @@ namespace OpenPST {
                 * @return void
                 */
                 void setSize(uint32_t size);
+
+            void unpack(std::vector<uint8_t>& data) override;
 
         };
     }

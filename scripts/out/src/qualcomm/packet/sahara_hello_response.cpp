@@ -1,4 +1,14 @@
-#include "/.h"
+/**
+* LICENSE PLACEHOLDER
+*
+* @file sahara_hello_response.cpp
+* @package openpst/libopenpst
+* @brief 
+*
+* @author Gassan Idriss <ghassani@gmail.com>
+*/
+
+#include "qualcomm/packet/sahara_hello_response.h"
 
 SaharaHelloResponse::SaharaHelloResponse() : SaharaPacket()
 {
@@ -6,8 +16,10 @@ SaharaHelloResponse::SaharaHelloResponse() : SaharaPacket()
 	addField("min_version", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("max_command_packet_size", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("status", kPacketFieldTypePrimitive, sizeof(uint32_t));
-	addField("reserved", kPacketFieldTypeArray, 24);
+	addField("reserved", kPacketFieldTypePrimitive, sizeof(uint8_t[]));
 	addField("mode", kPacketFieldTypePrimitive, sizeof(uint32_t));
+
+	setCommand(kSaharaCommandHelloResponse);
 }
 
 SaharaHelloResponse::~SaharaHelloResponse()
@@ -68,4 +80,9 @@ uint32_t SaharaHelloResponse::getMode()
 void SaharaHelloResponse::setMode(uint32_t mode)
 {
     write<uint32_t>("mode", mode);
+}
+
+void SaharaHelloResponse::unpack(std::vector<uint8_t>& data)
+{
+	
 }

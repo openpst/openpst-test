@@ -1,6 +1,16 @@
+/**
+* LICENSE PLACEHOLDER
+*
+* @file dm_version_request.h
+* @package openpst/libopenpst
+* @brief 
+*
+* @author Gassan Idriss <ghassani@gmail.com>
+*/
+
 #pragma once
 
-#include "serial/dm_version_request.h"
+#include "qualcomm/packet/dm_packet.h"
 
 using OpenPST::QC::DmPacket;
 
@@ -32,6 +42,8 @@ namespace OpenPST {
                 * @return void
                 */
                 void setVersion(uint16_t version);
+
+            void unpack(std::vector<uint8_t>& data) override;
 
         };
     }

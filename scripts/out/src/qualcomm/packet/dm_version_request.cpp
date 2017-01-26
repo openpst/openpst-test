@@ -1,8 +1,19 @@
-#include "/.h"
+/**
+* LICENSE PLACEHOLDER
+*
+* @file dm_version_request.cpp
+* @package openpst/libopenpst
+* @brief 
+*
+* @author Gassan Idriss <ghassani@gmail.com>
+*/
+
+#include "qualcomm/packet/dm_version_request.h"
 
 DmVersionRequest::DmVersionRequest() : DmPacket()
 {
 	addField("version", kPacketFieldTypePrimitive, sizeof(uint16_t));
+
 }
 
 DmVersionRequest::~DmVersionRequest()
@@ -18,4 +29,9 @@ uint16_t DmVersionRequest::getVersion()
 void DmVersionRequest::setVersion(uint16_t version)
 {
     write<uint16_t>("version", version);
+}
+
+void DmVersionRequest::unpack(std::vector<uint8_t>& data)
+{
+	
 }

@@ -1,4 +1,14 @@
-#include "/.h"
+/**
+* LICENSE PLACEHOLDER
+*
+* @file dm_version_response.cpp
+* @package openpst/libopenpst
+* @brief 
+*
+* @author Gassan Idriss <ghassani@gmail.com>
+*/
+
+#include "qualcomm/packet/dm_version_response.h"
 
 DmVersionResponse::DmVersionResponse() : DmPacket()
 {
@@ -7,8 +17,8 @@ DmVersionResponse::DmVersionResponse() : DmPacket()
 	addField("interleaver_id", kPacketFieldTypePrimitive, sizeof(uint8_t));
 	addField("esn", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("rm_mode", kPacketFieldTypePrimitive, sizeof(uint16_t));
-	addField("min1", kPacketFieldTypeArray, 8);
-	addField("min2", kPacketFieldTypeArray, 8);
+	addField("min1", kPacketFieldTypePrimitive, sizeof(uint8_t[]));
+	addField("min2", kPacketFieldTypePrimitive, sizeof(uint8_t[]));
 	addField("min_index", kPacketFieldTypePrimitive, sizeof(uint8_t));
 	addField("cdma_rm_state", kPacketFieldTypePrimitive, sizeof(uint16_t));
 	addField("cdma_good_frames", kPacketFieldTypePrimitive, sizeof(uint8_t));
@@ -24,6 +34,7 @@ DmVersionResponse::DmVersionResponse() : DmPacket()
 	addField("location_id", kPacketFieldTypePrimitive, sizeof(uint16_t));
 	addField("rssi_level", kPacketFieldTypePrimitive, sizeof(uint16_t));
 	addField("power", kPacketFieldTypePrimitive, sizeof(uint8_t));
+
 }
 
 DmVersionResponse::~DmVersionResponse()
@@ -244,4 +255,9 @@ uint8_t DmVersionResponse::getPower()
 void DmVersionResponse::setPower(uint8_t power)
 {
     write<uint8_t>("power", power);
+}
+
+void DmVersionResponse::unpack(std::vector<uint8_t>& data)
+{
+	
 }

@@ -1,11 +1,23 @@
-#include "/.h"
+/**
+* LICENSE PLACEHOLDER
+*
+* @file streaming_dload_hello_request.cpp
+* @package openpst/libopenpst
+* @brief 
+*
+* @author Gassan Idriss <ghassani@gmail.com>
+*/
+
+#include "qualcomm/packet/streaming_dload_hello_request.h"
 
 StreamingDloadHelloRequest::StreamingDloadHelloRequest() : StreamingDloadPacket()
 {
-	addField("magic", kPacketFieldTypeArray, STREAMING_DLOAD_MAGIC_SIZE);
+	addField("magic", kPacketFieldTypePrimitive, sizeof(uint8_t[]));
 	addField("version", kPacketFieldTypePrimitive, sizeof(uint8_t));
 	addField("compatible_version", kPacketFieldTypePrimitive, sizeof(uint8_t));
 	addField("feature_bits", kPacketFieldTypePrimitive, sizeof(uint8_t));
+
+	setCommand(kStreamingDloadHello);
 }
 
 StreamingDloadHelloRequest::~StreamingDloadHelloRequest()
@@ -48,4 +60,9 @@ uint8_t StreamingDloadHelloRequest::getFeatureBits()
 void StreamingDloadHelloRequest::setFeatureBits(uint8_t featureBits)
 {
     write<uint8_t>("feature_bits", featureBits);
+}
+
+void StreamingDloadHelloRequest::unpack(std::vector<uint8_t>& data)
+{
+	
 }

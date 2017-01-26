@@ -1,3 +1,14 @@
+/**
+* LICENSE PLACEHOLDER
+*
+* @file packet.h
+* @package openpst/libopenpst
+* @brief Represents a packet to be sent over serial that 
+*   allows for some dynamic packet creation
+*
+* @author Gassan Idriss <ghassani@gmail.com>
+*/
+
 #pragma once
 
 #include <vector>
@@ -12,7 +23,7 @@
 
 namespace OpenPST {
     namespace Serial {
-    	
+        
         enum PacketEndianess{
             kPacketEndianessLittle,
             kPacketEndianessBig,
@@ -22,7 +33,7 @@ namespace OpenPST {
         enum PacketTargetArch{
             kPacketTargetArchUnknown,
             kPacketTargetArchX86,
-            kPacketTargetArchX8664,
+            kPacketTargetArchX86_64,
             kPacketTargetArchArm,
             kPacketTargetArchAArch64,
             kPacketTargetArchLast      // last entry, equal or over is invalid
@@ -43,8 +54,8 @@ namespace OpenPST {
 
         class Packet
         {
-        	protected:
-        		/* @var Endianess of target device */
+            protected:
+                /* @var Endianess of target device */
                 PacketEndianess endianT = kPacketEndianessLittle;
 
                 /* @var Endianess of host device */
@@ -56,14 +67,14 @@ namespace OpenPST {
                 /* @var The maximum size the data occupy */
                 size_t maxDataSize    = 0;
 
-                /* @var If this packet requires a response or not */
+                /* @var If this packet expects a response or not */
                 bool responseExpected = true;
 
                 /* @var The resulting response, if available */
                 Packet* response = nullptr;
 
                 std::vector<PacketFieldMeta> fieldMeta;
-            public:
+
                 /* @var The underlying data of the packet to be sent */
                 std::vector<uint8_t> data;
             public:
@@ -125,7 +136,7 @@ namespace OpenPST {
                 * @brief Get the flag that this packet will require a response
                 * @return bool
                 */
-                bool getResponseExpected();
+                bool isResponseExpected();
 
                 /**
                 * @brief Set the flag that this packet will require a response
@@ -212,10 +223,10 @@ namespace OpenPST {
                 size_t getFieldMetaSize();
 
                 /**
-                * @brief Get a const reference to the underlying data buffer
+                * @brief Get a reference to the underlying data buffer
                 * @return const std::vector<uint8_t>&
                 */
-                const std::vector<uint8_t>& getData();
+                std::vector<uint8_t>& getData();
 
                 /**
                 * @brief Validate the data in the packet buffer
@@ -250,7 +261,7 @@ namespace OpenPST {
                     T* p = reinterpret_cast<T*>(&data[offset]);
                     
                     if (sizeof(T) != sizeof(uint8_t) && getTargetEndianess() != getHostEndianess()) {
-                    	return swap<T>(*p);
+                        return swap<T>(*p);
                     }
 
                     return *p;
@@ -288,13 +299,13 @@ namespace OpenPST {
                     if (field->type != kPacketFieldTypeVariant && field->size > sizeof(T)) {
                         throw std::invalid_argument("Write data is larger than static field size");
                     }
-					
+                    
                     T* p = reinterpret_cast<T*>(&data[getFieldOffset(field->name)]);
 
                     if (sizeof(T) != sizeof(uint8_t) && getTargetEndianess() != getHostEndianess()) {
-                    	*p = swap<T>(value);
+                        *p = swap<T>(value);
                     } else {
-                    	*p = value;
+                        *p = value;
                     }
                 }
 
@@ -349,26 +360,26 @@ namespace OpenPST {
 
                     auto cur = file.cur;
                     
-                	file.seekg(cur, file.end);
+                    file.seekg(cur, file.end);
 
-                	off_t end = file.tellg();
+                    off_t end = file.tellg();
 
-                	file.seekg(cur, file.beg);
+                    file.seekg(cur, file.beg);
 
-                	if (end < size) {
-                		throw std::overflow_error("Requested size exceeds file size from its current position in the stream");
-                	}     
+                    if (end < size) {
+                        throw std::overflow_error("Requested size exceeds file size from its current position in the stream");
+                    }     
                     
                     if(field->type == kPacketFieldTypeVariant && field->size != size) {
                         resizeField(field, size);
                     }
 
                     if (!file.read(reinterpret_cast<char*>(&data[getFieldOffset(fieldName)]), size)) {
-                    	std::stringstream ss;
-                    	ss << "Error reading from file. Expected " << size << " but read " << file.gcount();
-                    	throw std::runtime_error(ss.str());
+                        std::stringstream ss;
+                        ss << "Error reading from file. Expected " << size << " but read " << file.gcount();
+                        throw std::runtime_error(ss.str());
                     }
-				}
+                }
 
                 /**
                 * @brief Resize a field in the data buffer, for kPacketFieldTypeVariant fields only
@@ -486,10 +497,10 @@ namespace OpenPST {
                     throw std::invalid_argument("Field does not exist");
                 }
 
-            	/**
-            	* @brief Byte swap primititve type T
-            	* @return T
-            	*/
+                /**
+                * @brief Byte swap primititve type T
+                * @return T
+                */
                 template <class T> inline T swap(T i)
                 {
                     assert(std::is_fundamental<T>::value);

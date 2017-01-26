@@ -1,7 +1,7 @@
 #include <iostream>
 #include <type_traits>
 #include "serial/packet.h"
-#include "serial/serial_queue.h"
+#include "serial/serial_packet_writer.h"
 #include "qualcomm/packet/streaming_dload_hello_request.h"
 #include "qualcomm/packet/sahara_hello_request.h"
 #include "qualcomm/packet/sahara_hello_response.h"
@@ -10,10 +10,23 @@
 
 using namespace OpenPST::Serial;
 using namespace OpenPST::QC;
+using OpenPST::Serial::SerialError;
 
 int main(int argc, char* argv[])
 {
-	SerialQueue sq;
+	
+
+	try {
+		SerialPacketWriter writer("/dev/ttyUSB0");
+
+		
+
+
+	}catch (const SerialError& e) {
+		std::cerr << e.what() << std::endl;
+		return 1;
+	}
+	/*SerialQueue sq;
 
 	SaharaHelloRequest packet;
 	
@@ -36,6 +49,6 @@ int main(int argc, char* argv[])
 
 	std::cout << std::endl; 
 
-	std::cout << packet.size() << " " << packet.getSize() << std::endl;
+	std::cout << packet.size() << " " << packet.getSize() << std::endl;*/
 	return 0;
 }

@@ -29,6 +29,10 @@ $inc_dir = sprintf('%s/include', $out_dir);
 
 foreach ($packets as $group => $pkts) {
 	foreach ($pkts as $name => $packet) {
+		if (isset($packet['skip'])) {
+			continue;
+		}
+
 		$file_src_dir = sprintf('%s/%s', $src_dir, $packet['path']);
 		$file_inc_dir = sprintf('%s/%s', $inc_dir, $packet['path']);
 
@@ -41,28 +45,29 @@ foreach ($packets as $group => $pkts) {
 			echo 'Creating ' . $file_inc_dir.PHP_EOL;
 			mkdir($file_inc_dir, 0755, true);
 		}
+		
+		/*if (isset($pkts[$packet['extends']])) {
+			echo $name.' - '. $pkts[$packet['extends']]['path'] . PHP_EOL;
+		}continue;*/
 
-		$data = [
-			'packet' 					=> $packet,
-			'extends_path'				=> isset($pkts[$packet['extends']]) ? $pkts[$packet['extends']]['path'] : 'serial',
-			'extends_header_filename'	=> sprintf('%s', to_lower_name($name)),
-			'extends_class_namespace'	=> $packet['extends_namespace'],
-			'extends_class_name'		=> $packet['extends'],
-			'namespace'					=> $packet['namespace'],
-			'class_name'				=> $name,
-			'fields'					=> isset($packet['fields']) ? $packet['fields'] : [],
-		];
+		$packet['file_name'] 				= to_lower_name($name);
+		$packet['extends_path'] 			= isset($pkts[$packet['extends']]) ? $pkts[$packet['extends']]['path'] : 'serial';
+		$packet['extends_header_filename']	= to_lower_name($packet['extends']);
+		$packet['extends_class_namespace']	= $packet['extends_namespace'];
+		$packet['extends_class_name']		= $packet['extends'];
+		$packet['namespace']				= $packet['namespace'];
+		$packet['class_name']				= $name;
+		$packet['default_exends'] 			= isset($packet['default_exends']) && is_array($packet['default_exends']) ? $packet['default_exends'] : array();
+		
 
-		foreach ($data['fields'] as $fname => &$field) {
-			$field['field_type'] 		= $field['type'];
-			$field['field_size'] 		= $field['size'];
-			$field['field_name'] 		= $fname;
-			$field['field_name_camel']  = to_camel($fname);
-			$field['field_name_lower_camel']  = to_lower_camel($fname);
+		foreach ($packet['fields'] as $fname => &$field) {
+			$field['name'] 					  = $fname;
+			$field['name_camel']  	  = to_camel($fname);
+			$field['name_lower_camel']  = to_lower_camel($fname);
 		}
 
-		$header = $twig->render('packet_header.twig', $data);
-		$source = $twig->render('packet_source.twig', $data);
+		$header = $twig->render('packet_header.twig', $packet);
+		$source = $twig->render('packet_source.twig', $packet);
 
 		file_put_contents(sprintf('%s/%s.h', $file_inc_dir, to_lower_name($name)), $header);
 		file_put_contents(sprintf('%s/%s.cpp', $file_src_dir, to_lower_name($name)), $source);

@@ -1,6 +1,16 @@
+/**
+* LICENSE PLACEHOLDER
+*
+* @file sahara_read_data_response.h
+* @package openpst/libopenpst
+* @brief 
+*
+* @author Gassan Idriss <ghassani@gmail.com>
+*/
+
 #pragma once
 
-#include "serial/sahara_read_data_response.h"
+#include "serial/packet.h"
 
 using OpenPST::Serial::Packet;
 
@@ -51,6 +61,8 @@ namespace OpenPST {
                 * @return void
                 */
                 void setData(const std::string& data);
+
+            void unpack(std::vector<uint8_t>& data) override;
 
         };
     }

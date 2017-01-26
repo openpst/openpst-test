@@ -1,6 +1,16 @@
+/**
+* LICENSE PLACEHOLDER
+*
+* @file streaming_dload_reset_request.h
+* @package openpst/libopenpst
+* @brief 
+*
+* @author Gassan Idriss <ghassani@gmail.com>
+*/
+
 #pragma once
 
-#include "serial/streaming_dload_reset_request.h"
+#include "qualcomm/packet/streaming_dload_packet.h"
 
 using OpenPST::QC::StreamingDloadPacket;
 
@@ -20,6 +30,8 @@ namespace OpenPST {
                 */
                 ~StreamingDloadResetRequest();
 
+
+            void unpack(std::vector<uint8_t>& data) override;
 
         };
     }

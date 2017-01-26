@@ -1,82 +1,82 @@
-{% if '[]' in field_type %}
-{% if field_allowed_setters %}
-{% for setter in field_allowed_setters %}
+{% if '[]' in field.type %}
+{% if field.allowed_setters %}
+{% for setter in field.allowed_setters %}
 {% if setter == 'file' %}
                 /**
-                * @brief Set {{field_name}}
+                * @brief Set {{field.name}}
                 * @param std::ifstream& file
                 * @param size_t size
                 * @return void
                 */
-                void set{{field_name_camel}}(std::ifstream& file, size_t size);
+                void set{{field.name_camel}}(std::ifstream& file, size_t size);
 {% elseif setter == 'raw' %}
                 /**
-                * @brief Set {{field_name}}
-                * @param uint8_t* {{field_name_lower_camel}}
+                * @brief Set {{field.name}}
+                * @param uint8_t* {{field.name_lower_camel}}
                 * @param size_t size
                 * @return void
                 */
-                void set{{field_name_camel}}(uint8_t* data, size_t size);
+                void set{{field.name_camel}}(uint8_t* data, size_t size);
 {% elseif setter == 'string' %}
                 /**
-                * @brief Set {{field_name}}
-                * @param const std::string& {{field_name_lower_camel}}
+                * @brief Set {{field.name}}
+                * @param const std::string& {{field.name_lower_camel}}
                 * @return void
                 */
-                void set{{field_name_camel}}(const std::string& {{field_name_lower_camel}});
+                void set{{field.name_camel}}(const std::string& {{field.name_lower_camel}});
 {% endif %}
 {% endfor %}
 {% else %}
                 /**
-                * @brief Set {{field_name}}
-                * @param uint8_t* {{field_name_lower_camel}}
+                * @brief Set {{field.name}}
+                * @param uint8_t* {{field.name_lower_camel}}
                 * @param size_t size
                 * @return void
                 */
-                void set{{field_name_camel}}(uint8_t* data, size_t size);
+                void set{{field.name_camel}}(uint8_t* data, size_t size);
 {% endif %}
-{% elseif field_type == 'variable' %}
-{% if field_allowed_setters %}
-{% for setter in field_allowed_setters %}
+{% elseif field.type == 'variable' %}
+{% if field.allowed_setters %}
+{% for setter in field.allowed_setters %}
 {% if setter == 'file' %}
                 /**
-                * @brief Set {{field_name}}
+                * @brief Set {{field.name}}
                 * @param std::ifstream& file
                 * @param size_t size
                 * @return void
                 */
-                void set{{field_name_camel}}(std::ifstream& file, size_t size);
+                void set{{field.name_camel}}(std::ifstream& file, size_t size);
 {% elseif setter == 'raw' %}
                 /**
-                * @brief Set {{field_name}}
-                * @param uint8_t* {{field_name_lower_camel}}
-                * @param size_t {{field_name_lower_camel}}
+                * @brief Set {{field.name}}
+                * @param uint8_t* {{field.name_lower_camel}}
+                * @param size_t {{field.name_lower_camel}}
                 * @return void
                 */
-                void set{{field_name_camel}}(uint8_t* data, size_t size);
+                void set{{field.name_camel}}(uint8_t* data, size_t size);
 {% elseif setter == 'string' %}
                 /**
-                * @brief Set {{field_name}}
-                * @param const std::string& {{field_name_lower_camel}}
+                * @brief Set {{field.name}}
+                * @param const std::string& {{field.name_lower_camel}}
                 * @return void
                 */
-                void set{{field_name_camel}}(const std::string& {{field_name_lower_camel}});
+                void set{{field.name_camel}}(const std::string& {{field.name_lower_camel}});
 {% endif %}
 {% endfor %}
 {% else %}
                 /**
-                * @brief Set {{field_name}}
-                * @param uint8_t* {{field_name_lower_camel}}
-                * @param size_t {{field_name_lower_camel}}
+                * @brief Set {{field.name}}
+                * @param uint8_t* {{field.name_lower_camel}}
+                * @param size_t {{field.name_lower_camel}}
                 * @return void
                 */
-                void set{{field_name_camel}}(uint8_t* data, size_t size);
+                void set{{field.name_camel}}(uint8_t* data, size_t size);
 {% endif %}
 {% else %}
                 /**
-                * @brief Set {{field_name}}
-                * @param {{field_type}} {{field_name_lower_camel}}
+                * @brief Set {{field.name}}
+                * @param {{field.type}} {{field.name_lower_camel}}
                 * @return void
                 */
-                void set{{field_name_camel}}({{field_type}} {{field_name_lower_camel}});
+                void set{{field.name_camel}}({{field.type}} {{field.name_lower_camel}});
 {% endif %}

@@ -1,14 +1,35 @@
-#include "{{path}}/{{header_filename}}.h"
+/**
+* LICENSE PLACEHOLDER
+*
+* @file {{file_name}}.cpp
+* @package openpst/libopenpst
+* @brief {{description}}
+*
+* @author Gassan Idriss <ghassani@gmail.com>
+*/
+
+#include "{{path}}/{{file_name}}.h"
 
 {{class_name}}::{{class_name}}() : {{extends_class_name}}()
 {
 {% for field in fields %}
-{% if '[]' in field.field_type %}
-	addField("{{field.field_name}}", kPacketFieldTypeArray, {%if field.size_const %}{{field.size_const}}{%else%}{{field.field_size}}{%endif%});
-{% elseif field.field_type == 'variable' %}
-	addField("{{field.field_name}}", kPacketFieldTypeVariant, {{field.field_size}});
+{% if '[]' in field.field.type %}
+	addField("{{field.field.name}}", kPacketFieldTypeArray, {%if field.size_const %}{{field.size_const}}{%else%}{{field.size}}{%endif%});
+{% elseif field.field.type == 'variable' %}
+	addField("{{field.name}}", kPacketFieldTypeVariant, {{field.size}});
 {% else %}
-	addField("{{field.field_name}}", kPacketFieldTypePrimitive, sizeof({{field.field_type}}));
+	addField("{{field.name}}", kPacketFieldTypePrimitive, sizeof({{field.type}}));
+{% endif %}
+{% endfor %}
+
+{% for field,val in default_exends %}
+{% if field and val %}
+	set{{field|to_camel}}({{val}});
+{% endif %}
+{% endfor %}
+{% for field in fields %}
+{% if field.default %}
+	set{{field.name_camel}}({{field.default}});
 {% endif %}
 {% endfor %}
 }
@@ -19,25 +40,12 @@
 }
 
 {% for field in fields %}
-{% include 'method_get.twig' with {
-    'field_type'  : field.field_type,
-	'field_size'  : field.field_size,
-	'field_name'  : field.field_name,
-	'field_name_camel'  : field.field_name_camel,
-	'field_name_lower_camel'  : field.field_name_lower_camel,
-	'field_size_const'  : field.size_const,
-	'field_allowed_setters' : field.allowed_setters,
-	'field_allowed_getters' : field.allowed_getters
-} %}
+{% include 'method_get.twig' %}
                 
-{% include 'method_set.twig' with {
-    'field_type'  : field.field_type,
-	'field_size'  : field.field_size,
-	'field_name'  : field.field_name,
-	'field_name_camel'  : field.field_name_camel,
-	'field_name_lower_camel'  : field.field_name_lower_camel,
-	'field_size_const'  : field.size_const,
-	'field_allowed_setters' : field.allowed_setters,
-	'field_allowed_getters' : field.allowed_getters
-} %}
+{% include 'method_set.twig' %}
 {% endfor %}
+
+void {{class_name}}::unpack(std::vector<uint8_t>& data)
+{
+	
+}

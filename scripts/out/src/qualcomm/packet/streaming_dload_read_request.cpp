@@ -1,9 +1,21 @@
-#include "/.h"
+/**
+* LICENSE PLACEHOLDER
+*
+* @file streaming_dload_read_request.cpp
+* @package openpst/libopenpst
+* @brief 
+*
+* @author Gassan Idriss <ghassani@gmail.com>
+*/
+
+#include "qualcomm/packet/streaming_dload_read_request.h"
 
 StreamingDloadReadRequest::StreamingDloadReadRequest() : StreamingDloadPacket()
 {
 	addField("address", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("length", kPacketFieldTypePrimitive, sizeof(uint16_t));
+
+	setCommand(kStreamingDloadRead);
 }
 
 StreamingDloadReadRequest::~StreamingDloadReadRequest()
@@ -28,4 +40,9 @@ uint16_t StreamingDloadReadRequest::getLength()
 void StreamingDloadReadRequest::setLength(uint16_t length)
 {
     write<uint16_t>("length", length);
+}
+
+void StreamingDloadReadRequest::unpack(std::vector<uint8_t>& data)
+{
+	
 }

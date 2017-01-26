@@ -1,6 +1,16 @@
+/**
+* LICENSE PLACEHOLDER
+*
+* @file sahara_reset_response.h
+* @package openpst/libopenpst
+* @brief 
+*
+* @author Gassan Idriss <ghassani@gmail.com>
+*/
+
 #pragma once
 
-#include "serial/sahara_reset_response.h"
+#include "qualcomm/packet/sahara_packet.h"
 
 using OpenPST::QC::SaharaPacket;
 
@@ -20,6 +30,8 @@ namespace OpenPST {
                 */
                 ~SaharaResetResponse();
 
+
+            void unpack(std::vector<uint8_t>& data) override;
 
         };
     }

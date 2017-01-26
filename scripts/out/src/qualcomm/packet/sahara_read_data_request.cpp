@@ -1,10 +1,21 @@
-#include "/.h"
+/**
+* LICENSE PLACEHOLDER
+*
+* @file sahara_read_data_request.cpp
+* @package openpst/libopenpst
+* @brief 
+*
+* @author Gassan Idriss <ghassani@gmail.com>
+*/
+
+#include "qualcomm/packet/sahara_read_data_request.h"
 
 SaharaReadDataRequest::SaharaReadDataRequest() : SaharaPacket()
 {
 	addField("image_id", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("offset", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("size", kPacketFieldTypePrimitive, sizeof(uint32_t));
+
 }
 
 SaharaReadDataRequest::~SaharaReadDataRequest()
@@ -38,4 +49,9 @@ uint32_t SaharaReadDataRequest::getSize()
 void SaharaReadDataRequest::setSize(uint32_t size)
 {
     write<uint32_t>("size", size);
+}
+
+void SaharaReadDataRequest::unpack(std::vector<uint8_t>& data)
+{
+	
 }
