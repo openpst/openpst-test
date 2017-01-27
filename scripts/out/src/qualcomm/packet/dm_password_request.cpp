@@ -41,5 +41,6 @@ void DmPasswordRequest::setPassword(const std::string& password);
 
 void DmPasswordRequest::unpack(std::vector<uint8_t>& data)
 {
-	
+	DmPacket::unpack(data);
 }
+

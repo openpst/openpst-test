@@ -43,5 +43,6 @@ void QcdmEfsReadDirRequest::setSequenceNumber(uint32_t sequenceNumber)
 
 void QcdmEfsReadDirRequest::unpack(std::vector<uint8_t>& data)
 {
-	
+	DmEfsPacket::unpack(data);
 }
+

@@ -34,5 +34,6 @@ void StreamingDloadOpenMultiImageResponse::setStatus(uint8_t status)
 
 void StreamingDloadOpenMultiImageResponse::unpack(std::vector<uint8_t>& data)
 {
-	
+	StreamingDloadPacket::unpack(data);
 }
+

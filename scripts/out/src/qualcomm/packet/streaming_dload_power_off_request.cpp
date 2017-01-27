@@ -24,5 +24,12 @@ StreamingDloadPowerOffRequest::~StreamingDloadPowerOffRequest()
 
 void StreamingDloadPowerOffRequest::unpack(std::vector<uint8_t>& data)
 {
-	
+	StreamingDloadPacket::unpack(data);
+}
+
+void StreamingDloadPowerOffRequest::prepareResponse()
+{
+	if (response != nullptr) {
+		response = new StreamingDloadPowerOffResponse();
+	}
 }

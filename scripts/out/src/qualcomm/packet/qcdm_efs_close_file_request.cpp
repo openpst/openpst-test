@@ -33,5 +33,6 @@ void QcdmEfsCloseFileRequest::setFp(uint32_t fp)
 
 void QcdmEfsCloseFileRequest::unpack(std::vector<uint8_t>& data)
 {
-	
+	DmEfsPacket::unpack(data);
 }
+

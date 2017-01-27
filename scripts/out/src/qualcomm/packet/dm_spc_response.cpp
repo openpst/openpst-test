@@ -33,5 +33,6 @@ void DmSpcResponse::setStatus(uint8_t status)
 
 void DmSpcResponse::unpack(std::vector<uint8_t>& data)
 {
-	
+	DmPacket::unpack(data);
 }
+

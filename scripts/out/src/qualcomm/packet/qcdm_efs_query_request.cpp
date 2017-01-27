@@ -23,5 +23,6 @@ QcdmEfsQueryRequest::~QcdmEfsQueryRequest()
 
 void QcdmEfsQueryRequest::unpack(std::vector<uint8_t>& data)
 {
-	
+	DmEfsPacket::unpack(data);
 }
+

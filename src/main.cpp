@@ -2,6 +2,7 @@
 #include <type_traits>
 #include "serial/packet.h"
 #include "serial/serial_packet_writer.h"
+#include "serial/generic_serial.h"
 #include "qualcomm/packet/streaming_dload_hello_request.h"
 #include "qualcomm/packet/sahara_hello_request.h"
 #include "qualcomm/packet/sahara_hello_response.h"
@@ -17,7 +18,9 @@ int main(int argc, char* argv[])
 	
 
 	try {
-		SerialPacketWriter writer("/dev/ttyUSB0");
+		GenericSerial port("/dev/ttyUSB0");
+
+		SerialPacketWriter writer(port);
 
 		
 

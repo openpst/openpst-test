@@ -43,8 +43,10 @@ namespace OpenPST {
                 * @return void
                 */
                 void setPath(uint8_t* data, size_t size);
-
-            void unpack(std::vector<uint8_t>& data) override;
+				/**
+				* @overload Packet::unpack
+				*/
+	            void unpack(std::vector<uint8_t>& data) override;
 
         };
     }

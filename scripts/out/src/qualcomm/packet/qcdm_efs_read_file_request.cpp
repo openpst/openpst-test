@@ -53,5 +53,6 @@ void QcdmEfsReadFileRequest::setOffset(uint32_t offset)
 
 void QcdmEfsReadFileRequest::unpack(std::vector<uint8_t>& data)
 {
-	
+	DmEfsPacket::unpack(data);
 }
+

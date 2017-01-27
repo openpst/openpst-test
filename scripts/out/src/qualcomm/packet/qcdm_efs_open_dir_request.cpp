@@ -33,5 +33,6 @@ void QcdmEfsOpenDirRequest::setPath(uint8_t* data, size_t size);
 
 void QcdmEfsOpenDirRequest::unpack(std::vector<uint8_t>& data)
 {
-	
+	DmEfsPacket::unpack(data);
 }
+

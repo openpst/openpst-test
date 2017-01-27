@@ -33,5 +33,6 @@ void DmPhoneModeResponse::setStatus(uint8_t status)
 
 void DmPhoneModeResponse::unpack(std::vector<uint8_t>& data)
 {
-	
+	DmPacket::unpack(data);
 }
+

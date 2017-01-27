@@ -44,5 +44,5 @@ void SaharaMemoryRead64Request::setSize(uint64_t size)
 
 void SaharaMemoryRead64Request::unpack(std::vector<uint8_t>& data)
 {
-	
 }
+

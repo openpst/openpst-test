@@ -51,5 +51,6 @@ void DmNvReadResponse::setData(const std::string& data);
 
 void DmNvReadResponse::unpack(std::vector<uint8_t>& data)
 {
-	
+	DmPacket::unpack(data);
 }
+

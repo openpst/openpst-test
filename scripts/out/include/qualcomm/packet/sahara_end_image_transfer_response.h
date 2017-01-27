@@ -54,8 +54,10 @@ namespace OpenPST {
                 * @return void
                 */
                 void setStatus(uint32_t status);
-
-            void unpack(std::vector<uint8_t>& data) override;
+				/**
+				* @overload Packet::unpack
+				*/
+	            void unpack(std::vector<uint8_t>& data) override;
 
         };
     }

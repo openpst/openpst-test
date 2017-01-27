@@ -63,5 +63,6 @@ void QcdmEfsWriteFileResponse::setError(uint32_t error)
 
 void QcdmEfsWriteFileResponse::unpack(std::vector<uint8_t>& data)
 {
-	
+	DmEfsPacket::unpack(data);
 }
+

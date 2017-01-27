@@ -34,5 +34,12 @@ void StreamingDloadNopRequest::setIdentifier(uint32_t identifier)
 
 void StreamingDloadNopRequest::unpack(std::vector<uint8_t>& data)
 {
-	
+	StreamingDloadPacket::unpack(data);
+}
+
+void StreamingDloadNopRequest::prepareResponse()
+{
+	if (response != nullptr) {
+		response = new StreamingDloadNopResponse();
+	}
 }

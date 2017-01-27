@@ -46,5 +46,5 @@ void SaharaReadDataResponse::setData(const std::string& data);
 
 void SaharaReadDataResponse::unpack(std::vector<uint8_t>& data)
 {
-	
 }
+

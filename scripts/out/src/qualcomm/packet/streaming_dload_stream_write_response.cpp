@@ -34,5 +34,6 @@ void StreamingDloadStreamWriteResponse::setAddress(uint32_t address)
 
 void StreamingDloadStreamWriteResponse::unpack(std::vector<uint8_t>& data)
 {
-	
+	StreamingDloadPacket::unpack(data);
 }
+

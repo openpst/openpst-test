@@ -34,5 +34,5 @@ void SaharaCommandReadyResponse::setImageTxStatus(uint32_t imageTxStatus)
 
 void SaharaCommandReadyResponse::unpack(std::vector<uint8_t>& data)
 {
-	
 }
+

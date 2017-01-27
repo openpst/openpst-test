@@ -73,5 +73,6 @@ void QcdmEfsLstatResponse::setCtime(uint32_t ctime)
 
 void QcdmEfsLstatResponse::unpack(std::vector<uint8_t>& data)
 {
-	
+	DmEfsPacket::unpack(data);
 }
+

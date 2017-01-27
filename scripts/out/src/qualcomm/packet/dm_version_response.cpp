@@ -259,5 +259,6 @@ void DmVersionResponse::setPower(uint8_t power)
 
 void DmVersionResponse::unpack(std::vector<uint8_t>& data)
 {
-	
+	DmPacket::unpack(data);
 }
+

@@ -34,5 +34,5 @@ void kSaharaCommandMemoryDebug64Request::setClientCommand(uint64_t clientCommand
 
 void kSaharaCommandMemoryDebug64Request::unpack(std::vector<uint8_t>& data)
 {
-	
 }
+

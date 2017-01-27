@@ -53,5 +53,11 @@ void SaharaReadDataRequest::setSize(uint32_t size)
 
 void SaharaReadDataRequest::unpack(std::vector<uint8_t>& data)
 {
-	
+}
+
+void SaharaReadDataRequest::prepareResponse()
+{
+	if (response != nullptr) {
+		response = new SaharaReadDataResponse();
+	}
 }

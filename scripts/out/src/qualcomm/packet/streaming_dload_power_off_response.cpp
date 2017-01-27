@@ -34,5 +34,6 @@ void StreamingDloadPowerOffResponse::setAddress(uint32_t address)
 
 void StreamingDloadPowerOffResponse::unpack(std::vector<uint8_t>& data)
 {
-	
+	StreamingDloadPacket::unpack(data);
 }
+

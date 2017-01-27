@@ -24,5 +24,6 @@ StreamingDloadResetResponse::~StreamingDloadResetResponse()
 
 void StreamingDloadResetResponse::unpack(std::vector<uint8_t>& data)
 {
-	
+	StreamingDloadPacket::unpack(data);
 }
+

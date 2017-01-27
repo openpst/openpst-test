@@ -43,5 +43,6 @@ void QcdmEfsChmodRequest::setPath(uint8_t* data, size_t size);
 
 void QcdmEfsChmodRequest::unpack(std::vector<uint8_t>& data)
 {
-	
+	DmEfsPacket::unpack(data);
 }
+

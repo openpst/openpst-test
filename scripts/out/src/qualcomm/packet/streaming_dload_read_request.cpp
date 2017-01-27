@@ -44,5 +44,12 @@ void StreamingDloadReadRequest::setLength(uint16_t length)
 
 void StreamingDloadReadRequest::unpack(std::vector<uint8_t>& data)
 {
-	
+	StreamingDloadPacket::unpack(data);
+}
+
+void StreamingDloadReadRequest::prepareResponse()
+{
+	if (response != nullptr) {
+		response = new StreamingDloadReadResponse();
+	}
 }

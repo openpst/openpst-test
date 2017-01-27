@@ -33,5 +33,6 @@ void QcdmEfsUnlinkResponse::setError(uint32_t error)
 
 void QcdmEfsUnlinkResponse::unpack(std::vector<uint8_t>& data)
 {
-	
+	DmEfsPacket::unpack(data);
 }
+

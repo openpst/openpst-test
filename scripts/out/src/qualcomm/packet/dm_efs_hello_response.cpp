@@ -113,5 +113,6 @@ void DmEfsHelloResponse::setFeatureBits(uint32_t featureBits)
 
 void DmEfsHelloResponse::unpack(std::vector<uint8_t>& data)
 {
-	
+	DmEfsPacket::unpack(data);
 }
+

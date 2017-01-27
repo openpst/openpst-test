@@ -33,5 +33,6 @@ void QcdmEfsRenameResponse::setError(uint32_t error)
 
 void QcdmEfsRenameResponse::unpack(std::vector<uint8_t>& data)
 {
-	
+	DmEfsPacket::unpack(data);
 }
+

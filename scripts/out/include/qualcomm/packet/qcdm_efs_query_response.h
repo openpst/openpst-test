@@ -102,8 +102,10 @@ namespace OpenPST {
                 * @return void
                 */
                 void setMaxMounts(uint32_t maxMounts);
-
-            void unpack(std::vector<uint8_t>& data) override;
+				/**
+				* @overload Packet::unpack
+				*/
+	            void unpack(std::vector<uint8_t>& data) override;
 
         };
     }

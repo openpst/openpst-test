@@ -33,5 +33,5 @@ void QcdmEfsRmdirRequest::setPath(uint8_t* data, size_t size);
 
 void QcdmEfsRmdirRequest::unpack(std::vector<uint8_t>& data)
 {
-	
 }
+

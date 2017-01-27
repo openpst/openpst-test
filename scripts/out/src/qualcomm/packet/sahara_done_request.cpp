@@ -24,5 +24,11 @@ SaharaDoneRequest::~SaharaDoneRequest()
 
 void SaharaDoneRequest::unpack(std::vector<uint8_t>& data)
 {
-	
+}
+
+void SaharaDoneRequest::prepareResponse()
+{
+	if (response != nullptr) {
+		response = new SaharaDoneResponse();
+	}
 }

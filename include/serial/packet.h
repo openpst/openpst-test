@@ -239,6 +239,11 @@ namespace OpenPST {
                 virtual void prepare() {}
 
                 /**
+                * @brief Prepare the response packet before unpacking into the response packet
+                */
+                virtual void prepareResponse() {}
+
+                /**
                 * @brief Unpack a buffer into the packet
                 */
                 virtual void unpack(std::vector<uint8_t>& data) = 0;

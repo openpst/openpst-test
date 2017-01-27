@@ -83,5 +83,6 @@ void QcdmEfsQueryResponse::setMaxMounts(uint32_t maxMounts)
 
 void QcdmEfsQueryResponse::unpack(std::vector<uint8_t>& data)
 {
-	
+	DmEfsPacket::unpack(data);
 }
+

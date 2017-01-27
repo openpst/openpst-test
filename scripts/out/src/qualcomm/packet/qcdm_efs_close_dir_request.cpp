@@ -33,5 +33,6 @@ void QcdmEfsCloseDirRequest::setDp(uint32_t dp)
 
 void QcdmEfsCloseDirRequest::unpack(std::vector<uint8_t>& data)
 {
-	
+	DmEfsPacket::unpack(data);
 }
+

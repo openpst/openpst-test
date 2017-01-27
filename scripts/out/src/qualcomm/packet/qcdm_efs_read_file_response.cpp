@@ -73,5 +73,6 @@ void QcdmEfsReadFileResponse::setData(uint8_t* data, size_t size);
 
 void QcdmEfsReadFileResponse::unpack(std::vector<uint8_t>& data)
 {
-	
+	DmEfsPacket::unpack(data);
 }
+

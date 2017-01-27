@@ -54,8 +54,10 @@ namespace OpenPST {
                 * @return void
                 */
                 void setPassword(const std::string& password);
-
-            void unpack(std::vector<uint8_t>& data) override;
+				/**
+				* @overload Packet::unpack
+				*/
+	            void unpack(std::vector<uint8_t>& data) override;
 
         };
     }

@@ -8,13 +8,12 @@ namespace OpenPST {
         class SerialPacketWriter
         {
         	protected:
-                GenericSerial port;
+                GenericSerial& port;
             public:
-
                 /**
                 * Constructor
-                */
-                SerialPacketWriter(const std::string& port, int baudRate = 115200, int timeout = 1000);
+                */ 
+                SerialPacketWriter(GenericSerial& port);
                 
                 /**
                 * Destructor
@@ -40,7 +39,7 @@ namespace OpenPST {
                 * @param size_t size
                 * @return void
                 */
-                void read(Packet* packet, size_t size)
+                void read(Packet* packet, size_t size);
 
         };
     }

@@ -34,5 +34,5 @@ void SaharaClientCommandExecuteDataRequest::setClientCommand(uint32_t clientComm
 
 void SaharaClientCommandExecuteDataRequest::unpack(std::vector<uint8_t>& data)
 {
-	
 }
+

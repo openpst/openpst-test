@@ -34,5 +34,12 @@ void StreamingDloadSecurityModeRequest::setMode(uint8_t mode)
 
 void StreamingDloadSecurityModeRequest::unpack(std::vector<uint8_t>& data)
 {
-	
+	StreamingDloadPacket::unpack(data);
+}
+
+void StreamingDloadSecurityModeRequest::prepareResponse()
+{
+	if (response != nullptr) {
+		response = new StreamingDloadSecurityModeResponse();
+	}
 }

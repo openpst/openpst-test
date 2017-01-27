@@ -24,5 +24,12 @@ StreamingDloadEraseFlashRequest::~StreamingDloadEraseFlashRequest()
 
 void StreamingDloadEraseFlashRequest::unpack(std::vector<uint8_t>& data)
 {
-	
+	StreamingDloadPacket::unpack(data);
+}
+
+void StreamingDloadEraseFlashRequest::prepareResponse()
+{
+	if (response != nullptr) {
+		response = new StreamingDloadEraseFlashResponse();
+	}
 }

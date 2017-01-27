@@ -44,5 +44,5 @@ void SaharaClientCommandResponse::setSize(uint32_t size)
 
 void SaharaClientCommandResponse::unpack(std::vector<uint8_t>& data)
 {
-	
 }
+

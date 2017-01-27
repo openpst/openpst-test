@@ -43,5 +43,6 @@ void DmNvReadRequest::setData(uint8_t* data, size_t size);
 
 void DmNvReadRequest::unpack(std::vector<uint8_t>& data)
 {
-	
+	DmPacket::unpack(data);
 }
+

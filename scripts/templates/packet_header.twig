@@ -35,9 +35,18 @@ namespace OpenPST {
                 
 {% include 'method_set_declaration.twig' %}
 {% endfor %}
+				/**
+				* @overload Packet::unpack
+				*/
+	            void unpack(std::vector<uint8_t>& data) override;
 
-            void unpack(std::vector<uint8_t>& data) override;
+{% if expects_response %}
+				/**
+				* @overload Packet::prepareResponse
+				*/
+				void prepareResponse() override;
 
+{% endif %}
         };
     }
 }

@@ -123,5 +123,6 @@ void QcdmEfsReadDirResponse::setName(uint8_t* data, size_t size);
 
 void QcdmEfsReadDirResponse::unpack(std::vector<uint8_t>& data)
 {
-	
+	DmEfsPacket::unpack(data);
 }
+

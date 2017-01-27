@@ -41,5 +41,6 @@ void DmSpcRequest::setSpc(const std::string& spc);
 
 void DmSpcRequest::unpack(std::vector<uint8_t>& data)
 {
-	
+	DmPacket::unpack(data);
 }
+

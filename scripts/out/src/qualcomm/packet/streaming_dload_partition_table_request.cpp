@@ -44,5 +44,12 @@ void StreamingDloadPartitionTableRequest::setData(uint8_t* data, size_t size);
 
 void StreamingDloadPartitionTableRequest::unpack(std::vector<uint8_t>& data)
 {
-	
+	StreamingDloadPacket::unpack(data);
+}
+
+void StreamingDloadPartitionTableRequest::prepareResponse()
+{
+	if (response != nullptr) {
+		response = new StreamingDloadPartitionTableResponse();
+	}
 }

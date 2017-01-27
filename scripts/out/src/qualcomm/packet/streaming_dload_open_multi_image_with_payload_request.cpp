@@ -52,5 +52,12 @@ void StreamingDloadOpenMultiImageWithPayloadRequest::setPayload(const std::strin
 
 void StreamingDloadOpenMultiImageWithPayloadRequest::unpack(std::vector<uint8_t>& data)
 {
-	
+	StreamingDloadPacket::unpack(data);
+}
+
+void StreamingDloadOpenMultiImageWithPayloadRequest::prepareResponse()
+{
+	if (response != nullptr) {
+		response = new StreamingDloadOpenMultiImageResponse();
+	}
 }

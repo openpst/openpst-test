@@ -138,8 +138,10 @@ namespace OpenPST {
                 * @return void
                 */
                 void setFeatureBits(uint32_t featureBits);
-
-            void unpack(std::vector<uint8_t>& data) override;
+				/**
+				* @overload Packet::unpack
+				*/
+	            void unpack(std::vector<uint8_t>& data) override;
 
         };
     }

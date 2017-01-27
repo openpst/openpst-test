@@ -44,5 +44,11 @@ void SaharaMemoryDebugRequest::setSize(uint32_t size)
 
 void SaharaMemoryDebugRequest::unpack(std::vector<uint8_t>& data)
 {
-	
+}
+
+void SaharaMemoryDebugRequest::prepareResponse()
+{
+	if (response != nullptr) {
+		response = new SaharaMemoryReadRequest();
+	}
 }

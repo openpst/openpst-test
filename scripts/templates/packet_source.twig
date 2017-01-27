@@ -47,5 +47,16 @@
 
 void {{class_name}}::unpack(std::vector<uint8_t>& data)
 {
-	
+{% if unpack_base %}
+	{{extends_class_name}}::unpack(data);
+{% endif %}
 }
+
+{% if expects_response %}
+void {{class_name}}::prepareResponse()
+{
+	if (response != nullptr) {
+		response = new {{expects_response}}();
+	}
+}
+{% endif %}

@@ -49,7 +49,10 @@ namespace OpenPST {
                 void prepare() override {
                     encoder.encode(data);
                 }
-
+                
+                void unpack(std::vector<uint8_t>& data) override {
+                    encoder.decode(data);
+                }
         };
     }
 }

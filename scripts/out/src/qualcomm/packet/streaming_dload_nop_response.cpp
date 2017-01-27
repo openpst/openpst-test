@@ -34,5 +34,6 @@ void StreamingDloadNopResponse::setIdentifier(uint32_t identifier)
 
 void StreamingDloadNopResponse::unpack(std::vector<uint8_t>& data)
 {
-	
+	StreamingDloadPacket::unpack(data);
 }
+

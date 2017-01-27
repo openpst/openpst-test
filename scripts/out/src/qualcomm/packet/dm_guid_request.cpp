@@ -23,5 +23,6 @@ DmGuidRequest::~DmGuidRequest()
 
 void DmGuidRequest::unpack(std::vector<uint8_t>& data)
 {
-	
+	DmPacket::unpack(data);
 }
+

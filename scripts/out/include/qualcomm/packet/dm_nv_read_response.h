@@ -66,8 +66,10 @@ namespace OpenPST {
                 * @return void
                 */
                 void setData(const std::string& data);
-
-            void unpack(std::vector<uint8_t>& data) override;
+				/**
+				* @overload Packet::unpack
+				*/
+	            void unpack(std::vector<uint8_t>& data) override;
 
         };
     }

@@ -33,5 +33,6 @@ void QcdmEfsCloseDirResponse::setError(uint32_t error)
 
 void QcdmEfsCloseDirResponse::unpack(std::vector<uint8_t>& data)
 {
-	
+	DmEfsPacket::unpack(data);
 }
+

@@ -33,5 +33,6 @@ void QcdmEfsFstatRequest::setFp(uint32_t fp)
 
 void QcdmEfsFstatRequest::unpack(std::vector<uint8_t>& data)
 {
-	
+	DmEfsPacket::unpack(data);
 }
+

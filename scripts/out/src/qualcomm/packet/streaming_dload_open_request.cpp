@@ -34,5 +34,12 @@ void StreamingDloadOpenRequest::setMode(uint8_t mode)
 
 void StreamingDloadOpenRequest::unpack(std::vector<uint8_t>& data)
 {
-	
+	StreamingDloadPacket::unpack(data);
+}
+
+void StreamingDloadOpenRequest::prepareResponse()
+{
+	if (response != nullptr) {
+		response = new StreamingDloadOpenResponse();
+	}
 }

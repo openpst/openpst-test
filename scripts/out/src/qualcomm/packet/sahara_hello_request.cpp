@@ -84,5 +84,11 @@ void SaharaHelloRequest::setMode(uint32_t mode)
 
 void SaharaHelloRequest::unpack(std::vector<uint8_t>& data)
 {
-	
+}
+
+void SaharaHelloRequest::prepareResponse()
+{
+	if (response != nullptr) {
+		response = new SaharaHelloResponse();
+	}
 }

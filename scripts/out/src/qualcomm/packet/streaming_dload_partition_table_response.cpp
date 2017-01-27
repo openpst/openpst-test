@@ -34,5 +34,6 @@ void StreamingDloadPartitionTableResponse::setStatus(uint8_t status)
 
 void StreamingDloadPartitionTableResponse::unpack(std::vector<uint8_t>& data)
 {
-	
+	StreamingDloadPacket::unpack(data);
 }
+

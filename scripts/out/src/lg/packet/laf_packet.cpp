@@ -113,5 +113,11 @@ void LafPacket::setData(uint8_t* data, size_t size);
 
 void LafPacket::unpack(std::vector<uint8_t>& data)
 {
-	
+}
+
+void LafPacket::prepareResponse()
+{
+	if (response != nullptr) {
+		response = new LafPacket();
+	}
 }

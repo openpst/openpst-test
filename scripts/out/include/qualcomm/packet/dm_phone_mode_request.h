@@ -54,8 +54,10 @@ namespace OpenPST {
                 * @return void
                 */
                 void setPadding(uint8_t padding);
-
-            void unpack(std::vector<uint8_t>& data) override;
+				/**
+				* @overload Packet::unpack
+				*/
+	            void unpack(std::vector<uint8_t>& data) override;
 
         };
     }

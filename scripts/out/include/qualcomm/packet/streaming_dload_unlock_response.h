@@ -30,8 +30,10 @@ namespace OpenPST {
                 */
                 ~StreamingDloadUnlockResponse();
 
-
-            void unpack(std::vector<uint8_t>& data) override;
+				/**
+				* @overload Packet::unpack
+				*/
+	            void unpack(std::vector<uint8_t>& data) override;
 
         };
     }

@@ -33,5 +33,6 @@ void DmVersionRequest::setVersion(uint16_t version)
 
 void DmVersionRequest::unpack(std::vector<uint8_t>& data)
 {
-	
+	DmPacket::unpack(data);
 }
+

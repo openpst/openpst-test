@@ -24,5 +24,12 @@ StreamingDloadGetEccStateRequest::~StreamingDloadGetEccStateRequest()
 
 void StreamingDloadGetEccStateRequest::unpack(std::vector<uint8_t>& data)
 {
-	
+	StreamingDloadPacket::unpack(data);
+}
+
+void StreamingDloadGetEccStateRequest::prepareResponse()
+{
+	if (response != nullptr) {
+		response = new StreamingDloadGetEccStateResponse();
+	}
 }

@@ -42,8 +42,10 @@ namespace OpenPST {
                 * @return void
                 */
                 void setVersion(uint16_t version);
-
-            void unpack(std::vector<uint8_t>& data) override;
+				/**
+				* @overload Packet::unpack
+				*/
+	            void unpack(std::vector<uint8_t>& data) override;
 
         };
     }

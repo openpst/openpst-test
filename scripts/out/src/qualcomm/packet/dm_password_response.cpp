@@ -33,5 +33,6 @@ void DmPasswordResponse::setStatus(uint8_t status)
 
 void DmPasswordResponse::unpack(std::vector<uint8_t>& data)
 {
-	
+	DmPacket::unpack(data);
 }
+

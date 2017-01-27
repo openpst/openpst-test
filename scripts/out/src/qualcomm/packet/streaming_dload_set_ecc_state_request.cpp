@@ -34,5 +34,12 @@ void StreamingDloadSetEccStateRequest::setStatus(uint8_t status)
 
 void StreamingDloadSetEccStateRequest::unpack(std::vector<uint8_t>& data)
 {
-	
+	StreamingDloadPacket::unpack(data);
+}
+
+void StreamingDloadSetEccStateRequest::prepareResponse()
+{
+	if (response != nullptr) {
+		response = new StreamingDloadSetEccStateResponse();
+	}
 }

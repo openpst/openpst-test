@@ -24,5 +24,5 @@ SaharaResetResponse::~SaharaResetResponse()
 
 void SaharaResetResponse::unpack(std::vector<uint8_t>& data)
 {
-	
 }
+

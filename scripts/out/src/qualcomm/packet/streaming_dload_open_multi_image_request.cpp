@@ -34,5 +34,12 @@ void StreamingDloadOpenMultiImageRequest::setType(uint8_t type)
 
 void StreamingDloadOpenMultiImageRequest::unpack(std::vector<uint8_t>& data)
 {
-	
+	StreamingDloadPacket::unpack(data);
+}
+
+void StreamingDloadOpenMultiImageRequest::prepareResponse()
+{
+	if (response != nullptr) {
+		response = new StreamingDloadOpenMultiImageResponse();
+	}
 }

@@ -43,5 +43,6 @@ void QcdmEfsRenameRequest::setNewPath(uint8_t* data, size_t size);
 
 void QcdmEfsRenameRequest::unpack(std::vector<uint8_t>& data)
 {
-	
+	DmEfsPacket::unpack(data);
 }
+

@@ -2,11 +2,12 @@
 
 using namespace OpenPST::Serial;
 
-SerialPacketWriter::SerialPacketWriter(const std::string& port, int baudRate, int timeout) : 
-port(port, 115200, 1000)
+SerialPacketWriter::SerialPacketWriter(GenericSerial& port) : 
+port(port)
 {
 
 }
+
 
 SerialPacketWriter::~SerialPacketWriter()
 {
@@ -15,7 +16,7 @@ SerialPacketWriter::~SerialPacketWriter()
 
 GenericSerial& SerialPacketWriter::getPort()
 {
-
+	return port;
 }
 
 void SerialPacketWriter::write(Packet* packet)
@@ -25,7 +26,7 @@ void SerialPacketWriter::write(Packet* packet)
 		try {
 			port.open();
 		} catch(...) {
-
+			// throw
 		}
 	}
 
@@ -36,12 +37,24 @@ void SerialPacketWriter::write(Packet* packet)
 	port.write(packet->getData());
 
 	if (packet->isResponseExpected()) {
-		std::vector<uint8_t> response;
+		
+		packet->prepareResponse();
 
-		read(response, 1024);
-//		port.read(response, packet->getExpectedResponseSize());
+		std::vector<uint8_t> rbuffer;
 
-		packet->unpack(response);
+		Packet* response = packet->getResponse();
+
+		if (response == nullptr) {
+			throw std::runtime_error("Response packet has not been allocated");
+		}
+
+		port.read(rbuffer, response->getMaxDataSize());
+
+		if (port.available()) {
+			std::cerr << port.available() << " bytes of data is still waiting to be read!" << std::endl;
+		}
+
+		response->unpack(rbuffer);
 	}
 }
 
@@ -52,14 +65,13 @@ void SerialPacketWriter::read(Packet* packet, size_t size)
 		try {
 			port.open();
 		} catch(...) {
-
+			// throw
 		}
 	}
 
-	std::vector<uint8_t> response;
+	std::vector<uint8_t> rbuffer;
 
-	port.read(response, size);
-//		port.read(response, packet->getExpectedResponseSize());
+	port.read(rbuffer, packet->getMaxDataSize());
 
-	packet->unpack(response);
+	packet->unpack(rbuffer);
 }

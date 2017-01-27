@@ -33,5 +33,6 @@ void QcdmEfsChmodResponse::setError(uint32_t error)
 
 void QcdmEfsChmodResponse::unpack(std::vector<uint8_t>& data)
 {
-	
+	DmEfsPacket::unpack(data);
 }
+

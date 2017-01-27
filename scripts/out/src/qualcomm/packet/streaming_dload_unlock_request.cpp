@@ -34,5 +34,12 @@ void StreamingDloadUnlockRequest::setCode(uint64_t code)
 
 void StreamingDloadUnlockRequest::unpack(std::vector<uint8_t>& data)
 {
-	
+	StreamingDloadPacket::unpack(data);
+}
+
+void StreamingDloadUnlockRequest::prepareResponse()
+{
+	if (response != nullptr) {
+		response = new StreamingDloadUnlockResponse();
+	}
 }

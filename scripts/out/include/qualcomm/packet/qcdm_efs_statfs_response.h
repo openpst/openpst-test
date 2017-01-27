@@ -151,8 +151,10 @@ namespace OpenPST {
                 * @return void
                 */
                 void setMaxFileCount(uint32_t maxFileCount);
-
-            void unpack(std::vector<uint8_t>& data) override;
+				/**
+				* @overload Packet::unpack
+				*/
+	            void unpack(std::vector<uint8_t>& data) override;
 
         };
     }

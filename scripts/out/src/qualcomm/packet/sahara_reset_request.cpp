@@ -24,5 +24,11 @@ SaharaResetRequest::~SaharaResetRequest()
 
 void SaharaResetRequest::unpack(std::vector<uint8_t>& data)
 {
-	
+}
+
+void SaharaResetRequest::prepareResponse()
+{
+	if (response != nullptr) {
+		response = new SaharaResetResponse();
+	}
 }

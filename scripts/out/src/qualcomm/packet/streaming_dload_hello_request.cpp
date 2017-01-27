@@ -64,5 +64,12 @@ void StreamingDloadHelloRequest::setFeatureBits(uint8_t featureBits)
 
 void StreamingDloadHelloRequest::unpack(std::vector<uint8_t>& data)
 {
-	
+	StreamingDloadPacket::unpack(data);
+}
+
+void StreamingDloadHelloRequest::prepareResponse()
+{
+	if (response != nullptr) {
+		response = new StreamingDloadHelloResponse();
+	}
 }

@@ -52,5 +52,12 @@ void StreamingDloadStreamWriteRequest::setData(const std::string& data);
 
 void StreamingDloadStreamWriteRequest::unpack(std::vector<uint8_t>& data)
 {
-	
+	StreamingDloadPacket::unpack(data);
+}
+
+void StreamingDloadStreamWriteRequest::prepareResponse()
+{
+	if (response != nullptr) {
+		response = new StreamingDloadStreamWriteResponse();
+	}
 }

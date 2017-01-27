@@ -44,5 +44,5 @@ void SaharaEndImageTransferResponse::setStatus(uint32_t status)
 
 void SaharaEndImageTransferResponse::unpack(std::vector<uint8_t>& data)
 {
-	
 }
+

@@ -33,5 +33,6 @@ void QcdmEfsRmdirResponse::setError(uint32_t error)
 
 void QcdmEfsRmdirResponse::unpack(std::vector<uint8_t>& data)
 {
-	
+	DmEfsPacket::unpack(data);
 }
+

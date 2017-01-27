@@ -34,5 +34,12 @@ void StreamingDloadCloseRequest::setMode(uint8_t mode)
 
 void StreamingDloadCloseRequest::unpack(std::vector<uint8_t>& data)
 {
-	
+	StreamingDloadPacket::unpack(data);
+}
+
+void StreamingDloadCloseRequest::prepareResponse()
+{
+	if (response != nullptr) {
+		response = new StreamingDloadCloseResponse();
+	}
 }

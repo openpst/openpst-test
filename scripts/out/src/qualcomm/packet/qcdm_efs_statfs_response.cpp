@@ -123,5 +123,6 @@ void QcdmEfsStatfsResponse::setMaxFileCount(uint32_t maxFileCount)
 
 void QcdmEfsStatfsResponse::unpack(std::vector<uint8_t>& data)
 {
-	
+	DmEfsPacket::unpack(data);
 }
+

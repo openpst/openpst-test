@@ -24,5 +24,12 @@ StreamingDloadResetRequest::~StreamingDloadResetRequest()
 
 void StreamingDloadResetRequest::unpack(std::vector<uint8_t>& data)
 {
-	
+	StreamingDloadPacket::unpack(data);
+}
+
+void StreamingDloadResetRequest::prepareResponse()
+{
+	if (response != nullptr) {
+		response = new StreamingDloadResetResponse();
+	}
 }

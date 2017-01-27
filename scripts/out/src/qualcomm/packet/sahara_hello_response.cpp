@@ -84,5 +84,5 @@ void SaharaHelloResponse::setMode(uint32_t mode)
 
 void SaharaHelloResponse::unpack(std::vector<uint8_t>& data)
 {
-	
 }
+
