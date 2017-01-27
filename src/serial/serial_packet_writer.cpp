@@ -58,7 +58,7 @@ void SerialPacketWriter::write(Packet* packet)
 	}
 }
 
-void SerialPacketWriter::read(Packet* packet, size_t size)
+void SerialPacketWriter::read(Packet* packet)
 {
 
 	if (!port.isOpen()) {

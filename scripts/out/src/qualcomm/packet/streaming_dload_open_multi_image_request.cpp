@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/streaming_dload_open_multi_image_request.h"
 
+using namespace OpenPST::QC;
+
 StreamingDloadOpenMultiImageRequest::StreamingDloadOpenMultiImageRequest() : StreamingDloadPacket()
 {
 	addField("type", kPacketFieldTypePrimitive, sizeof(uint8_t));
@@ -40,6 +42,7 @@ void StreamingDloadOpenMultiImageRequest::unpack(std::vector<uint8_t>& data)
 void StreamingDloadOpenMultiImageRequest::prepareResponse()
 {
 	if (response != nullptr) {
-		response = new StreamingDloadOpenMultiImageResponse();
+		StreamingDloadOpenMultiImageResponse* r = new StreamingDloadOpenMultiImageResponse();
+		this->response = r;
 	}
 }

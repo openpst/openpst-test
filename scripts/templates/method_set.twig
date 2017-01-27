@@ -2,24 +2,24 @@
 {% if field.allowed_setters %}
 {% for setter in field.allowed_setters %}
 {% if setter == 'file' %}
-void {{class_name}}::set{{field.name_camel}}(std::ifstream& file, size_t size);
+void {{class_name}}::set{{field.name_camel}}(std::ifstream& file, size_t size)
 {
     write("{{field.name}}", file, size);
 }
 {% elseif setter == 'raw' %}
-void {{class_name}}::set{{field.name_camel}}(uint8_t* data, size_t size);
+void {{class_name}}::set{{field.name_camel}}(uint8_t* data, size_t size)
 {
     write("{{field.name}}", data, size);
 }
 {% elseif setter == 'string' %}
-void {{class_name}}::set{{field.name_camel}}(const std::string& {{field.name_lower_camel}});
+void {{class_name}}::set{{field.name_camel}}(const std::string& {{field.name_lower_camel}})
 {
     write("{{field.name}}", {{field.name_lower_camel}});
 }
 {% endif %}
 {% endfor %}
 {% else %}
-void {{class_name}}::set{{field.name_camel}}(uint8_t* data, size_t size);
+void {{class_name}}::set{{field.name_camel}}(uint8_t* data, size_t size)
 {
     write("{{field.name}}", data, size);
 }
@@ -28,7 +28,7 @@ void {{class_name}}::set{{field.name_camel}}(uint8_t* data, size_t size);
 {% if field.allowed_setters %}
 {% for setter in field.allowed_setters %}
 {% if setter == 'file' %}
-void {{class_name}}::set{{field.name_camel}}(std::ifstream& file, size_t size);
+void {{class_name}}::set{{field.name_camel}}(std::ifstream& file, size_t size)
 {
     write("{{field.name}}", file, size);
 }
@@ -38,14 +38,14 @@ void {{class_name}}::set{{field.name_camel}}(uint8_t* data, size_t size);
     write("{{field.name}}", data, size);
 }
 {% elseif setter == 'string' %}
-void {{class_name}}::set{{field.name_camel}}(const std::string& {{field.name_lower_camel}});
+void {{class_name}}::set{{field.name_camel}}(const std::string& {{field.name_lower_camel}})
 {
     write("{{field.name}}", {{field.name_lower_camel}});
 }
 {% endif %}
 {% endfor %}
 {% else %}
-void {{class_name}}::set{{field.name_camel}}(uint8_t* data, size_t size);
+void {{class_name}}::set{{field.name_camel}}(uint8_t* data, size_t size)
 {
     write("{{field.name}}", data, size);
 }

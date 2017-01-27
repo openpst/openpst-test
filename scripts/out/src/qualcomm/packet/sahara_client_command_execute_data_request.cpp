@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/sahara_client_command_execute_data_request.h"
 
+using namespace OpenPST::QC;
+
 SaharaClientCommandExecuteDataRequest::SaharaClientCommandExecuteDataRequest() : SaharaPacket()
 {
 	addField("client_command", kPacketFieldTypePrimitive, sizeof(uint32_t));

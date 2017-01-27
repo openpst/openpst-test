@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/qcdm_efs_read_dir_response.h"
 
+using namespace OpenPST::QC;
+
 QcdmEfsReadDirResponse::QcdmEfsReadDirResponse() : DmEfsPacket()
 {
 	addField("dp", kPacketFieldTypePrimitive, sizeof(uint32_t));
@@ -21,7 +23,7 @@ QcdmEfsReadDirResponse::QcdmEfsReadDirResponse() : DmEfsPacket()
 	addField("atime", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("mtime", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("ctime", kPacketFieldTypePrimitive, sizeof(uint32_t));
-	addField("name", kPacketFieldTypePrimitive, sizeof(variable));
+	addField("name", kPacketFieldTypeVariant, 0);
 
 }
 
@@ -113,10 +115,10 @@ void QcdmEfsReadDirResponse::setCtime(uint32_t ctime)
 }
 std::vector<uint8_t> QcdmEfsReadDirResponse::getName()
 {
-	return read(getFieldSize("name"), getFieldOffset("name"));
+	return readV(getFieldSize("name"), getFieldOffset("name"));
 }
                 
-void QcdmEfsReadDirResponse::setName(uint8_t* data, size_t size);
+void QcdmEfsReadDirResponse::setName(uint8_t* data, size_t size)
 {
     write("name", data, size);
 }

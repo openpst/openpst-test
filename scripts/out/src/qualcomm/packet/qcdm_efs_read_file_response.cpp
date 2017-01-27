@@ -10,13 +10,15 @@
 
 #include "qualcomm/packet/qcdm_efs_read_file_response.h"
 
+using namespace OpenPST::QC;
+
 QcdmEfsReadFileResponse::QcdmEfsReadFileResponse() : DmEfsPacket()
 {
 	addField("fp", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("offset", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("bytes_read", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("error", kPacketFieldTypePrimitive, sizeof(uint32_t));
-	addField("data", kPacketFieldTypePrimitive, sizeof(variable));
+	addField("data", kPacketFieldTypeVariant, 0);
 
 }
 
@@ -63,10 +65,10 @@ void QcdmEfsReadFileResponse::setError(uint32_t error)
 }
 std::vector<uint8_t> QcdmEfsReadFileResponse::getData()
 {
-	return read(getFieldSize("data"), getFieldOffset("data"));
+	return readV(getFieldSize("data"), getFieldOffset("data"));
 }
                 
-void QcdmEfsReadFileResponse::setData(uint8_t* data, size_t size);
+void QcdmEfsReadFileResponse::setData(uint8_t* data, size_t size)
 {
     write("data", data, size);
 }

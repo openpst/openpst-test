@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/sahara_client_command_response.h"
 
+using namespace OpenPST::QC;
+
 SaharaClientCommandResponse::SaharaClientCommandResponse() : SaharaPacket()
 {
 	addField("client_command", kPacketFieldTypePrimitive, sizeof(uint32_t));

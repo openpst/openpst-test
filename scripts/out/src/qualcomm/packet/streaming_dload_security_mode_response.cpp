@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/streaming_dload_security_mode_response.h"
 
+using namespace OpenPST::QC;
+
 StreamingDloadSecurityModeResponse::StreamingDloadSecurityModeResponse() : StreamingDloadPacket()
 {
 

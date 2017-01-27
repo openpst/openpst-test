@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/streaming_dload_security_mode_request.h"
 
+using namespace OpenPST::QC;
+
 StreamingDloadSecurityModeRequest::StreamingDloadSecurityModeRequest() : StreamingDloadPacket()
 {
 	addField("mode", kPacketFieldTypePrimitive, sizeof(uint8_t));
@@ -40,6 +42,7 @@ void StreamingDloadSecurityModeRequest::unpack(std::vector<uint8_t>& data)
 void StreamingDloadSecurityModeRequest::prepareResponse()
 {
 	if (response != nullptr) {
-		response = new StreamingDloadSecurityModeResponse();
+		StreamingDloadSecurityModeResponse* r = new StreamingDloadSecurityModeResponse();
+		this->response = r;
 	}
 }

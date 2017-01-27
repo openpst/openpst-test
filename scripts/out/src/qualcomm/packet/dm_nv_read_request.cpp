@@ -10,10 +10,12 @@
 
 #include "qualcomm/packet/dm_nv_read_request.h"
 
+using namespace OpenPST::QC;
+
 DmNvReadRequest::DmNvReadRequest() : DmPacket()
 {
 	addField("nv_item", kPacketFieldTypePrimitive, sizeof(uint16_t));
-	addField("data", kPacketFieldTypePrimitive, sizeof(uint8_t[]));
+	addField("data", kPacketFieldTypeArray, DIAG_NV_ITEM_SIZE);
 
 }
 
@@ -36,7 +38,7 @@ std::vector<uint8_t> DmNvReadRequest::getData()
 	return read(getFieldSize("data"), getFieldOffset("data"));
 }
                 
-void DmNvReadRequest::setData(uint8_t* data, size_t size);
+void DmNvReadRequest::setData(uint8_t* data, size_t size)
 {
     write("data", data, size);
 }

@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/streaming_dload_reset_response.h"
 
+using namespace OpenPST::QC;
+
 StreamingDloadResetResponse::StreamingDloadResetResponse() : StreamingDloadPacket()
 {
 

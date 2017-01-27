@@ -10,9 +10,11 @@
 
 #include "qualcomm/packet/qcdm_efs_stat_request.h"
 
+using namespace OpenPST::QC;
+
 QcdmEfsStatRequest::QcdmEfsStatRequest() : DmEfsPacket()
 {
-	addField("path", kPacketFieldTypePrimitive, sizeof(variable));
+	addField("path", kPacketFieldTypeVariant, 0);
 
 }
 
@@ -23,10 +25,10 @@ QcdmEfsStatRequest::~QcdmEfsStatRequest()
 
 std::vector<uint8_t> QcdmEfsStatRequest::getPath()
 {
-	return read(getFieldSize("path"), getFieldOffset("path"));
+	return readV(getFieldSize("path"), getFieldOffset("path"));
 }
                 
-void QcdmEfsStatRequest::setPath(uint8_t* data, size_t size);
+void QcdmEfsStatRequest::setPath(uint8_t* data, size_t size)
 {
     write("path", data, size);
 }

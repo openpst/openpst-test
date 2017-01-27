@@ -10,9 +10,11 @@
 
 #include "qualcomm/packet/qcdm_efs_rmdir_request.h"
 
+using namespace OpenPST::QC;
+
 QcdmEfsRmdirRequest::QcdmEfsRmdirRequest() : DmEfsPacket()
 {
-	addField("path", kPacketFieldTypePrimitive, sizeof(variable));
+	addField("path", kPacketFieldTypeVariant, 0);
 
 }
 
@@ -23,10 +25,10 @@ QcdmEfsRmdirRequest::~QcdmEfsRmdirRequest()
 
 std::vector<uint8_t> QcdmEfsRmdirRequest::getPath()
 {
-	return read(getFieldSize("path"), getFieldOffset("path"));
+	return readV(getFieldSize("path"), getFieldOffset("path"));
 }
                 
-void QcdmEfsRmdirRequest::setPath(uint8_t* data, size_t size);
+void QcdmEfsRmdirRequest::setPath(uint8_t* data, size_t size)
 {
     write("path", data, size);
 }

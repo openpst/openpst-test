@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/dm_spc_response.h"
 
+using namespace OpenPST::QC;
+
 DmSpcResponse::DmSpcResponse() : DmPacket()
 {
 	addField("status", kPacketFieldTypePrimitive, sizeof(uint8_t));

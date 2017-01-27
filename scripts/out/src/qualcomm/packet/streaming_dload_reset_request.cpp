@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/streaming_dload_reset_request.h"
 
+using namespace OpenPST::QC;
+
 StreamingDloadResetRequest::StreamingDloadResetRequest() : StreamingDloadPacket()
 {
 
@@ -30,6 +32,7 @@ void StreamingDloadResetRequest::unpack(std::vector<uint8_t>& data)
 void StreamingDloadResetRequest::prepareResponse()
 {
 	if (response != nullptr) {
-		response = new StreamingDloadResetResponse();
+		StreamingDloadResetResponse* r = new StreamingDloadResetResponse();
+		this->response = r;
 	}
 }

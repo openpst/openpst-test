@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/sahara_memory_read_request.h"
 
+using namespace OpenPST::QC;
+
 SaharaMemoryReadRequest::SaharaMemoryReadRequest() : SaharaPacket()
 {
 	addField("address", kPacketFieldTypePrimitive, sizeof(uint32_t));

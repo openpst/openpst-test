@@ -10,10 +10,12 @@
 
 #include "qualcomm/packet/qcdm_efs_create_link_request.h"
 
+using namespace OpenPST::QC;
+
 QcdmEfsCreateLinkRequest::QcdmEfsCreateLinkRequest() : DmEfsPacket()
 {
-	addField("path", kPacketFieldTypePrimitive, sizeof(variable));
-	addField("new_path", kPacketFieldTypePrimitive, sizeof(variable));
+	addField("path", kPacketFieldTypeVariant, 0);
+	addField("new_path", kPacketFieldTypeVariant, 0);
 
 }
 
@@ -24,19 +26,19 @@ QcdmEfsCreateLinkRequest::~QcdmEfsCreateLinkRequest()
 
 std::vector<uint8_t> QcdmEfsCreateLinkRequest::getPath()
 {
-	return read(getFieldSize("path"), getFieldOffset("path"));
+	return readV(getFieldSize("path"), getFieldOffset("path"));
 }
                 
-void QcdmEfsCreateLinkRequest::setPath(uint8_t* data, size_t size);
+void QcdmEfsCreateLinkRequest::setPath(uint8_t* data, size_t size)
 {
     write("path", data, size);
 }
 std::vector<uint8_t> QcdmEfsCreateLinkRequest::getNewPath()
 {
-	return read(getFieldSize("new_path"), getFieldOffset("new_path"));
+	return readV(getFieldSize("new_path"), getFieldOffset("new_path"));
 }
                 
-void QcdmEfsCreateLinkRequest::setNewPath(uint8_t* data, size_t size);
+void QcdmEfsCreateLinkRequest::setNewPath(uint8_t* data, size_t size)
 {
     write("new_path", data, size);
 }

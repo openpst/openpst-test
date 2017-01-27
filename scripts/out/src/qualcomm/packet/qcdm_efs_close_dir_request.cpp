@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/qcdm_efs_close_dir_request.h"
 
+using namespace OpenPST::QC;
+
 QcdmEfsCloseDirRequest::QcdmEfsCloseDirRequest() : DmEfsPacket()
 {
 	addField("dp", kPacketFieldTypePrimitive, sizeof(uint32_t));

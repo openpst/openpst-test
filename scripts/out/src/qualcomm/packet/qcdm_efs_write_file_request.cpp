@@ -10,11 +10,13 @@
 
 #include "qualcomm/packet/qcdm_efs_write_file_request.h"
 
+using namespace OpenPST::QC;
+
 QcdmEfsWriteFileRequest::QcdmEfsWriteFileRequest() : DmEfsPacket()
 {
 	addField("fp", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("offset", kPacketFieldTypePrimitive, sizeof(uint32_t));
-	addField("data", kPacketFieldTypePrimitive, sizeof(variable));
+	addField("data", kPacketFieldTypeVariant, 0);
 
 }
 
@@ -43,10 +45,10 @@ void QcdmEfsWriteFileRequest::setOffset(uint32_t offset)
 }
 std::vector<uint8_t> QcdmEfsWriteFileRequest::getData()
 {
-	return read(getFieldSize("data"), getFieldOffset("data"));
+	return readV(getFieldSize("data"), getFieldOffset("data"));
 }
                 
-void QcdmEfsWriteFileRequest::setData(uint8_t* data, size_t size);
+void QcdmEfsWriteFileRequest::setData(uint8_t* data, size_t size)
 {
     write("data", data, size);
 }

@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/streaming_dload_open_request.h"
 
+using namespace OpenPST::QC;
+
 StreamingDloadOpenRequest::StreamingDloadOpenRequest() : StreamingDloadPacket()
 {
 	addField("mode", kPacketFieldTypePrimitive, sizeof(uint8_t));
@@ -40,6 +42,7 @@ void StreamingDloadOpenRequest::unpack(std::vector<uint8_t>& data)
 void StreamingDloadOpenRequest::prepareResponse()
 {
 	if (response != nullptr) {
-		response = new StreamingDloadOpenResponse();
+		StreamingDloadOpenResponse* r = new StreamingDloadOpenResponse();
+		this->response = r;
 	}
 }

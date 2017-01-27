@@ -10,10 +10,12 @@
 
 #include "qualcomm/packet/streaming_dload_stream_write_request.h"
 
+using namespace OpenPST::QC;
+
 StreamingDloadStreamWriteRequest::StreamingDloadStreamWriteRequest() : StreamingDloadPacket()
 {
 	addField("address", kPacketFieldTypePrimitive, sizeof(uint32_t));
-	addField("data", kPacketFieldTypePrimitive, sizeof(variable));
+	addField("data", kPacketFieldTypeVariant, 0);
 
 	setCommand(kStreamingDloadStreamWrite);
 }
@@ -34,10 +36,10 @@ void StreamingDloadStreamWriteRequest::setAddress(uint32_t address)
 }
 std::vector<uint8_t> StreamingDloadStreamWriteRequest::getData()
 {
-	return read(getFieldSize("data"), getFieldOffset("data"));
+	return readString(getFieldSize("data"), getFieldOffset("data"));
 }
                 
-void StreamingDloadStreamWriteRequest::setData(std::ifstream& file, size_t size);
+void StreamingDloadStreamWriteRequest::setData(std::ifstream& file, size_t size)
 {
     write("data", file, size);
 }
@@ -45,7 +47,7 @@ void StreamingDloadStreamWriteRequest::setData(uint8_t* data, size_t size);
 {
     write("data", data, size);
 }
-void StreamingDloadStreamWriteRequest::setData(const std::string& data);
+void StreamingDloadStreamWriteRequest::setData(const std::string& data)
 {
     write("data", data);
 }
@@ -58,6 +60,7 @@ void StreamingDloadStreamWriteRequest::unpack(std::vector<uint8_t>& data)
 void StreamingDloadStreamWriteRequest::prepareResponse()
 {
 	if (response != nullptr) {
-		response = new StreamingDloadStreamWriteResponse();
+		StreamingDloadStreamWriteResponse* r = new StreamingDloadStreamWriteResponse();
+		this->response = r;
 	}
 }

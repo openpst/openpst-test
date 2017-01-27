@@ -10,9 +10,11 @@
 
 #include "qualcomm/packet/qcdm_efs_read_link_request.h"
 
+using namespace OpenPST::QC;
+
 QcdmEfsReadLinkRequest::QcdmEfsReadLinkRequest() : DmEfsPacket()
 {
-	addField("path", kPacketFieldTypePrimitive, sizeof(variable));
+	addField("path", kPacketFieldTypeVariant, 0);
 
 }
 
@@ -23,10 +25,10 @@ QcdmEfsReadLinkRequest::~QcdmEfsReadLinkRequest()
 
 std::vector<uint8_t> QcdmEfsReadLinkRequest::getPath()
 {
-	return read(getFieldSize("path"), getFieldOffset("path"));
+	return readV(getFieldSize("path"), getFieldOffset("path"));
 }
                 
-void QcdmEfsReadLinkRequest::setPath(uint8_t* data, size_t size);
+void QcdmEfsReadLinkRequest::setPath(uint8_t* data, size_t size)
 {
     write("path", data, size);
 }

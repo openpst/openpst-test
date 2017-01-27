@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/qcdm_efs_create_link_response.h"
 
+using namespace OpenPST::QC;
+
 QcdmEfsCreateLinkResponse::QcdmEfsCreateLinkResponse() : DmEfsPacket()
 {
 	addField("error", kPacketFieldTypePrimitive, sizeof(uint32_t));

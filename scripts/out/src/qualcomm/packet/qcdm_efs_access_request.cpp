@@ -10,10 +10,12 @@
 
 #include "qualcomm/packet/qcdm_efs_access_request.h"
 
+using namespace OpenPST::QC;
+
 QcdmEfsAccessRequest::QcdmEfsAccessRequest() : DmEfsPacket()
 {
 	addField("permission_mask", kPacketFieldTypePrimitive, sizeof(uint32_t));
-	addField("path", kPacketFieldTypePrimitive, sizeof(variable));
+	addField("path", kPacketFieldTypeVariant, 0);
 
 }
 
@@ -33,10 +35,10 @@ void QcdmEfsAccessRequest::setPermissionMask(uint32_t permissionMask)
 }
 std::vector<uint8_t> QcdmEfsAccessRequest::getPath()
 {
-	return read(getFieldSize("path"), getFieldOffset("path"));
+	return readV(getFieldSize("path"), getFieldOffset("path"));
 }
                 
-void QcdmEfsAccessRequest::setPath(uint8_t* data, size_t size);
+void QcdmEfsAccessRequest::setPath(uint8_t* data, size_t size)
 {
     write("path", data, size);
 }

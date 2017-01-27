@@ -10,10 +10,12 @@
 
 #include "qualcomm/packet/streaming_dload_open_multi_image_with_payload_request.h"
 
+using namespace OpenPST::QC;
+
 StreamingDloadOpenMultiImageWithPayloadRequest::StreamingDloadOpenMultiImageWithPayloadRequest() : StreamingDloadPacket()
 {
 	addField("type", kPacketFieldTypePrimitive, sizeof(uint8_t));
-	addField("payload", kPacketFieldTypePrimitive, sizeof(variable));
+	addField("payload", kPacketFieldTypeVariant, 0);
 
 	setCommand(kStreamingDloadOpenMultiImage);
 }
@@ -34,10 +36,10 @@ void StreamingDloadOpenMultiImageWithPayloadRequest::setType(uint8_t type)
 }
 std::vector<uint8_t> StreamingDloadOpenMultiImageWithPayloadRequest::getPayload()
 {
-	return read(getFieldSize("payload"), getFieldOffset("payload"));
+	return readString(getFieldSize("payload"), getFieldOffset("payload"));
 }
                 
-void StreamingDloadOpenMultiImageWithPayloadRequest::setPayload(std::ifstream& file, size_t size);
+void StreamingDloadOpenMultiImageWithPayloadRequest::setPayload(std::ifstream& file, size_t size)
 {
     write("payload", file, size);
 }
@@ -45,7 +47,7 @@ void StreamingDloadOpenMultiImageWithPayloadRequest::setPayload(uint8_t* data, s
 {
     write("payload", data, size);
 }
-void StreamingDloadOpenMultiImageWithPayloadRequest::setPayload(const std::string& payload);
+void StreamingDloadOpenMultiImageWithPayloadRequest::setPayload(const std::string& payload)
 {
     write("payload", payload);
 }
@@ -58,6 +60,7 @@ void StreamingDloadOpenMultiImageWithPayloadRequest::unpack(std::vector<uint8_t>
 void StreamingDloadOpenMultiImageWithPayloadRequest::prepareResponse()
 {
 	if (response != nullptr) {
-		response = new StreamingDloadOpenMultiImageResponse();
+		StreamingDloadOpenMultiImageResponse* r = new StreamingDloadOpenMultiImageResponse();
+		this->response = r;
 	}
 }

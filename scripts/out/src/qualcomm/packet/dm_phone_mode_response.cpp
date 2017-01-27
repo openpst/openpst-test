@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/dm_phone_mode_response.h"
 
+using namespace OpenPST::QC;
+
 DmPhoneModeResponse::DmPhoneModeResponse() : DmPacket()
 {
 	addField("status", kPacketFieldTypePrimitive, sizeof(uint8_t));

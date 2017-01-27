@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/qcdm_efs_close_dir_response.h"
 
+using namespace OpenPST::QC;
+
 QcdmEfsCloseDirResponse::QcdmEfsCloseDirResponse() : DmEfsPacket()
 {
 	addField("error", kPacketFieldTypePrimitive, sizeof(uint32_t));

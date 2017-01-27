@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/qcdm_efs_read_file_request.h"
 
+using namespace OpenPST::QC;
+
 QcdmEfsReadFileRequest::QcdmEfsReadFileRequest() : DmEfsPacket()
 {
 	addField("fp", kPacketFieldTypePrimitive, sizeof(uint32_t));

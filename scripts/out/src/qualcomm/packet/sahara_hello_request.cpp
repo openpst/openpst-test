@@ -10,13 +10,15 @@
 
 #include "qualcomm/packet/sahara_hello_request.h"
 
+using namespace OpenPST::QC;
+
 SaharaHelloRequest::SaharaHelloRequest() : SaharaPacket()
 {
 	addField("version", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("min_version", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("max_command_packet_size", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("status", kPacketFieldTypePrimitive, sizeof(uint32_t));
-	addField("reserved", kPacketFieldTypePrimitive, sizeof(uint8_t[]));
+	addField("reserved", kPacketFieldTypeArray, 24);
 	addField("mode", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
 	setCommand(kSaharaCommandHello);
@@ -68,7 +70,7 @@ std::vector<uint8_t> SaharaHelloRequest::getReserved()
 	return read(getFieldSize("reserved"), getFieldOffset("reserved"));
 }
                 
-void SaharaHelloRequest::setReserved(uint8_t* data, size_t size);
+void SaharaHelloRequest::setReserved(uint8_t* data, size_t size)
 {
     write("reserved", data, size);
 }
@@ -89,6 +91,7 @@ void SaharaHelloRequest::unpack(std::vector<uint8_t>& data)
 void SaharaHelloRequest::prepareResponse()
 {
 	if (response != nullptr) {
-		response = new SaharaHelloResponse();
+		SaharaHelloResponse* r = new SaharaHelloResponse();
+		this->response = r;
 	}
 }

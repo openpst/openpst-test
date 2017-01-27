@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/streaming_dload_power_off_response.h"
 
+using namespace OpenPST::QC;
+
 StreamingDloadPowerOffResponse::StreamingDloadPowerOffResponse() : StreamingDloadPacket()
 {
 	addField("address", kPacketFieldTypePrimitive, sizeof(uint32_t));

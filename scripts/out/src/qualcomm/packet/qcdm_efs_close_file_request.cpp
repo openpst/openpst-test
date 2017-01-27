@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/qcdm_efs_close_file_request.h"
 
+using namespace OpenPST::QC;
+
 QcdmEfsCloseFileRequest::QcdmEfsCloseFileRequest() : DmEfsPacket()
 {
 	addField("fp", kPacketFieldTypePrimitive, sizeof(uint32_t));

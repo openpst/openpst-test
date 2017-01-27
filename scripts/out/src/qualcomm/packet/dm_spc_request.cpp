@@ -10,9 +10,11 @@
 
 #include "qualcomm/packet/dm_spc_request.h"
 
+using namespace OpenPST::QC;
+
 DmSpcRequest::DmSpcRequest() : DmPacket()
 {
-	addField("spc", kPacketFieldTypePrimitive, sizeof(uint8_t[]));
+	addField("spc", kPacketFieldTypeArray, DIAG_SPC_LENGTH);
 
 }
 
@@ -27,14 +29,14 @@ std::vector<uint8_t> DmSpcRequest::getSpc()
 }
 std::string DmSpcRequest::getSpc()
 {
-	return read(6, getFieldOffset("spc"));
+	return readString(6, getFieldOffset("spc"));
 }
                 
-void DmSpcRequest::setSpc(uint8_t* data, size_t size);
+void DmSpcRequest::setSpc(uint8_t* data, size_t size)
 {
     write("spc", data, size);
 }
-void DmSpcRequest::setSpc(const std::string& spc);
+void DmSpcRequest::setSpc(const std::string& spc)
 {
     write("spc", spc);
 }

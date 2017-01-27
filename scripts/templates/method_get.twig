@@ -9,7 +9,7 @@ std::vector<uint8_t> {{class_name}}::get{{field.name_camel}}()
 {% elseif getter == 'string' %}
 std::string {{class_name}}::get{{field.name_camel}}()
 {
-	return read({{field.size}}, getFieldOffset("{{field.name}}"));
+	return readString({{field.size}}, getFieldOffset("{{field.name}}"));
 }
 {% endif %}
 {% endfor %}
@@ -25,7 +25,7 @@ std::vector<uint8_t> {{class_name}}::get{{field.name_camel}}()
 {% if getter == 'vector' %}
 std::vector<uint8_t> {{class_name}}::get{{field.name_camel}}()
 {
-	return read(getFieldSize("{{field.name}}"), getFieldOffset("{{field.name}}"));
+	return readString(getFieldSize("{{field.name}}"), getFieldOffset("{{field.name}}"));
 }
 {% elseif getter == 'string' %}
 std::string {{class_name}}::get{{field.name_camel}}()
@@ -37,7 +37,7 @@ std::string {{class_name}}::get{{field.name_camel}}()
 {% else %}
 std::vector<uint8_t> {{class_name}}::get{{field.name_camel}}()
 {
-	return read(getFieldSize("{{field.name}}"), getFieldOffset("{{field.name}}"));
+	return readV(getFieldSize("{{field.name}}"), getFieldOffset("{{field.name}}"));
 }
 {% endif %}
 {% else %}

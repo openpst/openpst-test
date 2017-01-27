@@ -10,9 +10,11 @@
 
 #include "qualcomm/packet/dm_password_request.h"
 
+using namespace OpenPST::QC;
+
 DmPasswordRequest::DmPasswordRequest() : DmPacket()
 {
-	addField("password", kPacketFieldTypePrimitive, sizeof(uint8_t[]));
+	addField("password", kPacketFieldTypeArray, DIAG_PASSWORD_LENGTH);
 
 }
 
@@ -27,14 +29,14 @@ std::vector<uint8_t> DmPasswordRequest::getPassword()
 }
 std::string DmPasswordRequest::getPassword()
 {
-	return read(8, getFieldOffset("password"));
+	return readString(8, getFieldOffset("password"));
 }
                 
-void DmPasswordRequest::setPassword(uint8_t* data, size_t size);
+void DmPasswordRequest::setPassword(uint8_t* data, size_t size)
 {
     write("password", data, size);
 }
-void DmPasswordRequest::setPassword(const std::string& password);
+void DmPasswordRequest::setPassword(const std::string& password)
 {
     write("password", password);
 }

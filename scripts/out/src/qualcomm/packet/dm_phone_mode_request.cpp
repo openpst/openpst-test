@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/dm_phone_mode_request.h"
 
+using namespace OpenPST::QC;
+
 DmPhoneModeRequest::DmPhoneModeRequest() : DmPacket()
 {
 	addField("mode", kPacketFieldTypePrimitive, sizeof(uint8_t));

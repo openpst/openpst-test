@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/sahara_memory_debug_request.h"
 
+using namespace OpenPST::QC;
+
 SaharaMemoryDebugRequest::SaharaMemoryDebugRequest() : SaharaPacket()
 {
 	addField("address", kPacketFieldTypePrimitive, sizeof(uint32_t));
@@ -49,6 +51,7 @@ void SaharaMemoryDebugRequest::unpack(std::vector<uint8_t>& data)
 void SaharaMemoryDebugRequest::prepareResponse()
 {
 	if (response != nullptr) {
-		response = new SaharaMemoryReadRequest();
+		SaharaMemoryReadRequest* r = new SaharaMemoryReadRequest();
+		this->response = r;
 	}
 }

@@ -447,7 +447,37 @@ $packets['streaming_dload'] = [
 			'command' => 'kStreamingDloadHello'
 		]
 	],
-
+	'StreamingDloadHelloResponse' => [
+		'namespace' => 'QC',
+		'path'	  => 'qualcomm/packet',
+		'extends' => 'StreamingDloadPacket',
+		'extends_namespace' => 'OpenPST::QC',
+		'source'  => 'local',
+		'expects_response' => '',
+		'unpack_base' => true,
+		'fields'  => [
+			'magic' => [ 
+				'type' => FIELD_TYPE_UARRAY,
+				'size' => $fieldSizes[FIELD_TYPE_UINT8] * 32,
+				'size_const' => 'STREAMING_DLOAD_MAGIC_SIZE',
+			],
+			'version' => [ 
+				'type' => FIELD_TYPE_UINT8,
+				'size' => $fieldSizes[FIELD_TYPE_UINT8],
+			],
+			'compatible_version' => [ 
+				'type' => FIELD_TYPE_UINT8,
+				'size' => $fieldSizes[FIELD_TYPE_UINT8],
+			],
+			'feature_bits' => [ 
+				'type' => FIELD_TYPE_UINT8,
+				'size' => $fieldSizes[FIELD_TYPE_UINT8],
+			],
+		],
+		'default_exends' => [
+			'command' => 'kStreamingDloadHelloResponse'
+		]
+	],
 	// TODO: Response has dynamic size fields..
 	// kStreamingDloadHelloResponse
 

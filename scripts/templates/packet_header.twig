@@ -11,8 +11,14 @@
 #pragma once
 
 #include "{{extends_path}}/{{extends_header_filename}}.h"
+{% if expects_response %}
+#include "{{response_path}}/{{response_header_filename}}.h"
+{% endif %}
 
 using {{extends_class_namespace}}::{{extends_class_name}};
+{% if expects_response %}
+using OpenPST::{{response_class_namespace}}::{{response_class_name}};
+{% endif %}
 
 namespace OpenPST {
     namespace {{namespace}} {

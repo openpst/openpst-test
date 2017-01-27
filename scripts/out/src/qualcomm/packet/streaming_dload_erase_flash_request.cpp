@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/streaming_dload_erase_flash_request.h"
 
+using namespace OpenPST::QC;
+
 StreamingDloadEraseFlashRequest::StreamingDloadEraseFlashRequest() : StreamingDloadPacket()
 {
 
@@ -30,6 +32,7 @@ void StreamingDloadEraseFlashRequest::unpack(std::vector<uint8_t>& data)
 void StreamingDloadEraseFlashRequest::prepareResponse()
 {
 	if (response != nullptr) {
-		response = new StreamingDloadEraseFlashResponse();
+		StreamingDloadEraseFlashResponse* r = new StreamingDloadEraseFlashResponse();
+		this->response = r;
 	}
 }

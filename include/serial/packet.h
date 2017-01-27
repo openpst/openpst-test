@@ -87,6 +87,11 @@ namespace OpenPST {
                 * @brief Destructor
                 */
                 ~Packet();
+            private:
+                    // no copy
+                  Packet(const Packet&);
+
+            public:
                 
                 /**
                 * @brief Set the target endianess
@@ -274,17 +279,40 @@ namespace OpenPST {
 
                 /**
                 * @brief Read string from the data buffer at offset until 0x00 or end of buffer
+                * @param size_t size
                 * @param off_t offset
                 * @throws std::out_of_range 
-                * @return T
+                * @return std::string
                 */
-                inline std::string read(size_t size, off_t offset) 
+                inline std::string readString(size_t size, off_t offset) 
                 {
                     if ((offset + size) > data.size()) {
                         throw std::out_of_range("Attempted to read outside of the packet data buffer");
                     }
 
                     std::string ret( data.begin() + offset, data.begin() + offset + size );
+
+                    return ret;
+                }
+
+                /**
+                * @brief Read string from the data buffer at offset
+                * @param size_t size
+                * @param off_t offset
+                * @throws std::out_of_range 
+                * @return std::vector<uint8_t>
+                */
+                inline std::vector<uint8_t> read(size_t size, off_t offset) 
+                {
+                    if ((offset + size) > data.size()) {
+                        throw std::out_of_range("Attempted to read outside of the packet data buffer");
+                    }
+
+                    std::vector<uint8_t> ret;
+
+                    ret.reserve(size);
+
+                    ret.insert( ret.begin(), data.begin() + offset, data.begin() + offset + size );
 
                     return ret;
                 }

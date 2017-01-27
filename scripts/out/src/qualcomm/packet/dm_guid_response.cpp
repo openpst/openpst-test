@@ -10,9 +10,11 @@
 
 #include "qualcomm/packet/dm_guid_response.h"
 
+using namespace OpenPST::QC;
+
 DmGuidResponse::DmGuidResponse() : DmPacket()
 {
-	addField("guid", kPacketFieldTypePrimitive, sizeof(uint8_t[]));
+	addField("guid", kPacketFieldTypeArray, 16);
 
 }
 
@@ -27,14 +29,14 @@ std::vector<uint8_t> DmGuidResponse::getGuid()
 }
 std::string DmGuidResponse::getGuid()
 {
-	return read(16, getFieldOffset("guid"));
+	return readString(16, getFieldOffset("guid"));
 }
                 
-void DmGuidResponse::setGuid(uint8_t* data, size_t size);
+void DmGuidResponse::setGuid(uint8_t* data, size_t size)
 {
     write("guid", data, size);
 }
-void DmGuidResponse::setGuid(const std::string& guid);
+void DmGuidResponse::setGuid(const std::string& guid)
 {
     write("guid", guid);
 }

@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/streaming_dload_close_response.h"
 
+using namespace OpenPST::QC;
+
 StreamingDloadCloseResponse::StreamingDloadCloseResponse() : StreamingDloadPacket()
 {
 

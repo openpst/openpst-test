@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/qcdm_efs_chmod_response.h"
 
+using namespace OpenPST::QC;
+
 QcdmEfsChmodResponse::QcdmEfsChmodResponse() : DmEfsPacket()
 {
 	addField("error", kPacketFieldTypePrimitive, sizeof(uint32_t));

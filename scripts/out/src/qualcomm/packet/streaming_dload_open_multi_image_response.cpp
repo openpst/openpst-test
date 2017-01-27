@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/streaming_dload_open_multi_image_response.h"
 
+using namespace OpenPST::QC;
+
 StreamingDloadOpenMultiImageResponse::StreamingDloadOpenMultiImageResponse() : StreamingDloadPacket()
 {
 	addField("status", kPacketFieldTypePrimitive, sizeof(uint8_t));

@@ -10,9 +10,11 @@
 
 #include "qualcomm/packet/qcdm_efs_unlink_request.h"
 
+using namespace OpenPST::QC;
+
 QcdmEfsUnlinkRequest::QcdmEfsUnlinkRequest() : DmEfsPacket()
 {
-	addField("path", kPacketFieldTypePrimitive, sizeof(variable));
+	addField("path", kPacketFieldTypeVariant, 0);
 
 }
 
@@ -23,10 +25,10 @@ QcdmEfsUnlinkRequest::~QcdmEfsUnlinkRequest()
 
 std::vector<uint8_t> QcdmEfsUnlinkRequest::getPath()
 {
-	return read(getFieldSize("path"), getFieldOffset("path"));
+	return readV(getFieldSize("path"), getFieldOffset("path"));
 }
                 
-void QcdmEfsUnlinkRequest::setPath(uint8_t* data, size_t size);
+void QcdmEfsUnlinkRequest::setPath(uint8_t* data, size_t size)
 {
     write("path", data, size);
 }

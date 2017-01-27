@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/dm_password_response.h"
 
+using namespace OpenPST::QC;
+
 DmPasswordResponse::DmPasswordResponse() : DmPacket()
 {
 	addField("status", kPacketFieldTypePrimitive, sizeof(uint8_t));

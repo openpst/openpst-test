@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/qcdm_efs_open_file_response.h"
 
+using namespace OpenPST::QC;
+
 QcdmEfsOpenFileResponse::QcdmEfsOpenFileResponse() : DmEfsPacket()
 {
 	addField("fp", kPacketFieldTypePrimitive, sizeof(uint32_t));

@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/qcdm_efs_query_response.h"
 
+using namespace OpenPST::QC;
+
 QcdmEfsQueryResponse::QcdmEfsQueryResponse() : DmEfsPacket()
 {
 	addField("max_file_name_length", kPacketFieldTypePrimitive, sizeof(uint32_t));

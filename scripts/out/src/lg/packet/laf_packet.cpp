@@ -10,6 +10,8 @@
 
 #include "lg/packet/laf_packet.h"
 
+using namespace OpenPST::LG;
+
 LafPacket::LafPacket() : Packet()
 {
 	addField("command", kPacketFieldTypePrimitive, sizeof(uint32_t));
@@ -20,7 +22,7 @@ LafPacket::LafPacket() : Packet()
 	addField("size", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("crc", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("magic", kPacketFieldTypePrimitive, sizeof(uint32_t));
-	addField("data", kPacketFieldTypePrimitive, sizeof(variable));
+	addField("data", kPacketFieldTypeVariant, 2);
 
 }
 
@@ -103,10 +105,10 @@ void LafPacket::setMagic(uint32_t magic)
 }
 std::vector<uint8_t> LafPacket::getData()
 {
-	return read(getFieldSize("data"), getFieldOffset("data"));
+	return readV(getFieldSize("data"), getFieldOffset("data"));
 }
                 
-void LafPacket::setData(uint8_t* data, size_t size);
+void LafPacket::setData(uint8_t* data, size_t size)
 {
     write("data", data, size);
 }
@@ -118,6 +120,7 @@ void LafPacket::unpack(std::vector<uint8_t>& data)
 void LafPacket::prepareResponse()
 {
 	if (response != nullptr) {
-		response = new LafPacket();
+		LafPacket* r = new LafPacket();
+		this->response = r;
 	}
 }

@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/streaming_dload_unlock_response.h"
 
+using namespace OpenPST::QC;
+
 StreamingDloadUnlockResponse::StreamingDloadUnlockResponse() : StreamingDloadPacket()
 {
 

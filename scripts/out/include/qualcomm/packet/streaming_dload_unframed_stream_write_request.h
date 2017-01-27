@@ -11,8 +11,10 @@
 #pragma once
 
 #include "qualcomm/packet/streaming_dload_packet.h"
+#include "qualcomm/packet/streaming_dload_unframed_stream_write_response.h"
 
 using OpenPST::QC::StreamingDloadPacket;
+using OpenPST::QC::StreamingDloadUnframedStreamWriteResponse;
 
 namespace OpenPST {
     namespace QC {

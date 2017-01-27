@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/streaming_dload_unframed_stream_write_response.h"
 
+using namespace OpenPST::QC;
+
 StreamingDloadUnframedStreamWriteResponse::StreamingDloadUnframedStreamWriteResponse() : StreamingDloadPacket()
 {
 	addField("address", kPacketFieldTypePrimitive, sizeof(uint32_t));

@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/sahara_read_data_request.h"
 
+using namespace OpenPST::QC;
+
 SaharaReadDataRequest::SaharaReadDataRequest() : SaharaPacket()
 {
 	addField("image_id", kPacketFieldTypePrimitive, sizeof(uint32_t));
@@ -58,6 +60,7 @@ void SaharaReadDataRequest::unpack(std::vector<uint8_t>& data)
 void SaharaReadDataRequest::prepareResponse()
 {
 	if (response != nullptr) {
-		response = new SaharaReadDataResponse();
+		SaharaReadDataResponse* r = new SaharaReadDataResponse();
+		this->response = r;
 	}
 }

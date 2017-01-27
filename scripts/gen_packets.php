@@ -59,6 +59,16 @@ foreach ($packets as $group => $pkts) {
 		$packet['class_name']				= $name;
 		$packet['default_exends'] 			= isset($packet['default_exends']) && is_array($packet['default_exends']) ? $packet['default_exends'] : array();
 		
+		if ($packet['expects_response']) {
+			if (!isset($pkts[$packet['expects_response']])) {
+
+			}
+			$packet['response_path'] = $pkts[$packet['expects_response']]['path'];
+			$packet['response_header_filename'] = to_lower_name($packet['expects_response']);
+			$packet['response_class_namespace'] = $pkts[$packet['expects_response']]['namespace'];
+			$packet['response_class_name'] = $packet['expects_response'];
+		}
+
 
 		foreach ($packet['fields'] as $fname => &$field) {
 			$field['name'] 					  = $fname;

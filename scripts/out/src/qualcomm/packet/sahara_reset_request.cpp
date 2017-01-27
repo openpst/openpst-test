@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/sahara_reset_request.h"
 
+using namespace OpenPST::QC;
+
 SaharaResetRequest::SaharaResetRequest() : SaharaPacket()
 {
 
@@ -29,6 +31,7 @@ void SaharaResetRequest::unpack(std::vector<uint8_t>& data)
 void SaharaResetRequest::prepareResponse()
 {
 	if (response != nullptr) {
-		response = new SaharaResetResponse();
+		SaharaResetResponse* r = new SaharaResetResponse();
+		this->response = r;
 	}
 }

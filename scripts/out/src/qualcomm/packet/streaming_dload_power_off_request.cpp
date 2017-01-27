@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/streaming_dload_power_off_request.h"
 
+using namespace OpenPST::QC;
+
 StreamingDloadPowerOffRequest::StreamingDloadPowerOffRequest() : StreamingDloadPacket()
 {
 
@@ -30,6 +32,7 @@ void StreamingDloadPowerOffRequest::unpack(std::vector<uint8_t>& data)
 void StreamingDloadPowerOffRequest::prepareResponse()
 {
 	if (response != nullptr) {
-		response = new StreamingDloadPowerOffResponse();
+		StreamingDloadPowerOffResponse* r = new StreamingDloadPowerOffResponse();
+		this->response = r;
 	}
 }

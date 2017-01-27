@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/streaming_dload_close_request.h"
 
+using namespace OpenPST::QC;
+
 StreamingDloadCloseRequest::StreamingDloadCloseRequest() : StreamingDloadPacket()
 {
 	addField("mode", kPacketFieldTypePrimitive, sizeof(uint8_t));
@@ -40,6 +42,7 @@ void StreamingDloadCloseRequest::unpack(std::vector<uint8_t>& data)
 void StreamingDloadCloseRequest::prepareResponse()
 {
 	if (response != nullptr) {
-		response = new StreamingDloadCloseResponse();
+		StreamingDloadCloseResponse* r = new StreamingDloadCloseResponse();
+		this->response = r;
 	}
 }

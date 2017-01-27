@@ -4,8 +4,7 @@
 #include "serial/serial_packet_writer.h"
 #include "serial/generic_serial.h"
 #include "qualcomm/packet/streaming_dload_hello_request.h"
-#include "qualcomm/packet/sahara_hello_request.h"
-#include "qualcomm/packet/sahara_hello_response.h"
+#include "qualcomm/packet/streaming_dload_hello_response.h"
 #include "util/hexdump.h"
 #include <fstream>
 

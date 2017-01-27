@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/sahara_switch_mode_request.h"
 
+using namespace OpenPST::QC;
+
 SaharaSwitchModeRequest::SaharaSwitchModeRequest() : SaharaPacket()
 {
 	addField("mode", kPacketFieldTypePrimitive, sizeof(uint32_t));

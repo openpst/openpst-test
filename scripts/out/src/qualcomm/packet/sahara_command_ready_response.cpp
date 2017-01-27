@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/sahara_command_ready_response.h"
 
+using namespace OpenPST::QC;
+
 SaharaCommandReadyResponse::SaharaCommandReadyResponse() : SaharaPacket()
 {
 	addField("image_tx_status", kPacketFieldTypePrimitive, sizeof(uint32_t));

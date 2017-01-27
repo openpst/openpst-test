@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/qcdm_efs_mkdir_response.h"
 
+using namespace OpenPST::QC;
+
 QcdmEfsMkdirResponse::QcdmEfsMkdirResponse() : DmEfsPacket()
 {
 	addField("error", kPacketFieldTypePrimitive, sizeof(uint32_t));

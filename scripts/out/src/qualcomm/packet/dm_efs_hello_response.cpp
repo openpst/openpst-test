@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/dm_efs_hello_response.h"
 
+using namespace OpenPST::QC;
+
 DmEfsHelloResponse::DmEfsHelloResponse() : DmEfsPacket()
 {
 	addField("target_packet_window_size", kPacketFieldTypePrimitive, sizeof(uint32_t));

@@ -10,9 +10,11 @@
 
 #include "qualcomm/packet/streaming_dload_hello_request.h"
 
+using namespace OpenPST::QC;
+
 StreamingDloadHelloRequest::StreamingDloadHelloRequest() : StreamingDloadPacket()
 {
-	addField("magic", kPacketFieldTypePrimitive, sizeof(uint8_t[]));
+	addField("magic", kPacketFieldTypeArray, STREAMING_DLOAD_MAGIC_SIZE);
 	addField("version", kPacketFieldTypePrimitive, sizeof(uint8_t));
 	addField("compatible_version", kPacketFieldTypePrimitive, sizeof(uint8_t));
 	addField("feature_bits", kPacketFieldTypePrimitive, sizeof(uint8_t));
@@ -30,7 +32,7 @@ std::vector<uint8_t> StreamingDloadHelloRequest::getMagic()
 	return read(getFieldSize("magic"), getFieldOffset("magic"));
 }
                 
-void StreamingDloadHelloRequest::setMagic(uint8_t* data, size_t size);
+void StreamingDloadHelloRequest::setMagic(uint8_t* data, size_t size)
 {
     write("magic", data, size);
 }
@@ -70,6 +72,7 @@ void StreamingDloadHelloRequest::unpack(std::vector<uint8_t>& data)
 void StreamingDloadHelloRequest::prepareResponse()
 {
 	if (response != nullptr) {
-		response = new StreamingDloadHelloResponse();
+		StreamingDloadHelloResponse* r = new StreamingDloadHelloResponse();
+		this->response = r;
 	}
 }

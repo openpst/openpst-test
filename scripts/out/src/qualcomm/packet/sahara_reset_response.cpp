@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/sahara_reset_response.h"
 
+using namespace OpenPST::QC;
+
 SaharaResetResponse::SaharaResetResponse() : SaharaPacket()
 {
 

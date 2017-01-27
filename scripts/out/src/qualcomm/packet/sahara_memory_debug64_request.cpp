@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/sahara_memory_debug64_request.h"
 
+using namespace OpenPST::QC;
+
 SaharaMemoryDebug64Request::SaharaMemoryDebug64Request() : SaharaPacket()
 {
 	addField("address", kPacketFieldTypePrimitive, sizeof(uint32_t));

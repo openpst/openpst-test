@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/k_sahara_command_memory_debug64_request.h"
 
+using namespace OpenPST::QC;
+
 kSaharaCommandMemoryDebug64Request::kSaharaCommandMemoryDebug64Request() : SaharaPacket()
 {
 	addField("client_command", kPacketFieldTypePrimitive, sizeof(uint64_t));

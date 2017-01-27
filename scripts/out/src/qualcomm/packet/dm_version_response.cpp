@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/dm_version_response.h"
 
+using namespace OpenPST::QC;
+
 DmVersionResponse::DmVersionResponse() : DmPacket()
 {
 	addField("demod", kPacketFieldTypePrimitive, sizeof(uint8_t));
@@ -17,8 +19,8 @@ DmVersionResponse::DmVersionResponse() : DmPacket()
 	addField("interleaver_id", kPacketFieldTypePrimitive, sizeof(uint8_t));
 	addField("esn", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("rm_mode", kPacketFieldTypePrimitive, sizeof(uint16_t));
-	addField("min1", kPacketFieldTypePrimitive, sizeof(uint8_t[]));
-	addField("min2", kPacketFieldTypePrimitive, sizeof(uint8_t[]));
+	addField("min1", kPacketFieldTypeArray, 8);
+	addField("min2", kPacketFieldTypeArray, 8);
 	addField("min_index", kPacketFieldTypePrimitive, sizeof(uint8_t));
 	addField("cdma_rm_state", kPacketFieldTypePrimitive, sizeof(uint16_t));
 	addField("cdma_good_frames", kPacketFieldTypePrimitive, sizeof(uint8_t));
@@ -93,14 +95,14 @@ std::vector<uint8_t> DmVersionResponse::getMin1()
 }
 std::string DmVersionResponse::getMin1()
 {
-	return read(8, getFieldOffset("min1"));
+	return readString(8, getFieldOffset("min1"));
 }
                 
-void DmVersionResponse::setMin1(uint8_t* data, size_t size);
+void DmVersionResponse::setMin1(uint8_t* data, size_t size)
 {
     write("min1", data, size);
 }
-void DmVersionResponse::setMin1(const std::string& min1);
+void DmVersionResponse::setMin1(const std::string& min1)
 {
     write("min1", min1);
 }
@@ -110,14 +112,14 @@ std::vector<uint8_t> DmVersionResponse::getMin2()
 }
 std::string DmVersionResponse::getMin2()
 {
-	return read(8, getFieldOffset("min2"));
+	return readString(8, getFieldOffset("min2"));
 }
                 
-void DmVersionResponse::setMin2(uint8_t* data, size_t size);
+void DmVersionResponse::setMin2(uint8_t* data, size_t size)
 {
     write("min2", data, size);
 }
-void DmVersionResponse::setMin2(const std::string& min2);
+void DmVersionResponse::setMin2(const std::string& min2)
 {
     write("min2", min2);
 }

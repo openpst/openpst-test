@@ -10,10 +10,12 @@
 
 #include "qualcomm/packet/qcdm_efs_chmod_request.h"
 
+using namespace OpenPST::QC;
+
 QcdmEfsChmodRequest::QcdmEfsChmodRequest() : DmEfsPacket()
 {
 	addField("mode", kPacketFieldTypePrimitive, sizeof(uint32_t));
-	addField("path", kPacketFieldTypePrimitive, sizeof(variable));
+	addField("path", kPacketFieldTypeVariant, 0);
 
 }
 
@@ -33,10 +35,10 @@ void QcdmEfsChmodRequest::setMode(uint32_t mode)
 }
 std::vector<uint8_t> QcdmEfsChmodRequest::getPath()
 {
-	return read(getFieldSize("path"), getFieldOffset("path"));
+	return readV(getFieldSize("path"), getFieldOffset("path"));
 }
                 
-void QcdmEfsChmodRequest::setPath(uint8_t* data, size_t size);
+void QcdmEfsChmodRequest::setPath(uint8_t* data, size_t size)
 {
     write("path", data, size);
 }

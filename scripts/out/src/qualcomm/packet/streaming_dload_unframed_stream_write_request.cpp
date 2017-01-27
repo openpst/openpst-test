@@ -10,12 +10,14 @@
 
 #include "qualcomm/packet/streaming_dload_unframed_stream_write_request.h"
 
+using namespace OpenPST::QC;
+
 StreamingDloadUnframedStreamWriteRequest::StreamingDloadUnframedStreamWriteRequest() : StreamingDloadPacket()
 {
-	addField("alignment_padding", kPacketFieldTypePrimitive, sizeof(uint8_t[]));
+	addField("alignment_padding", kPacketFieldTypeArray, 3);
 	addField("address", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("length", kPacketFieldTypePrimitive, sizeof(uint32_t));
-	addField("data", kPacketFieldTypePrimitive, sizeof(variable));
+	addField("data", kPacketFieldTypeVariant, 0);
 
 	setCommand(kStreamingDloadUnframedStreamWrite);
 }
@@ -30,7 +32,7 @@ std::vector<uint8_t> StreamingDloadUnframedStreamWriteRequest::getAlignmentPaddi
 	return read(getFieldSize("alignment_padding"), getFieldOffset("alignment_padding"));
 }
                 
-void StreamingDloadUnframedStreamWriteRequest::setAlignmentPadding(uint8_t* data, size_t size);
+void StreamingDloadUnframedStreamWriteRequest::setAlignmentPadding(uint8_t* data, size_t size)
 {
     write("alignment_padding", data, size);
 }
@@ -54,10 +56,10 @@ void StreamingDloadUnframedStreamWriteRequest::setLength(uint32_t length)
 }
 std::vector<uint8_t> StreamingDloadUnframedStreamWriteRequest::getData()
 {
-	return read(getFieldSize("data"), getFieldOffset("data"));
+	return readString(getFieldSize("data"), getFieldOffset("data"));
 }
                 
-void StreamingDloadUnframedStreamWriteRequest::setData(std::ifstream& file, size_t size);
+void StreamingDloadUnframedStreamWriteRequest::setData(std::ifstream& file, size_t size)
 {
     write("data", file, size);
 }
@@ -65,7 +67,7 @@ void StreamingDloadUnframedStreamWriteRequest::setData(uint8_t* data, size_t siz
 {
     write("data", data, size);
 }
-void StreamingDloadUnframedStreamWriteRequest::setData(const std::string& data);
+void StreamingDloadUnframedStreamWriteRequest::setData(const std::string& data)
 {
     write("data", data);
 }
@@ -78,6 +80,7 @@ void StreamingDloadUnframedStreamWriteRequest::unpack(std::vector<uint8_t>& data
 void StreamingDloadUnframedStreamWriteRequest::prepareResponse()
 {
 	if (response != nullptr) {
-		response = new StreamingDloadUnframedStreamWriteResponse();
+		StreamingDloadUnframedStreamWriteResponse* r = new StreamingDloadUnframedStreamWriteResponse();
+		this->response = r;
 	}
 }

@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/dm_version_request.h"
 
+using namespace OpenPST::QC;
+
 DmVersionRequest::DmVersionRequest() : DmPacket()
 {
 	addField("version", kPacketFieldTypePrimitive, sizeof(uint16_t));

@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/streaming_dload_get_ecc_state_request.h"
 
+using namespace OpenPST::QC;
+
 StreamingDloadGetEccStateRequest::StreamingDloadGetEccStateRequest() : StreamingDloadPacket()
 {
 
@@ -30,6 +32,7 @@ void StreamingDloadGetEccStateRequest::unpack(std::vector<uint8_t>& data)
 void StreamingDloadGetEccStateRequest::prepareResponse()
 {
 	if (response != nullptr) {
-		response = new StreamingDloadGetEccStateResponse();
+		StreamingDloadGetEccStateResponse* r = new StreamingDloadGetEccStateResponse();
+		this->response = r;
 	}
 }

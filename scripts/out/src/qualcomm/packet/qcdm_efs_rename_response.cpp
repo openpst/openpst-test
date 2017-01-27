@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/qcdm_efs_rename_response.h"
 
+using namespace OpenPST::QC;
+
 QcdmEfsRenameResponse::QcdmEfsRenameResponse() : DmEfsPacket()
 {
 	addField("error", kPacketFieldTypePrimitive, sizeof(uint32_t));

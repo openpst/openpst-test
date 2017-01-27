@@ -11,8 +11,10 @@
 #pragma once
 
 #include "qualcomm/packet/sahara_packet.h"
+#include "qualcomm/packet/sahara_memory_read_request.h"
 
 using OpenPST::QC::SaharaPacket;
+using OpenPST::QC::SaharaMemoryReadRequest;
 
 namespace OpenPST {
     namespace QC {

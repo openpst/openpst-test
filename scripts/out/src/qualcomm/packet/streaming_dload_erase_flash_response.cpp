@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/streaming_dload_erase_flash_response.h"
 
+using namespace OpenPST::QC;
+
 StreamingDloadEraseFlashResponse::StreamingDloadEraseFlashResponse() : StreamingDloadPacket()
 {
 

@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/streaming_dload_partition_table_response.h"
 
+using namespace OpenPST::QC;
+
 StreamingDloadPartitionTableResponse::StreamingDloadPartitionTableResponse() : StreamingDloadPacket()
 {
 	addField("status", kPacketFieldTypePrimitive, sizeof(uint8_t));

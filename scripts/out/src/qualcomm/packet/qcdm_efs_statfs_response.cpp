@@ -10,10 +10,12 @@
 
 #include "qualcomm/packet/qcdm_efs_statfs_response.h"
 
+using namespace OpenPST::QC;
+
 QcdmEfsStatfsResponse::QcdmEfsStatfsResponse() : DmEfsPacket()
 {
 	addField("error", kPacketFieldTypePrimitive, sizeof(uint32_t));
-	addField("filesystem_id", kPacketFieldTypePrimitive, sizeof(uint8_t[]));
+	addField("filesystem_id", kPacketFieldTypeArray, 8);
 	addField("filesystem_type", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("block_size", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("total_blocks", kPacketFieldTypePrimitive, sizeof(uint32_t));
@@ -44,7 +46,7 @@ std::vector<uint8_t> QcdmEfsStatfsResponse::getFilesystemId()
 	return read(getFieldSize("filesystem_id"), getFieldOffset("filesystem_id"));
 }
                 
-void QcdmEfsStatfsResponse::setFilesystemId(uint8_t* data, size_t size);
+void QcdmEfsStatfsResponse::setFilesystemId(uint8_t* data, size_t size)
 {
     write("filesystem_id", data, size);
 }

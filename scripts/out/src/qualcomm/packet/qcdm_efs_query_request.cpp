@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/qcdm_efs_query_request.h"
 
+using namespace OpenPST::QC;
+
 QcdmEfsQueryRequest::QcdmEfsQueryRequest() : DmEfsPacket()
 {
 

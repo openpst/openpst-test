@@ -11,8 +11,10 @@
 #pragma once
 
 #include "serial/packet.h"
+#include "lg/packet/laf_packet.h"
 
 using OpenPST::Serial::Packet;
+using OpenPST::LG::LafPacket;
 
 namespace OpenPST {
     namespace LG {

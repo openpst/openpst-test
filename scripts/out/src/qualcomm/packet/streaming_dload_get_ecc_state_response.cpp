@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/streaming_dload_get_ecc_state_response.h"
 
+using namespace OpenPST::QC;
+
 StreamingDloadGetEccStateResponse::StreamingDloadGetEccStateResponse() : StreamingDloadPacket()
 {
 	addField("status", kPacketFieldTypePrimitive, sizeof(uint8_t));

@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/sahara_end_image_transfer_response.h"
 
+using namespace OpenPST::QC;
+
 SaharaEndImageTransferResponse::SaharaEndImageTransferResponse() : SaharaPacket()
 {
 	addField("image_id", kPacketFieldTypePrimitive, sizeof(uint32_t));

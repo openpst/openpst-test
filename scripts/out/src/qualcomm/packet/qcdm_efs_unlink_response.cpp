@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/qcdm_efs_unlink_response.h"
 
+using namespace OpenPST::QC;
+
 QcdmEfsUnlinkResponse::QcdmEfsUnlinkResponse() : DmEfsPacket()
 {
 	addField("error", kPacketFieldTypePrimitive, sizeof(uint32_t));

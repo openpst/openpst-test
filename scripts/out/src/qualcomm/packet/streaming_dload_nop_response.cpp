@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/streaming_dload_nop_response.h"
 
+using namespace OpenPST::QC;
+
 StreamingDloadNopResponse::StreamingDloadNopResponse() : StreamingDloadPacket()
 {
 	addField("identifier", kPacketFieldTypePrimitive, sizeof(uint32_t));

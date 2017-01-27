@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/qcdm_efs_open_dir_response.h"
 
+using namespace OpenPST::QC;
+
 QcdmEfsOpenDirResponse::QcdmEfsOpenDirResponse() : DmEfsPacket()
 {
 	addField("dp", kPacketFieldTypePrimitive, sizeof(uint32_t));

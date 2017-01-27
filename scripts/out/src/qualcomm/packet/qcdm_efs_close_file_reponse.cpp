@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/qcdm_efs_close_file_reponse.h"
 
+using namespace OpenPST::QC;
+
 QcdmEfsCloseFileReponse::QcdmEfsCloseFileReponse() : DmEfsPacket()
 {
 	addField("error", kPacketFieldTypePrimitive, sizeof(uint32_t));

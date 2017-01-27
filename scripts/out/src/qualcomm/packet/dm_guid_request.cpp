@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/dm_guid_request.h"
 
+using namespace OpenPST::QC;
+
 DmGuidRequest::DmGuidRequest() : DmPacket()
 {
 

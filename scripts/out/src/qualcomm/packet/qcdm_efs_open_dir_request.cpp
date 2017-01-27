@@ -10,9 +10,11 @@
 
 #include "qualcomm/packet/qcdm_efs_open_dir_request.h"
 
+using namespace OpenPST::QC;
+
 QcdmEfsOpenDirRequest::QcdmEfsOpenDirRequest() : DmEfsPacket()
 {
-	addField("path", kPacketFieldTypePrimitive, sizeof(variable));
+	addField("path", kPacketFieldTypeVariant, 0);
 
 }
 
@@ -23,10 +25,10 @@ QcdmEfsOpenDirRequest::~QcdmEfsOpenDirRequest()
 
 std::vector<uint8_t> QcdmEfsOpenDirRequest::getPath()
 {
-	return read(getFieldSize("path"), getFieldOffset("path"));
+	return readV(getFieldSize("path"), getFieldOffset("path"));
 }
                 
-void QcdmEfsOpenDirRequest::setPath(uint8_t* data, size_t size);
+void QcdmEfsOpenDirRequest::setPath(uint8_t* data, size_t size)
 {
     write("path", data, size);
 }

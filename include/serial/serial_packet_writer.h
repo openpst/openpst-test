@@ -19,9 +19,13 @@ namespace OpenPST {
                 * Destructor
                 */
                 ~SerialPacketWriter();
-                
+            private:
+                    // no copy
+                  SerialPacketWriter(const SerialPacketWriter&);
+
+            public:
                 /**
-                * @brief Get the serial device interface
+                * @brief Get the serial device interface reference
                 * @return GenericSerial&
                 */
                 GenericSerial& getPort();
@@ -39,7 +43,7 @@ namespace OpenPST {
                 * @param size_t size
                 * @return void
                 */
-                void read(Packet* packet, size_t size);
+                void read(Packet* packet);
 
         };
     }

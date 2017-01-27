@@ -10,6 +10,8 @@
 
 #include "qualcomm/packet/qcdm_efs_fstat_response.h"
 
+using namespace OpenPST::QC;
+
 QcdmEfsFstatResponse::QcdmEfsFstatResponse() : DmEfsPacket()
 {
 	addField("error", kPacketFieldTypePrimitive, sizeof(uint32_t));

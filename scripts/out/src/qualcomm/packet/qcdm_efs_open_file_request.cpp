@@ -10,11 +10,13 @@
 
 #include "qualcomm/packet/qcdm_efs_open_file_request.h"
 
+using namespace OpenPST::QC;
+
 QcdmEfsOpenFileRequest::QcdmEfsOpenFileRequest() : DmEfsPacket()
 {
 	addField("flags", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("mode", kPacketFieldTypePrimitive, sizeof(uint32_t));
-	addField("file_path", kPacketFieldTypePrimitive, sizeof(variable));
+	addField("file_path", kPacketFieldTypeVariant, 0);
 
 }
 
@@ -43,10 +45,10 @@ void QcdmEfsOpenFileRequest::setMode(uint32_t mode)
 }
 std::vector<uint8_t> QcdmEfsOpenFileRequest::getFilePath()
 {
-	return read(getFieldSize("file_path"), getFieldOffset("file_path"));
+	return readV(getFieldSize("file_path"), getFieldOffset("file_path"));
 }
                 
-void QcdmEfsOpenFileRequest::setFilePath(uint8_t* data, size_t size);
+void QcdmEfsOpenFileRequest::setFilePath(uint8_t* data, size_t size)
 {
     write("file_path", data, size);
 }
