@@ -46,5 +46,28 @@ namespace OpenPST {
                 void read(Packet* packet);
 
         };
+
+        /**
+        * @brief PacketOutOfRangeException
+        */
+		class SerialPacketWriterError : public std::exception
+		{
+			private:
+				const SerialPacketWriterError& operator=(SerialPacketWriterError);
+				std::string _what;
+			public:
+				SerialPacketWriterError(std::string message) : 
+					_what(message)  { }
+				SerialPacketWriterError(const SerialPacketWriterError& second) : 
+					_what(second._what) {}
+				virtual ~SerialPacketWriterError() throw() {}
+				virtual const char* what() const throw () {
+					return _what.c_str();
+				}
+				virtual const std::string& what() {
+					return _what;
+				}
+		};
     }
 }
+

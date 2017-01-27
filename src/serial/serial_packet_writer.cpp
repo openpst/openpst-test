@@ -25,12 +25,12 @@ void SerialPacketWriter::write(Packet* packet)
 	if (!port.isOpen()) {
 		try {
 			port.open();
+
 		} catch(...) {
 			// throw
 		}
 	}
 
-	packet->validate();
 
 	packet->prepare();
 
@@ -45,7 +45,7 @@ void SerialPacketWriter::write(Packet* packet)
 		Packet* response = packet->getResponse();
 
 		if (response == nullptr) {
-			throw std::runtime_error("Response packet has not been allocated");
+			throw SerialPacketWriterError("Response packet has not been allocated");
 		}
 
 		port.read(rbuffer, response->getMaxDataSize());
@@ -74,4 +74,19 @@ void SerialPacketWriter::read(Packet* packet)
 	port.read(rbuffer, packet->getMaxDataSize());
 
 	packet->unpack(rbuffer);
+
+	if (packet->isResponseExpected()) {
+
+		packet->prepareResponse();
+
+		Packet* response = packet->getResponse();
+		
+		if (response == nullptr) {
+			throw SerialPacketWriterError("Response packet has not been allocated");
+		}
+
+		response->prepare();
+
+		port.write(response->getData());
+	}
 }

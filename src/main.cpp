@@ -2,7 +2,9 @@
 #include <type_traits>
 #include "serial/packet.h"
 #include "serial/serial_packet_writer.h"
+//#include "serial/mock_serial_packet_writer.h"
 #include "serial/generic_serial.h"
+//#include "serial/mock_serial.h"
 #include "qualcomm/packet/streaming_dload_hello_request.h"
 #include "qualcomm/packet/streaming_dload_hello_response.h"
 #include "util/hexdump.h"
@@ -21,6 +23,9 @@ int main(int argc, char* argv[])
 
 		SerialPacketWriter writer(port);
 
+		StreamingDloadHelloRequest request;
+
+		writer.write(&request);
 		
 
 
@@ -28,7 +33,8 @@ int main(int argc, char* argv[])
 		std::cerr << e.what() << std::endl;
 		return 1;
 	}
-	/*SerialQueue sq;
+	/*
+	SerialQueue sq;
 
 	SaharaHelloRequest packet;
 	

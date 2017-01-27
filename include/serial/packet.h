@@ -21,6 +21,7 @@
 #include <iterator>
 #include <sstream>
 
+
 namespace OpenPST {
     namespace Serial {
         
@@ -52,6 +53,73 @@ namespace OpenPST {
             size_t size;
         };
 
+        /**
+        * @brief PacketError
+        */
+		class PacketError : public std::exception
+		{
+			private:
+				const PacketError& operator=(PacketError);
+				std::string _what;
+			public:
+				PacketError(std::string message) : _what(message)  { }
+				PacketError(const PacketError& second) : _what(second._what) {}
+				virtual ~PacketError() throw() {}
+				virtual const char* what() const throw () {
+					return _what.c_str();
+				}
+				virtual const std::string& what() {
+					return _what;
+				}
+		};
+
+        /**
+        * @brief PacketInvalidArgument
+        */
+		class PacketInvalidArgument : public std::invalid_argument
+		{
+			private:
+				const PacketInvalidArgument& operator=(PacketInvalidArgument);
+				std::string _what;
+			public:
+				PacketInvalidArgument(std::string message) : 
+					_what(message), std::invalid_argument(message)  { }
+				PacketInvalidArgument(const PacketInvalidArgument& second) : 
+					_what(second._what), std::invalid_argument(second._what) {}
+				virtual ~PacketInvalidArgument() throw() {}
+				virtual const char* what() const throw () {
+					return _what.c_str();
+				}
+				virtual const std::string& what() {
+					return _what;
+				}
+		};
+
+        /**
+        * @brief PacketOutOfRange
+        */
+		class PacketOutOfRange : public std::out_of_range
+		{
+			private:
+				const PacketOutOfRange& operator=(PacketOutOfRange);
+				std::string _what;
+			public:
+				PacketOutOfRange(std::string message) : 
+					_what(message), std::out_of_range(message) { }
+				PacketOutOfRange(const PacketOutOfRange& second) : 
+					_what(second._what), std::out_of_range(second._what) {}
+				virtual ~PacketOutOfRange() throw() {}
+				virtual const char* what() const throw () {
+					return _what.c_str();
+				}
+				virtual const std::string& what() {
+					return _what;
+				}
+		};
+
+        /**
+        * @brief Packet
+        */
         class Packet
         {
             protected:
@@ -236,7 +304,7 @@ namespace OpenPST {
                 /**
                 * @brief Validate the data in the packet buffer
                 */
-                virtual void validate() {}
+                //virtual void validate() {}
 
                 /**
                 * @brief Prepare the packet before sending, making and final adjustments, for example crc
@@ -265,7 +333,7 @@ namespace OpenPST {
                     assert(std::is_fundamental<T>::value);
 
                     if ((offset + sizeof(T)) > data.size()) {
-                        throw std::out_of_range("Attempted to read outside of the packet data buffer");
+                        throw PacketOutOfRange("Attempted to read outside of the packet data buffer");
                     }
 
                     T* p = reinterpret_cast<T*>(&data[offset]);
@@ -287,7 +355,7 @@ namespace OpenPST {
                 inline std::string readString(size_t size, off_t offset) 
                 {
                     if ((offset + size) > data.size()) {
-                        throw std::out_of_range("Attempted to read outside of the packet data buffer");
+                        throw PacketOutOfRange("Attempted to read outside of the packet data buffer");
                     }
 
                     std::string ret( data.begin() + offset, data.begin() + offset + size );
@@ -305,7 +373,7 @@ namespace OpenPST {
                 inline std::vector<uint8_t> read(size_t size, off_t offset) 
                 {
                     if ((offset + size) > data.size()) {
-                        throw std::out_of_range("Attempted to read outside of the packet data buffer");
+                        throw PacketOutOfRange("Attempted to read outside of the packet data buffer");
                     }
 
                     std::vector<uint8_t> ret;
@@ -330,7 +398,7 @@ namespace OpenPST {
                     auto field = getField(fieldName);
 
                     if (field->type != kPacketFieldTypeVariant && field->size > sizeof(T)) {
-                        throw std::invalid_argument("Write data is larger than static field size");
+                        throw PacketInvalidArgument("Write data is larger than static field size");
                     }
                     
                     T* p = reinterpret_cast<T*>(&data[getFieldOffset(field->name)]);
@@ -351,7 +419,7 @@ namespace OpenPST {
                     auto field = getField(fieldName);
 
                     if (field->type != kPacketFieldTypeVariant && field->size > str.size()) {
-                        throw std::invalid_argument("Write data is larger than static field size");
+                        throw PacketInvalidArgument("Write data is larger than static field size");
                     } else if(field->type == kPacketFieldTypeVariant && field->size != str.size()) {
                         resizeField(field, str.size());
                     }
@@ -368,7 +436,7 @@ namespace OpenPST {
                     auto field = getField(fieldName);
                     
                     if (field->type != kPacketFieldTypeVariant && field->size > size) {
-                        throw std::invalid_argument("Write data is larger than static field size");
+                        throw PacketInvalidArgument("Write data is larger than static field size");
                     } else if(field->type == kPacketFieldTypeVariant && field->size != size) {
                         resizeField(field, size);
                     }
@@ -388,7 +456,7 @@ namespace OpenPST {
                     auto field = getField(fieldName);
                     
                     if (field->type != kPacketFieldTypeVariant && field->size > size) {
-                        throw std::invalid_argument("Write data is larger than static field size");
+                        throw PacketInvalidArgument("Write data is larger than static field size");
                     }
 
                     auto cur = file.cur;
@@ -400,7 +468,7 @@ namespace OpenPST {
                     file.seekg(cur, file.beg);
 
                     if (end < size) {
-                        throw std::overflow_error("Requested size exceeds file size from its current position in the stream");
+                        throw PacketOutOfRange("Requested size exceeds file size from its current position in the stream");
                     }     
                     
                     if(field->type == kPacketFieldTypeVariant && field->size != size) {
@@ -427,9 +495,9 @@ namespace OpenPST {
 
                 inline void resizeField(PacketFieldMeta* field, size_t size) {
                     if (field->type != kPacketFieldTypeVariant) {
-                        throw std::overflow_error("Field resize only for kPacketFieldTypeVariant type");
+                        throw PacketOutOfRange("Field resize only for kPacketFieldTypeVariant type");
                     } else if (getMaxDataSize() > 0 && ((data.size() - field->size) + size) > getMaxDataSize()) {
-                        throw std::overflow_error("Field resize exceeds max allowed size");
+                        throw PacketOutOfRange("Field resize exceeds max allowed size");
                     }
 
                     off_t offset = getFieldOffset(field->name);
@@ -453,7 +521,7 @@ namespace OpenPST {
                     int ret = 0;
 
                     if (!hasField(name)) {
-                        throw std::invalid_argument("Field does not exist");
+                        throw PacketInvalidArgument("Field does not exist");
                     }
 
                     PacketFieldMeta* field = getField(name);
@@ -476,7 +544,7 @@ namespace OpenPST {
                     off_t ret = 0;
 
                     if (!hasField(index)) {
-                        throw std::invalid_argument("Field does not exist");
+                        throw PacketInvalidArgument("Field does not exist");
                     }
 
                     auto field = getField(index);
@@ -510,7 +578,7 @@ namespace OpenPST {
                         i++;
                     }
 
-                    throw std::invalid_argument("Field does not exist");
+                    throw PacketInvalidArgument("Field does not exist");
                 }
 
                 /**
@@ -527,7 +595,7 @@ namespace OpenPST {
                         }
                     }
 
-                    throw std::invalid_argument("Field does not exist");
+                    throw PacketInvalidArgument("Field does not exist");
                 }
 
                 /**
@@ -548,5 +616,6 @@ namespace OpenPST {
                     return ret;
                 }
         };
+
     }
 }

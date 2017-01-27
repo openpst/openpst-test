@@ -16,6 +16,14 @@ Packet::~Packet(){
 }
 
 void Packet::setTargetEndianess(PacketEndianess e) {
+	/*if (e != getHostEndianess()) {
+		// flip shorts and larger
+		for (auto &field : fieldMeta) {
+			if (field.type == kPacketFieldTypePrimitive && field.size > sizeof(uint8_t)) {
+				write(field, )
+			}
+		}
+	}*/
 	endianT = e;
 }
 
@@ -103,7 +111,7 @@ PacketFieldMeta* Packet::getField(const std::string& name)
 		}
 	}
 	
-	throw std::invalid_argument("Field not found");
+	throw PacketInvalidArgument("Field not found");
 }
 
 PacketFieldMeta* Packet::getField(int index)
@@ -116,19 +124,19 @@ PacketFieldMeta* Packet::getField(int index)
 		i++;
 	}
 	
-	throw std::invalid_argument("Field not found");
+	throw PacketInvalidArgument("Field not found");
 }
 
 void Packet::addField(PacketFieldMeta field)
 {
 	if (!field.size && field.type != kPacketFieldTypeVariant) {
-		throw std::invalid_argument("Invalid field size");
+		throw PacketInvalidArgument("Invalid field size");
 	} else if ( kPacketFieldTypeLast <= field.type) {
-		throw std::invalid_argument("Invalid field type");
+		throw PacketInvalidArgument("Invalid field type");
 	} else if (!field.name.size()) {
-		throw std::invalid_argument("Field name must be set");
+		throw PacketInvalidArgument("Field name must be set");
 	} else if(hasField(field.name)) {
-		throw std::invalid_argument("Field already exists");
+		throw PacketInvalidArgument("Field already exists");
 	}
 	
 	if (field.size > 0) {
