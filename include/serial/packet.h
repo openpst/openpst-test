@@ -325,18 +325,30 @@ namespace OpenPST {
                 /**
                 * @brief Read primitive type T from the data buffer at offset
                 * @param off_t offset
-                * @throws std::out_of_range 
+                * @throws PacketOutOfRange 
                 * @return T
                 */
                 template <class T> inline T read(off_t offset) 
                 {
-                    assert(std::is_fundamental<T>::value);
+                    return read<T>(data, offset);
+                }
 
-                    if ((offset + sizeof(T)) > data.size()) {
-                        throw PacketOutOfRange("Attempted to read outside of the packet data buffer");
+                /**
+                * @brief Read primitive type T from a vector buffer at offset
+                * @param std::vector<uint8_t>& buffer
+                * @param off_t offset
+                * @throws PacketOutOfRange 
+                * @return T
+                */
+                template <class T> inline T read(std::vector<uint8_t>& buffer, off_t offset) 
+                {
+                    assert(std::is_fundamental<T>::value);
+        
+                    if ((offset + sizeof(T)) > buffer.size()) {
+                        throw PacketOutOfRange("Attempted to read outside buffer");
                     }
 
-                    T* p = reinterpret_cast<T*>(&data[offset]);
+                    T* p = reinterpret_cast<T*>(&buffer[offset]);
                     
                     if (sizeof(T) != sizeof(uint8_t) && getTargetEndianess() != getHostEndianess()) {
                         return swap<T>(*p);
@@ -349,10 +361,10 @@ namespace OpenPST {
                 * @brief Read string from the data buffer at offset until 0x00 or end of buffer
                 * @param size_t size
                 * @param off_t offset
-                * @throws std::out_of_range 
+                * @throws PacketOutOfRange 
                 * @return std::string
                 */
-                inline std::string readString(size_t size, off_t offset) 
+                inline std::string getString(size_t size, off_t offset) 
                 {
                     if ((offset + size) > data.size()) {
                         throw PacketOutOfRange("Attempted to read outside of the packet data buffer");
@@ -367,7 +379,7 @@ namespace OpenPST {
                 * @brief Read string from the data buffer at offset
                 * @param size_t size
                 * @param off_t offset
-                * @throws std::out_of_range 
+                * @throws PacketOutOfRange 
                 * @return std::vector<uint8_t>
                 */
                 inline std::vector<uint8_t> read(size_t size, off_t offset) 

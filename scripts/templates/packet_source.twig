@@ -32,6 +32,8 @@ using namespace OpenPST::{{namespace}};
 {% for field in fields %}
 {% if field.default %}
 	set{{field.name_camel}}({{field.default}});
+{% elseif field.default_string %}
+	set{{field.name_camel}}("{{field.default_string}}");
 {% endif %}
 {% endfor %}
 }
@@ -47,19 +49,22 @@ using namespace OpenPST::{{namespace}};
 {% include 'method_set.twig' %}
 {% endfor %}
 
+{% if unpacked_custom %}
+{{unpacked_custom|raw}}
+{% else %}
 void {{class_name}}::unpack(std::vector<uint8_t>& data)
 {
 {% if unpack_base %}
 	{{extends_class_name}}::unpack(data);
 {% endif %}
 }
-
+{% endif %}
 {% if expects_response %}
 void {{class_name}}::prepareResponse()
 {
-	if (response != nullptr) {
-		{{expects_response}}* r = new {{expects_response}}();
-		this->response = r;
+	if (response == nullptr) {
+		{{expects_response}}* resp = new {{expects_response}}();
+		response = resp;
 	}
 }
 {% endif %}

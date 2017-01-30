@@ -11,12 +11,16 @@ $twig = new \Twig_Environment(
 	]
 );
 
+define('REAL_SRC_DIR', dirname(__FILE__).'/../src');
+define('REAL_INC_DIR', dirname(__FILE__).'/../include');
 
 $twig->addFilter(new \Twig_SimpleFilter('to_camel', 'to_camel'));
 $twig->addFilter(new \Twig_SimpleFilter('to_lower_camel', 'to_lower_camel'));
 $twig->addFilter(new \Twig_SimpleFilter('to_lower_name', 'to_lower_name'));
 
 $out_dir = dirname(__FILE__).'/out';
+
+echo "STARTING...".PHP_EOL;
 
 if (!is_dir($out_dir)) {
 	mkdir($out_dir, 0755, true);
@@ -59,7 +63,7 @@ foreach ($packets as $group => $pkts) {
 		$packet['class_name']				= $name;
 		$packet['default_exends'] 			= isset($packet['default_exends']) && is_array($packet['default_exends']) ? $packet['default_exends'] : array();
 		
-		if ($packet['expects_response']) {
+		if (isset($packet['expects_response']) && $packet['expects_response']) {
 			if (!isset($pkts[$packet['expects_response']])) {
 
 			}
@@ -74,6 +78,15 @@ foreach ($packets as $group => $pkts) {
 			$field['name'] 					  = $fname;
 			$field['name_camel']  	  = to_camel($fname);
 			$field['name_lower_camel']  = to_lower_camel($fname);
+		}
+
+		$realSrcFile = sprintf('%s/%s/%s.cpp', REAL_SRC_DIR, $packet['path'], to_lower_name($name));
+
+		if (file_exists($realSrcFile)) {
+			$cust = extract_unpack_method($realSrcFile);
+			if (trim($cust)) {
+				$packet['unpacked_custom'] = $cust;
+			}
 		}
 
 		$header = $twig->render('packet_header.twig', $packet);
@@ -119,4 +132,32 @@ function to_lower_name($str)
 	}
 
 	return strtolower($str);
+}
+
+function extract_unpack_method($filePath) {
+	$file = file_get_contents($filePath);
+
+	if (!$file) {
+		throw \Exception("File has nothing or doesnt exist");
+	}
+
+	$lines = explode(PHP_EOL, $file);
+
+	$return = [];
+
+	$hit = false;
+	foreach ($lines as $line) {
+		if (preg_match(sprintf('/%s/i', preg_quote('::unpack(std::vector<uint8_t>& data)')), $line)) {
+			$hit = true;	
+		}
+
+		if ($hit) {
+			$return[] = $line;
+			if (preg_match('/^\}/', $line)) {
+				break;
+			}
+		}
+	}
+
+	return implode(PHP_EOL, $return);
 }

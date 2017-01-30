@@ -8,7 +8,7 @@ using namespace OpenPST::Serial;
 
 namespace OpenPST {
     namespace QC {
-    	
+        
         class StreamingDloadPacket : public Packet
         {
             protected:
@@ -26,19 +26,13 @@ namespace OpenPST {
                 /**
                 * @brief Destructor
                 */
-                ~StreamingDloadPacket() 
+                ~StreamingDloadPacket()
                 {
 
                 }
 
-                size_t getMaxDataSize() override 
-                {
-                    return STREAMING_DLOAD_MAX_DATA_SIZE;
-                }
-
-                void setCommand(uint8_t command)
-                {
-                    write<uint8_t>("command", command);
+                size_t getMaxDataSize() override {
+                    return STREAMING_DLOAD_MAX_RX_SIZE;
                 }
 
                 uint8_t getCommand()
@@ -46,13 +40,27 @@ namespace OpenPST {
                     return read<uint8_t>(getFieldOffset("command")); 
                 }
 
+                void setCommand(uint8_t command)
+                {
+                    write<uint8_t>("command", command);
+                }
+               
+                void unpack(std::vector<uint8_t>& resp) override {
+                    if (!resp.size()) {
+                        throw PacketError("No data to unpack");
+                    }
+
+                    encoder.decode(resp);
+
+                    if (resp[0] != getCommand()) {
+                        throw PacketError("Unexpected Response");
+                    }
+                }
+
                 void prepare() override {
                     encoder.encode(data);
                 }
-                
-                void unpack(std::vector<uint8_t>& data) override {
-                    encoder.decode(data);
-                }
+
         };
     }
 }

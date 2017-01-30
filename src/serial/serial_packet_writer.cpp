@@ -31,8 +31,12 @@ void SerialPacketWriter::write(Packet* packet)
 		}
 	}
 
-
 	packet->prepare();
+
+#ifdef SERIAL_PACKET_WRITER_DEBUG
+	std::cout << "Attempting to write " << packet->size() << " bytes" << std::endl;
+	hexdump((uint8_t*)&packet->getData()[0], packet->size());
+#endif
 
 	port.write(packet->getData());
 
@@ -48,12 +52,20 @@ void SerialPacketWriter::write(Packet* packet)
 			throw SerialPacketWriterError("Response packet has not been allocated");
 		}
 
+#ifdef SERIAL_PACKET_WRITER_DEBUG
+		std::cout << "Attempting to read " << response->getMaxDataSize() << " bytes" << std::endl;
+#endif
 		port.read(rbuffer, response->getMaxDataSize());
+	
+#ifdef SERIAL_PACKET_WRITER_DEBUG
+		std::cout << "Read " << rbuffer.size() << " bytes" << std::endl;
+
+		hexdump((uint8_t*)&rbuffer[0], rbuffer.size());
 
 		if (port.available()) {
 			std::cerr << port.available() << " bytes of data is still waiting to be read!" << std::endl;
 		}
-
+#endif
 		response->unpack(rbuffer);
 	}
 }

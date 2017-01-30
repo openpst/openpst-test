@@ -389,7 +389,7 @@ $packets['sahara'] = [
 			'command' => 'kSaharaCommandMemoryDebug64'
 		]
 	],
-	'kSaharaCommandMemoryDebug64Request' => [
+	'SaharaCommandMemoryDebug64Request' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'SaharaPacket',
@@ -429,24 +429,32 @@ $packets['streaming_dload'] = [
 				'type' => FIELD_TYPE_UARRAY,
 				'size' => $fieldSizes[FIELD_TYPE_UINT8] * 32,
 				'size_const' => 'STREAMING_DLOAD_MAGIC_SIZE',
+				'default_string' => 'QCOM fast download protocol host',
+				'allowed_getters' => ['string'],
+				'allowed_setters' => ['string'],
 			],
 			'version' => [ 
 				'type' => FIELD_TYPE_UINT8,
 				'size' => $fieldSizes[FIELD_TYPE_UINT8],
+				'default' => '0x05',
 			],
 			'compatible_version' => [ 
 				'type' => FIELD_TYPE_UINT8,
 				'size' => $fieldSizes[FIELD_TYPE_UINT8],
+				'default' => '0x02',
 			],
 			'feature_bits' => [ 
 				'type' => FIELD_TYPE_UINT8,
 				'size' => $fieldSizes[FIELD_TYPE_UINT8],
+				'default' => '0x19',
 			],
 		],
 		'default_exends' => [
 			'command' => 'kStreamingDloadHello'
 		]
 	],
+	// TODO: Response has dynamic size fields..
+	// kStreamingDloadHelloResponse
 	'StreamingDloadHelloResponse' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
@@ -460,6 +468,7 @@ $packets['streaming_dload'] = [
 				'type' => FIELD_TYPE_UARRAY,
 				'size' => $fieldSizes[FIELD_TYPE_UINT8] * 32,
 				'size_const' => 'STREAMING_DLOAD_MAGIC_SIZE',
+				'allowed_getters' => [ 'string' ],
 			],
 			'version' => [ 
 				'type' => FIELD_TYPE_UINT8,
@@ -468,6 +477,35 @@ $packets['streaming_dload'] = [
 			'compatible_version' => [ 
 				'type' => FIELD_TYPE_UINT8,
 				'size' => $fieldSizes[FIELD_TYPE_UINT8],
+			],
+			'preferred_block_size' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'base_flash_address' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'flash_id_length' => [ 
+				'type' => FIELD_TYPE_UINT8,
+				'size' => $fieldSizes[FIELD_TYPE_UINT8],
+			],
+			'flash_id' => [ 
+				'type' => FIELD_TYPE_VARIABLE,
+				'size' => 0,
+				'allowed_getters' => [ 'string' ],
+			],
+			'window_size' => [ 
+				'type' => FIELD_TYPE_UINT16,
+				'size' => $fieldSizes[FIELD_TYPE_UINT16],
+			],
+			'number_of_sectors' => [ 
+				'type' => FIELD_TYPE_UINT16,
+				'size' => $fieldSizes[FIELD_TYPE_UINT16],
+			],
+			'sector_sizes' => [ 
+				'type' => FIELD_TYPE_VARIABLE,
+				'size' => 0,
 			],
 			'feature_bits' => [ 
 				'type' => FIELD_TYPE_UINT8,
@@ -478,8 +516,7 @@ $packets['streaming_dload'] = [
 			'command' => 'kStreamingDloadHelloResponse'
 		]
 	],
-	// TODO: Response has dynamic size fields..
-	// kStreamingDloadHelloResponse
+
 
 	'StreamingDloadReadRequest' => [
 		'namespace' => 'QC',
@@ -1476,7 +1513,7 @@ $packets['qcdm_efs'] = [
 
 
 
-	'QcdmEfsQueryRequest' => [
+	'DmEfsQueryRequest' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
@@ -1488,7 +1525,7 @@ $packets['qcdm_efs'] = [
 		]
 	],
 
-	'QcdmEfsQueryResponse' => [
+	'DmEfsQueryResponse' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
@@ -1524,7 +1561,7 @@ $packets['qcdm_efs'] = [
 		]
 	],
 
-	'QcdmEfsOpenFileRequest' => [
+	'DmEfsOpenFileRequest' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
@@ -1548,7 +1585,7 @@ $packets['qcdm_efs'] = [
 		]
 	],
 
-	'QcdmEfsOpenFileResponse' => [
+	'DmEfsOpenFileResponse' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
@@ -1568,7 +1605,7 @@ $packets['qcdm_efs'] = [
 		]
 	],
 
-	'QcdmEfsCloseFileRequest' => [
+	'DmEfsCloseFileRequest' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
@@ -1584,7 +1621,7 @@ $packets['qcdm_efs'] = [
 		]
 	],
 
-	'QcdmEfsCloseFileReponse' => [
+	'DmEfsCloseFileReponse' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
@@ -1600,7 +1637,7 @@ $packets['qcdm_efs'] = [
 		]
 	],
 
-	'QcdmEfsReadFileRequest' => [
+	'DmEfsReadFileRequest' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
@@ -1624,7 +1661,7 @@ $packets['qcdm_efs'] = [
 		]
 	],
 
-	'QcdmEfsReadFileResponse' => [
+	'DmEfsReadFileResponse' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
@@ -1657,7 +1694,7 @@ $packets['qcdm_efs'] = [
 	],
 
 
-	'QcdmEfsWriteFileRequest' => [
+	'DmEfsWriteFileRequest' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
@@ -1681,7 +1718,7 @@ $packets['qcdm_efs'] = [
 		]
 	],
 
-	'QcdmEfsWriteFileResponse' => [
+	'DmEfsWriteFileResponse' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
@@ -1709,7 +1746,7 @@ $packets['qcdm_efs'] = [
 		]
 	],
 
-	'QcdmEfsCreateLinkRequest' => [
+	'DmEfsCreateLinkRequest' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
@@ -1729,7 +1766,7 @@ $packets['qcdm_efs'] = [
 		]
 	],
 
-	'QcdmEfsCreateLinkResponse' => [
+	'DmEfsCreateLinkResponse' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
@@ -1745,7 +1782,7 @@ $packets['qcdm_efs'] = [
 		]
 	],
 
-	'QcdmEfsReadLinkRequest' => [
+	'DmEfsReadLinkRequest' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
@@ -1761,7 +1798,7 @@ $packets['qcdm_efs'] = [
 		]
 	],
 
-	'QcdmEfsUnlinkRequest' => [
+	'DmEfsUnlinkRequest' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
@@ -1778,7 +1815,7 @@ $packets['qcdm_efs'] = [
 	],
 
 
-	'QcdmEfsUnlinkResponse' => [
+	'DmEfsUnlinkResponse' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
@@ -1794,7 +1831,7 @@ $packets['qcdm_efs'] = [
 		]
 	],
 
-	'QcdmEfsMkdirRequest' => [
+	'DmEfsMkdirRequest' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
@@ -1815,7 +1852,7 @@ $packets['qcdm_efs'] = [
 	],
 
 
-	'QcdmEfsMkdirResponse' => [
+	'DmEfsMkdirResponse' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
@@ -1831,7 +1868,7 @@ $packets['qcdm_efs'] = [
 		]
 	],
 
-	'QcdmEfsRmdirRequest' => [
+	'DmEfsRmdirRequest' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
@@ -1846,7 +1883,7 @@ $packets['qcdm_efs'] = [
 	],
 
 
-	'QcdmEfsRmdirResponse' => [
+	'DmEfsRmdirResponse' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
@@ -1862,7 +1899,7 @@ $packets['qcdm_efs'] = [
 		]
 	],
 
-	'QcdmEfsOpenDirRequest' => [
+	'DmEfsOpenDirRequest' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
@@ -1879,7 +1916,7 @@ $packets['qcdm_efs'] = [
 	],
 
 
-	'QcdmEfsOpenDirResponse' => [
+	'DmEfsOpenDirResponse' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
@@ -1899,7 +1936,7 @@ $packets['qcdm_efs'] = [
 		]
 	],
 
-	'QcdmEfsReadDirRequest' => [
+	'DmEfsReadDirRequest' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
@@ -1920,7 +1957,7 @@ $packets['qcdm_efs'] = [
 	],
 
 
-	'QcdmEfsReadDirResponse' => [
+	'DmEfsReadDirResponse' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
@@ -1973,7 +2010,7 @@ $packets['qcdm_efs'] = [
 	],
 
 
-	'QcdmEfsCloseDirRequest' => [
+	'DmEfsCloseDirRequest' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
@@ -1990,7 +2027,7 @@ $packets['qcdm_efs'] = [
 	],
 
 
-	'QcdmEfsCloseDirResponse' => [
+	'DmEfsCloseDirResponse' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
@@ -2006,7 +2043,7 @@ $packets['qcdm_efs'] = [
 		]
 	],
 
-	'QcdmEfsRenameRequest' => [
+	'DmEfsRenameRequest' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
@@ -2027,7 +2064,7 @@ $packets['qcdm_efs'] = [
 	],
 
 
-	'QcdmEfsRenameResponse' => [
+	'DmEfsRenameResponse' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
@@ -2043,7 +2080,7 @@ $packets['qcdm_efs'] = [
 		]
 	],
 
-	'QcdmEfsStatRequest' => [
+	'DmEfsStatRequest' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
@@ -2060,7 +2097,7 @@ $packets['qcdm_efs'] = [
 	],
 
 
-	'QcdmEfsStatResponse' => [
+	'DmEfsStatResponse' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
@@ -2100,7 +2137,7 @@ $packets['qcdm_efs'] = [
 		]
 	],
 
-	'QcdmEfsLstatRequest' => [
+	'DmEfsLstatRequest' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
@@ -2117,7 +2154,7 @@ $packets['qcdm_efs'] = [
 	],
 
 
-	'QcdmEfsLstatResponse' => [
+	'DmEfsLstatResponse' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
@@ -2150,7 +2187,7 @@ $packets['qcdm_efs'] = [
 	],
 
 
-	'QcdmEfsFstatRequest' => [
+	'DmEfsFstatRequest' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
@@ -2167,7 +2204,7 @@ $packets['qcdm_efs'] = [
 	],
 
 
-	'QcdmEfsFstatResponse' => [
+	'DmEfsFstatResponse' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
@@ -2207,7 +2244,7 @@ $packets['qcdm_efs'] = [
 		]
 	],
 
-	'QcdmEfsChmodRequest' => [
+	'DmEfsChmodRequest' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
@@ -2228,7 +2265,7 @@ $packets['qcdm_efs'] = [
 	],
 
 
-	'QcdmEfsChmodResponse' => [
+	'DmEfsChmodResponse' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
@@ -2244,7 +2281,7 @@ $packets['qcdm_efs'] = [
 		]
 	],
 
-	'QcdmEfsStatfsRequest' => [
+	'DmEfsStatfsRequest' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
@@ -2261,7 +2298,7 @@ $packets['qcdm_efs'] = [
 	],
 
 
-	'QcdmEfsStatfsResponse' => [
+	'DmEfsStatfsResponse' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
@@ -2313,7 +2350,7 @@ $packets['qcdm_efs'] = [
 		]
 	],
 
-	'QcdmEfsAccessRequest' => [
+	'DmEfsAccessRequest' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
@@ -2334,7 +2371,7 @@ $packets['qcdm_efs'] = [
 	],
 
 
-	'QcdmEfsAccessResponse' => [
+	'DmEfsAccessResponse' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
