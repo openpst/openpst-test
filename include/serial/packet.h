@@ -123,24 +123,22 @@ namespace OpenPST {
         class Packet
         {
             protected:
-                /* @var Endianess of target device */
+                /** @var Endianess of target device */
                 PacketEndianess endianT = kPacketEndianessLittle;
-
-                /* @var Endianess of host device */
-                PacketEndianess endianH = kPacketEndianessLittle;
                 
-                /* @var Architecture of the target device */
+                /** @var Architecture of the target device */
                 PacketTargetArch archT = kPacketTargetArchUnknown;
                 
-                /* @var The maximum size the data occupy */
-                size_t maxDataSize    = 0;
-
-                /* @var If this packet expects a response or not */
+                /** @var If this packet expects a response or not */
                 bool responseExpected = true;
 
-                /* @var The resulting response, if available */
+                /** @var The max size the data may occupy */
+                size_t maxDataSize = 0;
+
+                /** @var The resulting response, if available */
                 Packet* response = nullptr;
 
+                /** @var Field defitions for the packet */
                 std::vector<PacketFieldMeta> fieldMeta;
 
                 /* @var The underlying data of the packet to be sent */
@@ -148,9 +146,19 @@ namespace OpenPST {
             public:
                 /**
                 * @brief Constructor
+                * @param size_t
+                * @return Packet
                 */
                 Packet(size_t maxDataSize);
                 
+                /**
+                * @brief Constructor
+                * @param PacketEndianess
+                * @param size_t
+                * @return Packet
+                */
+                Packet(PacketEndianess targetEndianess, size_t maxDataSize);
+
                 /**
                 * @brief Destructor
                 */
@@ -175,14 +183,6 @@ namespace OpenPST {
                 * @return PacketEndianess
                 */
                 PacketEndianess getTargetEndianess();
-
-                /**
-                * @brief Set the host endianess
-                *
-                * @param PacketEndianess e
-                * @return void
-                */
-                void setHostEndianess(PacketEndianess e);
 
                 /**
                 * @brief Get the host endianess

@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-DmVersionResponse::DmVersionResponse() : DmPacket()
+DmVersionResponse::DmVersionResponse(PacketEndianess targetEndian) : DmPacket(targetEndian)
 {
 	addField("demod", kPacketFieldTypePrimitive, sizeof(uint8_t));
 	addField("decode", kPacketFieldTypePrimitive, sizeof(uint8_t));

@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-DmEfsOpenDirRequest::DmEfsOpenDirRequest() : DmEfsPacket()
+DmEfsOpenDirRequest::DmEfsOpenDirRequest(PacketEndianess targetEndian) : DmEfsPacket(targetEndian)
 {
 	addField("path", kPacketFieldTypeVariant, 0);
 

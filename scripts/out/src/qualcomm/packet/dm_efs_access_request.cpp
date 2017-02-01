@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-DmEfsAccessRequest::DmEfsAccessRequest() : DmEfsPacket()
+DmEfsAccessRequest::DmEfsAccessRequest(PacketEndianess targetEndian) : DmEfsPacket(targetEndian)
 {
 	addField("permission_mask", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("path", kPacketFieldTypeVariant, 0);

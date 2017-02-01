@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-DmEfsOpenFileRequest::DmEfsOpenFileRequest() : DmEfsPacket()
+DmEfsOpenFileRequest::DmEfsOpenFileRequest(PacketEndianess targetEndian) : DmEfsPacket(targetEndian)
 {
 	addField("flags", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("mode", kPacketFieldTypePrimitive, sizeof(uint32_t));

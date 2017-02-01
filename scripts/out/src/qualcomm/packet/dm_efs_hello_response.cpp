@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-DmEfsHelloResponse::DmEfsHelloResponse() : DmEfsPacket()
+DmEfsHelloResponse::DmEfsHelloResponse(PacketEndianess targetEndian) : DmEfsPacket(targetEndian)
 {
 	addField("target_packet_window_size", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("target_packet_window_byte_size", kPacketFieldTypePrimitive, sizeof(uint32_t));

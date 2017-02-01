@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-StreamingDloadStreamWriteRequest::StreamingDloadStreamWriteRequest() : StreamingDloadPacket()
+StreamingDloadStreamWriteRequest::StreamingDloadStreamWriteRequest(PacketEndianess targetEndian) : StreamingDloadPacket(targetEndian)
 {
 	addField("address", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("data", kPacketFieldTypeVariant, 0);

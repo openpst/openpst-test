@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-StreamingDloadUnframedStreamWriteRequest::StreamingDloadUnframedStreamWriteRequest() : StreamingDloadPacket()
+StreamingDloadUnframedStreamWriteRequest::StreamingDloadUnframedStreamWriteRequest(PacketEndianess targetEndian) : StreamingDloadPacket(targetEndian)
 {
 	addField("alignment_padding", kPacketFieldTypeArray, 3);
 	addField("address", kPacketFieldTypePrimitive, sizeof(uint32_t));

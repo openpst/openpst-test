@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-SaharaHelloRequest::SaharaHelloRequest() : SaharaPacket()
+SaharaHelloRequest::SaharaHelloRequest(PacketEndianess targetEndian) : SaharaPacket(targetEndian)
 {
 	addField("version", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("min_version", kPacketFieldTypePrimitive, sizeof(uint32_t));

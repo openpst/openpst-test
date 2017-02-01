@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-DmPasswordResponse::DmPasswordResponse() : DmPacket()
+DmPasswordResponse::DmPasswordResponse(PacketEndianess targetEndian) : DmPacket(targetEndian)
 {
 	addField("status", kPacketFieldTypePrimitive, sizeof(uint8_t));
 

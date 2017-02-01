@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-StreamingDloadResetRequest::StreamingDloadResetRequest() : StreamingDloadPacket()
+StreamingDloadResetRequest::StreamingDloadResetRequest(PacketEndianess targetEndian) : StreamingDloadPacket(targetEndian)
 {
 
 	setCommand(kStreamingDloadReset);

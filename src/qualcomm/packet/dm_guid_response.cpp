@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-DmGuidResponse::DmGuidResponse() : DmPacket()
+DmGuidResponse::DmGuidResponse(PacketEndianess targetEndian) : DmPacket(targetEndian)
 {
 	addField("guid", kPacketFieldTypeArray, 16);
 

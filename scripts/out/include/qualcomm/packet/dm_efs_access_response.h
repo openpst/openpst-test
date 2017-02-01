@@ -23,7 +23,7 @@ namespace OpenPST {
                 /**
                 * @brief Constructor
                 */
-                DmEfsAccessResponse();
+                DmEfsAccessResponse(PacketEndianess targetEndian);
                 
                 /**
                 * @brief Destructor

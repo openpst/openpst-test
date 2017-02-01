@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-StreamingDloadSecurityModeResponse::StreamingDloadSecurityModeResponse() : StreamingDloadPacket()
+StreamingDloadSecurityModeResponse::StreamingDloadSecurityModeResponse(PacketEndianess targetEndian) : StreamingDloadPacket(targetEndian)
 {
 
 	setCommand(kStreamingDloadSecurityModeReceived);

@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-StreamingDloadUnlockResponse::StreamingDloadUnlockResponse() : StreamingDloadPacket()
+StreamingDloadUnlockResponse::StreamingDloadUnlockResponse(PacketEndianess targetEndian) : StreamingDloadPacket(targetEndian)
 {
 
 	setCommand(kStreamingDloadUnlocked);

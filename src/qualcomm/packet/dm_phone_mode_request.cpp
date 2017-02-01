@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-DmPhoneModeRequest::DmPhoneModeRequest() : DmPacket()
+DmPhoneModeRequest::DmPhoneModeRequest(PacketEndianess targetEndian) : DmPacket(targetEndian)
 {
 	addField("mode", kPacketFieldTypePrimitive, sizeof(uint8_t));
 	addField("padding", kPacketFieldTypePrimitive, sizeof(uint8_t));

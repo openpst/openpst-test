@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-DmEfsFstatRequest::DmEfsFstatRequest() : DmEfsPacket()
+DmEfsFstatRequest::DmEfsFstatRequest(PacketEndianess targetEndian) : DmEfsPacket(targetEndian)
 {
 	addField("fp", kPacketFieldTypePrimitive, sizeof(uint32_t));
 

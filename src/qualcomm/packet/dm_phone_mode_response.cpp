@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-DmPhoneModeResponse::DmPhoneModeResponse() : DmPacket()
+DmPhoneModeResponse::DmPhoneModeResponse(PacketEndianess targetEndian) : DmPacket(targetEndian)
 {
 	addField("status", kPacketFieldTypePrimitive, sizeof(uint8_t));
 

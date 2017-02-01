@@ -25,7 +25,7 @@ namespace OpenPST {
                 /**
                 * @brief Constructor
                 */
-                LafPacket();
+                LafPacket(PacketEndianess targetEndian);
                 
                 /**
                 * @brief Destructor

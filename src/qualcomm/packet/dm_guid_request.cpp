@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-DmGuidRequest::DmGuidRequest() : DmPacket()
+DmGuidRequest::DmGuidRequest(PacketEndianess targetEndian) : DmPacket(targetEndian)
 {
 
 }

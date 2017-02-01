@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-DmNvReadRequest::DmNvReadRequest() : DmPacket()
+DmNvReadRequest::DmNvReadRequest(PacketEndianess targetEndian) : DmPacket(targetEndian)
 {
 	addField("nv_item", kPacketFieldTypePrimitive, sizeof(uint16_t));
 	addField("data", kPacketFieldTypeArray, DIAG_NV_ITEM_SIZE);

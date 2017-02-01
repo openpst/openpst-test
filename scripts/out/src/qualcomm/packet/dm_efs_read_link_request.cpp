@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-DmEfsReadLinkRequest::DmEfsReadLinkRequest() : DmEfsPacket()
+DmEfsReadLinkRequest::DmEfsReadLinkRequest(PacketEndianess targetEndian) : DmEfsPacket(targetEndian)
 {
 	addField("path", kPacketFieldTypeVariant, 0);
 

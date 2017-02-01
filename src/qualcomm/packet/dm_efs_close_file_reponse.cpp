@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-DmEfsCloseFileReponse::DmEfsCloseFileReponse() : DmEfsPacket()
+DmEfsCloseFileReponse::DmEfsCloseFileReponse(PacketEndianess targetEndian) : DmEfsPacket(targetEndian)
 {
 	addField("error", kPacketFieldTypePrimitive, sizeof(uint32_t));
 

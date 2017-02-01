@@ -18,7 +18,7 @@ namespace OpenPST {
                 /**
                 * @brief Constructor
                 */
-                StreamingDloadPacket() : Packet(getMaxDataSize()) 
+                StreamingDloadPacket(PacketEndianess targetEndian) : Packet(targetEndian, getMaxDataSize()) 
                 {
                    addField("command", kPacketFieldTypePrimitive, sizeof(uint8_t));
                 }

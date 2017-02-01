@@ -25,7 +25,7 @@ namespace OpenPST {
                 /**
                 * @brief Constructor
                 */
-                SaharaHelloRequest();
+                SaharaHelloRequest(PacketEndianess targetEndian);
                 
                 /**
                 * @brief Destructor

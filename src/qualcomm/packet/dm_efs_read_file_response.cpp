@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-DmEfsReadFileResponse::DmEfsReadFileResponse() : DmEfsPacket()
+DmEfsReadFileResponse::DmEfsReadFileResponse(PacketEndianess targetEndian) : DmEfsPacket(targetEndian)
 {
 	addField("fp", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("offset", kPacketFieldTypePrimitive, sizeof(uint32_t));

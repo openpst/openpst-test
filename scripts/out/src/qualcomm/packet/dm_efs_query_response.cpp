@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-DmEfsQueryResponse::DmEfsQueryResponse() : DmEfsPacket()
+DmEfsQueryResponse::DmEfsQueryResponse(PacketEndianess targetEndian) : DmEfsPacket(targetEndian)
 {
 	addField("max_file_name_length", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("max_pathname_length", kPacketFieldTypePrimitive, sizeof(uint32_t));

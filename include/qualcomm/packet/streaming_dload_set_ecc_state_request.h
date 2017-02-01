@@ -25,7 +25,7 @@ namespace OpenPST {
                 /**
                 * @brief Constructor
                 */
-                StreamingDloadSetEccStateRequest();
+                StreamingDloadSetEccStateRequest(PacketEndianess targetEndian);
                 
                 /**
                 * @brief Destructor

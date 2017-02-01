@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-DmEfsReadDirResponse::DmEfsReadDirResponse() : DmEfsPacket()
+DmEfsReadDirResponse::DmEfsReadDirResponse(PacketEndianess targetEndian) : DmEfsPacket(targetEndian)
 {
 	addField("dp", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("sequence_number", kPacketFieldTypePrimitive, sizeof(uint32_t));

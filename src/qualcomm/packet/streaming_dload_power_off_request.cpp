@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-StreamingDloadPowerOffRequest::StreamingDloadPowerOffRequest() : StreamingDloadPacket()
+StreamingDloadPowerOffRequest::StreamingDloadPowerOffRequest(PacketEndianess targetEndian) : StreamingDloadPacket(targetEndian)
 {
 
 	setCommand(kStreamingDloadPowerOff);

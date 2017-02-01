@@ -15,7 +15,7 @@ namespace OpenPST {
                 /**
                 * @brief Constructor
                 */
-                SaharaPacket() : Packet(getMaxDataSize()) 
+                SaharaPacket(PacketEndianess targetEndian) : Packet(targetEndian, getMaxDataSize()) 
                 {
                    addField("command", kPacketFieldTypePrimitive, sizeof(uint32_t));
                    addField("size", kPacketFieldTypePrimitive, sizeof(uint32_t));

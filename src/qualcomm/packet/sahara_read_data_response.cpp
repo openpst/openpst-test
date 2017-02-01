@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-SaharaReadDataResponse::SaharaReadDataResponse() : Packet()
+SaharaReadDataResponse::SaharaReadDataResponse(PacketEndianess targetEndian) : Packet(targetEndian)
 {
 	addField("data", kPacketFieldTypeVariant, 0);
 

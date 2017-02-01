@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-StreamingDloadHelloResponse::StreamingDloadHelloResponse() : StreamingDloadPacket()
+StreamingDloadHelloResponse::StreamingDloadHelloResponse(PacketEndianess targetEndian) : StreamingDloadPacket(targetEndian)
 {
 	addField("magic", kPacketFieldTypeArray, STREAMING_DLOAD_MAGIC_SIZE);
 	addField("version", kPacketFieldTypePrimitive, sizeof(uint8_t));

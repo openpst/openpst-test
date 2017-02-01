@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-SaharaMemoryRead64Request::SaharaMemoryRead64Request() : SaharaPacket()
+SaharaMemoryRead64Request::SaharaMemoryRead64Request(PacketEndianess targetEndian) : SaharaPacket(targetEndian)
 {
 	addField("address", kPacketFieldTypePrimitive, sizeof(uint64_t));
 	addField("size", kPacketFieldTypePrimitive, sizeof(uint64_t));

@@ -23,7 +23,7 @@ namespace OpenPST {
                 /**
                 * @brief Constructor
                 */
-                DmPhoneModeResponse();
+                DmPhoneModeResponse(PacketEndianess targetEndian);
                 
                 /**
                 * @brief Destructor

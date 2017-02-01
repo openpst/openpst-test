@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-DmEfsRenameRequest::DmEfsRenameRequest() : DmEfsPacket()
+DmEfsRenameRequest::DmEfsRenameRequest(PacketEndianess targetEndian) : DmEfsPacket(targetEndian)
 {
 	addField("path", kPacketFieldTypeVariant, 0);
 	addField("new_path", kPacketFieldTypeVariant, 0);

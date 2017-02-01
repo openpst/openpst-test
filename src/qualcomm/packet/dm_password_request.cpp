@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-DmPasswordRequest::DmPasswordRequest() : DmPacket()
+DmPasswordRequest::DmPasswordRequest(PacketEndianess targetEndian) : DmPacket(targetEndian)
 {
 	addField("password", kPacketFieldTypeArray, DIAG_PASSWORD_LENGTH);
 

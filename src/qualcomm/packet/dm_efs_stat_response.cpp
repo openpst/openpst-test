@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-DmEfsStatResponse::DmEfsStatResponse() : DmEfsPacket()
+DmEfsStatResponse::DmEfsStatResponse(PacketEndianess targetEndian) : DmEfsPacket(targetEndian)
 {
 	addField("error", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("mode", kPacketFieldTypePrimitive, sizeof(uint32_t));

@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-SaharaDoneRequest::SaharaDoneRequest() : SaharaPacket()
+SaharaDoneRequest::SaharaDoneRequest(PacketEndianess targetEndian) : SaharaPacket(targetEndian)
 {
 
 	setCommand(kSaharaCommandDone);

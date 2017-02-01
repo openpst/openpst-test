@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-SaharaCommandMemoryDebug64Request::SaharaCommandMemoryDebug64Request() : SaharaPacket()
+SaharaCommandMemoryDebug64Request::SaharaCommandMemoryDebug64Request(PacketEndianess targetEndian) : SaharaPacket(targetEndian)
 {
 	addField("client_command", kPacketFieldTypePrimitive, sizeof(uint64_t));
 

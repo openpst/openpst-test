@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-StreamingDloadSetEccStateRequest::StreamingDloadSetEccStateRequest() : StreamingDloadPacket()
+StreamingDloadSetEccStateRequest::StreamingDloadSetEccStateRequest(PacketEndianess targetEndian) : StreamingDloadPacket(targetEndian)
 {
 	addField("status", kPacketFieldTypePrimitive, sizeof(uint8_t));
 

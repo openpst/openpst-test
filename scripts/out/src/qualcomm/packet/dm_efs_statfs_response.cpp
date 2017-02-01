@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-DmEfsStatfsResponse::DmEfsStatfsResponse() : DmEfsPacket()
+DmEfsStatfsResponse::DmEfsStatfsResponse(PacketEndianess targetEndian) : DmEfsPacket(targetEndian)
 {
 	addField("error", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("filesystem_id", kPacketFieldTypeArray, 8);

@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-DmVersionRequest::DmVersionRequest() : DmPacket()
+DmVersionRequest::DmVersionRequest(PacketEndianess targetEndian) : DmPacket(targetEndian)
 {
 	addField("version", kPacketFieldTypePrimitive, sizeof(uint16_t));
 

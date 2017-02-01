@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-StreamingDloadCloseRequest::StreamingDloadCloseRequest() : StreamingDloadPacket()
+StreamingDloadCloseRequest::StreamingDloadCloseRequest(PacketEndianess targetEndian) : StreamingDloadPacket(targetEndian)
 {
 	addField("mode", kPacketFieldTypePrimitive, sizeof(uint8_t));
 

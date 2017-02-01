@@ -12,7 +12,7 @@
 
 using namespace OpenPST::{{namespace}};
 
-{{class_name}}::{{class_name}}() : {{extends_class_name}}()
+{{class_name}}::{{class_name}}(PacketEndianess targetEndian) : {{extends_class_name}}(targetEndian)
 {
 {% for field in fields %}
 {% if '[]' in field.type %}

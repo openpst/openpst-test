@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-DmEfsChmodResponse::DmEfsChmodResponse() : DmEfsPacket()
+DmEfsChmodResponse::DmEfsChmodResponse(PacketEndianess targetEndian) : DmEfsPacket(targetEndian)
 {
 	addField("error", kPacketFieldTypePrimitive, sizeof(uint32_t));
 

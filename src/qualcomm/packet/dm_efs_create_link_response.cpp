@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-DmEfsCreateLinkResponse::DmEfsCreateLinkResponse() : DmEfsPacket()
+DmEfsCreateLinkResponse::DmEfsCreateLinkResponse(PacketEndianess targetEndian) : DmEfsPacket(targetEndian)
 {
 	addField("error", kPacketFieldTypePrimitive, sizeof(uint32_t));
 

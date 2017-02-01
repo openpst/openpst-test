@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-StreamingDloadNopResponse::StreamingDloadNopResponse() : StreamingDloadPacket()
+StreamingDloadNopResponse::StreamingDloadNopResponse(PacketEndianess targetEndian) : StreamingDloadPacket(targetEndian)
 {
 	addField("identifier", kPacketFieldTypePrimitive, sizeof(uint32_t));
 

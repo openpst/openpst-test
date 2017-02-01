@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-StreamingDloadOpenMultiImageResponse::StreamingDloadOpenMultiImageResponse() : StreamingDloadPacket()
+StreamingDloadOpenMultiImageResponse::StreamingDloadOpenMultiImageResponse(PacketEndianess targetEndian) : StreamingDloadPacket(targetEndian)
 {
 	addField("status", kPacketFieldTypePrimitive, sizeof(uint8_t));
 

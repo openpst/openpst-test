@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-DmEfsQueryRequest::DmEfsQueryRequest() : DmEfsPacket()
+DmEfsQueryRequest::DmEfsQueryRequest(PacketEndianess targetEndian) : DmEfsPacket(targetEndian)
 {
 
 }

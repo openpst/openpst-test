@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-DmEfsChmodRequest::DmEfsChmodRequest() : DmEfsPacket()
+DmEfsChmodRequest::DmEfsChmodRequest(PacketEndianess targetEndian) : DmEfsPacket(targetEndian)
 {
 	addField("mode", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("path", kPacketFieldTypeVariant, 0);

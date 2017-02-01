@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-DmEfsUnlinkRequest::DmEfsUnlinkRequest() : DmEfsPacket()
+DmEfsUnlinkRequest::DmEfsUnlinkRequest(PacketEndianess targetEndian) : DmEfsPacket(targetEndian)
 {
 	addField("path", kPacketFieldTypeVariant, 0);
 

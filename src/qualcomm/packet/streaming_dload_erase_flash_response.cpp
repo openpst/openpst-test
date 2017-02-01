@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-StreamingDloadEraseFlashResponse::StreamingDloadEraseFlashResponse() : StreamingDloadPacket()
+StreamingDloadEraseFlashResponse::StreamingDloadEraseFlashResponse(PacketEndianess targetEndian) : StreamingDloadPacket(targetEndian)
 {
 
 	setCommand(kStreamingDloadFlashErased);

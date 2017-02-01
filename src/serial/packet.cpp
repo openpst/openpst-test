@@ -9,6 +9,14 @@ Packet::Packet(size_t maxDataSize) : maxDataSize(maxDataSize)
 	}
 }
 
+Packet::Packet(PacketEndianess targetEndianess, size_t maxDataSize) : endianT(targetEndianess), maxDataSize(maxDataSize)
+{
+	if (maxDataSize > 0) {
+		data.reserve(maxDataSize);
+	}
+}
+
+
 Packet::~Packet(){
 	if (response != nullptr) {
 		delete response;
@@ -16,8 +24,8 @@ Packet::~Packet(){
 }
 
 void Packet::setTargetEndianess(PacketEndianess e) {
-	/*if (e != getHostEndianess()) {
-		// flip shorts and larger
+	/*if (e != endianT && e != getHostEndianess()) {
+		// flip shorts and larger but not arrays or dynamic sized data
 		for (auto &field : fieldMeta) {
 			if (field.type == kPacketFieldTypePrimitive && field.size > sizeof(uint8_t)) {
 				write(field, )
@@ -31,12 +39,11 @@ PacketEndianess Packet::getTargetEndianess() {
 	return endianT;
 }
 
-void Packet::setHostEndianess(PacketEndianess e) {
-	endianH = e;
-}
 
 PacketEndianess Packet::getHostEndianess() {
-	return endianH;
+	uint16_t test = 0x0102;
+	return reinterpret_cast<uint8_t*>(&test)[0] == 0x02 ? 
+		kPacketEndianessLittle : kPacketEndianessBig;
 }
 
 PacketTargetArch Packet::getTargetArch()

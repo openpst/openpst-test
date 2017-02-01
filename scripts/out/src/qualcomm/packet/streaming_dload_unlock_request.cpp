@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-StreamingDloadUnlockRequest::StreamingDloadUnlockRequest() : StreamingDloadPacket()
+StreamingDloadUnlockRequest::StreamingDloadUnlockRequest(PacketEndianess targetEndian) : StreamingDloadPacket(targetEndian)
 {
 	addField("code", kPacketFieldTypePrimitive, sizeof(uint64_t));
 

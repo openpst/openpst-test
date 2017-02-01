@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-SaharaSwitchModeRequest::SaharaSwitchModeRequest() : SaharaPacket()
+SaharaSwitchModeRequest::SaharaSwitchModeRequest(PacketEndianess targetEndian) : SaharaPacket(targetEndian)
 {
 	addField("mode", kPacketFieldTypePrimitive, sizeof(uint32_t));
 

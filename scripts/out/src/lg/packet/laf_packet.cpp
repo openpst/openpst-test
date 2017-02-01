@@ -12,7 +12,7 @@
 
 using namespace OpenPST::LG;
 
-LafPacket::LafPacket() : Packet()
+LafPacket::LafPacket(PacketEndianess targetEndian) : Packet(targetEndian)
 {
 	addField("command", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("arg0", kPacketFieldTypePrimitive, sizeof(uint32_t));

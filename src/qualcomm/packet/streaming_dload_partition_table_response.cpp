@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-StreamingDloadPartitionTableResponse::StreamingDloadPartitionTableResponse() : StreamingDloadPacket()
+StreamingDloadPartitionTableResponse::StreamingDloadPartitionTableResponse(PacketEndianess targetEndian) : StreamingDloadPacket(targetEndian)
 {
 	addField("status", kPacketFieldTypePrimitive, sizeof(uint8_t));
 

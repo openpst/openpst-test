@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-StreamingDloadPartitionTableRequest::StreamingDloadPartitionTableRequest() : StreamingDloadPacket()
+StreamingDloadPartitionTableRequest::StreamingDloadPartitionTableRequest(PacketEndianess targetEndian) : StreamingDloadPacket(targetEndian)
 {
 	addField("override_existing", kPacketFieldTypePrimitive, sizeof(uint8_t));
 	addField("data", kPacketFieldTypeArray, 512);

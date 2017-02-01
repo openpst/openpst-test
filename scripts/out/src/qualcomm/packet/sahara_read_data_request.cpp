@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-SaharaReadDataRequest::SaharaReadDataRequest() : SaharaPacket()
+SaharaReadDataRequest::SaharaReadDataRequest(PacketEndianess targetEndian) : SaharaPacket(targetEndian)
 {
 	addField("image_id", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("offset", kPacketFieldTypePrimitive, sizeof(uint32_t));

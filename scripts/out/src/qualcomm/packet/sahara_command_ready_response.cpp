@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-SaharaCommandReadyResponse::SaharaCommandReadyResponse() : SaharaPacket()
+SaharaCommandReadyResponse::SaharaCommandReadyResponse(PacketEndianess targetEndian) : SaharaPacket(targetEndian)
 {
 	addField("image_tx_status", kPacketFieldTypePrimitive, sizeof(uint32_t));
 

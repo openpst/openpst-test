@@ -12,7 +12,7 @@
 
 using namespace OpenPST::QC;
 
-SaharaEndImageTransferResponse::SaharaEndImageTransferResponse() : SaharaPacket()
+SaharaEndImageTransferResponse::SaharaEndImageTransferResponse(PacketEndianess targetEndian) : SaharaPacket(targetEndian)
 {
 	addField("image_id", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("status", kPacketFieldTypePrimitive, sizeof(uint32_t));

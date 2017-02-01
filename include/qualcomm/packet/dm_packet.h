@@ -18,7 +18,7 @@ namespace OpenPST {
                 /**
                 * @brief Constructor
                 */
-                DmPacket() : Packet(getMaxDataSize()) 
+                DmPacket(PacketEndianess targetEndian) : Packet(targetEndian, getMaxDataSize()) 
                 {
                    addField("command", kPacketFieldTypePrimitive, sizeof(uint8_t));
                 }
