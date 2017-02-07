@@ -23,7 +23,7 @@ namespace OpenPST {
                 /**
                 * @brief Constructor
                 */
-                StreamingDloadSecurityModeResponse(PacketEndianess targetEndian);
+                StreamingDloadSecurityModeResponse(PacketEndianess targetEndian = kPacketEndianessLittle);
                 
                 /**
                 * @brief Destructor

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "serial/packet.h"
+#include "transport/packet.h"
 #include "qualcomm/sahara.h"
 
 

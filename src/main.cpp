@@ -5,21 +5,21 @@
 //#include "serial/mock_serial_packet_writer.h"
 #include "serial/generic_serial.h"
 //#include "serial/mock_serial.h"
-#include "qualcomm/packet/streaming_dload_hello_request.h"
-#include "qualcomm/packet/streaming_dload_hello_response.h"
-#include "qualcomm/packet/streaming_dload_security_mode_request.h"
-#include "qualcomm/packet/streaming_dload_security_mode_response.h"
-#include "qualcomm/packet/streaming_dload_open_multi_image_request.h"
-#include "qualcomm/packet/streaming_dload_open_multi_image_response.h"
+//#include "qualcomm/packet/streaming_dload_hello_request.h"
+//#include "qualcomm/packet/streaming_dload_hello_response.h"
+//#include "qualcomm/packet/streaming_dload_security_mode_request.h"
+//#include "qualcomm/packet/streaming_dload_security_mode_response.h"
+//#include "qualcomm/packet/streaming_dload_open_multi_image_request.h"
+//#include "qualcomm/packet/streaming_dload_open_multi_image_response.h"
 #include "qualcomm/streaming_dload.h"
 #include "util/hexdump.h"
 #include <fstream>
 #include <stdint.h>
 
 using namespace OpenPST::Serial;
-using namespace OpenPST::QC;
+//using namespace OpenPST::QC;
 using OpenPST::Serial::SerialError;
-
+/*
 void hello(SerialPacketWriter& writer) {
 	StreamingDloadHelloRequest request;
 	
@@ -77,7 +77,7 @@ void open_multi(SerialPacketWriter& writer, uint8_t type)
 
 	std::cout << "Opened Multi Image 0x" << std::hex << type << std::endl;
 
-}
+}*/
 
 int main(int argc, char* argv[])
 {
@@ -87,15 +87,20 @@ int main(int argc, char* argv[])
 	}
 
 	try {
-		GenericSerial port(argv[1], 115200, 100);
+		GenericSerial port(argv[1], 1152000, 100);
 
-		std::cout << "[+] Connected to " << argv[1] << std::endl;
+		std::cout << "Baud: " << port.getBaudrate() << std::endl;
+		std::cout << "ByteSize: " << port.getBytesize() << std::endl;
+		std::cout << "Parity: " << port.getParity() << std::endl;
+		std::cout << "Stop Bits: " << port.getStopbits() << std::endl;
+		std::cout << "Flow: " << port.getFlowcontrol() << std::endl;
+		/*std::cout << "[+] Connected to " << argv[1] << std::endl;
 
 		SerialPacketWriter writer(port);
 		
 		hello(writer);
 		set_security_mode(writer, true);
-		open_multi(writer, kStreamingDloadOpenModeMultiGpp1);
+		open_multi(writer, kStreamingDloadOpenModeMultiGpp1);*/
 
 	}catch (const SerialError& e) {
 		std::cerr << e.what() << std::endl;

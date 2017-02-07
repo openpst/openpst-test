@@ -55,7 +55,7 @@ foreach ($packets as $group => $pkts) {
 		}continue;*/
 
 		$packet['file_name'] 				= to_lower_name($name);
-		$packet['extends_path'] 			= isset($pkts[$packet['extends']]) ? $pkts[$packet['extends']]['path'] : 'serial';
+		$packet['extends_path'] 			= isset($pkts[$packet['extends']]) ? $pkts[$packet['extends']]['path'] : 'transport';
 		$packet['extends_header_filename']	= to_lower_name($packet['extends']);
 		$packet['extends_class_namespace']	= $packet['extends_namespace'];
 		$packet['extends_class_name']		= $packet['extends'];

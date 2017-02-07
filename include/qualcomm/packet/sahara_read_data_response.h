@@ -10,9 +10,9 @@
 
 #pragma once
 
-#include "serial/packet.h"
+#include "transport/packet.h"
 
-using OpenPST::Serial::Packet;
+using OpenPST::Transport::Packet;
 
 namespace OpenPST {
     namespace QC {
@@ -23,7 +23,7 @@ namespace OpenPST {
                 /**
                 * @brief Constructor
                 */
-                SaharaReadDataResponse(PacketEndianess targetEndian);
+                SaharaReadDataResponse(PacketEndianess targetEndian = kPacketEndianessLittle);
                 
                 /**
                 * @brief Destructor

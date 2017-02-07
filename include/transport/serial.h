@@ -13,15 +13,16 @@ namespace OpenPST {
 		{
 			protected:
 				boost::asio::io_service   io;
-				boost::asio::serial_port  port;
-				boost::system::error_code lastError;
+				boost::asio::serial_port  port;				
+				boost::asio::deadline_timer timer;
 				std::string device;
-
 				// default options
-				int baudRate 	  = 115200;
+				int baudRate 	  = 1152000;
 				int timeout   	  = 0;
+
+				// 
 			public:
-				Serial(const std::string& device, int baudrate, int timeout);
+				Serial(const std::string& device, int baudRate = 1152000, int timeout = 10000);
 				~Serial();			
             private:                
                 Serial(const Serial&);
@@ -83,6 +84,12 @@ namespace OpenPST {
 				* @brief getTimeout
 				*/
 				int getTimeout();
+
+			private:
+				void onReadComplete(const boost::system::error_code& error, size_t received, size_t expected);
+				void onWriteComplete(const boost::system::error_code& error, size_t written, size_t expected);
+				void onTimeout();
+
 
 		};
 

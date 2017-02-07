@@ -10,10 +10,10 @@
 
 #pragma once
 
-#include "serial/packet.h"
+#include "transport/packet.h"
 #include "lg/packet/laf_packet.h"
 
-using OpenPST::Serial::Packet;
+using OpenPST::Transport::Packet;
 using OpenPST::LG::LafPacket;
 
 namespace OpenPST {
@@ -25,7 +25,7 @@ namespace OpenPST {
                 /**
                 * @brief Constructor
                 */
-                LafPacket(PacketEndianess targetEndian);
+                LafPacket(PacketEndianess targetEndian = kPacketEndianessLittle);
                 
                 /**
                 * @brief Destructor

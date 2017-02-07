@@ -1,10 +1,11 @@
 #pragma once
 
-#include "serial/packet.h"
+#include "transport/packet.h"
 #include "qualcomm/streaming_dload.h"
 #include "qualcomm/hdlc_encoder.h"
 
-using namespace OpenPST::Serial;
+using namespace OpenPST::Transport;
+using OpenPST::QC::HdlcEncoder;
 
 namespace OpenPST {
     namespace QC {
