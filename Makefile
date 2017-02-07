@@ -28,5 +28,14 @@ default:
 		./src/qualcomm/packet/streaming_dload_open_multi_image_request.cpp \
 		./src/qualcomm/packet/streaming_dload_open_multi_image_response.cpp \
 		./src/main.cpp -o build/test 
+serial:
+	if [ ! -d "./build" ]; then mkdir -p build;  fi
+	$(CXX) -I./include \
+		-I./include -std=gnu++11 $(CXX_FLAGS) \
+		-DBOOST_SYSTEM_NO_DEPRECATED \
+		./src/transport/serial.cpp \
+		./src/server/remote_socket_serial_server.cpp \
+		./src/main2.cpp -o build/serial -Bstatic -lboost_system
+
 clean:
 	rm -rf build/*
