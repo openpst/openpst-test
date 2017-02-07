@@ -72,6 +72,14 @@ void RemoteSocketSerialServerSession::handleRead(const boost::system::error_code
 		delete this;
 		return;
 	}
+
+	 // read from socket
+
+	// write read data to opened serial device
+
+	// read response from serial device
+
+	// write back to socket serial device response wrapped as RemoteSocketSerialServerResponse struct
 }
 
 void RemoteSocketSerialServerSession::handleWrite(size_t amount, const boost::system::error_code& error)
@@ -80,4 +88,9 @@ void RemoteSocketSerialServerSession::handleWrite(size_t amount, const boost::sy
 		delete this;
 		return;
 	}
+
+    socket.async_read_some(
+        boost::asio::buffer(data_, max_length),
+        boost::bind(&session::handle_read, this, boost::asio::placeholders::error, boost::asio::placeholders::bytes_transferred)
+    );
 }
