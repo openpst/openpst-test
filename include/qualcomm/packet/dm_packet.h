@@ -1,10 +1,10 @@
 #pragma once
 
-#include "serial/packet.h"
+#include "transport/packet.h"
 #include "qualcomm/dm.h"
 #include "qualcomm/hdlc_encoder.h"
 
-using namespace OpenPST::Serial;
+using namespace OpenPST::Transport;
 
 namespace OpenPST {
     namespace QC {
@@ -38,12 +38,24 @@ namespace OpenPST {
 
                 void setCommand(uint8_t command)
                 {
-                    write<uint8_t>(command, getFieldOffset("command"));
+                    write<uint8_t>("command", command);
                 }
 
                 uint8_t getCommand()
                 {
-                    return read<uint8_t>(getFieldOffset("command")); 
+                    return read<uint8_t>(getFieldOffset("command"));
+                }
+                
+                void unpack(std::vector<uint8_t>& resp) override {
+                    if (!resp.size()) {
+                        throw PacketError("No data to unpack");
+                    }
+
+                    encoder.decode(resp);
+
+                    if (resp[0] != getCommand()) {
+                        throw PacketError("Unexpected Response");
+                    }
                 }
 
                 void prepare() override {

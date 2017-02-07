@@ -2,6 +2,7 @@
 #ifdef SERIAL_PACKET_WRITER_DEBUG
 #include "util/hexdump.h"
 #endif
+#include "util/sleep.h"
 
 using namespace OpenPST::Transport;
 
@@ -53,6 +54,8 @@ void SerialPacketWriter::write(Packet* packet)
 		if (response == nullptr) {
 			throw SerialPacketWriterError("Response packet has not been allocated");
 		}
+		
+		sleep(10000);
 
 #ifdef SERIAL_PACKET_WRITER_DEBUG
 		std::cout << "Attempting to read " << response->getMaxDataSize() << " bytes" << std::endl;

@@ -1141,15 +1141,15 @@ $packets['qcdm'] = [
 		'extends' => 'DmPacket',
 		'extends_namespace' => 'OpenPST::QC',
 		'source'  => 'local',
-		'expects_response' => '',
+		'expects_response' => 'DmSpcResponse',
 		'unpack_base' => true,
 		'fields'  => [
 			'spc' => [ 
 				'type' => FIELD_TYPE_UARRAY,
 				'size' => $fieldSizes[FIELD_TYPE_UINT8] * 6,
 				'size_const' => 'DIAG_SPC_LENGTH',
-				'allowed_setters' => ['raw','string'],
-				'allowed_getters' => ['vector','string'],
+				'allowed_setters' => ['raw'],
+				'allowed_getters' => ['vector'],
 			],
 		]
 	],

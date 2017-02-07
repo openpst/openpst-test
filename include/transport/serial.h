@@ -9,18 +9,30 @@
 
 namespace OpenPST {
 	namespace Transport {
+		
+		enum SerialReadState {
+			kSerialReadStateIdle,
+			kSerialReadStateWorking,
+			kSerialReadStateComplete,
+			kSerialReadStateError,
+			kSerialReadStateTimeout
+		};
+
 		class Serial
 		{
 			protected:
-				boost::asio::io_service   io;
-				boost::asio::serial_port  port;				
-				boost::asio::deadline_timer timer;
-				std::string device;
 				// default options
+				std::string device;
 				int baudRate 	  = 1152000;
-				int timeout   	  = 0;
+				int timeout   	  = 10000;
 
-				// 
+				boost::asio::io_service     io;
+				boost::asio::serial_port    port;				
+				boost::asio::deadline_timer timer;
+				boost::system::error_code   readError;
+				SerialReadState readState = kSerialReadStateIdle;
+				size_t lastRx = 0;
+
 			public:
 				Serial(const std::string& device, int baudRate = 1152000, int timeout = 10000);
 				~Serial();			
@@ -85,12 +97,14 @@ namespace OpenPST {
 				*/
 				int getTimeout();
 
+				//void setMaxResponseSize(size_t size);
+
+				//size_t getMaxResponseSize();
+
 			private:
-				void onReadComplete(const boost::system::error_code& error, size_t received, size_t expected);
-				void onWriteComplete(const boost::system::error_code& error, size_t written, size_t expected);
-				void onTimeout();
-
-
+				//void doRead(const boost::system::error_code& error, size_t received);
+				void onReadComplete(const boost::system::error_code& error, size_t received, std::vector<uint8_t>& in, size_t amount);
+				void onTimeout(const boost::system::error_code& error);
 		};
 
         /**

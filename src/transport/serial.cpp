@@ -44,10 +44,10 @@ void Serial::open()
 		}
 
 		port.set_option(boost::asio::serial_port_base::baud_rate(baudRate));
-		//port.set_option(boost::asio::serial_port_base::character_size(8));
-		//port.set_option(boost::asio::serial_port_base::stop_bits(boost::asio::serial_port_base::stop_bits::one));
-		//port.set_option(boost::asio::serial_port_base::parity(boost::asio::serial_port_base::parity::none));
-		//port.set_option(boost::asio::serial_port_base::flow_control(boost::asio::serial_port_base::flow_control::none));
+		port.set_option(boost::asio::serial_port_base::character_size(8));
+		port.set_option(boost::asio::serial_port_base::stop_bits(boost::asio::serial_port_base::stop_bits::one));
+		port.set_option(boost::asio::serial_port_base::parity(boost::asio::serial_port_base::parity::none));
+		port.set_option(boost::asio::serial_port_base::flow_control(boost::asio::serial_port_base::flow_control::none));
 	}
 }
 
@@ -78,60 +78,96 @@ size_t Serial::write(std::vector<uint8_t>& out)
 
 size_t Serial::read(std::vector<uint8_t>& in, size_t amount)
 {
-	uint8_t* test = new uint8_t[amount];
 
-	port.async_read_some(
-		boost::asio::buffer(test, amount), 
+	port.async_read_some( 
+		boost::asio::buffer(in, amount), 
 		boost::bind(
 			&Serial::onReadComplete, 
 			this, 
 			boost::asio::placeholders::error, 
 			boost::asio::placeholders::bytes_transferred,
+			in,
 			amount
 		)
 	);
 	
-	timer.expires_from_now(boost::posix_time::seconds(getTimeout()));
-    timer.async_wait(
-    	boost::bind(
-        	&Serial::onTimeout, 
-        	this
-        )
-    );
+	timer.expires_from_now(boost::posix_time::milliseconds(getTimeout()));
+    timer.async_wait(boost::bind(&Serial::onTimeout, this, boost::asio::placeholders::error));
 
-    io.run();
+    readState = kSerialReadStateWorking;
 
-    delete[] test;
+    while(true) {
+    	io.run_one();
+
+    	if (readState == kSerialReadStateComplete) {
+    		timer.cancel();
+    		std::cout << "Read " << lastRx << std::endl;
+    		break;
+    	} else if (readState == kSerialReadStateError) {
+    		timer.cancel();
+    		port.cancel();
+    		throw SerialError(readError.message());
+    	} else if (readState == kSerialReadStateTimeout) {
+    		port.cancel();
+    		break;
+    	}
+    }
+
+    readState = kSerialReadStateIdle;
+
+    return in.size();
 }
 
-void Serial::onReadComplete(const boost::system::error_code& error, size_t received, size_t expected)
+/*
+void Serial::doRead(const boost::system::error_code& error, size_t received)
 {
-#ifdef SERIAL_DEBUG
-	std::cout << __FUNCTION__ << " Read " << received << std::endl;
-#endif
+	port.async_read_some(
+		asio::buffer(readBuffer, readBuffer.size()),
+    	boost::bind(&AsyncSerial::readEnd, this, asio::placeholders::error, asio::placeholders::bytes_transferred)
+    );
+}*/
 
-	if (error || !received) {
-#ifdef SERIAL_DEBUG
-		std::cout << __FUNCTION__ << " Error! " << std::endl;
-#endif
+void Serial::onReadComplete(const boost::system::error_code& error, size_t received, std::vector<uint8_t>& in, size_t amount)
+{
+	
+	if (error) {
+		std::cout << __FUNCTION__ << " ERROR " << error.message() << std::endl;
+		readState = kSerialReadStateError;
+		readError = error;
 		return;
-		//lastError = error;
-	} else if (received == 0) {
-
 	}
 
-	timer.cancel();
+	if (received) {
+		std::cout << "Received: " << received << std::endl;
+		lastRx    = received;
+		readState = kSerialReadStateComplete;
+		return;
+	}
+
+	port.async_read_some( 
+		boost::asio::buffer(in, amount), 
+		boost::bind(
+			&Serial::onReadComplete, 
+			this, 
+			boost::asio::placeholders::error, 
+			boost::asio::placeholders::bytes_transferred,
+			in,
+			amount
+		)
+	);	
 }
 
-void Serial::onWriteComplete(const boost::system::error_code& error, size_t written, size_t expected)
-{
 
-}
-
-void Serial::onTimeout()
+void Serial::onTimeout(const boost::system::error_code& error)
 {
-	std::cout << "TIMED OUT" << std::endl;
-	port.cancel();
+	if (error) {
+		std::cout << __FUNCTION__ << " ERROR " << error.message() << std::endl;
+		readState = kSerialReadStateError;
+		readError = error;
+		return;
+	}
+
+	readState = kSerialReadStateTimeout;
 }
 
 void Serial::setDevice(const std::string& device)
@@ -171,3 +207,13 @@ int Serial::getTimeout()
 {
 	return this->timeout;
 }
+/*
+void setMaxResponseSize(size_t size)
+{
+	readBuffer.resize(size);
+}
+
+size_t getMaxResponseSize()
+{
+	return readBuffer.size();
+}*/

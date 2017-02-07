@@ -36,9 +36,12 @@ serial:
 		-DSERIAL_DEBUG \
 		./../libopenpst/src/qualcomm/hdlc_encoder.cpp \
 		./../libopenpst/src/util/hexdump.cpp \
+		./../libopenpst/src/util/sleep.cpp \
 		./src/transport/packet.cpp \
 		./src/transport/serial.cpp \
 		./src/transport/serial_packet_writer.cpp \
+		./src/qualcomm/packet/dm_spc_request.cpp \
+		./src/qualcomm/packet/dm_spc_response.cpp \
 		./src/qualcomm/packet/streaming_dload_hello_request.cpp \
 		./src/qualcomm/packet/streaming_dload_hello_response.cpp \
 		./src/main2.cpp -o build/serial -Bstatic -lboost_system

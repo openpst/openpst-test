@@ -11,8 +11,10 @@
 #pragma once
 
 #include "qualcomm/packet/dm_packet.h"
+#include "qualcomm/packet/dm_spc_response.h"
 
 using OpenPST::QC::DmPacket;
+using OpenPST::QC::DmSpcResponse;
 
 namespace OpenPST {
     namespace QC {
@@ -35,11 +37,6 @@ namespace OpenPST {
                 * @return uint8_t[]
                 */
                 std::vector<uint8_t> getSpc();
-                /**
-                * @brief Get spc
-                * @return std::string
-                */
-                std::string getSpc();
                 
                 /**
                 * @brief Set spc
@@ -48,16 +45,15 @@ namespace OpenPST {
                 * @return void
                 */
                 void setSpc(uint8_t* data, size_t size);
-                /**
-                * @brief Set spc
-                * @param const std::string& spc
-                * @return void
-                */
-                void setSpc(const std::string& spc);
 				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data) override;
+
+				/**
+				* @overload Packet::prepareResponse
+				*/
+				void prepareResponse() override;
 
         };
     }

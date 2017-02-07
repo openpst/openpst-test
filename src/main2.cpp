@@ -2,6 +2,8 @@
 #include "transport/serial_packet_writer.h"
 #include "qualcomm/packet/streaming_dload_hello_request.h"
 #include "qualcomm/packet/streaming_dload_hello_response.h"
+#include "qualcomm/packet/dm_spc_request.h"
+#include "qualcomm/packet/dm_spc_response.h"
 #include <iostream>
 
 using OpenPST::Transport::Serial;
@@ -10,9 +12,39 @@ using OpenPST::Transport::SerialError;
 using OpenPST::Transport::PacketError;
 using OpenPST::QC::StreamingDloadHelloRequest;
 using OpenPST::QC::StreamingDloadHelloResponse;
+using OpenPST::QC::DmSpcRequest;
+using OpenPST::QC::DmSpcResponse;
 
-int main(int argc, char* argv[])
-{
+int main3(int argc, char* argv[]) {
+	if (argc < 2) {
+		std::cout << "Provide device as argument" << std::endl;
+		return 1;
+	}
+	try {
+		Serial port("");
+		SerialPacketWriter writer(port);
+
+		port.setDevice(argv[1]);
+		port.open();
+
+		DmSpcRequest request;
+	
+		writer.write(&request);
+		
+		auto response = reinterpret_cast<StreamingDloadHelloResponse*>(request.getResponse());
+		
+		
+
+	} catch (SerialError& e) {
+		std::cout << e.what() << std::endl;
+	} catch (PacketError& e) {
+		std::cout << e.what() << std::endl;
+	}
+
+	return 0;
+}
+
+int main2(int argc, char* argv[]) {
 	if (argc < 2) {
 		std::cout << "Provide device as argument" << std::endl;
 		return 1;
@@ -66,5 +98,13 @@ std::cout << port.getBaudRate() << std::endl;
 		std::cout << e.what() << std::endl;
 	}
 
+	return 0;
+
+}
+
+int main(int argc, char* argv[])
+{
+	//return main2(argc, argv);
+	return main3(argc, argv);
 	return 0;
 }
