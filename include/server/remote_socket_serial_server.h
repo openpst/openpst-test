@@ -9,6 +9,26 @@ using OpenPST::Transport::Serial;
 
 namespace OpenPST {
 	namespace Server {
+
+		/**
+		* @brief RemoteSocketSerialServerRequest
+		*/
+		struct RemoteSocketSerialServerRequest {
+			uint8_t data[0];
+		};
+
+		/**
+		* @brief RemoteSocketSerialServerResponse
+		*/
+		struct RemoteSocketSerialServerResponse {
+			int status;
+			size_t amount;
+			uint8_t data[0];
+		};
+
+		/**
+		* @brief RemoteSocketSerialServer
+		*/
 		class RemoteSocketSerialServer
 		{
 			protected:
@@ -25,7 +45,10 @@ namespace OpenPST {
 				void start();
 				void accept(RemoteSocketSerialServerSession* session, const boost::system::error_code& error);  			
 		};
-
+		
+		/**
+		* @brief RemoteSocketSerialServerSession
+		*/
 		class RemoteSocketSerialServerSession
 		{
 			protected:
