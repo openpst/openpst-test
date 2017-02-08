@@ -32,8 +32,12 @@ serial:
 		-std=gnu++11 $(CXX_FLAGS) \
 		-DNO_POD_PACKET_STRUCTURES \
 		-DBOOST_SYSTEM_NO_DEPRECATED \
-		-DSERIAL_PACKET_WRITER_DEBUG \
+		-DWITHOUT_SERIAL_PACKET_WRITER_DEBUG \
+		-DWITHOUT_SERIAL_PACKET_WRITER_DEBUG_RX \
+		-DWITHOUT_SERIAL_PACKET_WRITER_DEBUG_TX \
 		-DSERIAL_DEBUG \
+		-DSERIAL_DEBUG_TX \
+		-DSERIAL_DEBUG_RX \
 		./../libopenpst/src/qualcomm/hdlc_encoder.cpp \
 		./../libopenpst/src/util/hexdump.cpp \
 		./../libopenpst/src/util/sleep.cpp \

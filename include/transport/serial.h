@@ -7,6 +7,13 @@
 #include <boost/bind.hpp>
 //#include <boost/thread.hpp>
 
+using boost::asio::serial_port_base;
+using boost::asio::io_service;
+using boost::asio::serial_port;
+using boost::asio::deadline_timer;
+using boost::system::error_code;
+using boost::posix_time::time_duration;
+
 namespace OpenPST {
 	namespace Transport {
 		
@@ -21,20 +28,26 @@ namespace OpenPST {
 		class Serial
 		{
 			protected:
-				// default options
+				io_service     io;
+				serial_port    port;				
+				deadline_timer timer;
+				error_code     lastError;
+				size_t received = 0;
 				std::string device;
-				int baudRate 	  = 1152000;
-				int timeout   	  = 10000;
-
-				boost::asio::io_service     io;
-				boost::asio::serial_port    port;				
-				boost::asio::deadline_timer timer;
-				boost::system::error_code   readError;
-				SerialReadState readState = kSerialReadStateIdle;
-				size_t lastRx = 0;
-
+				int timeout;
+				std::vector<uint8_t> rxbuff;
+				bool timedOut = false;
 			public:
-				Serial(const std::string& device, int baudRate = 1152000, int timeout = 10000);
+				Serial(
+					const std::string& device,
+					unsigned int baud = 115200,
+					int timeout = 1000,
+					serial_port_base::parity parity = serial_port_base::parity(serial_port_base::parity::none),
+        			serial_port_base::character_size csize = serial_port_base::character_size(8),
+        			serial_port_base::flow_control flow = serial_port_base::flow_control(serial_port_base::flow_control::none),
+        			serial_port_base::stop_bits stop = serial_port_base::stop_bits(serial_port_base::stop_bits::one)
+        		);
+
 				~Serial();			
             private:                
                 Serial(const Serial&);
@@ -48,7 +61,13 @@ namespace OpenPST {
 				/**
 				* @brief open
 				*/
-				void open();
+				void open(const std::string& device,
+					unsigned int baud = 115200,
+					serial_port_base::parity parity = serial_port_base::parity(serial_port_base::parity::none),
+        			serial_port_base::character_size csize = serial_port_base::character_size(8),
+        			serial_port_base::flow_control flow = serial_port_base::flow_control(serial_port_base::flow_control::none),
+        			serial_port_base::stop_bits stop = serial_port_base::stop_bits(serial_port_base::stop_bits::one)
+        		);
 
 				/**
 				* @brief close
@@ -59,33 +78,16 @@ namespace OpenPST {
 				* @brief write
 				*/
 				size_t write(std::vector<uint8_t>& out);
-				//size_t writeAsync(std::vector<uint8_t>& out);
 
 				/**
 				* @brief read
 				*/
 				size_t read(std::vector<uint8_t>& in, size_t size);
-				//size_t readAsync(std::vector<uint8_t>& in, size_t size);
-
-				/**
-				* @brief setDevice
-				*/
-				void setDevice(const std::string& device);
 
 				/**
 				* @brief getDevice
 				*/
 				const std::string& getDevice();
-
-				/**
-				* @brief setBaudRate
-				*/
-				void setBaudRate(int baudRate);
-
-				/**
-				* @brief getBaudRate
-				*/
-				int getBaudRate();
 
 				/**
 				* @brief setTimeout
@@ -97,13 +99,9 @@ namespace OpenPST {
 				*/
 				int getTimeout();
 
-				//void setMaxResponseSize(size_t size);
-
-				//size_t getMaxResponseSize();
-
 			private:
-				//void doRead(const boost::system::error_code& error, size_t received);
-				void onReadComplete(const boost::system::error_code& error, size_t received, std::vector<uint8_t>& in, size_t amount);
+				void doAsyncRead(size_t amount);
+				void onReadComplete(const boost::system::error_code& error, size_t received, size_t requested);
 				void onTimeout(const boost::system::error_code& error);
 		};
 

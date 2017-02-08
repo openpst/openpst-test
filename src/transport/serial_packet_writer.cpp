@@ -26,18 +26,13 @@ Serial& SerialPacketWriter::getPort()
 void SerialPacketWriter::write(Packet* packet)
 {
 	if (!port.isOpen()) {
-		try {
-			port.open();
 
-		} catch(...) {
-			// throw
-		}
 	}
 
 	packet->prepare();
 
-#ifdef SERIAL_PACKET_WRITER_DEBUG
-	std::cout << "Attempting to write " << packet->size() << " bytes" << std::endl;
+#ifdef SERIAL_PACKET_WRITER_DEBUG_TX
+	std::cout << "[SerialPacketWriter] Attempting to write " << packet->size() << " bytes" << std::endl;
 	hexdump((uint8_t*)&packet->getData()[0], packet->size());
 #endif
 
@@ -55,15 +50,15 @@ void SerialPacketWriter::write(Packet* packet)
 			throw SerialPacketWriterError("Response packet has not been allocated");
 		}
 		
-		sleep(10000);
+		//sleep(10000);
 
 #ifdef SERIAL_PACKET_WRITER_DEBUG
-		std::cout << "Attempting to read " << response->getMaxDataSize() << " bytes" << std::endl;
+		std::cout << __PRETTY_FUNCTION__ << std::endl << "Attempting to read " << response->getMaxDataSize() << " bytes" << std::endl;
 #endif
 		port.read(rbuffer, response->getMaxDataSize());
 	
 #ifdef SERIAL_PACKET_WRITER_DEBUG
-		std::cout << "Read " << rbuffer.size() << " bytes" << std::endl;
+		std::cout << __PRETTY_FUNCTION__ << std::endl << "Read " << rbuffer.size() << " bytes" << std::endl;
 
 		hexdump((uint8_t*)&rbuffer[0], rbuffer.size());
 
@@ -79,11 +74,7 @@ void SerialPacketWriter::read(Packet* packet)
 {
 
 	if (!port.isOpen()) {
-		try {
-			port.open();
-		} catch(...) {
-			// throw
-		}
+		
 	}
 
 	std::vector<uint8_t> rbuffer;

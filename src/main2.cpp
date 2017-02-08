@@ -21,11 +21,12 @@ int main3(int argc, char* argv[]) {
 		return 1;
 	}
 	try {
-		Serial port("");
+		Serial port(argv[1]);
 		SerialPacketWriter writer(port);
 
-		port.setDevice(argv[1]);
-		port.open();
+		if (port.isOpen()) {
+			std::cout << "Opened " << port.getDevice() << std::endl;
+		}
 
 		DmSpcRequest request;
 	
@@ -49,17 +50,30 @@ int main2(int argc, char* argv[]) {
 		std::cout << "Provide device as argument" << std::endl;
 		return 1;
 	}
+	
+
 
 	try {
-		Serial port("", 1152000, 10);
+		Serial port(argv[1]);
 		SerialPacketWriter writer(port);
 
-		port.setDevice(argv[1]);
-		port.open();
-std::cout << port.getBaudRate() << std::endl;
+		if (port.isOpen()) {
+			std::cout << "Opened " << port.getDevice() << std::endl;
+		}
 
-		StreamingDloadHelloRequest request;
-	
+		for (int i = 0; i < 5; i++) {
+			StreamingDloadHelloRequest request;
+			writer.write(&request);
+		}
+
+		std::vector<uint8_t> test;
+
+		std::cout << "Try:" << std::endl;
+		port.read(test, 1);
+		std::cout << "Try:" << std::endl;
+		port.read(test, 1);
+
+	/*
 		writer.write(&request);
 		
 		auto response = reinterpret_cast<StreamingDloadHelloResponse*>(request.getResponse());
@@ -91,7 +105,7 @@ std::cout << port.getBaudRate() << std::endl;
 		if (response->getFeatureBits() & STREAMING_DLOAD_FEATURE_BIT_SECTOR_ADDRESSES) {
 			std::cout << "[!] Device features sector addresses" << std::endl;
 		}
-
+*/
 	} catch (SerialError& e) {
 		std::cout << e.what() << std::endl;
 	} catch (PacketError& e) {
@@ -104,7 +118,7 @@ std::cout << port.getBaudRate() << std::endl;
 
 int main(int argc, char* argv[])
 {
-	//return main2(argc, argv);
-	return main3(argc, argv);
+	return main2(argc, argv);
+	//return main3(argc, argv);
 	return 0;
 }
