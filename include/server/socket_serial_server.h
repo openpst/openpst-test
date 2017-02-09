@@ -36,45 +36,46 @@ namespace OpenPST {
 	namespace Server {
 
 		/**
-		* @brief RemoteSocketSerialServerRequest
+		* @brief SocketSerialServerRequest
 		*/
-		struct RemoteSocketSerialServerRequest {
+		struct SocketSerialServerRequest {
+			size_t  size;
 			uint8_t data[0];
 		};
 
 		/**
-		* @brief RemoteSocketSerialServerResponse
+		* @brief SocketSerialServerResponse
 		*/
-		struct RemoteSocketSerialServerResponse {
-			int status;
-			size_t amount;
+		struct SocketSerialServerResponse {
+			int  	status;
+			size_t  size;
 			uint8_t data[0];
 		};
 
 		/**
-		* @brief RemoteSocketSerialServer
+		* @brief SocketSerialServer
 		*/
-		class RemoteSocketSerialServer
+		class SocketSerialServer
 		{
 			protected:
 				boost::asio::io_service io;
 				boost::asio::ip::tcp::acceptor acceptor;
-				Serial serial;
+				Serial& serial;
 			public:
-				RemoteSocketSerialServer(int port, const std::string& device, int baudrate, int timeout);
-				~RemoteSocketSerialServer();
-
+				SocketSerialServer(Serial& port);
+				~SocketSerialServer();
+				void start(const std::string hostname, int port);
+				void stop();
 			private:                          
-                RemoteSocketSerialServer(const RemoteSocketSerialServer&);
-                RemoteSocketSerialServer &operator=(const RemoteSocketSerialServer &p); 
-				void start();
-				void accept(RemoteSocketSerialServerSession* session, const boost::system::error_code& error);  			
+                SocketSerialServer(const SocketSerialServer&);
+                SocketSerialServer &operator=(const SocketSerialServer &p); 
+				void onAccept(SocketSerialServerSession* session, const boost::system::error_code& error);  			
 		};
 		
 		/**
-		* @brief RemoteSocketSerialServerSession
+		* @brief SocketSerialServerSession
 		*/
-		class RemoteSocketSerialServerSession
+		class SocketSerialServerSession
 		{
 			protected:
 				boost::asio::ip::tcp::socket socket;
@@ -82,13 +83,13 @@ namespace OpenPST {
 				std::vector<uint8_t> writeBuffer;
 				Serial serial;
 			public:
-				RemoteSocketSerialServerSession(boost::asio::io_service& io, Serial& serial);
-				~RemoteSocketSerialServerSession();
+				SocketSerialServerSession(boost::asio::io_service& io, Serial& serial);
+				~SocketSerialServerSession();
 				boost::asio::ip::tcp::socket& getSocket();
 				void start();
             private:                
-                RemoteSocketSerialServerSession(const RemoteSocketSerialServerSession&);
-                RemoteSocketSerialServerSession &operator=(const RemoteSocketSerialServerSession &p); 
+                SocketSerialServerSession(const SocketSerialServerSession&);
+                SocketSerialServerSession &operator=(const SocketSerialServerSession &p); 
 				void handleRead(const boost::system::error_code& error, size_t amount);
 				void handleWrite(size_t amount, const boost::system::error_code& error);
 		};

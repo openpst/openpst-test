@@ -24,32 +24,39 @@
 * @author Gassan Idriss <ghassani@gmail.com>
 */
 
-#include "server/remote_socket_serial_server.h"
+#include "server/socket_serial_server.h"
 
 using namespace OpenPST::Server;
 
 /**
-* RemoteSocketSerialServer
+* SocketSerialServer
 */
-RemoteSocketSerialServer::RemoteSocketSerialServer(int port, const std::string& device, int baudRate, int timeout) : 
-	acceptor(io, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), port)),,
-	serial(device, baudRate, timeout)
+SocketSerialServer::SocketSerialServer(Serial& port) : 
+    io(),
+    acceptor(io),
+	port(port)
 {
 
 }
 
-RemoteSocketSerialServer::~RemoteSocketSerialServer()
+SocketSerialServer::~SocketSerialServer()
 {
 
 }
 
-void RemoteSocketSerialServer::start()
+void SocketSerialServer::start(const std::string listenHost, int listenPort)
 {
-	RemoteSocketSerialServerSession* session = new RemoteSocketSerialServerSession(io);
-	acceptor.async_accept(session->getSocket(), boost::bind(&RemoteSocketSerialServer::accept, this, session, boost::asio::placeholders::error));
+	SocketSerialServerSession* session = new SocketSerialServerSession(io);
+	
+    acceptor.async_accept(session->getSocket(), boost::bind(&SocketSerialServer::accept, this, session, boost::asio::placeholders::error));
 }
 
-void RemoteSocketSerialServer::accept(RemoteSocketSerialServerSession* session, const boost::system::error_code& error)
+void SocketSerialServer::stop()
+{
+
+}
+
+void SocketSerialServer::onAccept(SocketSerialServerSession* session, const boost::system::error_code& error)
 {
     if (!error) {
     	session->start();
@@ -61,30 +68,29 @@ void RemoteSocketSerialServer::accept(RemoteSocketSerialServerSession* session, 
 }
 
 /**
-* RemoteSocketSerialServerSession
-*/
-RemoteSocketSerialServerSession::RemoteSocketSerialServerSession(boost::asio::io_service& io, Serial& serial) : socket(io), serial(serial)
+
+SocketSerialServerSession::SocketSerialServerSession(boost::asio::io_service& io, Serial& serial) : socket(io), serial(serial)
 {
 
 }
 
-RemoteSocketSerialServerSession::~RemoteSocketSerialServerSession()
+SocketSerialServerSession::~SocketSerialServerSession()
 {
 
 }
 
-boost::asio::ip::tcp::socket& RemoteSocketSerialServerSession::getSocket()
+boost::asio::ip::tcp::socket& SocketSerialServerSession::getSocket()
 {
 	return socket;
 }
 
-void RemoteSocketSerialServerSession::start()
+void SocketSerialServerSession::start()
 {
     socket.async_read_some(
         //boost::asio::buffer(buffer, max_length),
         boost::asio::buffer(buffer),
         boost::bind(
-            &RemoteSocketSerialServerSession::handleRead,
+            &SocketSerialServerSession::handleRead,
             this,
             boost::asio::placeholders::error,
             boost::asio::placeholders::bytes_transferred
@@ -92,7 +98,7 @@ void RemoteSocketSerialServerSession::start()
     );
 }
 
-void RemoteSocketSerialServerSession::handleRead(const boost::system::error_code& error, size_t amount)
+void SocketSerialServerSession::handleRead(const boost::system::error_code& error, size_t amount)
 {
 	if (error) {
 		delete this;
@@ -105,10 +111,10 @@ void RemoteSocketSerialServerSession::handleRead(const boost::system::error_code
 
 	// read response from serial device
 
-	// write back to socket serial device response wrapped as RemoteSocketSerialServerResponse struct
+	// write back to socket serial device response wrapped as SocketSerialServerResponse struct
 }
 
-void RemoteSocketSerialServerSession::handleWrite(size_t amount, const boost::system::error_code& error)
+void SocketSerialServerSession::handleWrite(size_t amount, const boost::system::error_code& error)
 {
 	if (error) {
 		delete this;
@@ -120,3 +126,4 @@ void RemoteSocketSerialServerSession::handleWrite(size_t amount, const boost::sy
         boost::bind(&session::handle_read, this, boost::asio::placeholders::error, boost::asio::placeholders::bytes_transferred)
     );
 }
+*/

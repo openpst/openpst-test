@@ -27,21 +27,25 @@
 #pragma once
 
 #include <boost/asio.hpp>
+#include <boost/bind.hpp>
+#include <boost/thread.hpp>
+#include <boost/smart_ptr.hpp>
+#include <iostream>
+#include <vector>
 
 namespace OpenPST {
 	namespace Transport {
 		class SocketClient
 		{
 			protected:
-				std::string host;
-				int port;
-				boost::asio::io_service io;
-				//address address;
-				boost::asio::ip::tcp::endpoint endpoint;
-				boost::asio::ip::tcp::socket socket;
-				boost::asio::deadline_timer timer;
-				boost::asio::deadline_timer heartbeat;
-				bool connected = false;
+				boost::asio::io_service 		 io;
+				boost::asio::ip::tcp::endpoint 	 endpoint;
+				boost::asio::ip::tcp::socket   	 socket;
+				boost::asio::deadline_timer    	 timer;
+				boost::asio::deadline_timer    	 heartbeat;
+				boost::scoped_ptr<boost::thread> thread;
+				std::vector<uint8_t> 			 rxbuffer;
+				bool 							 idle;
 			public:
 				SocketClient();
 				SocketClient(const std::string& host, int port);				
@@ -56,6 +60,11 @@ namespace OpenPST {
 				*/
 				void connect(const std::string& host, int port);
 				
+				/**
+				* @brief connected
+				*/
+				bool connected();
+
 				/*
 				* @brief disconnect
 				*/
@@ -70,21 +79,36 @@ namespace OpenPST {
 				* @brief read
 				*/
 				size_t read(std::vector<uint8_t>& in, size_t amount);
+
 			private:
+				/*
+				* @brief write
+				*/
+				void asyncWrite();
+				
+				/*
+				* @brief read
+				*/
+				void asyncRead();
+
 				/*
 				* @brief onConnect
 				*/
-				void onConnect(const boost::system::error_code& ec);
+				void onConnect(const boost::system::error_code& error);
 				
+				/*
+				* @brief onConnectionTimeout
+				*/
+				void onConnectionTimeout();
 				/*
 				* @brief onReceive
 				*/
-				void onReceive(const boost::system::error_code& ec);
+				void onReceive(const boost::system::error_code& error);
 				
 				/*
 				* @brief onSend
 				*/
-				void onSend(const boost::system::error_code& ec);
+				void onSend(const boost::system::error_code& error);
 		};
 
         /**
