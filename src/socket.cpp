@@ -8,7 +8,7 @@ int main(int argc, char* argv[])
 {
 	try {
 		SocketClient socket;
-		socket.connect("localhost", 5037);
+		socket.connect("localhost", 613);
 		
 		usleep(1000000 * 60);
 

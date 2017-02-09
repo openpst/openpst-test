@@ -28,7 +28,6 @@
 #ifdef SERIAL_PACKET_WRITER_DEBUG
 #include "util/hexdump.h"
 #endif
-#include "util/sleep.h"
 
 using namespace OpenPST::Transport;
 

@@ -97,7 +97,7 @@ void SocketClient::disconnect()
 	timer.cancel();
 	heartbeat.cancel();
 	io.stop();
-	thread->join();
+	//thread->join();
 	io.reset();
 	thread.reset();
 }

@@ -61,8 +61,24 @@ socket:
 		-DSERIAL_DEBUG_RX \
 		./../libopenpst/src/util/hexdump.cpp \
 		./src/transport/packet.cpp \
+		./src/transport/socket_client.cpp \
+		./src/socket.cpp -o build/socket -Bstatic -lpthread -lboost_system -lboost_thread
+
+server:
+	if [ ! -d "./build" ]; then mkdir -p build;  fi
+	$(CXX) -I./include \
+		-I./../libopenpst/include \
+		-I./src \
+		-std=gnu++11 $(CXX_FLAGS) \
+		-DNO_POD_PACKET_STRUCTURES \
+		-DBOOST_SYSTEM_NO_DEPRECATED \
+		-DSERIAL_DEBUG \
+		-DSERIAL_DEBUG_TX \
+		-DSERIAL_DEBUG_RX \
+		./../libopenpst/src/util/hexdump.cpp \
+		./src/transport/packet.cpp \
 		./src/transport/serial.cpp \
-		./src/server/socket_serial_server.cpp \
+		./src/server/tcp_serial_server.cpp \
 		./src/server.cpp -o build/server -Bstatic -lpthread -lboost_system -lboost_thread
 
 clean:
