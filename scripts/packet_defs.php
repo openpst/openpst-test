@@ -2454,3 +2454,13 @@ $packets['laf'] = [
 		]
 	],
 ];
+
+/**
+* ADB Packet Definitions
+*/
+$packets['dload'] = [
+	'AdbPacket' => [
+		'skip' => true,
+		'path' => 'android/packet'
+	],
+];

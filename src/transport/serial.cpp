@@ -1,3 +1,29 @@
+/**
+*
+* (c) Gassan Idriss <ghassani@gmail.com>
+* 
+* This file is part of libopenpst.
+* 
+* libopenpst is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+* 
+* libopenpst is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+* 
+* You should have received a copy of the GNU General Public License
+* along with libopenpst. If not, see <http://www.gnu.org/licenses/>.
+*
+* @file 
+* @package 
+* @brief 
+*
+* @author Gassan Idriss <ghassani@gmail.com>
+*/
+
 #include "transport/serial.h"
 #ifdef SERIAL_DEBUG
 #include "util/hexdump.h"
@@ -5,15 +31,6 @@
 #endif
 
 using namespace OpenPST::Transport;
-
-/*Serial::Serial(const std::string& device, unsigned int baudRate, int timeout) : 
-	device(device), baudRate(baudRate), timeout(timeout), 
-	io(), port(io), timer(io)
-{
-	if (device.size()) {
-		open(device, baud);
-	}
-}*/
 
 Serial::Serial(
 	const std::string& device,

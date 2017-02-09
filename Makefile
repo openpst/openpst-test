@@ -4,7 +4,7 @@
 
 all: default
 
-default:
+old:
 	if [ ! -d "./build" ]; then mkdir -p build;  fi
 	$(CXX) -I./include \
 		-I./scripts/out/ \
@@ -21,7 +21,7 @@ default:
 		-DSERIAL_PACKET_WRITER_DEBUG \
 		./src/serial/packet.cpp \
 		./src/serial/serial_packet_writer.cpp \
-		./src/main.cpp -o build/test 
+		./src/old_serial.cpp -o build/old_serial 
 serial:
 	if [ ! -d "./build" ]; then mkdir -p build;  fi
 	$(CXX) -I./include \
@@ -40,7 +40,6 @@ serial:
 		-DSERIAL_DEBUG_RX \
 		./../libopenpst/src/qualcomm/hdlc_encoder.cpp \
 		./../libopenpst/src/util/hexdump.cpp \
-		./../libopenpst/src/util/sleep.cpp \
 		./src/transport/packet.cpp \
 		./src/transport/serial.cpp \
 		./src/transport/serial_packet_writer.cpp \
@@ -48,7 +47,23 @@ serial:
 		./src/qualcomm/packet/dm_spc_response.cpp \
 		./src/qualcomm/packet/streaming_dload_hello_request.cpp \
 		./src/qualcomm/packet/streaming_dload_hello_response.cpp \
-		./src/main2.cpp -o build/serial -Bstatic -lboost_system
+		./src/new_serial.cpp -o build/new_serial -Bstatic -lboost_system
+socket:
+	if [ ! -d "./build" ]; then mkdir -p build;  fi
+	$(CXX) -I./include \
+		-I./../libopenpst/include \
+		-I./src \
+		-std=gnu++11 $(CXX_FLAGS) \
+		-DNO_POD_PACKET_STRUCTURES \
+		-DBOOST_SYSTEM_NO_DEPRECATED \
+		-DWITHOUT_SERIAL_PACKET_WRITER_DEBUG \
+		-DWITHOUT_SERIAL_PACKET_WRITER_DEBUG_RX \
+		-DWITHOUT_SERIAL_PACKET_WRITER_DEBUG_TX \
+		./../libopenpst/src/qualcomm/hdlc_encoder.cpp \
+		./../libopenpst/src/util/hexdump.cpp \
+		./src/transport/packet.cpp \
+		./src/transport/socket_client.cpp \
+		./src/socket.cpp -o build/socket -Bstatic -lboost_system
 
 clean:
 	rm -rf build/*
