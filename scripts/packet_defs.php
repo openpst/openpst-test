@@ -2464,3 +2464,13 @@ $packets['dload'] = [
 		'path' => 'android/packet'
 	],
 ];
+
+/**
+* TCP Serial server packets
+*/
+$packets['tcp_serial'] = [
+	'TcpSerialPacket' => [
+		'skip' => true,
+		'path' => 'server/packet'
+	],
+];
