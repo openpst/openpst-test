@@ -26,6 +26,7 @@
 
 #pragma once
 
+#include "transport/transport_interface.h"
 #include <boost/asio.hpp>
 #include <boost/bind.hpp>
 #include <boost/thread.hpp>
@@ -35,7 +36,7 @@
 
 namespace OpenPST {
 	namespace Transport {
-		class SocketClient
+		class Tcp : TransportInterface
 		{
 			protected:
 				boost::asio::io_service 		 io;
@@ -46,19 +47,20 @@ namespace OpenPST {
 				boost::scoped_ptr<boost::thread> thread;
 				std::vector<uint8_t> 			 rxbuffer;
 				bool 							 idle;
+				
 			public:
-				SocketClient();
-				SocketClient(const std::string& host, int port);				
-				~SocketClient();			
+				Tcp();
+				Tcp(const std::string& host, int port, int timeout = 30);				
+				~Tcp();			
             private:                
-                SocketClient(const SocketClient&);
-                SocketClient &operator=(const SocketClient &p); 
+                Tcp(const Tcp&);
+                Tcp &operator=(const Tcp &p); 
 			public:
 				
 				/*
 				* @brief connect
 				*/
-				void connect(const std::string& host, int port);
+				void connect(const std::string& host, int port, int timeout = 30);
 				
 				/**
 				* @brief connected
@@ -81,6 +83,9 @@ namespace OpenPST {
 				size_t read(std::vector<uint8_t>& in, size_t amount);
 
 			private:
+				void start(const boost::asio::ip::tcp::endpoint& endpoint);
+
+				void stop();
 				/*
 				* @brief write
 				*/
@@ -109,22 +114,33 @@ namespace OpenPST {
 				* @brief onSend
 				*/
 				void onSend(const boost::system::error_code& error);
+
+				/**
+				* doWork
+				*/
+				void doWork();
+
+
+				/**
+				* onWorkComplete
+				*/
+				void onWorkComplete();
 		};
 
         /**
-        * @brief SocketClientError
+        * @brief TcpError
         */
-		class SocketClientError : public std::exception
+		class TcpError : public std::exception
 		{
 			private:
-				const SocketClientError& operator=(SocketClientError);
+				const TcpError& operator=(TcpError);
 				std::string _what;
 			public:
-				SocketClientError(std::string message) : 
+				TcpError(std::string message) : 
 					_what(message)  { }
-				SocketClientError(const SocketClientError& second) : 
+				TcpError(const TcpError& second) : 
 					_what(second._what) {}
-				virtual ~SocketClientError() throw() {}
+				virtual ~TcpError() throw() {}
 				virtual const char* what() const throw () {
 					return _what.c_str();
 				}

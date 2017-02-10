@@ -9,7 +9,8 @@ using OpenPST::Transport::SerialError;
 
 int main(int argc, char* argv[])
 {
-	if (argc > 2) {
+	if (argc > 4) {
+		std::cout << "program [serial_port] [hostname] [port]" << std::endl;
 		return 1;
 	}
 
@@ -17,7 +18,7 @@ int main(int argc, char* argv[])
 		Serial port(argv[1]);
 		TcpSerialServer server(port);
 
-		server.start("127.0.0.1", 613);
+		server.start(argv[2], std::strtoul(argv[3], nullptr, 10));
 
 	} catch(TcpSerialServerError& e) {
 		std::cout << "Server Error: " << e.what() << std::endl;

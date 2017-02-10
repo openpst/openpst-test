@@ -26,12 +26,12 @@
 
 #pragma once
 
+#include "transport/transport_interface.h"
 #include <boost/asio.hpp>
 #include <boost/asio/serial_port.hpp>
 #include <boost/system/error_code.hpp>
 #include <boost/system/system_error.hpp>
 #include <boost/bind.hpp>
-//#include <boost/thread.hpp>
 
 using boost::asio::serial_port_base;
 using boost::asio::io_service;
@@ -51,7 +51,7 @@ namespace OpenPST {
 			kSerialReadStateTimeout
 		};
 
-		class Serial
+		class Serial : TransportInterface
 		{
 			protected:
 				io_service     io;
@@ -109,6 +109,11 @@ namespace OpenPST {
 				* @brief read
 				*/
 				size_t read(std::vector<uint8_t>& in, size_t size);
+
+				/**
+				* available
+				*/
+				size_t available();
 
 				/**
 				* @brief getDevice

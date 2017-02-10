@@ -158,6 +158,33 @@ size_t Serial::read(std::vector<uint8_t>& in, size_t amount)
     return in.size();
 }
 
+size_t Serial::available()
+{
+	if (!isOpen()) {
+		return 0;
+	}
+
+	boost::system::error_code error;
+#if defined(BOOST_ASIO_WINDOWS) || defined(__CYGWIN__)
+	COMSTAT status;
+	if (::ClearCommError(port.native_handle(), NULL, &status)) {
+		error = boost::system::error_code(
+			::GetLastError(), 
+			boost::asio::error::get_system_category()
+		);
+		throw SerialError(error.message());
+	}
+	return static_cast<size_t>(status.cbInQue);
+#else
+	size_t amount;
+	if (!::ioctl(port.native_handle(), FIONREAD, &amount)) {
+		error = boost::system::error_code(errno, boost::asio::error::get_system_category());
+		throw SerialError(error.message());
+	}
+	return amount;
+#endif
+}
+
 void Serial::onReadComplete(const boost::system::error_code& error, size_t received, size_t requested)
 {
 	if (error && error != boost::asio::error::eof) {

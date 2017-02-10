@@ -61,7 +61,8 @@ socket:
 		-DSERIAL_DEBUG_RX \
 		./../libopenpst/src/util/hexdump.cpp \
 		./src/transport/packet.cpp \
-		./src/transport/socket_client.cpp \
+		./src/transport/tcp.cpp \
+		./src/transport/tcp_serial_client.cpp \
 		./src/socket.cpp -o build/socket -Bstatic -lpthread -lboost_system -lboost_thread
 
 server:

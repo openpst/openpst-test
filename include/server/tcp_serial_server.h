@@ -37,27 +37,48 @@ namespace OpenPST {
 	namespace Server {
 
 		enum TcpSerialServerCommand {
-			kTcpSerialServerCommandWrite = 1,
-			kTcpSerialServerCommandRead,
-			kTcpSerialServerCommandChangeDevice,
-			kTcpSerialServerCommandEndSession,
+			kTcpSerialServerCommandWriteRequest = 1,
+			kTcpSerialServerCommandWriteResponse,
+			kTcpSerialServerCommandReadRequest,
+			kTcpSerialServerCommandReadResponse,
+			kTcpSerialServerCommandChangeDeviceRequest,
+			kTcpSerialServerCommandChangeDeviceResponse
 		};
 
 		/**
-		* @brief TcpSerialServerRequest
+		* @brief TcpSerialServerPacketHeader
 		*/
-		struct TcpSerialServerRequest {
+		struct TcpSerialServerPacketHeader {
 			int 	command;
 			size_t  size;
-			uint8_t data[0];
+		};
+
+		struct TcpSerialServerReadRequest {
+			TcpSerialServerPacketHeader header = {
+				kTcpSerialServerCommandWriteRequest, 
+				0
+			};
+			size_t amountToRead;
+		};
+
+		struct TcpSerialServerWriteRequest {
+			TcpSerialServerPacketHeader header = {
+				kTcpSerialServerCommandWriteResponse, 
+				0
+			};
+			size_t amountToWrite;
+		};
+		
+		struct TcpSerialServerChangeDeviceRequest {
+			TcpSerialServerPacketHeader header;
+			char path[255];
 		};
 
 		/**
 		* @brief TcpSerialServerResponse
 		*/
 		struct TcpSerialServerResponse {
-			int  	status;
-			size_t  size;
+			TcpSerialServerPacketHeader  header;
 			uint8_t data[0];
 		};
 		

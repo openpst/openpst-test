@@ -53,7 +53,7 @@ TcpSerialServer::~TcpSerialServer()
 
 void TcpSerialServer::start(const std::string hostname, int port)
 {
-    //std::cout << __PRETTY_FUNCTION__ << std::endl;
+    std::cout << __PRETTY_FUNCTION__ << std::endl;
     
     boost::system::error_code error;
 
@@ -63,16 +63,16 @@ void TcpSerialServer::start(const std::string hostname, int port)
     
     endpoint_iter = resolver.resolve(boost::asio::ip::tcp::resolver::query(hostname, std::to_string(port)));
     
-    /*if (endpoint_iter != boost::asio::ip::tcp::resolver::iterator()) {
-        throw SocketClientError("Unable to resolve host");
-    }*/
 
     endpoint = endpoint_iter->endpoint();
 
-    std::cout << "Binding With " << endpoint << std::endl;
 
-    acceptor.open(endpoint.protocol());
-    acceptor.bind(endpoint, error);
+    std::cout << "Binding With " << endpoint << " - " << std::endl;
+
+    acceptor = boost::asio::ip::tcp::acceptor(io, endpoint);
+    
+    //acceptor.open(endpoint.protocol());
+    //acceptor.bind(endpoint, error);
 
     if (error) {
         throw TcpSerialServerError(error.message());
@@ -135,11 +135,12 @@ void TcpSerialServer::onAccept(TcpSerialServerSession* session, const boost::sys
 {
     //std::cout << __PRETTY_FUNCTION__ << std::endl;
 
-    if (!error) {
+    if (error) {
+        delete session;
+        throw TcpSerialServerError(error.message());
+    } else {
         std::cout << "New Session!" << std::endl;
         session->start();
-    } else {
-        delete session;
     }
 
     accept();
