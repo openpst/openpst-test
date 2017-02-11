@@ -28,14 +28,6 @@
 
 using namespace OpenPST::Server;
 
-/*TcpSerialServer::TcpSerialServer(const std::string hostname, int port, Serial& port) :
-    io(),
-    acceptor(io),
-    port(port)
-{
-
-}
-*/
 TcpSerialServer::TcpSerialServer(Serial& port) :
     io(),
     acceptor(io),

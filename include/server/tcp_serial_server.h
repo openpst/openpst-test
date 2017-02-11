@@ -17,8 +17,8 @@
 * You should have received a copy of the GNU General Public License
 * along with libopenpst. If not, see <http://www.gnu.org/licenses/>.
 *
-* @file 
-* @package 
+* @file tcp_serial_server.h
+* @package libopenpst
 * @brief 
 *
 * @author Gassan Idriss <ghassani@gmail.com>

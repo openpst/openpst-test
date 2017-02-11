@@ -42,14 +42,6 @@ using boost::posix_time::time_duration;
 
 namespace OpenPST {
 	namespace Transport {
-		
-		enum SerialReadState {
-			kSerialReadStateIdle,
-			kSerialReadStateWorking,
-			kSerialReadStateComplete,
-			kSerialReadStateError,
-			kSerialReadStateTimeout
-		};
 
 		class Serial : TransportInterface
 		{

@@ -50,7 +50,9 @@ Serial::Serial(
 Serial::~Serial()
 {
 	if (isOpen()) {
-		close();
+		try {
+			close();
+		} catch(...) {}
 	}
 }
 
@@ -125,6 +127,28 @@ size_t Serial::write(std::vector<uint8_t>& out)
 	return ret;
 }
 
+size_t Serial::write(uint8_t* out, size_t amount)
+{
+	if (!isOpen()) {
+		throw SerialError("Not open");
+	}
+
+	error_code error;
+
+	size_t ret = boost::asio::write(port, boost::asio::buffer(out, amount), boost::asio::transfer_all(), error);
+
+	if (error) {
+		throw SerialError(error.message());
+	}
+
+#ifdef SERIAL_DEBUG_TX
+	std::cout << "Wrote " << ret << " bytes" << std::endl;
+	hexdump(out, ret);
+#endif
+
+	return ret;
+}
+
 size_t Serial::read(std::vector<uint8_t>& in, size_t amount)
 {
 	if (!isOpen()) {
@@ -154,6 +178,36 @@ size_t Serial::read(std::vector<uint8_t>& in, size_t amount)
 	if (received) {
 		in.insert(in.end(), rxbuff.begin(), rxbuff.begin() + received);
 	}
+
+    return in.size();
+}
+
+size_t Serial::read(uint8_t* in, size_t amount)
+{
+	if (!isOpen()) {
+		throw SerialError("Not open");
+	}
+
+	doAsyncRead(amount);
+
+	timer.expires_from_now(boost::posix_time::milliseconds(getTimeout()));
+    timer.async_wait(boost::bind(&Serial::onTimeout, this, boost::asio::placeholders::error));
+
+    received = 0;
+    timedOut = false;
+
+    io.run();
+
+    io.reset();
+
+#ifdef SERIAL_DEBUG_RX
+	std::cout << "Read " << received << " bytes" << std::endl;
+	hexdump(&rxbuff[0], received);
+#endif
+
+	//if (received) {
+	//	in.insert(in.end(), rxbuff.begin(), rxbuff.begin() + received);
+	//}
 
     return in.size();
 }
@@ -189,6 +243,9 @@ void Serial::onReadComplete(const boost::system::error_code& error, size_t recei
 {
 	if (error && error != boost::asio::error::eof) {
 		timer.cancel();
+		if (error.value() == ECANCELED) {
+			return;
+		}
 		throw SerialError(error.message());
 	}
 
@@ -203,7 +260,7 @@ void Serial::onReadComplete(const boost::system::error_code& error, size_t recei
 
 void Serial::doAsyncRead(size_t amount)
 {
-	port.async_read_some( 
+	port.async_read_some(
 		boost::asio::buffer(&rxbuff[0], amount), 
 		boost::bind(
 			&Serial::onReadComplete, 
@@ -217,9 +274,11 @@ void Serial::doAsyncRead(size_t amount)
 
 void Serial::onTimeout(const boost::system::error_code& error)
 {	
-	port.cancel();
+	std::cout << "Read Timeout" << std::endl;
 
 	timedOut = true;
+
+	port.cancel();
 
 	if (error && error.value() != ECANCELED) {
 		throw SerialError(error.message());

@@ -2,7 +2,7 @@
 ## Makefile for openpst/readmbn
 ####
 
-all: default
+all: old serial socket server at
 
 old:
 	if [ ! -d "./build" ]; then mkdir -p build;  fi
@@ -81,6 +81,24 @@ server:
 		./src/transport/serial.cpp \
 		./src/server/tcp_serial_server.cpp \
 		./src/server.cpp -o build/server -Bstatic -lpthread -lboost_system -lboost_thread
-
+at:
+	if [ ! -d "./build" ]; then mkdir -p build;  fi
+	$(CXX) -I./include \
+		-I./scripts/out/ \
+		-I./../libopenpst/include \
+		-I./../libopenpst/lib/serial/include \
+		-I./src \
+		-std=gnu++11 $(CXX_FLAGS) \
+		-DNO_POD_PACKET_STRUCTURES \
+		-DBOOST_SYSTEM_NO_DEPRECATED \
+		-DWITHOUT_SERIAL_PACKET_WRITER_DEBUG \
+		-DWITHOUT_SERIAL_PACKET_WRITER_DEBUG_RX \
+		-DWITHOUT_SERIAL_PACKET_WRITER_DEBUG_TX \
+		-DSERIAL_DEBUG \
+		-DSERIAL_DEBUG_TX \
+		-DSERIAL_DEBUG_RX \
+		./../libopenpst/src/util/hexdump.cpp \
+		./src/transport/serial.cpp \
+		./src/at.cpp -o build/at -Bstatic -lboost_system
 clean:
 	rm -rf build/*
