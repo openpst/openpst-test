@@ -41,6 +41,7 @@ namespace OpenPST {
 				virtual size_t write(std::vector<uint8_t>& out) = 0;
 				
 				//virtual size_t write(uint8_t* data, size_t amount) = 0;
+				//virtual size_t write(Packet* packet) = 0;
 				
 				/*
 				* @brief read
@@ -48,6 +49,7 @@ namespace OpenPST {
 				virtual size_t read(std::vector<uint8_t>& in, size_t amount) = 0;
 
 				//virtual size_t read(uint8_t* in, size_t amount) = 0;
+				//virtual size_t read(Packet* packet, size_t amount = 0) = 0;
 		};
 	}
 }

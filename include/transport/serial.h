@@ -49,12 +49,11 @@ namespace OpenPST {
 				io_service     io;
 				serial_port    port;				
 				deadline_timer timer;
-				error_code     lastError;
-				size_t received = 0;
-				std::string device;
-				int timeout;
-				std::vector<uint8_t> rxbuff;
-				bool timedOut = false;
+				int 		   timeout;
+				std::string    device;
+				size_t 		   received = 0;
+				bool 		   timedOut = false;
+				std::vector<uint8_t> rxbuffer;
 			public:
 				Serial(
 					const std::string& device,
@@ -97,10 +96,14 @@ namespace OpenPST {
 				*/
 				size_t write(std::vector<uint8_t>& out);
 
+				size_t write(uint8_t* out, size_t amount);
+
 				/**
 				* @brief read
 				*/
 				size_t read(std::vector<uint8_t>& in, size_t size);
+				
+				size_t read(uint8_t* in, size_t amount);
 
 				/**
 				* available
@@ -123,8 +126,8 @@ namespace OpenPST {
 				int getTimeout();
 
 			private:
-				void doAsyncRead(size_t amount);
-				void onReadComplete(const boost::system::error_code& error, size_t received, size_t requested);
+				void doAsyncRead();
+				void onReadReady(const boost::system::error_code& error);
 				void onTimeout(const boost::system::error_code& error);
 		};
 

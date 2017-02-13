@@ -85,9 +85,9 @@ void SerialPacketWriter::write(Packet* packet)
 
 		hexdump((uint8_t*)&rbuffer[0], rbuffer.size());
 
-		//if (port.available()) {
-		//	std::cerr << port.available() << " bytes of data is still waiting to be read!" << std::endl;
-		//}
+		if (port.available()) {
+			std::cout << port.available() << " bytes of data is still waiting to be read!" << std::endl;
+		}
 #endif
 		response->unpack(rbuffer);
 	}

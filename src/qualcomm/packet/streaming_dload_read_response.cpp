@@ -67,4 +67,14 @@ void StreamingDloadReadResponse::setData(const std::string& data)
 void StreamingDloadReadResponse::unpack(std::vector<uint8_t>& data)
 {
 	StreamingDloadPacket::unpack(data);
+    
+    off_t offset = 0;
+
+    setCommand(read<uint8_t>(data, offset++));
+
+	setAddress(read<uint32_t>(data, offset));
+
+	offset += sizeof(uint32_t);
+
+	setData(&data[offset], data.size() - offset);
 }

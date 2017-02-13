@@ -2,7 +2,7 @@
 ## Makefile for openpst/readmbn
 ####
 
-all: old serial socket server at
+all: old serial socket server async
 
 old:
 	if [ ! -d "./build" ]; then mkdir -p build;  fi
@@ -47,7 +47,16 @@ serial:
 		./src/qualcomm/packet/dm_spc_response.cpp \
 		./src/qualcomm/packet/streaming_dload_hello_request.cpp \
 		./src/qualcomm/packet/streaming_dload_hello_response.cpp \
+		./src/qualcomm/packet/streaming_dload_security_mode_request.cpp \
+		./src/qualcomm/packet/streaming_dload_security_mode_response.cpp \
+		./src/qualcomm/packet/streaming_dload_open_multi_image_request.cpp \
+		./src/qualcomm/packet/streaming_dload_open_multi_image_response.cpp \
+		./src/qualcomm/packet/streaming_dload_read_request.cpp \
+		./src/qualcomm/packet/streaming_dload_read_response.cpp \
 		./src/new_serial.cpp -o build/new_serial -Bstatic -lboost_system
+
+#		-DBOOST_ASIO_ENABLE_HANDLER_TRACKING 
+
 socket:
 	if [ ! -d "./build" ]; then mkdir -p build;  fi
 	$(CXX) -I./include \
@@ -81,7 +90,7 @@ server:
 		./src/transport/serial.cpp \
 		./src/server/tcp_serial_server.cpp \
 		./src/server.cpp -o build/server -Bstatic -lpthread -lboost_system -lboost_thread
-at:
+async:
 	if [ ! -d "./build" ]; then mkdir -p build;  fi
 	$(CXX) -I./include \
 		-I./scripts/out/ \
@@ -97,8 +106,10 @@ at:
 		-DSERIAL_DEBUG \
 		-DSERIAL_DEBUG_TX \
 		-DSERIAL_DEBUG_RX \
+		-DBOOST_ASIO_ENABLE_BUFFER_DEBUGGING \
 		./../libopenpst/src/util/hexdump.cpp \
 		./src/transport/serial.cpp \
-		./src/at.cpp -o build/at -Bstatic -lboost_system
+		./src/transport/async_serial.cpp \
+		./src/async.cpp -o build/async -Bstatic -lboost_system -lboost_thread
 clean:
 	rm -rf build/*

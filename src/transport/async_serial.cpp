@@ -24,7 +24,7 @@
 * @author Gassan Idriss <ghassani@gmail.com>
 */
 
-#include "transport/serial.h"
+#include "transport/async_serial.h"
 #ifdef SERIAL_DEBUG
 #include "util/hexdump.h"
 #include <iostream>
@@ -40,7 +40,7 @@ AsyncSerial::AsyncSerial(
 	serial_port_base::character_size csize,
 	serial_port_base::flow_control flow,
 	serial_port_base::stop_bits stop
-) : io(), port(io), timer(io), timeout(timeout)
+) : io(), port(io), timeout(timeout)
 {
 	if (device.size()) {
 		open(device, baud, parity, csize, flow, stop);
@@ -70,6 +70,8 @@ void AsyncSerial::open(
     serial_port_base::stop_bits stop
 )
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
+
 	if (!device.size()) {
 		throw AsyncSerialError("No device specified");
 	}
@@ -92,10 +94,18 @@ void AsyncSerial::open(
 	port.set_option(stop);
 	
 	this->device = device;
+
+    io.post(boost::bind(&AsyncSerial::doAsyncRead, this));
+
+    boost::thread thread(boost::bind(&AsyncSerial::doWork, this));
+
+    worker.swap(thread);
 }
 
 void AsyncSerial::close()
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
+
 	if (port.is_open()) {
 		port.cancel();
 		port.close();
@@ -103,65 +113,70 @@ void AsyncSerial::close()
 
 	io.stop();
 	io.reset();
+
+	if (boost::this_thread::get_id() != worker.get_id()) {
+		worker.join();
+	}
 }
 
 size_t AsyncSerial::write(std::vector<uint8_t>& out)
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
+
 	if (!isOpen()) {
 		throw AsyncSerialError("Not open");
 	}
 
-	error_code error;
+	boost::lock_guard<boost::mutex> lock(writeLock);
 
-	size_t ret = boost::asio::write(port, boost::asio::buffer(out), boost::asio::transfer_all(), error);
+	std::vector<uint8_t> writeData;
+	
+	writeData.reserve(out.size());
 
-	if (error) {
-		throw AsyncSerialError(error.message());
-	}
+	writeQueue.push(writeData);
 
-#ifdef SERIAL_DEBUG_TX
-	std::cout << "Wrote " << ret << " bytes" << std::endl;
-	hexdump(reinterpret_cast<uint8_t*>(&out[0]), ret);
-#endif
+	writeQueue.front().insert(writeQueue.front().begin(), out.begin(), out.end());
 
-	return ret;
+	//std::copy(out.begin(), out.end(), .begin());
+	
+	io.post(boost::bind(&AsyncSerial::doAsyncWrite, this));
+
+	return out.size();
 }
 
 size_t AsyncSerial::read(std::vector<uint8_t>& in, size_t amount)
 {
-	if (!isOpen()) {
-		throw AsyncSerialError("Not open");
-	}
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 
-	rxbuff.empty();
-	rxbuff.reserve(amount);
+	io_service io_;
+	deadline_timer timer(io_);
 
-	doAsyncRead(amount);
+	timedOut = false;
 
 	timer.expires_from_now(boost::posix_time::milliseconds(getTimeout()));
     timer.async_wait(boost::bind(&AsyncSerial::onTimeout, this, boost::asio::placeholders::error));
 
-    received = 0;
-    timedOut = false;
+	while(!timedOut) {
+		io_.run_one();
+		boost::lock_guard<boost::mutex> lock(readLock);
 
-    io.run();
+		if (rxbuff.size()) {
+			if (amount > rxbuff.size()) {
+				amount = rxbuff.size();
+			}
 
-    io.reset();
-
-#ifdef SERIAL_DEBUG_RX
-	std::cout << "Read " << received << " bytes" << std::endl;
-	hexdump(&rxbuff[0], received);
-#endif
-
-	if (received) {
-		in.insert(in.end(), rxbuff.begin(), rxbuff.begin() + received);
+			in.insert(in.end(), rxbuff.begin(), rxbuff.begin() + amount);
+			rxbuff.erase(rxbuff.begin(), rxbuff.begin() + amount);
+		}
 	}
 
-    return in.size();
+	return timedOut ? 0 : amount;
 }
 
 size_t AsyncSerial::available()
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
+
 	if (!isOpen()) {
 		return 0;
 	}
@@ -178,59 +193,134 @@ size_t AsyncSerial::available()
 	}
 	return static_cast<size_t>(status.cbInQue);
 #else
-	size_t amount;
-	if (!::ioctl(port.native_handle(), FIONREAD, &amount)) {
+	int amount = 0;
+	if (::ioctl(port.lowest_layer().native_handle(), FIONREAD, &amount)) {
 		error = boost::system::error_code(errno, boost::asio::error::get_system_category());
 		throw AsyncSerialError(error.message());
 	}
-	return amount;
+	std::cout << "Amount available: " << static_cast<size_t>(amount) << std::endl;
+	return static_cast<size_t>(amount);
 #endif
 }
 
-void AsyncSerial::onReadComplete(const boost::system::error_code& error, size_t received, size_t requested)
+void AsyncSerial::doAsyncRead()
 {
-	if (error && error != boost::asio::error::eof) {
-		timer.cancel();
-		if (error.value() == ECANCELED) {
-			return;
-		}
-		throw AsyncSerialError(error.message());
-	}
+	//std::cout << __PRETTY_FUNCTION__ << std::endl;
 
-	if (received || timedOut) {
-		this->received = received;
-		timer.cancel();
-		return;
-	}
-
-	doAsyncRead(requested);
-}
-
-void AsyncSerial::doAsyncRead(size_t amount)
-{
 	port.async_read_some(
-		boost::asio::buffer(&rxbuff[0], amount), 
+		//boost::asio::buffer(&rxbuff[rxbuff.size()], 1024), 
+		boost::asio::null_buffers(),
 		boost::bind(
 			&AsyncSerial::onReadComplete, 
 			this, 
 			boost::asio::placeholders::error, 
-			boost::asio::placeholders::bytes_transferred,
-			amount
+			boost::asio::placeholders::bytes_transferred
 		)
 	);
 }
 
+void AsyncSerial::onReadComplete(const boost::system::error_code& error, size_t received)
+{
+	std::cout << __PRETTY_FUNCTION__ << " " << received <<  " " << available() << std::endl;
+
+	if (error && error != boost::asio::error::eof) {
+		if (error.value() == ECANCELED) {
+			return;
+		}
+		throw AsyncSerialError(error.message());
+	} else if(!isOpen()) {
+		throw AsyncSerialError("Port closed");
+	}
+
+	boost::lock_guard<boost::mutex> lock(readLock);
+
+	size_t currentlyAvailable = available();
+	off_t start = rxbuff.size();
+
+	rxbuff.reserve(rxbuff.size() + currentlyAvailable);
+	rxbuff.insert(rxbuff.end(), currentlyAvailable, 0x00);
+
+	size_t read = port.read_some(boost::asio::buffer(&rxbuff[start], currentlyAvailable));
+
+std::cout << "DUMPING " << rxbuff.size() << " " << read << std::endl;
+
+	hexdump((uint8_t*)&rxbuff[0], rxbuff.size());
+
+	doAsyncRead();
+}
+
+void AsyncSerial::doAsyncWrite()
+{
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
+
+	if (!writeQueue.size()) {
+		return;
+	}
+
+	boost::lock_guard<boost::mutex> lock(writeLock);
+
+	boost::asio::async_write(
+		port,
+		boost::asio::buffer(writeQueue.front(), writeQueue.front().size()),
+        boost::bind(
+        	&AsyncSerial::onWriteComplete, 
+			this,
+			boost::asio::placeholders::error, 
+			boost::asio::placeholders::bytes_transferred
+        )
+    );	
+}
+
+void AsyncSerial::onWriteComplete(const boost::system::error_code& error, size_t written)
+{
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
+
+	if (error) {
+		std::cout << __FUNCTION__ << " " << error.message() << std::endl;
+		throw AsyncSerialError(error.message());
+	}
+	
+	boost::lock_guard<boost::mutex> lock(writeLock);
+
+	if (writeQueue.size()) {
+		std::cout << "Wrote " << writeQueue.front().size() << std::endl;
+		hexdump((uint8_t*)&writeQueue.front()[0], writeQueue.front().size());
+		writeQueue.pop();
+	}
+
+	
+}
+
+void AsyncSerial::doWork()
+{
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
+	
+	boost::this_thread::at_thread_exit(
+		boost::bind(&AsyncSerial::onWorkComplete, this)
+	);
+	try {
+		io.run();	
+	} catch(AsyncSerialError& e) {
+		std::cout << __FUNCTION__ << " - " << e.what() << std::endl;
+	}
+}
+
 void AsyncSerial::onTimeout(const boost::system::error_code& error)
 {	
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
+
 	std::cout << "Read Timeout" << std::endl;
 
 	timedOut = true;
 
-	port.cancel();
-
 	if (error && error.value() != ECANCELED) {
 		throw AsyncSerialError(error.message());
 	}
+}
+
+void AsyncSerial::onWorkComplete()
+{
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 }
 
 const std::string& AsyncSerial::getDevice()
@@ -248,3 +338,4 @@ int AsyncSerial::getTimeout()
 {
 	return timeout;
 }
+

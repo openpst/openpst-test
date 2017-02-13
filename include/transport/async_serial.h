@@ -28,10 +28,12 @@
 
 #include "transport/transport_interface.h"
 #include <boost/asio.hpp>
+#include <boost/bind.hpp>
+#include <boost/thread.hpp>
 #include <boost/asio/serial_port.hpp>
 #include <boost/system/error_code.hpp>
 #include <boost/system/system_error.hpp>
-#include <boost/bind.hpp>
+#include <queue>
 
 using boost::asio::serial_port_base;
 using boost::asio::io_service;
@@ -47,23 +49,18 @@ namespace OpenPST {
 		class AsyncSerial : TransportInterface
 		{
 			protected:
-				io_service     io;
-				serial_port    port;				
-				deadline_timer timer;
-				error_code     lastError;
-				size_t received = 0;
-				std::string device;
+				io_service      io;
+				serial_port     port;
+				std::string 	device;
 				int timeout;
-				std::vector<uint8_t> rxbuff;
+				
 				bool timedOut = false;
 
 				boost::thread worker;
-				std::vector<std::vector<uint8_t>> writeQueue;
-				//std::dequeue<std::vector<uint8_t>> writeQueue;
-
-				boost::mutex 		 writeLock;
-				boost::mutex 		 readLock;
-				//mutable boost::mutex errorLock;
+				boost::mutex  writeLock;
+				boost::mutex  readLock;
+				std::queue<std::vector<uint8_t>> writeQueue;
+				std::vector<uint8_t> rxbuff;
 			public:
 				AsyncSerial(
 					const std::string& device,
@@ -134,9 +131,11 @@ namespace OpenPST {
 			private:
 				void doAsyncRead();
 				void doAsyncWrite();
-				void onReadComplete(const boost::system::error_code& error, size_t received, size_t requested);
-				void onWriteComplete(const boost::system::error_code& error, size_t written, size_t expected);
+				void onReadComplete(const boost::system::error_code& error, size_t received);
+				void onWriteComplete(const boost::system::error_code& error, size_t written);
 				void onTimeout(const boost::system::error_code& error);
+				void doWork();
+				void onWorkComplete();
 		};
 
         /**

@@ -135,7 +135,12 @@ size_t Serial::write(uint8_t* out, size_t amount)
 
 	error_code error;
 
-	size_t ret = boost::asio::write(port, boost::asio::buffer(out, amount), boost::asio::transfer_all(), error);
+	size_t ret = boost::asio::write(
+		port, 
+		boost::asio::buffer(out, amount), 
+		boost::asio::transfer_all(), 
+		error
+	);
 
 	if (error) {
 		throw SerialError(error.message());
@@ -155,31 +160,26 @@ size_t Serial::read(std::vector<uint8_t>& in, size_t amount)
 		throw SerialError("Not open");
 	}
 
-	rxbuff.empty();
-	rxbuff.reserve(amount);
-
-	doAsyncRead(amount);
+	doAsyncRead();
 
 	timer.expires_from_now(boost::posix_time::milliseconds(getTimeout()));
     timer.async_wait(boost::bind(&Serial::onTimeout, this, boost::asio::placeholders::error));
 
     received = 0;
     timedOut = false;
-
+    
     io.run();
-
     io.reset();
 
-#ifdef SERIAL_DEBUG_RX
-	std::cout << "Read " << received << " bytes" << std::endl;
-	hexdump(&rxbuff[0], received);
-#endif
-
-	if (received) {
-		in.insert(in.end(), rxbuff.begin(), rxbuff.begin() + received);
-	}
-
-    return in.size();
+    if(received > amount) {
+    	in.insert(in.end(), rxbuffer.begin(), rxbuffer.begin() + amount);
+    	rxbuffer.erase(rxbuffer.begin(), rxbuffer.begin() + amount);
+    	return amount;
+    }
+    
+    in.insert(in.end(), rxbuffer.begin(), rxbuffer.begin() + received);
+    rxbuffer.erase(rxbuffer.begin(), rxbuffer.begin() + received);
+    return received;
 }
 
 size_t Serial::read(uint8_t* in, size_t amount)
@@ -188,28 +188,26 @@ size_t Serial::read(uint8_t* in, size_t amount)
 		throw SerialError("Not open");
 	}
 
-	doAsyncRead(amount);
+	doAsyncRead();
 
 	timer.expires_from_now(boost::posix_time::milliseconds(getTimeout()));
     timer.async_wait(boost::bind(&Serial::onTimeout, this, boost::asio::placeholders::error));
 
     received = 0;
     timedOut = false;
-
+    
     io.run();
-
     io.reset();
 
-#ifdef SERIAL_DEBUG_RX
-	std::cout << "Read " << received << " bytes" << std::endl;
-	hexdump(&rxbuff[0], received);
-#endif
-
-	//if (received) {
-	//	in.insert(in.end(), rxbuff.begin(), rxbuff.begin() + received);
-	//}
-
-    return in.size();
+    if(received > amount) {
+    	std::copy(rxbuffer.begin(), rxbuffer.begin() + amount, in);
+    	rxbuffer.erase(rxbuffer.begin(), rxbuffer.begin() + amount);
+    	return amount;
+    }
+    
+    std::copy(rxbuffer.begin(), rxbuffer.begin() + received, in);
+    rxbuffer.erase(rxbuffer.begin(), rxbuffer.begin() + received);
+    return received;
 }
 
 size_t Serial::available()
@@ -219,27 +217,28 @@ size_t Serial::available()
 	}
 
 	boost::system::error_code error;
-#if defined(BOOST_ASIO_WINDOWS) || defined(__CYGWIN__)
-	COMSTAT status;
-	if (::ClearCommError(port.native_handle(), NULL, &status)) {
-		error = boost::system::error_code(
-			::GetLastError(), 
-			boost::asio::error::get_system_category()
-		);
-		throw SerialError(error.message());
-	}
-	return static_cast<size_t>(status.cbInQue);
-#else
-	size_t amount;
-	if (!::ioctl(port.native_handle(), FIONREAD, &amount)) {
-		error = boost::system::error_code(errno, boost::asio::error::get_system_category());
-		throw SerialError(error.message());
-	}
-	return amount;
-#endif
+	#if defined(BOOST_ASIO_WINDOWS) || defined(__CYGWIN__)
+		COMSTAT status;
+		if (::ClearCommError(port.native_handle(), NULL, &status)) {
+			error = boost::system::error_code(
+				::GetLastError(), 
+				boost::asio::error::get_system_category()
+			);
+			throw SerialError(error.message());
+		}
+		return static_cast<size_t>(status.cbInQue);
+	#else
+		int amount = 0;
+		if (::ioctl(port.native_handle(), FIONREAD, &amount)) {
+			error = boost::system::error_code(errno, boost::asio::error::get_system_category());
+			throw SerialError(error.message());
+		}
+		return static_cast<size_t>(amount);
+	#endif
 }
 
-void Serial::onReadComplete(const boost::system::error_code& error, size_t received, size_t requested)
+
+void Serial::onReadReady(const boost::system::error_code& error)
 {
 	if (error && error != boost::asio::error::eof) {
 		timer.cancel();
@@ -249,33 +248,48 @@ void Serial::onReadComplete(const boost::system::error_code& error, size_t recei
 		throw SerialError(error.message());
 	}
 
-	if (received || timedOut) {
-		this->received = received;
-		timer.cancel();
-		return;
+	off_t  start = rxbuffer.size();
+	size_t avail = available();
+
+	if (avail) {	
+
+		rxbuffer.insert(rxbuffer.end(), avail, 0);
+
+		received += port.read_some(boost::asio::buffer(&rxbuffer[start], avail));
+		
+		#ifdef SERIAL_DEBUG_RX
+			std::cout << "Read " << received << " bytes" << std::endl;
+			hexdump(&rxbuffer[start], received);
+		#endif
+
+		if (!available()) {
+			timer.cancel();
+			return;
+		}
 	}
 
-	doAsyncRead(requested);
+	if (timedOut) {		
+		timer.cancel();		
+	} else {
+		doAsyncRead();
+	}	
 }
 
-void Serial::doAsyncRead(size_t amount)
+
+void Serial::doAsyncRead()
 {
 	port.async_read_some(
-		boost::asio::buffer(&rxbuff[0], amount), 
+		boost::asio::null_buffers(), 
 		boost::bind(
-			&Serial::onReadComplete, 
+			&Serial::onReadReady, 
 			this, 
-			boost::asio::placeholders::error, 
-			boost::asio::placeholders::bytes_transferred,
-			amount
+			boost::asio::placeholders::error
 		)
 	);
 }
 
 void Serial::onTimeout(const boost::system::error_code& error)
 {	
-	std::cout << "Read Timeout" << std::endl;
-
 	timedOut = true;
 
 	port.cancel();
@@ -289,7 +303,6 @@ const std::string& Serial::getDevice()
 {
 	return this->device;
 }
-
 
 void Serial::setTimeout(int timeout)
 {
