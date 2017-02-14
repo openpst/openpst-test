@@ -53,7 +53,7 @@ void SaharaReadDataResponse::setData(std::ifstream& file, size_t size)
 {
     write("data", file, size);
 }
-void SaharaReadDataResponse::setData(uint8_t* data, size_t size);
+void SaharaReadDataResponse::setData(uint8_t* data, size_t size)
 {
     write("data", data, size);
 }

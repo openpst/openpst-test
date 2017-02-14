@@ -33,7 +33,7 @@ void {{class_name}}::set{{field.name_camel}}(std::ifstream& file, size_t size)
     write("{{field.name}}", file, size);
 }
 {% elseif setter == 'raw' %}
-void {{class_name}}::set{{field.name_camel}}(uint8_t* data, size_t size);
+void {{class_name}}::set{{field.name_camel}}(uint8_t* data, size_t size)
 {
     write("{{field.name}}", data, size);
 }

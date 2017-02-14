@@ -8,19 +8,11 @@
 #include "qualcomm/packet/dm_spc_request.h"
 #include "qualcomm/packet/dm_spc_response.h"
 #include <iostream>
+#include <fstream>
+#include <time.h> 
 
-using OpenPST::Transport::Serial;
-using OpenPST::Transport::SerialPacketWriter;
-using OpenPST::Transport::SerialError;
-using OpenPST::Transport::PacketError;
-using OpenPST::QC::StreamingDloadHelloRequest;
-using OpenPST::QC::StreamingDloadHelloResponse;
-using OpenPST::QC::StreamingDloadSecurityModeRequest;
-using OpenPST::QC::StreamingDloadSecurityModeResponse;
-using OpenPST::QC::StreamingDloadOpenMultiImageRequest;
-using OpenPST::QC::StreamingDloadOpenMultiImageResponse;
-using OpenPST::QC::DmSpcRequest;
-using OpenPST::QC::DmSpcResponse;
+using namespace OpenPST::Transport;
+using namespace OpenPST::QC;
 
 
 void hello(Serial& port, SerialPacketWriter& writer, int argc, char* argv[]) {
@@ -82,20 +74,59 @@ void open_multi(Serial& port, SerialPacketWriter& writer, int argc, char* argv[]
 void read_emmc(Serial& port, SerialPacketWriter& writer, int argc, char* argv[]) {
 	
 	uint32_t startAddress = 0x00000000;
-	uint32_t endAddress   = startAddress + (1024 * 1024 * 5);
+	uint32_t endAddress   = startAddress + (1024 * 1024 * 100);
 	uint32_t currentAddress = startAddress;
 	size_t readSize = 1024;
 
-	while(currentAddress < endAddress) {
-		StreamingDloadReadRequest request;
-		request.setAddress(currentAddress);
-		request.setLength(readSize);
-
-		writer.write(packet);
-
-		currentAddress += readSize;
-	}
+	std::string outFile("/home/ghassani/Desktop/read_emmc.out");
 	
+	std::ofstream file(outFile.c_str(), std::ios::out | std::ios::binary | std::ios::trunc);
+
+	if (!file.is_open()) {
+		throw std::invalid_argument("Error opening file for writing");
+	}
+
+	std::cout << "Opened " << outFile << " for writing" << std::endl;
+
+	size_t total = 0;
+	time_t stime;
+	time_t etime;
+
+	time(&stime);
+
+	try {
+		while(currentAddress < endAddress) {
+			StreamingDloadReadRequest request;
+			request.setAddress(currentAddress);
+			request.setLength(readSize);
+
+			writer.write(&request);
+
+			auto response = reinterpret_cast<StreamingDloadReadResponse*>(request.getResponse());
+
+			auto data = response->getData();
+
+			file.write(reinterpret_cast<char*>(&data[0]), data.size());
+
+			currentAddress += readSize;
+			total 		   += readSize;
+		}
+	} catch(...) {
+		std::cout << "Error reading at address 0x" << std::hex << currentAddress << std::endl;
+		std::cout << "Read " << total << " bytes from 0x" << std::hex << startAddress << std::endl;
+		time(&etime);
+		std::cout << "Time: " << difftime(etime, stime) << std::endl;
+		file.close();
+		throw;
+	}
+
+	file.close();
+	
+	std::cout << "Read " << total << " bytes from 0x" << std::hex << startAddress << std::endl;
+
+	time(&etime);
+
+	std::cout << "Time: " << difftime(etime, stime) << std::endl;
 }
 
 int main(int argc, char* argv[])

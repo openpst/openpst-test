@@ -71,12 +71,6 @@ namespace OpenPST {
                 * @return void
                 */
                 void setData(uint8_t* data, size_t size);
-                /**
-                * @brief Set data
-                * @param const std::string& data
-                * @return void
-                */
-                void setData(const std::string& data);
 				/**
 				* @overload Packet::unpack
 				*/

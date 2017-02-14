@@ -79,7 +79,7 @@ void StreamingDloadUnframedStreamWriteRequest::setData(std::ifstream& file, size
 {
     write("data", file, size);
 }
-void StreamingDloadUnframedStreamWriteRequest::setData(uint8_t* data, size_t size);
+void StreamingDloadUnframedStreamWriteRequest::setData(uint8_t* data, size_t size)
 {
     write("data", data, size);
 }

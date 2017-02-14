@@ -556,7 +556,7 @@ $packets['streaming_dload'] = [
 			'data' => [ 
 				'type' => FIELD_TYPE_VARIABLE,
 				'size' => 0,
-				'allowed_setters' => ['raw','string'],
+				'allowed_setters' => ['raw'],
 				'allowed_getters' => ['vector'],
 			],
 		],

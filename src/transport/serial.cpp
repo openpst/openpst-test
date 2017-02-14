@@ -257,6 +257,10 @@ void Serial::onReadReady(const boost::system::error_code& error)
 
 		received += port.read_some(boost::asio::buffer(&rxbuffer[start], avail));
 		
+		if (received < avail) {
+			rxbuffer.erase(rxbuffer.begin() + start + received, rxbuffer.end());
+		}
+
 		#ifdef SERIAL_DEBUG_RX
 			std::cout << "Read " << received << " bytes" << std::endl;
 			hexdump(&rxbuffer[start], received);
@@ -274,7 +278,6 @@ void Serial::onReadReady(const boost::system::error_code& error)
 		doAsyncRead();
 	}	
 }
-
 
 void Serial::doAsyncRead()
 {

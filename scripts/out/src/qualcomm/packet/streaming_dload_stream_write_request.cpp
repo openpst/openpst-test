@@ -59,7 +59,7 @@ void StreamingDloadStreamWriteRequest::setData(std::ifstream& file, size_t size)
 {
     write("data", file, size);
 }
-void StreamingDloadStreamWriteRequest::setData(uint8_t* data, size_t size);
+void StreamingDloadStreamWriteRequest::setData(uint8_t* data, size_t size)
 {
     write("data", data, size);
 }

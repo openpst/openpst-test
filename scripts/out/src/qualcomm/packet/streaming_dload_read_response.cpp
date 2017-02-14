@@ -55,16 +55,22 @@ std::vector<uint8_t> StreamingDloadReadResponse::getData()
 	return read(getFieldSize("data"), getFieldOffset("data"));
 }
                 
-void StreamingDloadReadResponse::setData(uint8_t* data, size_t size);
+void StreamingDloadReadResponse::setData(uint8_t* data, size_t size)
 {
     write("data", data, size);
-}
-void StreamingDloadReadResponse::setData(const std::string& data)
-{
-    write("data", data);
 }
 
 void StreamingDloadReadResponse::unpack(std::vector<uint8_t>& data)
 {
 	StreamingDloadPacket::unpack(data);
+    
+    off_t offset = 0;
+
+    setCommand(read<uint8_t>(data, offset++));
+
+	setAddress(read<uint32_t>(data, offset));
+
+	offset += sizeof(uint32_t);
+
+	setData(&data[offset], data.size() - offset);
 }

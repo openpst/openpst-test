@@ -59,7 +59,7 @@ void StreamingDloadOpenMultiImageWithPayloadRequest::setPayload(std::ifstream& f
 {
     write("payload", file, size);
 }
-void StreamingDloadOpenMultiImageWithPayloadRequest::setPayload(uint8_t* data, size_t size);
+void StreamingDloadOpenMultiImageWithPayloadRequest::setPayload(uint8_t* data, size_t size)
 {
     write("payload", data, size);
 }
