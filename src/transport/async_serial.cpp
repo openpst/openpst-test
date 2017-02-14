@@ -148,7 +148,7 @@ size_t AsyncSerial::read(std::vector<uint8_t>& in, size_t amount)
 {
 	std::cout << __PRETTY_FUNCTION__ << std::endl;
 
-	io_service io_;
+	io_service io_; // create a new io service, since our main one is running in another thread
 	deadline_timer timer(io_);
 
 	timedOut = false;
@@ -184,7 +184,7 @@ size_t AsyncSerial::available()
 	boost::system::error_code error;
 #if defined(BOOST_ASIO_WINDOWS) || defined(__CYGWIN__)
 	COMSTAT status;
-	if (::ClearCommError(port.native_handle(), NULL, &status)) {
+	if (::ClearCommError(port.lowest_layer().native_handle(), NULL, &status)) {
 		error = boost::system::error_code(
 			::GetLastError(), 
 			boost::asio::error::get_system_category()

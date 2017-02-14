@@ -33,13 +33,11 @@ TcpSerialServer::TcpSerialServer(Serial& port) :
     acceptor(io),
     port(port)
 {
-    //std::cout << __PRETTY_FUNCTION__ << std::endl;
 
 }
 
 TcpSerialServer::~TcpSerialServer()
 {
-    //std::cout << __PRETTY_FUNCTION__ << std::endl;
 
 }
 
@@ -58,14 +56,10 @@ void TcpSerialServer::start(const std::string hostname, int port)
 
     endpoint = endpoint_iter->endpoint();
 
-
     std::cout << "Binding With " << endpoint << " - " << std::endl;
 
     acceptor = boost::asio::ip::tcp::acceptor(io, endpoint);
     
-    //acceptor.open(endpoint.protocol());
-    //acceptor.bind(endpoint, error);
-
     if (error) {
         throw TcpSerialServerError(error.message());
     }
@@ -79,7 +73,6 @@ void TcpSerialServer::start(const std::string hostname, int port)
 
 void TcpSerialServer::start(int port)
 {
-    //std::cout << __PRETTY_FUNCTION__ << std::endl;
     boost::system::error_code error;
 
     endpoint = boost::asio::ip::tcp::endpoint(
@@ -142,25 +135,19 @@ void TcpSerialServer::onAccept(TcpSerialServerSession* session, const boost::sys
 TcpSerialServerSession::TcpSerialServerSession(boost::asio::io_service& io, Serial& port) : 
     socket(io), port(port)
 {
-    //std::cout << __PRETTY_FUNCTION__ << std::endl;
 }
 
 TcpSerialServerSession::~TcpSerialServerSession()
 {
-    //std::cout << __PRETTY_FUNCTION__ << std::endl;
 }
 
 boost::asio::ip::tcp::socket& TcpSerialServerSession::getSocket()
 {
-    //std::cout << __PRETTY_FUNCTION__ << std::endl;
-
     return socket;
 }
 
 void TcpSerialServerSession::start()
 {
-    //std::cout << __PRETTY_FUNCTION__ << std::endl;
-
     socket.async_read_some(
         boost::asio::buffer(rxbuffer, 1024),
         boost::bind(
@@ -202,8 +189,6 @@ void TcpSerialServerSession::onReceive(const boost::system::error_code& error, s
 
 void TcpSerialServerSession::onSend(const boost::system::error_code& error, size_t sent)
 {
-    //std::cout << __PRETTY_FUNCTION__ << std::endl;
-
     if (error) {
         delete this;
         return;
