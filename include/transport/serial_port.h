@@ -17,19 +17,16 @@
 * You should have received a copy of the GNU General Public License
 * along with libopenpst. If not, see <http://www.gnu.org/licenses/>.
 *
-* @file 
-* @package 
-* @brief 
+* @file serial_port.h
+* @package openpst/libopenpst
+* @brief Wraps boost::asio::serial_port providing additional functionality on top
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
 
 #pragma once
 
-
 #include <boost/asio/serial_port.hpp>
-
-
 
 namespace OpenPST {
 	namespace Transport {
