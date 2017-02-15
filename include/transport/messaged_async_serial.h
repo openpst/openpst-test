@@ -28,11 +28,14 @@
 
 #include "transport/transport_interface.h"
 #include "transport/serial_port.h"
+#include "transport/serial.h"
 #include <boost/asio.hpp>
+#include <boost/bind.hpp>
+#include <boost/thread.hpp>
 #include <boost/asio/serial_port.hpp>
 #include <boost/system/error_code.hpp>
 #include <boost/system/system_error.hpp>
-#include <boost/bind.hpp>
+#include <queue>
 
 using boost::asio::serial_port_base;
 using boost::asio::io_service;
@@ -43,21 +46,27 @@ using boost::posix_time::time_duration;
 
 namespace OpenPST {
 	namespace Transport {
+		
 
-		class Serial : TransportInterface
+		class MessagedAsyncSerial : TransportInterface
 		{
 			protected:
-				io_service     io;
-				SerialPort     port;				
-				deadline_timer timer;
-				int 		   timeout;
-				std::string    device;
-				size_t 		   received = 0;
-				bool 		   timedOut = false;
-				std::vector<uint8_t> rxbuffer;
+				io_service      io;
+				SerialPort      port;
+				std::string 	device;
+				std::string 	messageEnd;
+				int timeout;
+				bool timedOut = false;
+				boost::thread worker;
+				boost::mutex  writeLock;
+				boost::mutex  readLock;
+				std::queue<std::vector<uint8_t>>  writeQueue;
+				boost::asio::streambuf 			  buffer; 
+				std::vector<std::vector<uint8_t>> messages;
 			public:
-				Serial(
+				MessagedAsyncSerial(
 					const std::string& device,
+					const std::string& messageEnd,
 					unsigned int baud = 115200,
 					int timeout = 1000,
 					serial_port_base::parity parity = serial_port_base::parity(serial_port_base::parity::none),
@@ -66,10 +75,10 @@ namespace OpenPST {
         			serial_port_base::stop_bits stop = serial_port_base::stop_bits(serial_port_base::stop_bits::one)
         		);
 
-				~Serial();			
+				~MessagedAsyncSerial();			
             private:                
-                Serial(const Serial&);
-                Serial &operator=(const Serial &p); 
+                MessagedAsyncSerial(const MessagedAsyncSerial&);
+                MessagedAsyncSerial &operator=(const MessagedAsyncSerial &p); 
 			public:
 				/**
 				* @brief isOpen
@@ -80,6 +89,7 @@ namespace OpenPST {
 				* @brief open
 				*/
 				void open(const std::string& device,
+					const std::string& messageEnd,
 					unsigned int baud = 115200,
 					serial_port_base::parity parity = serial_port_base::parity(serial_port_base::parity::none),
         			serial_port_base::character_size csize = serial_port_base::character_size(8),
@@ -97,19 +107,40 @@ namespace OpenPST {
 				*/
 				size_t write(std::vector<uint8_t>& out);
 
-				size_t write(uint8_t* out, size_t amount);
-
 				/**
 				* @brief read
 				*/
 				size_t read(std::vector<uint8_t>& in, size_t size);
+
+				/**
+				* available
+				*/
+				size_t available();
 				
-				size_t read(uint8_t* in, size_t amount);
+				/**
+				* flush
+				*/
+				void flush();
+
+				/**
+				* flushInput
+				*/
+				void flushInput();
+				
+				/**
+				* flushOutput
+				*/
+				void flushOutput();
 
 				/**
 				* @brief getDevice
 				*/
 				const std::string& getDevice();
+
+				/**
+				* @brief getMessageEnd
+				*/
+				const std::string& getMessageEnd();
 
 				/**
 				* @brief setTimeout
@@ -123,30 +154,12 @@ namespace OpenPST {
 
 			private:
 				void doAsyncRead();
-				void onReadReady(const boost::system::error_code& error);
+				void doAsyncWrite();
+				void onReadComplete(const boost::system::error_code& error, size_t received);
+				void onWriteComplete(const boost::system::error_code& error, size_t written);
 				void onTimeout(const boost::system::error_code& error);
-		};
-
-        /**
-        * @brief SerialError
-        */
-		class SerialError : public std::exception
-		{
-			private:
-				const SerialError& operator=(SerialError);
-				std::string _what;
-			public:
-				SerialError(std::string message) : 
-					_what(message)  { }
-				SerialError(const SerialError& second) : 
-					_what(second._what) {}
-				virtual ~SerialError() throw() {}
-				virtual const char* what() const throw () {
-					return _what.c_str();
-				}
-				virtual const std::string& what() {
-					return _what;
-				}
+				void doWork();
+				void onWorkComplete();
 		};
 	}
 }

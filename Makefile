@@ -111,5 +111,28 @@ async:
 		./src/transport/serial.cpp \
 		./src/transport/async_serial.cpp \
 		./src/async.cpp -o build/async -Bstatic -lboost_system -lboost_thread
+
+messaged_async:
+	if [ ! -d "./build" ]; then mkdir -p build;  fi
+	$(CXX) -I./include \
+		-I./scripts/out/ \
+		-I./../libopenpst/include \
+		-I./../libopenpst/lib/serial/include \
+		-I./src \
+		-std=gnu++11 $(CXX_FLAGS) \
+		-DNO_POD_PACKET_STRUCTURES \
+		-DBOOST_SYSTEM_NO_DEPRECATED \
+		-DWITHOUT_SERIAL_PACKET_WRITER_DEBUG \
+		-DWITHOUT_SERIAL_PACKET_WRITER_DEBUG_RX \
+		-DWITHOUT_SERIAL_PACKET_WRITER_DEBUG_TX \
+		-DSERIAL_DEBUG \
+		-DSERIAL_DEBUG_TX \
+		-DSERIAL_DEBUG_RX \
+		-DBOOST_ASIO_ENABLE_BUFFER_DEBUGGING \
+		./../libopenpst/src/util/hexdump.cpp \
+		./src/transport/serial.cpp \
+		./src/transport/async_serial.cpp \
+		./src/transport/messaged_async_serial.cpp \
+		./src/messaged_async.cpp -o build/messaged_async -Bstatic -lboost_system -lboost_thread
 clean:
 	rm -rf build/*

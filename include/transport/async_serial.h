@@ -27,6 +27,7 @@
 #pragma once
 
 #include "transport/transport_interface.h"
+#include "transport/serial_port.h"
 #include <boost/asio.hpp>
 #include <boost/bind.hpp>
 #include <boost/thread.hpp>
@@ -50,7 +51,7 @@ namespace OpenPST {
 		{
 			protected:
 				io_service      io;
-				serial_port     port;
+				SerialPort      port;
 				std::string 	device;
 				int timeout;
 				
@@ -107,11 +108,6 @@ namespace OpenPST {
 				* @brief read
 				*/
 				size_t read(std::vector<uint8_t>& in, size_t size);
-
-				/**
-				* available
-				*/
-				size_t available();
 
 				/**
 				* @brief getDevice

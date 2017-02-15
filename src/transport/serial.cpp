@@ -210,34 +210,6 @@ size_t Serial::read(uint8_t* in, size_t amount)
     return received;
 }
 
-size_t Serial::available()
-{
-	if (!isOpen()) {
-		return 0;
-	}
-
-	boost::system::error_code error;
-	#if defined(BOOST_ASIO_WINDOWS) || defined(__CYGWIN__)
-		COMSTAT status;
-		if (::ClearCommError(port.native_handle(), NULL, &status)) {
-			error = boost::system::error_code(
-				::GetLastError(), 
-				boost::asio::error::get_system_category()
-			);
-			throw SerialError(error.message());
-		}
-		return static_cast<size_t>(status.cbInQue);
-	#else
-		int amount = 0;
-		if (::ioctl(port.native_handle(), FIONREAD, &amount)) {
-			error = boost::system::error_code(errno, boost::asio::error::get_system_category());
-			throw SerialError(error.message());
-		}
-		return static_cast<size_t>(amount);
-	#endif
-}
-
-
 void Serial::onReadReady(const boost::system::error_code& error)
 {
 	if (error && error != boost::asio::error::eof) {
@@ -249,7 +221,7 @@ void Serial::onReadReady(const boost::system::error_code& error)
 	}
 
 	off_t  start = rxbuffer.size();
-	size_t avail = available();
+	size_t avail = port.available();
 
 	if (avail) {	
 
@@ -266,7 +238,7 @@ void Serial::onReadReady(const boost::system::error_code& error)
 			hexdump(&rxbuffer[start], received);
 		#endif
 
-		if (!available()) {
+		if (!port.available()) {
 			timer.cancel();
 			return;
 		}
