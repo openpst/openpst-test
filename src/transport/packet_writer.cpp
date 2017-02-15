@@ -24,44 +24,44 @@
 * @author Gassan Idriss <ghassani@gmail.com>
 */
 
-#include "transport/serial_packet_writer.h"
-#ifdef SERIAL_PACKET_WRITER_DEBUG
+#include "transport/packet_writer.h"
+#ifdef PACKET_WRITER_DEBUG
 #include "util/hexdump.h"
 #endif
 
 using namespace OpenPST::Transport;
 
-SerialPacketWriter::SerialPacketWriter(Serial& port) : 
-port(port)
+PacketWriter::PacketWriter(TransportInterface& transport) : 
+transport(transport)
 {
 
 }
 
 
-SerialPacketWriter::~SerialPacketWriter()
+PacketWriter::~PacketWriter()
 {
 	
 }
 
-Serial& SerialPacketWriter::getPort()
+TransportInterface& PacketWriter::getTransport()
 {
-	return port;
+	return transport;
 }
 
-void SerialPacketWriter::write(Packet* packet)
+void PacketWriter::write(Packet* packet)
 {
-	if (!port.isOpen()) {
-		throw SerialPacketWriterError("Device not open");
+	if (!transport.isOpen()) {
+		throw PacketWriterError("Device not open");
 	}
 
 	packet->prepare();
 
-#ifdef SERIAL_PACKET_WRITER_DEBUG_TX
-	std::cout << "[SerialPacketWriter] Attempting to write " << packet->size() << " bytes" << std::endl;
+#ifdef PACKET_WRITER_DEBUG_TX
+	std::cout << "[PacketWriter] Attempting to write " << packet->size() << " bytes" << std::endl;
 	hexdump((uint8_t*)&packet->getData()[0], packet->size());
 #endif
 
-	port.write(packet->getData());
+	transport.write(packet->getData());
 
 	if (packet->isResponseExpected()) {
 		
@@ -72,37 +72,37 @@ void SerialPacketWriter::write(Packet* packet)
 		Packet* response = packet->getResponse();
 
 		if (response == nullptr) {
-			throw SerialPacketWriterError("Response packet has not been allocated");
+			throw PacketWriterError("Response packet has not been allocated");
 		}
 		
-#ifdef SERIAL_PACKET_WRITER_DEBUG
+#ifdef PACKET_WRITER_DEBUG
 		std::cout << __PRETTY_FUNCTION__ << std::endl << "Attempting to read " << response->getMaxDataSize() << " bytes" << std::endl;
 #endif
-		port.read(rbuffer, response->getMaxDataSize());
+		transport.read(rbuffer, response->getMaxDataSize());
 	
-#ifdef SERIAL_PACKET_WRITER_DEBUG
+#ifdef PACKET_WRITER_DEBUG
 		std::cout << __PRETTY_FUNCTION__ << std::endl << "Read " << rbuffer.size() << " bytes" << std::endl;
 
 		hexdump((uint8_t*)&rbuffer[0], rbuffer.size());
 
-		if (port.available()) {
-			std::cout << port.available() << " bytes of data is still waiting to be read!" << std::endl;
+		if (transport.available()) {
+			std::cout << transport.available() << " bytes of data is still waiting to be read!" << std::endl;
 		}
 #endif
 		response->unpack(rbuffer);
 	}
 }
 
-void SerialPacketWriter::read(Packet* packet)
+void PacketWriter::read(Packet* packet)
 {
 
-	if (!port.isOpen()) {
-		throw SerialPacketWriterError("Device not open");
+	if (!transport.isOpen()) {
+		throw PacketWriterError("Device not open");
 	}
 
 	std::vector<uint8_t> rbuffer;
 
-	port.read(rbuffer, packet->getMaxDataSize());
+	transport.read(rbuffer, packet->getMaxDataSize());
 
 	packet->unpack(rbuffer);
 
@@ -113,11 +113,11 @@ void SerialPacketWriter::read(Packet* packet)
 		Packet* response = packet->getResponse();
 		
 		if (response == nullptr) {
-			throw SerialPacketWriterError("Response packet has not been allocated");
+			throw PacketWriterError("Response packet has not been allocated");
 		}
 
 		response->prepare();
 
-		port.write(response->getData());
+		transport.write(response->getData());
 	}
 }

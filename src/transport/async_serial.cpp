@@ -144,6 +144,16 @@ size_t AsyncSerial::write(std::vector<uint8_t>& out)
 	return out.size();
 }
 
+size_t AsyncSerial::write(uint8_t* out, size_t amount)
+{
+	return 0;
+}
+
+size_t AsyncSerial::write(Packet* packet)
+{
+	return 0;
+}
+
 size_t AsyncSerial::read(std::vector<uint8_t>& in, size_t amount)
 {
 	std::cout << __PRETTY_FUNCTION__ << std::endl;
@@ -171,6 +181,21 @@ size_t AsyncSerial::read(std::vector<uint8_t>& in, size_t amount)
 	}
 
 	return timedOut ? 0 : amount;
+}
+
+size_t AsyncSerial::read(uint8_t* in, size_t amount)
+{
+	return 0;
+}
+
+size_t AsyncSerial::read(Packet* packet, size_t amount)
+{
+	return 0;
+}
+
+size_t AsyncSerial::available()
+{
+	return port.available();
 }
 
 void AsyncSerial::doAsyncRead()

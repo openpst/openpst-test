@@ -148,6 +148,16 @@ size_t MessagedAsyncSerial::write(std::vector<uint8_t>& out)
 	return out.size();
 }
 
+size_t MessagedAsyncSerial::write(uint8_t* out, size_t amount)
+{
+	return 0;
+}
+
+size_t MessagedAsyncSerial::write(Packet* packet)
+{
+	return 0;
+}
+
 size_t MessagedAsyncSerial::read(std::vector<uint8_t>& in, size_t amount)
 {
 	//std::cout << __PRETTY_FUNCTION__ << std::endl;
@@ -175,6 +185,21 @@ size_t MessagedAsyncSerial::read(std::vector<uint8_t>& in, size_t amount)
 	}
 
 	return timedOut ? 0 : amount;
+}
+
+size_t MessagedAsyncSerial::read(uint8_t* in, size_t amount)
+{
+	return 0;
+}
+
+size_t MessagedAsyncSerial::read(Packet* packet, size_t amount)
+{
+	return 0;
+}
+
+size_t MessagedAsyncSerial::available()
+{
+	return port.available();
 }
 
 void MessagedAsyncSerial::doAsyncRead()
@@ -219,7 +244,6 @@ void MessagedAsyncSerial::onReadComplete(const boost::system::error_code& error,
 		if (memcmp(&message[message.size() - messageEnd.size()], &messageEnd[0], messageEnd.size()) == 0) {
 			message.erase(message.end() - messageEnd.size(), message.end());
 		}
-
 
 		std::cout << "DUMPING " << buffer.size() << " " << received << " " << message.size()  << std::endl;
 		hexdump((uint8_t*)&message[0], message.size());

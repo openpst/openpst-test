@@ -27,7 +27,6 @@
 #pragma once
 
 #include "transport/transport_interface.h"
-#include "transport/serial_port.h"
 #include <boost/asio.hpp>
 #include <boost/asio/serial_port.hpp>
 #include <boost/system/error_code.hpp>
@@ -44,7 +43,79 @@ using boost::posix_time::time_duration;
 namespace OpenPST {
 	namespace Transport {
 
-		class Serial : TransportInterface
+	class SerialPort : public boost::asio::serial_port
+		{
+			
+			public:
+				SerialPort(boost::asio::io_service & io_service) : boost::asio::serial_port(io_service) {}
+
+				size_t available()
+				{
+					if (!is_open()) {
+						return 0;
+					}
+
+					boost::system::error_code error;
+					#if defined(BOOST_ASIO_WINDOWS) || defined(__CYGWIN__)
+						COMSTAT status;
+						if (::ClearCommError(native_handle(), NULL, &status)) {
+							error = boost::system::error_code(
+								::GetLastError(), 
+								boost::asio::error::get_system_category()
+							);
+							//throw AsyncSerialError(error.message());
+							return 0;
+						}
+						return static_cast<size_t>(status.cbInQue);
+					#else
+						int amount = 0;
+						if (::ioctl(native_handle(), FIONREAD, &amount)) {
+							error = boost::system::error_code(errno, boost::asio::error::get_system_category());
+							//throw AsyncSerialError(error.message());
+							return 0;
+						}
+						return static_cast<size_t>(amount);
+					#endif
+				}
+
+				void flush()
+				{
+					if (!is_open()) {
+						return;
+					}
+					#ifdef _WIN32
+						FlushFileBuffers(native_handle());
+					#else
+						tcdrain(native_handle());
+					#endif
+				}
+
+				void flushInput()
+				{
+					if (!is_open()) {
+						return;
+					}
+					#ifdef _WIN32
+						return;
+					#else
+						tcflush(native_handle(), TCIFLUSH);
+					#endif
+				}
+
+				void flushOutput()
+				{
+					if (!is_open()) {
+						return;
+					}
+					#ifdef _WIN32
+						return;
+					#else
+						tcflush(native_handle(), TCOFLUSH);
+					#endif
+				}
+		};
+
+		class Serial : public TransportInterface
 		{
 			protected:
 				io_service     io;
@@ -54,7 +125,7 @@ namespace OpenPST {
 				std::string    device;
 				size_t 		   received = 0;
 				bool 		   timedOut = false;
-				std::vector<uint8_t> rxbuffer;
+				std::vector<uint8_t> buffer;
 			public:
 				Serial(
 					const std::string& device,
@@ -71,10 +142,6 @@ namespace OpenPST {
                 Serial(const Serial&);
                 Serial &operator=(const Serial &p); 
 			public:
-				/**
-				* @brief isOpen
-				*/
-				bool isOpen();
 
 				/**
 				* @brief open
@@ -87,24 +154,59 @@ namespace OpenPST {
         			serial_port_base::stop_bits stop = serial_port_base::stop_bits(serial_port_base::stop_bits::one)
         		);
 
+				
+				/**
+				* @brief isOpen
+				*/
+				bool isOpen() override;
+
 				/**
 				* @brief close
+				* @see TransportInterface
 				*/
-				void close();
+				void close() override;
 
 				/**
 				* @brief write
+				* @see TransportInterface
 				*/
-				size_t write(std::vector<uint8_t>& out);
+				size_t write(std::vector<uint8_t>& out) override;
+				
+				/**
+				* @brief write
+				* @see TransportInterface
+				*/
+				size_t write(uint8_t* out, size_t amount) override;
 
-				size_t write(uint8_t* out, size_t amount);
+				/**
+				* @brief write
+				* @see TransportInterface
+				*/
+				size_t write(Packet* packet) override;
 
 				/**
 				* @brief read
+				* @see TransportInterface
 				*/
-				size_t read(std::vector<uint8_t>& in, size_t size);
+				size_t read(std::vector<uint8_t>& in, size_t amount) override;
 				
-				size_t read(uint8_t* in, size_t amount);
+				/**
+				* @brief read
+				* @see TransportInterface
+				*/
+				size_t read(uint8_t* in, size_t amount) override;
+				
+				/**
+				* @brief read
+				* @see TransportInterface
+				*/
+				size_t read(Packet* packet, size_t amount = 0) override;
+
+				/**
+				* @brief available
+				* @see TransportInterface
+				*/
+				size_t available() override;
 
 				/**
 				* @brief getDevice
@@ -122,8 +224,8 @@ namespace OpenPST {
 				int getTimeout();
 
 			private:
-				void doAsyncRead();
-				void onReadReady(const boost::system::error_code& error);
+				void doAsyncRead(size_t amount);
+				void onReadReady(const boost::system::error_code& error, size_t requested);
 				void onTimeout(const boost::system::error_code& error);
 		};
 

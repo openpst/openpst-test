@@ -36,7 +36,7 @@
 
 namespace OpenPST {
 	namespace Transport {
-		class Tcp : TransportInterface
+		class Tcp : public TransportInterface
 		{
 			protected:
 				boost::asio::io_service 		 io;
@@ -61,7 +61,7 @@ namespace OpenPST {
 				* @brief connect
 				*/
 				void connect(const std::string& host, int port, int timeout = 30);
-				
+
 				/**
 				* @brief connected
 				*/
@@ -72,15 +72,58 @@ namespace OpenPST {
 				*/
 				void disconnect();
 				
-				/*
-				* @brief write
+				/**
+				* @brief isOpen
 				*/
-				size_t write(std::vector<uint8_t>& out);
+				bool isOpen() override;
 				
-				/*
-				* @brief read
+				/**
+				* @brief close
+				* @see TransportInterface
 				*/
-				size_t read(std::vector<uint8_t>& in, size_t amount);
+				void close() override;
+
+				/**
+				* @brief write
+				* @see TransportInterface
+				*/
+				size_t write(std::vector<uint8_t>& out) override;
+				
+				/**
+				* @brief write
+				* @see TransportInterface
+				*/
+				size_t write(uint8_t* out, size_t amount) override;
+
+				/**
+				* @brief write
+				* @see TransportInterface
+				*/
+				size_t write(Packet* packet) override;
+
+				/**
+				* @brief read
+				* @see TransportInterface
+				*/
+				size_t read(std::vector<uint8_t>& in, size_t amount) override;
+				
+				/**
+				* @brief read
+				* @see TransportInterface
+				*/
+				size_t read(uint8_t* in, size_t amount) override;
+				
+				/**
+				* @brief read
+				* @see TransportInterface
+				*/
+				size_t read(Packet* packet, size_t amount = 0) override;
+
+				/**
+				* @brief available
+				* @see TransportInterface
+				*/
+				size_t available() override;
 
 			private:
 				void start(const boost::asio::ip::tcp::endpoint& endpoint);

@@ -27,7 +27,7 @@
 #pragma once
 
 #include "transport/transport_interface.h"
-#include "transport/serial_port.h"
+#include "transport/serial.h"
 #include <boost/asio.hpp>
 #include <boost/bind.hpp>
 #include <boost/thread.hpp>
@@ -47,7 +47,7 @@ namespace OpenPST {
 	namespace Transport {
 		
 
-		class AsyncSerial : TransportInterface
+		class AsyncSerial : public TransportInterface
 		{
 			protected:
 				io_service      io;
@@ -78,10 +78,6 @@ namespace OpenPST {
                 AsyncSerial(const AsyncSerial&);
                 AsyncSerial &operator=(const AsyncSerial &p); 
 			public:
-				/**
-				* @brief isOpen
-				*/
-				bool isOpen();
 
 				/**
 				* @brief open
@@ -93,21 +89,59 @@ namespace OpenPST {
         			serial_port_base::flow_control flow = serial_port_base::flow_control(serial_port_base::flow_control::none),
         			serial_port_base::stop_bits stop = serial_port_base::stop_bits(serial_port_base::stop_bits::one)
         		);
+				
+				/**
+				* @brief isOpen
+				*/
+				bool isOpen() override;
 
 				/**
 				* @brief close
+				* @see TransportInterface
 				*/
-				void close();
+				void close() override;
 
 				/**
 				* @brief write
+				* @see TransportInterface
 				*/
-				size_t write(std::vector<uint8_t>& out);
+				size_t write(std::vector<uint8_t>& out) override;
+				
+				/**
+				* @brief write
+				* @see TransportInterface
+				*/
+				size_t write(uint8_t* out, size_t amount) override;
+
+				/**
+				* @brief write
+				* @see TransportInterface
+				*/
+				size_t write(Packet* packet) override;
 
 				/**
 				* @brief read
+				* @see TransportInterface
 				*/
-				size_t read(std::vector<uint8_t>& in, size_t size);
+				size_t read(std::vector<uint8_t>& in, size_t amount) override;
+				
+				/**
+				* @brief read
+				* @see TransportInterface
+				*/
+				size_t read(uint8_t* in, size_t amount) override;
+				
+				/**
+				* @brief read
+				* @see TransportInterface
+				*/
+				size_t read(Packet* packet, size_t amount = 0) override;
+
+				/**
+				* @brief available
+				* @see TransportInterface
+				*/
+				size_t available() override;
 
 				/**
 				* @brief getDevice

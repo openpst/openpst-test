@@ -27,37 +27,35 @@
 #pragma once
 
 #include "transport/packet.h"
-#include "transport/serial.h"
-
-using OpenPST::Transport::Serial;
-using OpenPST::Transport::SerialError;
+#include "transport/transport_interface.h"
 
 namespace OpenPST {
     namespace Transport {
-        class SerialPacketWriter
+        class PacketWriter
         {
         	protected:
-                Serial& port;
+                TransportInterface& transport;
+
             public:
                 /**
                 * Constructor
                 */ 
-                SerialPacketWriter(Serial& port);
+                PacketWriter(TransportInterface& transport);
                 
                 /**
                 * Destructor
                 */
-                ~SerialPacketWriter();
+                ~PacketWriter();
             private:
                     // no copy
-                  SerialPacketWriter(const SerialPacketWriter&);
+                  PacketWriter(const PacketWriter&);
 
             public:
                 /**
-                * @brief Get the serial device interface reference
-                * @return Port&
+                * @brief Get the transport interface reference
+                * @return TransportInterface&
                 */
-                Serial& getPort();
+                TransportInterface& getTransport();
 
                 /**
                 * @brief Write a packet to the serial device
@@ -79,17 +77,17 @@ namespace OpenPST {
         /**
         * @brief PacketOutOfRangeException
         */
-		class SerialPacketWriterError : public std::exception
+		class PacketWriterError : public std::exception
 		{
 			private:
-				const SerialPacketWriterError& operator=(SerialPacketWriterError);
+				const PacketWriterError& operator=(PacketWriterError);
 				std::string _what;
 			public:
-				SerialPacketWriterError(std::string message) : 
+				PacketWriterError(std::string message) : 
 					_what(message)  { }
-				SerialPacketWriterError(const SerialPacketWriterError& second) : 
+				PacketWriterError(const PacketWriterError& second) : 
 					_what(second._what) {}
-				virtual ~SerialPacketWriterError() throw() {}
+				virtual ~PacketWriterError() throw() {}
 				virtual const char* what() const throw () {
 					return _what.c_str();
 				}

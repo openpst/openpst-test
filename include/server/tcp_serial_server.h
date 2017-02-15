@@ -47,7 +47,7 @@ namespace OpenPST {
 
 		/**
 		* @brief TcpSerialServerPacketHeader
-		*/
+		
 		struct TcpSerialServerPacketHeader {
 			int 	command;
 			size_t  size;
@@ -74,14 +74,11 @@ namespace OpenPST {
 			char path[255];
 		};
 
-		/**
-		* @brief TcpSerialServerResponse
-		*/
 		struct TcpSerialServerResponse {
 			TcpSerialServerPacketHeader  header;
 			uint8_t data[0];
 		};
-		
+		*/
 		/**
 		* @brief TcpSerialServerSession
 		*/

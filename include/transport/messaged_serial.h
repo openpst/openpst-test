@@ -17,9 +17,9 @@
 * You should have received a copy of the GNU General Public License
 * along with libopenpst. If not, see <http://www.gnu.org/licenses/>.
 *
-* @file messaged_async_serial.h
-* @package openpst/libopenpst
-* @brief Read from serial and parse out messages from the serial port
+* @file 
+* @package 
+* @brief 
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -29,12 +29,10 @@
 #include "transport/transport_interface.h"
 #include "transport/serial.h"
 #include <boost/asio.hpp>
-#include <boost/bind.hpp>
-#include <boost/thread.hpp>
 #include <boost/asio/serial_port.hpp>
 #include <boost/system/error_code.hpp>
 #include <boost/system/system_error.hpp>
-#include <queue>
+#include <boost/bind.hpp>
 
 using boost::asio::serial_port_base;
 using boost::asio::io_service;
@@ -45,25 +43,21 @@ using boost::posix_time::time_duration;
 
 namespace OpenPST {
 	namespace Transport {
-		
 
-		class MessagedAsyncSerial : public TransportInterface
+		class MessagedSerial : public TransportInterface
 		{
 			protected:
-				io_service      io;
-				SerialPort      port;
-				std::string 	device;
-				std::string 	messageEnd;
-				int timeout;
-				bool timedOut = false;
-				boost::thread worker;
-				boost::mutex  writeLock;
-				boost::mutex  readLock;
-				std::queue<std::vector<uint8_t>>  writeQueue;
-				boost::asio::streambuf 			  buffer; 
+				io_service     io;
+				SerialPort     port;				
+				deadline_timer timer;
+				int 		   timeout;
+				std::string    device;
+				std::string    messageEnd;
+				bool 		   timedOut = false;
+				boost::asio::streambuf 	buffer; 
 				std::vector<std::vector<uint8_t>> messages;
 			public:
-				MessagedAsyncSerial(
+				MessagedSerial(
 					const std::string& device,
 					const std::string& messageEnd,
 					unsigned int baud = 115200,
@@ -74,10 +68,10 @@ namespace OpenPST {
         			serial_port_base::stop_bits stop = serial_port_base::stop_bits(serial_port_base::stop_bits::one)
         		);
 
-				~MessagedAsyncSerial();			
+				~MessagedSerial();			
             private:                
-                MessagedAsyncSerial(const MessagedAsyncSerial&);
-                MessagedAsyncSerial &operator=(const MessagedAsyncSerial &p); 
+                MessagedSerial(const MessagedSerial&);
+                MessagedSerial &operator=(const MessagedSerial &p); 
 			public:
 
 				/**
@@ -91,6 +85,7 @@ namespace OpenPST {
         			serial_port_base::flow_control flow = serial_port_base::flow_control(serial_port_base::flow_control::none),
         			serial_port_base::stop_bits stop = serial_port_base::stop_bits(serial_port_base::stop_bits::one)
         		);
+
 				
 				/**
 				* @brief isOpen
@@ -124,18 +119,24 @@ namespace OpenPST {
 				/**
 				* @brief read
 				* @see TransportInterface
+				* @note amount is not used. read is performed until 
+				* a message has ended by messageEnd variable or time out
 				*/
 				size_t read(std::vector<uint8_t>& in, size_t amount) override;
 				
 				/**
 				* @brief read
 				* @see TransportInterface
+				* @note amount is not used. read is performed until 
+				* a message has ended by messageEnd variable or time out
 				*/
 				size_t read(uint8_t* in, size_t amount) override;
 				
 				/**
 				* @brief read
 				* @see TransportInterface
+				* @note amount is not used. read is performed until 
+				* a message has ended by messageEnd variable or time out
 				*/
 				size_t read(Packet* packet, size_t amount = 0) override;
 
@@ -151,9 +152,15 @@ namespace OpenPST {
 				const std::string& getDevice();
 
 				/**
-				* @brief getMessageEnd
+				* @brief getMessageEnd - get the current message end string terminator
 				*/
 				const std::string& getMessageEnd();
+
+				/**
+				* @brief - Get a what should be read only reference to the current message buffer.
+				* 			Use this for peeking, use read() to pop out messages
+				*/
+				const std::vector<std::vector<uint8_t>>& getMessages();
 
 				/**
 				* @brief setTimeout
@@ -167,12 +174,8 @@ namespace OpenPST {
 
 			private:
 				void doAsyncRead();
-				void doAsyncWrite();
 				void onReadComplete(const boost::system::error_code& error, size_t received);
-				void onWriteComplete(const boost::system::error_code& error, size_t written);
 				void onTimeout(const boost::system::error_code& error);
-				void doWork();
-				void onWorkComplete();
 		};
 	}
 }

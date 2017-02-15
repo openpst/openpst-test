@@ -98,6 +98,16 @@ void Tcp::disconnect()
 	}
 }
 
+bool Tcp::isOpen()
+{
+	return connected();
+}
+
+void Tcp::close()
+{
+	disconnect();
+}
+
 void Tcp::start(const boost::asio::ip::tcp::endpoint& endpoint)
 {
     std::cout << __PRETTY_FUNCTION__ << std::endl;
@@ -157,16 +167,40 @@ size_t Tcp::write(std::vector<uint8_t>& out)
 	return 0;
 }
 
+size_t Tcp::write(uint8_t* out, size_t amount)
+{
+	return 0;
+}
+
+size_t Tcp::write(Packet* packet)
+{
+	return 0;
+}
+
 size_t Tcp::read(std::vector<uint8_t>& in, size_t amount)
 {	
 	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	return 0;
 }
 
+size_t Tcp::read(uint8_t* in, size_t amount)
+{
+	return 0;
+}
+
+size_t Tcp::read(Packet* packet, size_t amount)
+{
+	return 0;
+}
+
+size_t Tcp::available()
+{
+	return socket.available();
+}
+
 void Tcp::asyncWrite()
 {
 	std::cout << __PRETTY_FUNCTION__ << std::endl;
-
 }
 
 void Tcp::asyncRead()

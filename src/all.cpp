@@ -1,12 +1,24 @@
 #include "transport/serial.h"
+#include "transport/async_serial.h"
+#include "transport/messaged_serial.h"
+#include "transport/messaged_async_serial.h"
+
+#include "server/tcp_serial_server.h"
+//#include "transport/tcp_serial_client.h"
+
 #include "transport/packet_writer.h"
+
 #include "qualcomm/streaming_dload.h"
 #include "qualcomm/packet/streaming_dload_hello_request.h"
 #include "qualcomm/packet/streaming_dload_security_mode_request.h"
 #include "qualcomm/packet/streaming_dload_open_multi_image_request.h"
 #include "qualcomm/packet/streaming_dload_read_request.h"
+
+
+#include "qualcomm/hdlc_encoder.h"
 #include "qualcomm/packet/dm_spc_request.h"
 #include "qualcomm/packet/dm_spc_response.h"
+
 #include <iostream>
 #include <fstream>
 #include <time.h> 
@@ -15,7 +27,7 @@ using namespace OpenPST::Transport;
 using namespace OpenPST::QC;
 
 
-void hello(Serial& port, PacketWriter& writer, int argc, char* argv[]) {
+void hello(TransportInterface& interface, PacketWriter& writer, int argc, char* argv[]) {
 	StreamingDloadHelloRequest request;
 	
 	writer.write(&request);
@@ -51,7 +63,7 @@ void hello(Serial& port, PacketWriter& writer, int argc, char* argv[]) {
 	}
 }
 
-void security_mode(Serial& port, PacketWriter& writer, int argc, char* argv[]) {
+void security_mode(TransportInterface& interface, PacketWriter& writer, int argc, char* argv[]) {
 	StreamingDloadSecurityModeRequest request;
 	
 	request.setMode(kStreamingDloadSecurityModeUntrusted);
@@ -61,7 +73,7 @@ void security_mode(Serial& port, PacketWriter& writer, int argc, char* argv[]) {
 	auto response = reinterpret_cast<StreamingDloadSecurityModeResponse*>(request.getResponse());
 }
 
-void open_multi(Serial& port, PacketWriter& writer, int argc, char* argv[]) {
+void open_multi(TransportInterface& interface, PacketWriter& writer, int argc, char* argv[]) {
 	StreamingDloadOpenMultiImageRequest request;
 	
 	request.setType(kStreamingDloadOpenModeMultiEmmcUser);
@@ -71,7 +83,7 @@ void open_multi(Serial& port, PacketWriter& writer, int argc, char* argv[]) {
 	auto response = reinterpret_cast<StreamingDloadOpenMultiImageResponse*>(request.getResponse());
 }
 
-void read_emmc(Serial& port, PacketWriter& writer, int argc, char* argv[]) {
+void read_emmc(TransportInterface& interface, PacketWriter& writer, int argc, char* argv[]) {
 	
 	uint32_t startAddress = 0x00000000;
 	uint32_t endAddress   = startAddress + (1024 * 1024 * 100);
@@ -136,8 +148,22 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
+	std::string atDelim = "\r\n";
+	std::string hdlcDelim;
+	hdlcDelim.push_back(HDLC_CONTROL_CHAR);
+	time_t stime;
+	time_t etime;
+	
+	time(&stime);
+		
 	try {
 		Serial port(argv[1]);
+		//MessagedSerial port(argv[1], atDelim);
+		//MessagedSerial port(argv[1], hdlcDelim);
+		//MessagedAsynSerial port(argv[1], atDelim);
+		//MessagedAsynSerial port(argv[1], hdlcDelim);
+
+
 		PacketWriter writer(port);
 
 		if (port.isOpen()) {
@@ -154,4 +180,7 @@ int main(int argc, char* argv[])
 	} catch (PacketError& e) {
 		std::cout << e.what() << std::endl;
 	}
+
+	time(&etime);
+	std::cout << "Time: " << difftime(etime, stime) << std::endl;
 }
