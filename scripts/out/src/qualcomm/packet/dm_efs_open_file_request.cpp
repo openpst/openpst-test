@@ -34,6 +34,7 @@ DmEfsOpenFileRequest::DmEfsOpenFileRequest(PacketEndianess targetEndian) : DmEfs
 	addField("mode", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("file_path", kPacketFieldTypeVariant, 0);
 
+	setSubsysCommand(kDiagEfsOpen);
 }
 
 DmEfsOpenFileRequest::~DmEfsOpenFileRequest()
@@ -72,4 +73,11 @@ void DmEfsOpenFileRequest::setFilePath(uint8_t* data, size_t size)
 void DmEfsOpenFileRequest::unpack(std::vector<uint8_t>& data)
 {
 	DmEfsPacket::unpack(data);
+}
+void DmEfsOpenFileRequest::prepareResponse()
+{
+	if (response == nullptr) {
+		DmEfsOpenFileResponse* resp = new DmEfsOpenFileResponse();
+		response = resp;
+	}
 }

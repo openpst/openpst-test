@@ -38,6 +38,7 @@ DmEfsStatResponse::DmEfsStatResponse(PacketEndianess targetEndian) : DmEfsPacket
 	addField("mtime", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("ctime", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
+	setSubsysCommand(kDiagEfsStat);
 }
 
 DmEfsStatResponse::~DmEfsStatResponse()

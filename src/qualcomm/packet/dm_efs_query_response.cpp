@@ -37,6 +37,7 @@ DmEfsQueryResponse::DmEfsQueryResponse(PacketEndianess targetEndian) : DmEfsPack
 	addField("max_directories", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("max_mounts", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
+	setSubsysCommand(kDiagEfsQuery);
 }
 
 DmEfsQueryResponse::~DmEfsQueryResponse()

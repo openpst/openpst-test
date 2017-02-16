@@ -33,6 +33,7 @@ DmEfsMkdirRequest::DmEfsMkdirRequest(PacketEndianess targetEndian) : DmEfsPacket
 	addField("mode", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("path", kPacketFieldTypeVariant, 0);
 
+	setSubsysCommand(kDiagEfsMkdir);
 }
 
 DmEfsMkdirRequest::~DmEfsMkdirRequest()
@@ -62,4 +63,11 @@ void DmEfsMkdirRequest::setPath(uint8_t* data, size_t size)
 void DmEfsMkdirRequest::unpack(std::vector<uint8_t>& data)
 {
 	DmEfsPacket::unpack(data);
+}
+void DmEfsMkdirRequest::prepareResponse()
+{
+	if (response == nullptr) {
+		DmEfsMkdirResponse* resp = new DmEfsMkdirResponse();
+		response = resp;
+	}
 }

@@ -53,6 +53,7 @@ DmVersionResponse::DmVersionResponse(PacketEndianess targetEndian) : DmPacket(ta
 	addField("rssi_level", kPacketFieldTypePrimitive, sizeof(uint16_t));
 	addField("power", kPacketFieldTypePrimitive, sizeof(uint8_t));
 
+	setCommand(kDiagDiagVer);
 }
 
 DmVersionResponse::~DmVersionResponse()

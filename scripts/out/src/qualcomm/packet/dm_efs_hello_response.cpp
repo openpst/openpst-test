@@ -40,6 +40,7 @@ DmEfsHelloResponse::DmEfsHelloResponse(PacketEndianess targetEndian) : DmEfsPack
 	addField("max_version", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("feature_bits", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
+	setSubsysCommand(kDiagEfsHello);
 }
 
 DmEfsHelloResponse::~DmEfsHelloResponse()

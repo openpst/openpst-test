@@ -40,6 +40,7 @@ DmEfsHelloRequest::DmEfsHelloRequest(PacketEndianess targetEndian) : DmEfsPacket
 	addField("max_version", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("feature_bits", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
+	setSubsysCommand(kDiagEfsHello);
 }
 
 DmEfsHelloRequest::~DmEfsHelloRequest()
@@ -132,4 +133,11 @@ void DmEfsHelloRequest::setFeatureBits(uint32_t featureBits)
 void DmEfsHelloRequest::unpack(std::vector<uint8_t>& data)
 {
 	DmEfsPacket::unpack(data);
+}
+void DmEfsHelloRequest::prepareResponse()
+{
+	if (response == nullptr) {
+		DmEfsHelloResponse* resp = new DmEfsHelloResponse();
+		response = resp;
+	}
 }

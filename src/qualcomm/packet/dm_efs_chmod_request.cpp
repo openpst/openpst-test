@@ -33,6 +33,7 @@ DmEfsChmodRequest::DmEfsChmodRequest(PacketEndianess targetEndian) : DmEfsPacket
 	addField("mode", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("path", kPacketFieldTypeVariant, 0);
 
+	setSubsysCommand(kDiagEfsChmod);
 }
 
 DmEfsChmodRequest::~DmEfsChmodRequest()
@@ -62,4 +63,11 @@ void DmEfsChmodRequest::setPath(uint8_t* data, size_t size)
 void DmEfsChmodRequest::unpack(std::vector<uint8_t>& data)
 {
 	DmEfsPacket::unpack(data);
+}
+void DmEfsChmodRequest::prepareResponse()
+{
+	if (response == nullptr) {
+		DmEfsChmodResponse* resp = new DmEfsChmodResponse();
+		response = resp;
+	}
 }

@@ -32,6 +32,7 @@ DmEfsCloseDirRequest::DmEfsCloseDirRequest(PacketEndianess targetEndian) : DmEfs
 {
 	addField("dp", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
+	setSubsysCommand(kDiagEfsCloseDir);
 }
 
 DmEfsCloseDirRequest::~DmEfsCloseDirRequest()
@@ -52,4 +53,11 @@ void DmEfsCloseDirRequest::setDp(uint32_t dp)
 void DmEfsCloseDirRequest::unpack(std::vector<uint8_t>& data)
 {
 	DmEfsPacket::unpack(data);
+}
+void DmEfsCloseDirRequest::prepareResponse()
+{
+	if (response == nullptr) {
+		DmEfsCloseDirResponse* resp = new DmEfsCloseDirResponse();
+		response = resp;
+	}
 }

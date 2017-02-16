@@ -33,6 +33,7 @@ DmEfsOpenFileResponse::DmEfsOpenFileResponse(PacketEndianess targetEndian) : DmE
 	addField("fp", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("error", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
+	setSubsysCommand(kDiagEfsOpen);
 }
 
 DmEfsOpenFileResponse::~DmEfsOpenFileResponse()

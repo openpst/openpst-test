@@ -32,6 +32,7 @@ DmEfsLstatRequest::DmEfsLstatRequest(PacketEndianess targetEndian) : DmEfsPacket
 {
 	addField("path", kPacketFieldTypeVariant, 0);
 
+	setSubsysCommand(kDiagEfsLstat);
 }
 
 DmEfsLstatRequest::~DmEfsLstatRequest()

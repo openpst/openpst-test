@@ -32,6 +32,7 @@ DmEfsUnlinkRequest::DmEfsUnlinkRequest(PacketEndianess targetEndian) : DmEfsPack
 {
 	addField("path", kPacketFieldTypeVariant, 0);
 
+	setSubsysCommand(kDiagEfsUnlink);
 }
 
 DmEfsUnlinkRequest::~DmEfsUnlinkRequest()
@@ -52,4 +53,11 @@ void DmEfsUnlinkRequest::setPath(uint8_t* data, size_t size)
 void DmEfsUnlinkRequest::unpack(std::vector<uint8_t>& data)
 {
 	DmEfsPacket::unpack(data);
+}
+void DmEfsUnlinkRequest::prepareResponse()
+{
+	if (response == nullptr) {
+		DmEfsUnlinkResponse* resp = new DmEfsUnlinkResponse();
+		response = resp;
+	}
 }

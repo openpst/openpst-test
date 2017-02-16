@@ -17,9 +17,9 @@
 * You should have received a copy of the GNU General Public License
 * along with libopenpst. If not, see <http://www.gnu.org/licenses/>.
 *
-* @file 
-* @package 
-* @brief 
+* @file packet.h
+* @package openpst/libopenpst
+* @brief Read and write serial data
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -43,6 +43,9 @@ using boost::posix_time::time_duration;
 namespace OpenPST {
 	namespace Transport {
 
+	/**
+	* @brief SerialPort - we suppliment boost serial port with some additional features we need
+	*/
 	class SerialPort : public boost::asio::serial_port
 		{
 			

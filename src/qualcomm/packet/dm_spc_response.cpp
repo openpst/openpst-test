@@ -32,6 +32,7 @@ DmSpcResponse::DmSpcResponse(PacketEndianess targetEndian) : DmPacket(targetEndi
 {
 	addField("status", kPacketFieldTypePrimitive, sizeof(uint8_t));
 
+	setCommand(kDiagSpc);
 }
 
 DmSpcResponse::~DmSpcResponse()

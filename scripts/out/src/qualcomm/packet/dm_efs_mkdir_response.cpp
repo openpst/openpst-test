@@ -32,6 +32,7 @@ DmEfsMkdirResponse::DmEfsMkdirResponse(PacketEndianess targetEndian) : DmEfsPack
 {
 	addField("error", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
+	setSubsysCommand(kDiagEfsMkdir);
 }
 
 DmEfsMkdirResponse::~DmEfsMkdirResponse()

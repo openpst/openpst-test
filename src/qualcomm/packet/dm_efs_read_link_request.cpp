@@ -32,6 +32,7 @@ DmEfsReadLinkRequest::DmEfsReadLinkRequest(PacketEndianess targetEndian) : DmEfs
 {
 	addField("path", kPacketFieldTypeVariant, 0);
 
+	setSubsysCommand(kDiagEfsReadLink);
 }
 
 DmEfsReadLinkRequest::~DmEfsReadLinkRequest()
@@ -52,4 +53,11 @@ void DmEfsReadLinkRequest::setPath(uint8_t* data, size_t size)
 void DmEfsReadLinkRequest::unpack(std::vector<uint8_t>& data)
 {
 	DmEfsPacket::unpack(data);
+}
+void DmEfsReadLinkRequest::prepareResponse()
+{
+	if (response == nullptr) {
+		DmEfsReadLinkResponse* resp = new DmEfsReadLinkResponse();
+		response = resp;
+	}
 }

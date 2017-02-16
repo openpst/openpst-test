@@ -41,6 +41,7 @@ DmEfsStatfsResponse::DmEfsStatfsResponse(PacketEndianess targetEndian) : DmEfsPa
 	addField("file_count", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("max_file_count", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
+	setSubsysCommand(kDiagEfsStatFS);
 }
 
 DmEfsStatfsResponse::~DmEfsStatfsResponse()

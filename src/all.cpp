@@ -141,6 +141,12 @@ void read_emmc(TransportInterface& interface, PacketWriter& writer, int argc, ch
 	std::cout << "Time: " << difftime(etime, stime) << std::endl;
 }
 
+void diag_test(TransportInterface& interface, PacketWriter& writer, int argc, char* argv[]) {
+	DmSpcRequest request;
+
+	writer.write(&request);
+}
+
 int main(int argc, char* argv[])
 {
 	if (argc < 2) {
@@ -170,10 +176,11 @@ int main(int argc, char* argv[])
 			std::cout << "Opened " << port.getDevice() << std::endl;
 		}
 
-		hello(port, writer, argc, argv);
-		security_mode(port, writer, argc, argv);
-		open_multi(port, writer, argc, argv);
+		//hello(port, writer, argc, argv);
+		//security_mode(port, writer, argc, argv);
+		//open_multi(port, writer, argc, argv);
 		//read_emmc(port, writer, argc, argv);
+		diag_test(port, writer, argc, argv);
 
 	} catch (SerialError& e) {
 		std::cout << e.what() << std::endl;

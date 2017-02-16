@@ -32,6 +32,7 @@ DmEfsFstatRequest::DmEfsFstatRequest(PacketEndianess targetEndian) : DmEfsPacket
 {
 	addField("fp", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
+	setSubsysCommand(kDiagEfsFstat);
 }
 
 DmEfsFstatRequest::~DmEfsFstatRequest()
@@ -52,4 +53,11 @@ void DmEfsFstatRequest::setFp(uint32_t fp)
 void DmEfsFstatRequest::unpack(std::vector<uint8_t>& data)
 {
 	DmEfsPacket::unpack(data);
+}
+void DmEfsFstatRequest::prepareResponse()
+{
+	if (response == nullptr) {
+		DmEfsFstatResponse* resp = new DmEfsFstatResponse();
+		response = resp;
+	}
 }

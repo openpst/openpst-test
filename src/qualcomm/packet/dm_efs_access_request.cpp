@@ -33,6 +33,7 @@ DmEfsAccessRequest::DmEfsAccessRequest(PacketEndianess targetEndian) : DmEfsPack
 	addField("permission_mask", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("path", kPacketFieldTypeVariant, 0);
 
+	setSubsysCommand(kDiagEfsAccess);
 }
 
 DmEfsAccessRequest::~DmEfsAccessRequest()
@@ -62,4 +63,11 @@ void DmEfsAccessRequest::setPath(uint8_t* data, size_t size)
 void DmEfsAccessRequest::unpack(std::vector<uint8_t>& data)
 {
 	DmEfsPacket::unpack(data);
+}
+void DmEfsAccessRequest::prepareResponse()
+{
+	if (response == nullptr) {
+		DmEfsAccessResponse* resp = new DmEfsAccessResponse();
+		response = resp;
+	}
 }

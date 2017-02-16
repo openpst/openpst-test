@@ -31,6 +31,7 @@ using namespace OpenPST::QC;
 DmEfsQueryRequest::DmEfsQueryRequest(PacketEndianess targetEndian) : DmEfsPacket(targetEndian)
 {
 
+	setSubsysCommand(kDiagEfsQuery);
 }
 
 DmEfsQueryRequest::~DmEfsQueryRequest()
@@ -42,4 +43,11 @@ DmEfsQueryRequest::~DmEfsQueryRequest()
 void DmEfsQueryRequest::unpack(std::vector<uint8_t>& data)
 {
 	DmEfsPacket::unpack(data);
+}
+void DmEfsQueryRequest::prepareResponse()
+{
+	if (response == nullptr) {
+		DmEfsQueryResponse* resp = new DmEfsQueryResponse();
+		response = resp;
+	}
 }

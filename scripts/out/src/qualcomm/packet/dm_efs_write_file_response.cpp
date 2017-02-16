@@ -35,6 +35,7 @@ DmEfsWriteFileResponse::DmEfsWriteFileResponse(PacketEndianess targetEndian) : D
 	addField("bytes_written", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("error", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
+	setSubsysCommand(kDiagEfsWrite);
 }
 
 DmEfsWriteFileResponse::~DmEfsWriteFileResponse()

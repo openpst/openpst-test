@@ -17,9 +17,9 @@
 * You should have received a copy of the GNU General Public License
 * along with libopenpst. If not, see <http://www.gnu.org/licenses/>.
 *
-* @file 
-* @package 
-* @brief 
+* @file serial.h
+* @package openpst/libopenpst
+* @brief Represents a packet of data to be read or written from a TransportInterface
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */

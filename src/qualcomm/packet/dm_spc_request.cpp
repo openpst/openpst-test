@@ -32,6 +32,7 @@ DmSpcRequest::DmSpcRequest(PacketEndianess targetEndian) : DmPacket(targetEndian
 {
 	addField("spc", kPacketFieldTypeArray, DIAG_SPC_LENGTH);
 
+	setCommand(kDiagSpc);
 }
 
 DmSpcRequest::~DmSpcRequest()

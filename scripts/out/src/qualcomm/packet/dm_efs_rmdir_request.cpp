@@ -32,6 +32,7 @@ DmEfsRmdirRequest::DmEfsRmdirRequest(PacketEndianess targetEndian) : DmEfsPacket
 {
 	addField("path", kPacketFieldTypeVariant, 0);
 
+	setSubsysCommand(kDiagEfsRmdir);
 }
 
 DmEfsRmdirRequest::~DmEfsRmdirRequest()
@@ -51,4 +52,11 @@ void DmEfsRmdirRequest::setPath(uint8_t* data, size_t size)
 
 void DmEfsRmdirRequest::unpack(std::vector<uint8_t>& data)
 {
+}
+void DmEfsRmdirRequest::prepareResponse()
+{
+	if (response == nullptr) {
+		DmEfsRmdirResponse* resp = new DmEfsRmdirResponse();
+		response = resp;
+	}
 }

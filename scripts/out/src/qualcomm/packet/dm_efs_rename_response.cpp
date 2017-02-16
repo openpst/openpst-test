@@ -32,6 +32,7 @@ DmEfsRenameResponse::DmEfsRenameResponse(PacketEndianess targetEndian) : DmEfsPa
 {
 	addField("error", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
+	setSubsysCommand(kDiagEfsRename);
 }
 
 DmEfsRenameResponse::~DmEfsRenameResponse()

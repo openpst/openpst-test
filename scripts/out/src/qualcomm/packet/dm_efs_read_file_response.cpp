@@ -36,6 +36,7 @@ DmEfsReadFileResponse::DmEfsReadFileResponse(PacketEndianess targetEndian) : DmE
 	addField("error", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("data", kPacketFieldTypeVariant, 0);
 
+	setSubsysCommand(kDiagEfsRead);
 }
 
 DmEfsReadFileResponse::~DmEfsReadFileResponse()

@@ -32,6 +32,7 @@ DmEfsOpenDirRequest::DmEfsOpenDirRequest(PacketEndianess targetEndian) : DmEfsPa
 {
 	addField("path", kPacketFieldTypeVariant, 0);
 
+	setSubsysCommand(kDiagEfsOpenDir);
 }
 
 DmEfsOpenDirRequest::~DmEfsOpenDirRequest()
@@ -52,4 +53,11 @@ void DmEfsOpenDirRequest::setPath(uint8_t* data, size_t size)
 void DmEfsOpenDirRequest::unpack(std::vector<uint8_t>& data)
 {
 	DmEfsPacket::unpack(data);
+}
+void DmEfsOpenDirRequest::prepareResponse()
+{
+	if (response == nullptr) {
+		DmEfsOpenDirResponse* resp = new DmEfsOpenDirResponse();
+		response = resp;
+	}
 }

@@ -32,6 +32,7 @@ DmPasswordResponse::DmPasswordResponse(PacketEndianess targetEndian) : DmPacket(
 {
 	addField("status", kPacketFieldTypePrimitive, sizeof(uint8_t));
 
+	setCommand(kDiagPassword);
 }
 
 DmPasswordResponse::~DmPasswordResponse()

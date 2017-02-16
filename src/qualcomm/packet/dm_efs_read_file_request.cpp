@@ -34,6 +34,7 @@ DmEfsReadFileRequest::DmEfsReadFileRequest(PacketEndianess targetEndian) : DmEfs
 	addField("size", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("offset", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
+	setSubsysCommand(kDiagEfsRead);
 }
 
 DmEfsReadFileRequest::~DmEfsReadFileRequest()
@@ -72,4 +73,11 @@ void DmEfsReadFileRequest::setOffset(uint32_t offset)
 void DmEfsReadFileRequest::unpack(std::vector<uint8_t>& data)
 {
 	DmEfsPacket::unpack(data);
+}
+void DmEfsReadFileRequest::prepareResponse()
+{
+	if (response == nullptr) {
+		DmEfsReadFileResponse* resp = new DmEfsReadFileResponse();
+		response = resp;
+	}
 }

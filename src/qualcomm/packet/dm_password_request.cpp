@@ -32,6 +32,7 @@ DmPasswordRequest::DmPasswordRequest(PacketEndianess targetEndian) : DmPacket(ta
 {
 	addField("password", kPacketFieldTypeArray, DIAG_PASSWORD_LENGTH);
 
+	setCommand(kDiagPassword);
 }
 
 DmPasswordRequest::~DmPasswordRequest()

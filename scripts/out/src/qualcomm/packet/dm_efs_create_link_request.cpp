@@ -33,6 +33,7 @@ DmEfsCreateLinkRequest::DmEfsCreateLinkRequest(PacketEndianess targetEndian) : D
 	addField("path", kPacketFieldTypeVariant, 0);
 	addField("new_path", kPacketFieldTypeVariant, 0);
 
+	setSubsysCommand(kDiagEfsSymlink);
 }
 
 DmEfsCreateLinkRequest::~DmEfsCreateLinkRequest()
@@ -62,4 +63,11 @@ void DmEfsCreateLinkRequest::setNewPath(uint8_t* data, size_t size)
 void DmEfsCreateLinkRequest::unpack(std::vector<uint8_t>& data)
 {
 	DmEfsPacket::unpack(data);
+}
+void DmEfsCreateLinkRequest::prepareResponse()
+{
+	if (response == nullptr) {
+		DmEfsCreateLinkResponse* resp = new DmEfsCreateLinkResponse();
+		response = resp;
+	}
 }

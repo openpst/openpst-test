@@ -41,6 +41,7 @@ DmEfsReadDirResponse::DmEfsReadDirResponse(PacketEndianess targetEndian) : DmEfs
 	addField("ctime", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("name", kPacketFieldTypeVariant, 0);
 
+	setSubsysCommand(kDiagEfsReadDir);
 }
 
 DmEfsReadDirResponse::~DmEfsReadDirResponse()

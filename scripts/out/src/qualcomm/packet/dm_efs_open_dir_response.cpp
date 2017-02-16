@@ -33,6 +33,7 @@ DmEfsOpenDirResponse::DmEfsOpenDirResponse(PacketEndianess targetEndian) : DmEfs
 	addField("dp", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("error", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
+	setSubsysCommand(kDiagEfsOpenDir);
 }
 
 DmEfsOpenDirResponse::~DmEfsOpenDirResponse()

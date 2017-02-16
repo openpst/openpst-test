@@ -32,6 +32,7 @@ DmEfsAccessResponse::DmEfsAccessResponse(PacketEndianess targetEndian) : DmEfsPa
 {
 	addField("error", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
+	setSubsysCommand(kDiagEfsAccess);
 }
 
 DmEfsAccessResponse::~DmEfsAccessResponse()

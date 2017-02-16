@@ -261,7 +261,8 @@ void MessagedSerial::onReadComplete(const boost::system::error_code& error, size
 		throw SerialError(error.message());
 	}
 
-	if (received) {
+	if (received && received != messageEnd.size()) {
+
 		std::vector<uint8_t> message;
 
 		message.reserve(received);
@@ -295,6 +296,8 @@ void MessagedSerial::onReadComplete(const boost::system::error_code& error, size
 		if (!port.available()) {
 			return; 
 		}
+	} else if (received == messageEnd.size()) {
+		buffer.consume(buffer.size());
 	}
 
 	doAsyncRead();

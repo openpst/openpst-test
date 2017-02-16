@@ -32,6 +32,7 @@ DmEfsCloseDirResponse::DmEfsCloseDirResponse(PacketEndianess targetEndian) : DmE
 {
 	addField("error", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
+	setSubsysCommand(kDiagEfsCloseDir);
 }
 
 DmEfsCloseDirResponse::~DmEfsCloseDirResponse()

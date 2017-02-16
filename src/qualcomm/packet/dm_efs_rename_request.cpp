@@ -33,6 +33,7 @@ DmEfsRenameRequest::DmEfsRenameRequest(PacketEndianess targetEndian) : DmEfsPack
 	addField("path", kPacketFieldTypeVariant, 0);
 	addField("new_path", kPacketFieldTypeVariant, 0);
 
+	setSubsysCommand(kDiagEfsRename);
 }
 
 DmEfsRenameRequest::~DmEfsRenameRequest()

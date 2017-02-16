@@ -32,6 +32,7 @@ DmEfsChmodResponse::DmEfsChmodResponse(PacketEndianess targetEndian) : DmEfsPack
 {
 	addField("error", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
+	setSubsysCommand(kDiagEfsChmod);
 }
 
 DmEfsChmodResponse::~DmEfsChmodResponse()

@@ -33,6 +33,7 @@ DmNvReadResponse::DmNvReadResponse(PacketEndianess targetEndian) : DmPacket(targ
 	addField("nv_item", kPacketFieldTypePrimitive, sizeof(uint16_t));
 	addField("data", kPacketFieldTypeArray, DIAG_NV_ITEM_SIZE);
 
+	setCommand(kDiagNvRead);
 }
 
 DmNvReadResponse::~DmNvReadResponse()

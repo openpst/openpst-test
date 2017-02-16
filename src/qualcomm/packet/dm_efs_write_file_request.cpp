@@ -34,6 +34,7 @@ DmEfsWriteFileRequest::DmEfsWriteFileRequest(PacketEndianess targetEndian) : DmE
 	addField("offset", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("data", kPacketFieldTypeVariant, 0);
 
+	setSubsysCommand(kDiagEfsWrite);
 }
 
 DmEfsWriteFileRequest::~DmEfsWriteFileRequest()
@@ -72,4 +73,11 @@ void DmEfsWriteFileRequest::setData(uint8_t* data, size_t size)
 void DmEfsWriteFileRequest::unpack(std::vector<uint8_t>& data)
 {
 	DmEfsPacket::unpack(data);
+}
+void DmEfsWriteFileRequest::prepareResponse()
+{
+	if (response == nullptr) {
+		DmEfsWriteFileResponse* resp = new DmEfsWriteFileResponse();
+		response = resp;
+	}
 }

@@ -32,6 +32,7 @@ DmEfsCloseFileRequest::DmEfsCloseFileRequest(PacketEndianess targetEndian) : DmE
 {
 	addField("fp", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
+	setSubsysCommand(kDiagEfsClose);
 }
 
 DmEfsCloseFileRequest::~DmEfsCloseFileRequest()
@@ -52,4 +53,11 @@ void DmEfsCloseFileRequest::setFp(uint32_t fp)
 void DmEfsCloseFileRequest::unpack(std::vector<uint8_t>& data)
 {
 	DmEfsPacket::unpack(data);
+}
+void DmEfsCloseFileRequest::prepareResponse()
+{
+	if (response == nullptr) {
+		DmEfsCloseFileReponse* resp = new DmEfsCloseFileReponse();
+		response = resp;
+	}
 }

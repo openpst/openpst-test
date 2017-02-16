@@ -32,6 +32,7 @@ DmEfsStatfsRequest::DmEfsStatfsRequest(PacketEndianess targetEndian) : DmEfsPack
 {
 	addField("path", kPacketFieldTypeVariant, 0);
 
+	setSubsysCommand(kDiagEfsStatFS);
 }
 
 DmEfsStatfsRequest::~DmEfsStatfsRequest()
@@ -52,4 +53,11 @@ void DmEfsStatfsRequest::setPath(uint8_t* data, size_t size)
 void DmEfsStatfsRequest::unpack(std::vector<uint8_t>& data)
 {
 	DmEfsPacket::unpack(data);
+}
+void DmEfsStatfsRequest::prepareResponse()
+{
+	if (response == nullptr) {
+		DmEfsStatfsResponse* resp = new DmEfsStatfsResponse();
+		response = resp;
+	}
 }

@@ -32,6 +32,7 @@ DmVersionRequest::DmVersionRequest(PacketEndianess targetEndian) : DmPacket(targ
 {
 	addField("version", kPacketFieldTypePrimitive, sizeof(uint16_t));
 
+	setCommand(kDiagDiagVer);
 }
 
 DmVersionRequest::~DmVersionRequest()

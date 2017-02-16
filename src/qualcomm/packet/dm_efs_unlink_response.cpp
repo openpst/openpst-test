@@ -32,6 +32,7 @@ DmEfsUnlinkResponse::DmEfsUnlinkResponse(PacketEndianess targetEndian) : DmEfsPa
 {
 	addField("error", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
+	setSubsysCommand(kDiagEfsUnlink);
 }
 
 DmEfsUnlinkResponse::~DmEfsUnlinkResponse()

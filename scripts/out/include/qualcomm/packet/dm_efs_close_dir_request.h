@@ -27,8 +27,10 @@
 #pragma once
 
 #include "qualcomm/packet/dm_efs_packet.h"
+#include "qualcomm/packet/dm_efs_close_dir_response.h"
 
 using OpenPST::QC::DmEfsPacket;
+using OpenPST::QC::DmEfsCloseDirResponse;
 
 namespace OpenPST {
     namespace QC {
@@ -62,6 +64,11 @@ namespace OpenPST {
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data) override;
+
+				/**
+				* @overload Packet::prepareResponse
+				*/
+				void prepareResponse() override;
 
         };
     }

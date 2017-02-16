@@ -1100,6 +1100,7 @@ $packets['qcdm'] = [
 		'skip' => true,
 		'path' => 'qualcomm/packet'
 	],
+
 	'DmPhoneModeRequest' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
@@ -1117,6 +1118,9 @@ $packets['qcdm'] = [
 				'type' => FIELD_TYPE_UINT8,
 				'size' => $fieldSizes[FIELD_TYPE_UINT8]
 			]
+		],
+		'default_exends' => [
+			'command' => ''
 		]
 	],
 	'DmPhoneModeResponse' => [
@@ -1132,6 +1136,9 @@ $packets['qcdm'] = [
 				'type' => FIELD_TYPE_UINT8,
 				'size' => $fieldSizes[FIELD_TYPE_UINT8],
 			],
+		],
+		'default_exends' => [
+			'command' => ''
 		]
 	],
 
@@ -1151,6 +1158,9 @@ $packets['qcdm'] = [
 				'allowed_setters' => ['raw'],
 				'allowed_getters' => ['vector'],
 			],
+		],
+		'default_exends' => [
+			'command' => 'kDiagSpc'
 		]
 	],
 	'DmSpcResponse' => [
@@ -1166,6 +1176,9 @@ $packets['qcdm'] = [
 				'type' => FIELD_TYPE_UINT8,
 				'size' => $fieldSizes[FIELD_TYPE_UINT8],
 			],
+		],
+		'default_exends' => [
+			'command' => 'kDiagSpc'
 		]
 	],
 
@@ -1185,6 +1198,9 @@ $packets['qcdm'] = [
 				'allowed_setters' => ['raw','string'],
 				'allowed_getters' => ['vector','string'],
 			],
+		],
+		'default_exends' => [
+			'command' => 'kDiagPassword'
 		]
 	],
 	
@@ -1201,6 +1217,9 @@ $packets['qcdm'] = [
 				'type' => FIELD_TYPE_UINT8,
 				'size' => $fieldSizes[FIELD_TYPE_UINT8],
 			],
+		],
+		'default_exends' => [
+			'command' => 'kDiagPassword'
 		]
 	],
 
@@ -1222,6 +1241,9 @@ $packets['qcdm'] = [
 				'size' => $fieldSizes[FIELD_TYPE_UINT8] * 128,
 				'size_const' => 'DIAG_NV_ITEM_SIZE',
 			],
+		],
+		'default_exends' => [
+			'command' => 'kDiagNvRead'
 		]
 	],
 	'DmNvReadResponse' => [
@@ -1244,6 +1266,9 @@ $packets['qcdm'] = [
 				'allowed_setters' => ['raw','string'],
 				'allowed_getters' => ['vector','string'],
 			],
+		],
+		'default_exends' => [
+			'command' => 'kDiagNvRead'
 		]
 	],
 
@@ -1260,6 +1285,9 @@ $packets['qcdm'] = [
 				'type' => FIELD_TYPE_UINT16,
 				'size' => $fieldSizes[FIELD_TYPE_UINT16],
 			]
+		],
+		'default_exends' => [
+			'command' => 'kDiagDiagVer'
 		]
 	],
 	'DmVersionResponse' => [
@@ -1363,6 +1391,9 @@ $packets['qcdm'] = [
 				'type' => FIELD_TYPE_UINT8,
 				'size' => $fieldSizes[FIELD_TYPE_UINT8],
 			],
+		],
+		'default_exends' => [
+			'command' => 'kDiagDiagVer'
 		]
 	],
 
@@ -1375,6 +1406,9 @@ $packets['qcdm'] = [
 		'expects_response' => '',
 		'unpack_base' => true,
 		'fields'  => [
+		],
+		'default_exends' => [
+			'command' => ''
 		]
 	],
 
@@ -1393,6 +1427,9 @@ $packets['qcdm'] = [
 				'allowed_setters' => ['raw','string'],
 				'allowed_getters' => ['vector','string'],
 			],
+		],
+		'default_exends' => [
+			'command' => ''
 		]
 	],
 ];
@@ -1413,7 +1450,7 @@ $packets['qcdm_efs'] = [
 		'extends' => 'DmEfsPacket',
 		'extends_namespace' => 'OpenPST::QC',
 		'source'  => 'local',
-		'expects_response' => '',
+		'expects_response' => 'DmEfsHelloResponse',
 		'unpack_base' => true,
 		'fields'  => [
 			'target_packet_window_size' => [ 
@@ -1456,6 +1493,9 @@ $packets['qcdm_efs'] = [
 				'type' => FIELD_TYPE_UINT32,
 				'size' => $fieldSizes[FIELD_TYPE_UINT32],
 			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsHello'
 		]
 	],
 
@@ -1508,6 +1548,9 @@ $packets['qcdm_efs'] = [
 				'type' => FIELD_TYPE_UINT32,
 				'size' => $fieldSizes[FIELD_TYPE_UINT32],
 			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsHello'
 		]
 	],
 
@@ -1519,9 +1562,12 @@ $packets['qcdm_efs'] = [
 		'extends' => 'DmEfsPacket',
 		'extends_namespace' => 'OpenPST::QC',
 		'source'  => 'local',
-		'expects_response' => '',
+		'expects_response' => 'DmEfsQueryResponse',
 		'unpack_base' => true,
 		'fields'  => [
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsQuery'
 		]
 	],
 
@@ -1558,6 +1604,9 @@ $packets['qcdm_efs'] = [
 				'type' => FIELD_TYPE_UINT32,
 				'size' => $fieldSizes[FIELD_TYPE_UINT32],
 			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsQuery'
 		]
 	],
 
@@ -1567,7 +1616,7 @@ $packets['qcdm_efs'] = [
 		'extends' => 'DmEfsPacket',
 		'extends_namespace' => 'OpenPST::QC',
 		'source'  => 'local',
-		'expects_response' => '',
+		'expects_response' => 'DmEfsOpenFileResponse',
 		'unpack_base' => true,
 		'fields'  => [
 			'flags' => [ 
@@ -1582,6 +1631,9 @@ $packets['qcdm_efs'] = [
 				'type' => FIELD_TYPE_VARIABLE,
 				'size' => 0,
 			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsOpen'
 		]
 	],
 
@@ -1602,6 +1654,9 @@ $packets['qcdm_efs'] = [
 				'type' => FIELD_TYPE_UINT32,
 				'size' => $fieldSizes[FIELD_TYPE_UINT32],
 			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsOpen'
 		]
 	],
 
@@ -1611,13 +1666,16 @@ $packets['qcdm_efs'] = [
 		'extends' => 'DmEfsPacket',
 		'extends_namespace' => 'OpenPST::QC',
 		'source'  => 'local',
-		'expects_response' => '',
+		'expects_response' => 'DmEfsCloseFileReponse',
 		'unpack_base' => true,
 		'fields'  => [
 			'fp' => [ 
 				'type' => FIELD_TYPE_UINT32,
 				'size' => $fieldSizes[FIELD_TYPE_UINT32],
 			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsClose'
 		]
 	],
 
@@ -1634,6 +1692,9 @@ $packets['qcdm_efs'] = [
 				'type' => FIELD_TYPE_UINT32,
 				'size' => $fieldSizes[FIELD_TYPE_UINT32],
 			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsClose'
 		]
 	],
 
@@ -1643,7 +1704,7 @@ $packets['qcdm_efs'] = [
 		'extends' => 'DmEfsPacket',
 		'extends_namespace' => 'OpenPST::QC',
 		'source'  => 'local',
-		'expects_response' => '',
+		'expects_response' => 'DmEfsReadFileResponse',
 		'unpack_base' => true,
 		'fields'  => [
 			'fp' => [ 
@@ -1658,6 +1719,9 @@ $packets['qcdm_efs'] = [
 				'type' => FIELD_TYPE_UINT32,
 				'size' => $fieldSizes[FIELD_TYPE_UINT32],
 			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsRead'
 		]
 	],
 
@@ -1690,6 +1754,9 @@ $packets['qcdm_efs'] = [
 				'type' => FIELD_TYPE_VARIABLE,
 				'size' => 0,
 			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsRead'
 		]
 	],
 
@@ -1700,7 +1767,7 @@ $packets['qcdm_efs'] = [
 		'extends' => 'DmEfsPacket',
 		'extends_namespace' => 'OpenPST::QC',
 		'source'  => 'local',
-		'expects_response' => '',
+		'expects_response' => 'DmEfsWriteFileResponse',
 		'unpack_base' => true,
 		'fields'  => [
 			'fp' => [ 
@@ -1715,6 +1782,9 @@ $packets['qcdm_efs'] = [
 				'type' => FIELD_TYPE_VARIABLE,
 				'size' => 0,
 			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsWrite'
 		]
 	],
 
@@ -1743,6 +1813,9 @@ $packets['qcdm_efs'] = [
 				'type' => FIELD_TYPE_UINT32,
 				'size' => $fieldSizes[FIELD_TYPE_UINT32],
 			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsWrite'
 		]
 	],
 
@@ -1752,7 +1825,7 @@ $packets['qcdm_efs'] = [
 		'extends' => 'DmEfsPacket',
 		'extends_namespace' => 'OpenPST::QC',
 		'source'  => 'local',
-		'expects_response' => '',
+		'expects_response' => 'DmEfsCreateLinkResponse',
 		'unpack_base' => true,
 		'fields'  => [
 			'path' => [ 
@@ -1763,6 +1836,9 @@ $packets['qcdm_efs'] = [
 				'type' => FIELD_TYPE_VARIABLE,
 				'size' => 0,
 			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsSymlink'
 		]
 	],
 
@@ -1779,6 +1855,9 @@ $packets['qcdm_efs'] = [
 				'type' => FIELD_TYPE_UINT32,
 				'size' => $fieldSizes[FIELD_TYPE_UINT32],
 			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsSymlink'
 		]
 	],
 
@@ -1788,17 +1867,19 @@ $packets['qcdm_efs'] = [
 		'extends' => 'DmEfsPacket',
 		'extends_namespace' => 'OpenPST::QC',
 		'source'  => 'local',
-		'expects_response' => '',
+		'expects_response' => 'DmEfsReadLinkResponse',
 		'unpack_base' => true,
 		'fields'  => [
 			'path' => [ 
 				'type' => FIELD_TYPE_VARIABLE,
 				'size' => 0,
 			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsReadLink'
 		]
 	],
-
-	'DmEfsUnlinkRequest' => [
+	'DmEfsReadLinkResponse' => [
 		'namespace' => 'QC',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
@@ -1807,10 +1888,37 @@ $packets['qcdm_efs'] = [
 		'expects_response' => '',
 		'unpack_base' => true,
 		'fields'  => [
+			'error' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
 			'path' => [ 
 				'type' => FIELD_TYPE_VARIABLE,
 				'size' => 0,
 			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsReadLink'
+		]
+	],
+
+
+	'DmEfsUnlinkRequest' => [
+		'namespace' => 'QC',
+		'path'	  => 'qualcomm/packet',
+		'extends' => 'DmEfsPacket',
+		'extends_namespace' => 'OpenPST::QC',
+		'source'  => 'local',
+		'expects_response' => 'DmEfsUnlinkResponse',
+		'unpack_base' => true,
+		'fields'  => [
+			'path' => [ 
+				'type' => FIELD_TYPE_VARIABLE,
+				'size' => 0,
+			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsUnlink'
 		]
 	],
 
@@ -1828,6 +1936,9 @@ $packets['qcdm_efs'] = [
 				'type' => FIELD_TYPE_UINT32,
 				'size' => $fieldSizes[FIELD_TYPE_UINT32],
 			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsUnlink'
 		]
 	],
 
@@ -1836,8 +1947,8 @@ $packets['qcdm_efs'] = [
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
 		'extends_namespace' => 'OpenPST::QC',
-		'source'  => 'remote',
-		'expects_response' => '',
+		'source'  => 'local',
+		'expects_response' => 'DmEfsMkdirResponse',
 		'unpack_base' => true,
 		'fields'  => [
 			'mode' => [ 
@@ -1848,6 +1959,9 @@ $packets['qcdm_efs'] = [
 				'type' => FIELD_TYPE_VARIABLE,
 				'size' => 0,
 			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsMkdir'
 		]
 	],
 
@@ -1865,6 +1979,9 @@ $packets['qcdm_efs'] = [
 				'type' => FIELD_TYPE_UINT32,
 				'size' => $fieldSizes[FIELD_TYPE_UINT32],
 			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsMkdir'
 		]
 	],
 
@@ -1873,12 +1990,16 @@ $packets['qcdm_efs'] = [
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
 		'extends_namespace' => 'OpenPST::QC',
-		'source'  => 'remote',
+		'expects_response' => 'DmEfsRmdirResponse',
+		'source'  => 'local',
 		'fields'  => [
 			'path' => [ 
 				'type' => FIELD_TYPE_VARIABLE,
 				'size' => 0,
 			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsRmdir'
 		]
 	],
 
@@ -1896,6 +2017,9 @@ $packets['qcdm_efs'] = [
 				'type' => FIELD_TYPE_UINT32,
 				'size' => $fieldSizes[FIELD_TYPE_UINT32],
 			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsRmdir'
 		]
 	],
 
@@ -1904,14 +2028,17 @@ $packets['qcdm_efs'] = [
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
 		'extends_namespace' => 'OpenPST::QC',
-		'source'  => 'remote',
-		'expects_response' => '',
+		'source'  => 'local',
+		'expects_response' => 'DmEfsOpenDirResponse',
 		'unpack_base' => true,
 		'fields'  => [
 			'path' => [ 
 				'type' => FIELD_TYPE_VARIABLE,
 				'size' => 0,
 			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsOpenDir'
 		]
 	],
 
@@ -1933,6 +2060,9 @@ $packets['qcdm_efs'] = [
 				'type' => FIELD_TYPE_UINT32,
 				'size' => $fieldSizes[FIELD_TYPE_UINT32],
 			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsOpenDir'
 		]
 	],
 
@@ -1941,8 +2071,8 @@ $packets['qcdm_efs'] = [
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
 		'extends_namespace' => 'OpenPST::QC',
-		'source'  => 'remote',
-		'expects_response' => '',
+		'source'  => 'local',
+		'expects_response' => 'DmEfsReadDirResponse',
 		'unpack_base' => true,
 		'fields'  => [
 			'dp' => [ 
@@ -1953,6 +2083,9 @@ $packets['qcdm_efs'] = [
 				'type' => FIELD_TYPE_UINT32,
 				'size' => $fieldSizes[FIELD_TYPE_UINT32],
 			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsReadDir'
 		]
 	],
 
@@ -2006,6 +2139,9 @@ $packets['qcdm_efs'] = [
 				'type' => FIELD_TYPE_VARIABLE,
 				'size' => 0,
 			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsReadDir'
 		]
 	],
 
@@ -2015,14 +2151,17 @@ $packets['qcdm_efs'] = [
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
 		'extends_namespace' => 'OpenPST::QC',
-		'source'  => 'remote',
-		'expects_response' => '',
+		'source'  => 'local',
+		'expects_response' => 'DmEfsCloseDirResponse',
 		'unpack_base' => true,
 		'fields'  => [
 			'dp' => [ 
 				'type' => FIELD_TYPE_UINT32,
 				'size' => $fieldSizes[FIELD_TYPE_UINT32],
 			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsCloseDir'
 		]
 	],
 
@@ -2040,6 +2179,9 @@ $packets['qcdm_efs'] = [
 				'type' => FIELD_TYPE_UINT32,
 				'size' => $fieldSizes[FIELD_TYPE_UINT32],
 			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsCloseDir'
 		]
 	],
 
@@ -2048,7 +2190,7 @@ $packets['qcdm_efs'] = [
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
 		'extends_namespace' => 'OpenPST::QC',
-		'source'  => 'remote',
+		'source'  => 'local',
 		'expects_response' => '',
 		'unpack_base' => true,
 		'fields'  => [
@@ -2060,6 +2202,9 @@ $packets['qcdm_efs'] = [
 				'type' => FIELD_TYPE_VARIABLE,
 				'size' => 0,
 			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsRename'
 		]
 	],
 
@@ -2077,6 +2222,9 @@ $packets['qcdm_efs'] = [
 				'type' => FIELD_TYPE_UINT32,
 				'size' => $fieldSizes[FIELD_TYPE_UINT32],
 			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsRename'
 		]
 	],
 
@@ -2093,6 +2241,9 @@ $packets['qcdm_efs'] = [
 				'type' => FIELD_TYPE_VARIABLE,
 				'size' => 0,
 			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsStat'
 		]
 	],
 
@@ -2134,6 +2285,9 @@ $packets['qcdm_efs'] = [
 				'type' => FIELD_TYPE_UINT32,
 				'size' => $fieldSizes[FIELD_TYPE_UINT32],
 			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsStat'
 		]
 	],
 
@@ -2142,7 +2296,7 @@ $packets['qcdm_efs'] = [
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
 		'extends_namespace' => 'OpenPST::QC',
-		'source'  => 'remote',
+		'source'  => 'local',
 		'expects_response' => '',
 		'unpack_base' => true,
 		'fields'  => [
@@ -2150,6 +2304,9 @@ $packets['qcdm_efs'] = [
 				'type' => FIELD_TYPE_VARIABLE,
 				'size' => 0,
 			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsLstat'
 		]
 	],
 
@@ -2183,6 +2340,9 @@ $packets['qcdm_efs'] = [
 				'type' => FIELD_TYPE_UINT32,
 				'size' => $fieldSizes[FIELD_TYPE_UINT32],
 			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsLstat'
 		]
 	],
 
@@ -2192,14 +2352,17 @@ $packets['qcdm_efs'] = [
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
 		'extends_namespace' => 'OpenPST::QC',
-		'source'  => 'remote',
-		'expects_response' => '',
+		'source'  => 'local',
+		'expects_response' => 'DmEfsFstatResponse',
 		'unpack_base' => true,
 		'fields'  => [
 			'fp' => [ 
 				'type' => FIELD_TYPE_UINT32,
 				'size' => $fieldSizes[FIELD_TYPE_UINT32],
 			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsFstat'
 		]
 	],
 
@@ -2241,6 +2404,9 @@ $packets['qcdm_efs'] = [
 				'type' => FIELD_TYPE_UINT32,
 				'size' => $fieldSizes[FIELD_TYPE_UINT32],
 			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsFstat'
 		]
 	],
 
@@ -2249,8 +2415,8 @@ $packets['qcdm_efs'] = [
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
 		'extends_namespace' => 'OpenPST::QC',
-		'source'  => 'remote',
-		'expects_response' => '',
+		'source'  => 'local',
+		'expects_response' => 'DmEfsChmodResponse',
 		'unpack_base' => true,
 		'fields'  => [
 			'mode' => [ 
@@ -2261,6 +2427,9 @@ $packets['qcdm_efs'] = [
 				'type' => FIELD_TYPE_VARIABLE,
 				'size' => 0,
 			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsChmod'
 		]
 	],
 
@@ -2278,6 +2447,9 @@ $packets['qcdm_efs'] = [
 				'type' => FIELD_TYPE_UINT32,
 				'size' => $fieldSizes[FIELD_TYPE_UINT32],
 			]
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsChmod'
 		]
 	],
 
@@ -2286,14 +2458,17 @@ $packets['qcdm_efs'] = [
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
 		'extends_namespace' => 'OpenPST::QC',
-		'source'  => 'remote',
-		'expects_response' => '',
+		'source'  => 'local',
+		'expects_response' => 'DmEfsStatfsResponse',
 		'unpack_base' => true,
 		'fields'  => [
 			'path' => [ 
 				'type' => FIELD_TYPE_VARIABLE,
 				'size' => 0,
 			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsStatFS'
 		]
 	],
 
@@ -2347,6 +2522,9 @@ $packets['qcdm_efs'] = [
 				'type' => FIELD_TYPE_UINT32,
 				'size' => $fieldSizes[FIELD_TYPE_UINT32],
 			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsStatFS'
 		]
 	],
 
@@ -2355,8 +2533,8 @@ $packets['qcdm_efs'] = [
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
 		'extends_namespace' => 'OpenPST::QC',
-		'source'  => 'remote',
-		'expects_response' => '',
+		'source'  => 'local',
+		'expects_response' => 'DmEfsAccessResponse',
 		'unpack_base' => true,
 		'fields'  => [
 			'permission_mask' => [ 
@@ -2367,6 +2545,9 @@ $packets['qcdm_efs'] = [
 				'type' => FIELD_TYPE_VARIABLE,
 				'size' => 0,
 			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsAccess'
 		]
 	],
 
@@ -2384,8 +2565,1035 @@ $packets['qcdm_efs'] = [
 				'type' => FIELD_TYPE_UINT32,
 				'size' => $fieldSizes[FIELD_TYPE_UINT32],
 			]
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsAccess'
 		]
 	],
+
+
+	'DmEfsDeviceInfoRequest' => [
+		'namespace' => 'QC',
+		'path'	  => 'qualcomm/packet',
+		'extends' => 'DmEfsPacket',
+		'extends_namespace' => 'OpenPST::QC',
+		'source'  => 'local',
+		'expects_response' => 'DmEfsDeviceInfoResponse',
+		'unpack_base' => true,
+		'fields'  => [
+
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsDevInfo'
+		]
+	],
+
+	'DmEfsDeviceInfoResponse' => [
+		'namespace' => 'QC',
+		'path'	  => 'qualcomm/packet',
+		'extends' => 'DmEfsPacket',
+		'extends_namespace' => 'OpenPST::QC',
+		'source'  => 'remote',
+		'expects_response' => '',
+		'unpack_base' => true,
+		'fields'  => [
+			'error' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'total_blocks' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'pages_per_block' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'page_size' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'total_page_size' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'maker_id' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'device_id' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'device_type' => [ 
+				'type' => FIELD_TYPE_UINT8,
+				'size' => $fieldSizes[FIELD_TYPE_UINT8],
+			],
+			'name' => [ 
+				'type' => FIELD_TYPE_VARIABLE,
+				'size' => 0,
+			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsDevInfo'
+		]
+	],
+
+
+
+	'DmEfsFactoryImageStartRequest' => [
+		'namespace' => 'QC',
+		'path'	  => 'qualcomm/packet',
+		'extends' => 'DmEfsPacket',
+		'extends_namespace' => 'OpenPST::QC',
+		'source'  => 'local',
+		'expects_response' => 'DmEfsFactoryImageStartResponse',
+		'unpack_base' => true,
+		'fields'  => [
+
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsFactoryImageStart'
+		]
+	],
+
+
+	'DmEfsFactoryImageStartResponse' => [
+		'namespace' => 'QC',
+		'path'	  => 'qualcomm/packet',
+		'extends' => 'DmEfsPacket',
+		'extends_namespace' => 'OpenPST::QC',
+		'source'  => 'remote',
+		'expects_response' => '',
+		'unpack_base' => true,
+		'fields'  => [
+			'error' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			]
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsFactoryImageStart'
+		]
+	],
+
+	'DmEfsFactoryImageReadRequest' => [
+		'namespace' => 'QC',
+		'path'	  => 'qualcomm/packet',
+		'extends' => 'DmEfsPacket',
+		'extends_namespace' => 'OpenPST::QC',
+		'source'  => 'local',
+		'expects_response' => 'DmEfsFactoryImageReadResponse',
+		'unpack_base' => true,
+		'fields'  => [
+			'stream_state' => [ 
+				'type' => FIELD_TYPE_UINT8,
+				'size' => $fieldSizes[FIELD_TYPE_UINT8],
+			],
+			'info_cluster_sent' => [ 
+				'type' => FIELD_TYPE_UINT8,
+				'size' => $fieldSizes[FIELD_TYPE_UINT8],
+			],
+			'custer_map_sequence' => [ 
+				'type' => FIELD_TYPE_UINT16,
+				'size' => $fieldSizes[FIELD_TYPE_UINT16],
+			],
+			'custer_data_sequence' => [ 
+				'type' => FIELD_TYPE_UINT16,
+				'size' => $fieldSizes[FIELD_TYPE_UINT16],
+			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsFactoryImageRead'
+		]
+	],
+
+
+	'DmEfsFactoryImageReadResponse' => [
+		'namespace' => 'QC',
+		'path'	  => 'qualcomm/packet',
+		'extends' => 'DmEfsPacket',
+		'extends_namespace' => 'OpenPST::QC',
+		'source'  => 'remote',
+		'expects_response' => '',
+		'unpack_base' => true,
+		'fields'  => [
+			'error' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'stream_state' => [ 
+				'type' => FIELD_TYPE_UINT8,
+				'size' => $fieldSizes[FIELD_TYPE_UINT8],
+			],
+			'info_cluster_sent' => [ 
+				'type' => FIELD_TYPE_UINT8,
+				'size' => $fieldSizes[FIELD_TYPE_UINT8],
+			],
+			'custer_map_sequence' => [ 
+				'type' => FIELD_TYPE_UINT16,
+				'size' => $fieldSizes[FIELD_TYPE_UINT16],
+			],
+			'custer_data_sequence' => [ 
+				'type' => FIELD_TYPE_UINT16,
+				'size' => $fieldSizes[FIELD_TYPE_UINT16],
+			],
+			'data' => [ 
+				'type' => FIELD_TYPE_VARIABLE,
+				'size' => 0,
+			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsFactoryImageRead'
+		]
+	],
+
+	'DmEfsFactoryImageEndRequest' => [
+		'namespace' => 'QC',
+		'path'	  => 'qualcomm/packet',
+		'extends' => 'DmEfsPacket',
+		'extends_namespace' => 'OpenPST::QC',
+		'source'  => 'local',
+		'expects_response' => 'DmEfsFactoryImageEndResponse',
+		'unpack_base' => true,
+		'fields'  => [
+
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsFactoryImageEnd'
+		]
+	],
+
+
+	'DmEfsFactoryImageEndResponse' => [
+		'namespace' => 'QC',
+		'path'	  => 'qualcomm/packet',
+		'extends' => 'DmEfsPacket',
+		'extends_namespace' => 'OpenPST::QC',
+		'source'  => 'remote',
+		'expects_response' => '',
+		'unpack_base' => true,
+		'fields'  => [
+			'error' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			]
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsFactoryImageEnd'
+		]
+	],
+
+	'DmEfsFactoryImagePrepareRequest' => [
+		'namespace' => 'QC',
+		'path'	  => 'qualcomm/packet',
+		'extends' => 'DmEfsPacket',
+		'extends_namespace' => 'OpenPST::QC',
+		'source'  => 'local',
+		'expects_response' => 'DmEfsFactoryImagePrepareResponse',
+		'unpack_base' => true,
+		'fields'  => [
+
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsPrepareFactoryImage'
+		]
+	],
+
+
+	'DmEfsFactoryImagePrepareResponse' => [
+		'namespace' => 'QC',
+		'path'	  => 'qualcomm/packet',
+		'extends' => 'DmEfsPacket',
+		'extends_namespace' => 'OpenPST::QC',
+		'source'  => 'remote',
+		'expects_response' => '',
+		'unpack_base' => true,
+		'fields'  => [
+			'error' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			]
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsPrepareFactoryImage'
+		]
+	],
+
+	'DmEfsChownRequest' => [
+		'namespace' => 'QC',
+		'path'	  => 'qualcomm/packet',
+		'extends' => 'DmEfsPacket',
+		'extends_namespace' => 'OpenPST::QC',
+		'source'  => 'local',
+		'expects_response' => 'DmEfsChownResponse',
+		'unpack_base' => true,
+		'fields'  => [
+			'uid' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'gid' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'path' => [ 
+				'type' => FIELD_TYPE_VARIABLE,
+				'size' => 0,
+			]
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsChown'
+		]
+	],
+
+
+	'DmEfsChownResponse' => [
+		'namespace' => 'QC',
+		'path'	  => 'qualcomm/packet',
+		'extends' => 'DmEfsPacket',
+		'extends_namespace' => 'OpenPST::QC',
+		'source'  => 'remote',
+		'expects_response' => '',
+		'unpack_base' => true,
+		'fields'  => [
+			'error' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			]
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsChown'
+		]
+	],
+
+	'DmEfsSetReservationRequest' => [
+		'namespace' => 'QC',
+		'path'	  => 'qualcomm/packet',
+		'extends' => 'DmEfsPacket',
+		'extends_namespace' => 'OpenPST::QC',
+		'source'  => 'local',
+		'expects_response' => 'DmEfsSetReservationResponse',
+		'unpack_base' => true,
+		'fields'  => [
+			'gid' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'amount' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'path' => [ 
+				'type' => FIELD_TYPE_VARIABLE,
+				'size' => 0,
+			]
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsSetReservation'
+		]
+	],
+
+
+	'DmEfsSetReservationResponse' => [
+		'namespace' => 'QC',
+		'path'	  => 'qualcomm/packet',
+		'extends' => 'DmEfsPacket',
+		'extends_namespace' => 'OpenPST::QC',
+		'source'  => 'remote',
+		'expects_response' => '',
+		'unpack_base' => true,
+		'fields'  => [
+			'error' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			]
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsSetReservation'
+		]
+	],
+
+	'DmEfsSetQuotaRequest' => [
+		'namespace' => 'QC',
+		'path'	  => 'qualcomm/packet',
+		'extends' => 'DmEfsPacket',
+		'extends_namespace' => 'OpenPST::QC',
+		'source'  => 'local',
+		'expects_response' => 'DmEfsSetQuotaResponse',
+		'unpack_base' => true,
+		'fields'  => [
+			'gid' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'amount' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'path' => [ 
+				'type' => FIELD_TYPE_VARIABLE,
+				'size' => 0,
+			]
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsSetQuota'
+		]
+	],
+
+
+	'DmEfsSetQuotaResponse' => [
+		'namespace' => 'QC',
+		'path'	  => 'qualcomm/packet',
+		'extends' => 'DmEfsPacket',
+		'extends_namespace' => 'OpenPST::QC',
+		'source'  => 'remote',
+		'expects_response' => '',
+		'unpack_base' => true,
+		'fields'  => [
+			'error' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			]
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsSetQuota'
+		]
+	],
+
+	'DmEfsGetGroupInfoRequest' => [
+		'namespace' => 'QC',
+		'path'	  => 'qualcomm/packet',
+		'extends' => 'DmEfsPacket',
+		'extends_namespace' => 'OpenPST::QC',
+		'source'  => 'local',
+		'expects_response' => 'DmEfsGetGroupInfoResponse',
+		'unpack_base' => true,
+		'fields'  => [
+			'gid' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'path' => [ 
+				'type' => FIELD_TYPE_VARIABLE,
+				'size' => 0,
+			]
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsGetGroupInfo'
+		]
+	],
+
+
+	'DmEfsGetGroupInfoResponse' => [
+		'namespace' => 'QC',
+		'path'	  => 'qualcomm/packet',
+		'extends' => 'DmEfsPacket',
+		'extends_namespace' => 'OpenPST::QC',
+		'source'  => 'remote',
+		'expects_response' => '',
+		'unpack_base' => true,
+		'fields'  => [
+			'error' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'quota_size' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'reservation_size' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'space_used' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsGetGroupInfo'
+		]
+	],
+
+	'DmEfsDeltreeRequest' => [
+		'namespace' => 'QC',
+		'path'	  => 'qualcomm/packet',
+		'extends' => 'DmEfsPacket',
+		'extends_namespace' => 'OpenPST::QC',
+		'source'  => 'local',
+		'expects_response' => 'DmEfsDeltreeResponse',
+		'unpack_base' => true,
+		'fields'  => [
+			'sequence' => [ 
+				'type' => FIELD_TYPE_UINT16,
+				'size' => $fieldSizes[FIELD_TYPE_UINT16],
+			],
+			'path' => [ 
+				'type' => FIELD_TYPE_VARIABLE,
+				'size' => 0,
+			]
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsDeltree'
+		]
+	],
+
+
+	'DmEfsDeltreeResponse' => [
+		'namespace' => 'QC',
+		'path'	  => 'qualcomm/packet',
+		'extends' => 'DmEfsPacket',
+		'extends_namespace' => 'OpenPST::QC',
+		'source'  => 'remote',
+		'expects_response' => '',
+		'unpack_base' => true,
+		'fields'  => [
+			'sequence' => [ 
+				'type' => FIELD_TYPE_UINT16,
+				'size' => $fieldSizes[FIELD_TYPE_UINT16],
+			],
+			'error' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			]
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsDeltree'
+		]
+	],
+
+	'DmEfsTruncateRequest' => [
+		'namespace' => 'QC',
+		'path'	  => 'qualcomm/packet',
+		'extends' => 'DmEfsPacket',
+		'extends_namespace' => 'OpenPST::QC',
+		'source'  => 'local',
+		'expects_response' => 'DmEfsTruncateResponse',
+		'unpack_base' => true,
+		'fields'  => [
+			'sequence' => [ 
+				'type' => FIELD_TYPE_UINT16,
+				'size' => $fieldSizes[FIELD_TYPE_UINT16],
+			],
+			'length' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'path' => [ 
+				'type' => FIELD_TYPE_VARIABLE,
+				'size' => 0,
+			]
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsTruncate'
+		]
+	],
+
+
+	'DmEfsTruncateResponse' => [
+		'namespace' => 'QC',
+		'path'	  => 'qualcomm/packet',
+		'extends' => 'DmEfsPacket',
+		'extends_namespace' => 'OpenPST::QC',
+		'source'  => 'remote',
+		'expects_response' => '',
+		'unpack_base' => true,
+		'fields'  => [
+			'sequence' => [ 
+				'type' => FIELD_TYPE_UINT16,
+				'size' => $fieldSizes[FIELD_TYPE_UINT16],
+			],
+			'error' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			]
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsTruncate'
+		]
+	],
+
+	'DmEfsFtruncateRequest' => [
+		'namespace' => 'QC',
+		'path'	  => 'qualcomm/packet',
+		'extends' => 'DmEfsPacket',
+		'extends_namespace' => 'OpenPST::QC',
+		'source'  => 'local',
+		'expects_response' => 'DmEfsFtruncateResponse',
+		'unpack_base' => true,
+		'fields'  => [
+			'sequence' => [ 
+				'type' => FIELD_TYPE_UINT16,
+				'size' => $fieldSizes[FIELD_TYPE_UINT16],
+			],
+			'length' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'fp' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			]
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsFtruncate'
+		]
+	],
+
+
+	'DmEfsFtruncateResponse' => [
+		'namespace' => 'QC',
+		'path'	  => 'qualcomm/packet',
+		'extends' => 'DmEfsPacket',
+		'extends_namespace' => 'OpenPST::QC',
+		'source'  => 'remote',
+		'expects_response' => '',
+		'unpack_base' => true,
+		'fields'  => [
+			'sequence' => [ 
+				'type' => FIELD_TYPE_UINT16,
+				'size' => $fieldSizes[FIELD_TYPE_UINT16],
+			],
+			'error' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			]
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsFtruncate'
+		]
+	],
+
+	'DmEfsStatfsV2Request' => [
+		'namespace' => 'QC',
+		'path'	  => 'qualcomm/packet',
+		'extends' => 'DmEfsPacket',
+		'extends_namespace' => 'OpenPST::QC',
+		'source'  => 'local',
+		'expects_response' => 'DmEfsStatfsV2Response',
+		'unpack_base' => true,
+		'fields'  => [
+			'sequence' => [ 
+				'type' => FIELD_TYPE_UINT16,
+				'size' => $fieldSizes[FIELD_TYPE_UINT16],
+			],
+			'path' => [ 
+				'type' => FIELD_TYPE_VARIABLE,
+				'size' => 0,
+			]
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsStatVFS_V2'
+		]
+	],
+
+
+	'DmEfsStatfsV2Response' => [
+		'namespace' => 'QC',
+		'path'	  => 'qualcomm/packet',
+		'extends' => 'DmEfsPacket',
+		'extends_namespace' => 'OpenPST::QC',
+		'source'  => 'remote',
+		'expects_response' => '',
+		'unpack_base' => true,
+		'fields'  => [
+			'sequence' => [ 
+				'type' => FIELD_TYPE_UINT16,
+				'size' => $fieldSizes[FIELD_TYPE_UINT16],
+			],
+			'error' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'fs_id' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'fs_type' => [ 
+				'type' => FIELD_TYPE_UARRAY,
+				'size' => $fieldSizes[FIELD_TYPE_UINT8] * 8,
+			],
+			'block_size' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'total_blocks' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'available_blocks' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'free_blocks' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'max_file_size' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'file_count' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'max_files' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'max_write_size' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'max_path_size' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'case_sensitive' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'case_preserving' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'max_file_size' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'file_size_units' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'max_open_files' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'name_rule' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'name_encoding' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsStatVFS_V2'
+		]
+	],
+
+	'DmEfsMd5SumRequest' => [
+		'namespace' => 'QC',
+		'path'	  => 'qualcomm/packet',
+		'extends' => 'DmEfsPacket',
+		'extends_namespace' => 'OpenPST::QC',
+		'source'  => 'local',
+		'expects_response' => 'DmEfsMd5SumResponse',
+		'unpack_base' => true,
+		'fields'  => [
+			'sequence' => [ 
+				'type' => FIELD_TYPE_UINT16,
+				'size' => $fieldSizes[FIELD_TYPE_UINT16],
+			],
+			'path' => [ 
+				'type' => FIELD_TYPE_VARIABLE,
+				'size' => 0,
+			]
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsMd5Sum'
+		]
+	],
+
+
+	'DmEfsMd5SumResponse' => [
+		'namespace' => 'QC',
+		'path'	  => 'qualcomm/packet',
+		'extends' => 'DmEfsPacket',
+		'extends_namespace' => 'OpenPST::QC',
+		'source'  => 'remote',
+		'expects_response' => '',
+		'unpack_base' => true,
+		'fields'  => [
+			'sequence' => [ 
+				'type' => FIELD_TYPE_UINT16,
+				'size' => $fieldSizes[FIELD_TYPE_UINT16],
+			],
+			'error' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'hash' => [ 
+				'type' => FIELD_TYPE_UARRAY,
+				'size' => $fieldSizes[FIELD_TYPE_UINT8] * 16,
+			]
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsMd5Sum'
+		]
+	],
+
+	'DmEfsHotplugFormatRequest' => [
+		'namespace' => 'QC',
+		'path'	  => 'qualcomm/packet',
+		'extends' => 'DmEfsPacket',
+		'extends_namespace' => 'OpenPST::QC',
+		'source'  => 'local',
+		'expects_response' => 'DmEfsHotplugFormatResponse',
+		'unpack_base' => true,
+		'fields'  => [
+			'sequence' => [ 
+				'type' => FIELD_TYPE_UINT16,
+				'size' => $fieldSizes[FIELD_TYPE_UINT16],
+			],
+			'path' => [ 
+				'type' => FIELD_TYPE_VARIABLE,
+				'size' => 0,
+			]
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsHotplugFormat'
+		]
+	],
+
+
+	'DmEfsHotplugFormatResponse' => [
+		'namespace' => 'QC',
+		'path'	  => 'qualcomm/packet',
+		'extends' => 'DmEfsPacket',
+		'extends_namespace' => 'OpenPST::QC',
+		'source'  => 'remote',
+		'expects_response' => '',
+		'unpack_base' => true,
+		'fields'  => [
+			'sequence' => [ 
+				'type' => FIELD_TYPE_UINT16,
+				'size' => $fieldSizes[FIELD_TYPE_UINT16],
+			],
+			'error' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			]
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsHotplugFormat'
+		]
+	],
+
+	'DmEfsShredRequest' => [
+		'namespace' => 'QC',
+		'path'	  => 'qualcomm/packet',
+		'extends' => 'DmEfsPacket',
+		'extends_namespace' => 'OpenPST::QC',
+		'source'  => 'local',
+		'expects_response' => 'DmEfsHotplugFormatResponse',
+		'unpack_base' => true,
+		'fields'  => [
+			'sequence' => [ 
+				'type' => FIELD_TYPE_UINT16,
+				'size' => $fieldSizes[FIELD_TYPE_UINT16],
+			],
+			'path' => [ 
+				'type' => FIELD_TYPE_VARIABLE,
+				'size' => 0,
+			]
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsShred'
+		]
+	],
+
+
+	'DmEfsShredResponse' => [
+		'namespace' => 'QC',
+		'path'	  => 'qualcomm/packet',
+		'extends' => 'DmEfsPacket',
+		'extends_namespace' => 'OpenPST::QC',
+		'source'  => 'remote',
+		'expects_response' => '',
+		'unpack_base' => true,
+		'fields'  => [
+			'sequence' => [ 
+				'type' => FIELD_TYPE_UINT16,
+				'size' => $fieldSizes[FIELD_TYPE_UINT16],
+			],
+			'results' => [ 
+				'type' => FIELD_TYPE_UINT16,
+				'size' => $fieldSizes[FIELD_TYPE_UINT16],
+			],
+			'error' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			]
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsShred'
+		]
+	],
+
+	'DmEfsHotplugDeviceInfoRequest' => [
+		'namespace' => 'QC',
+		'path'	  => 'qualcomm/packet',
+		'extends' => 'DmEfsPacket',
+		'extends_namespace' => 'OpenPST::QC',
+		'source'  => 'local',
+		'expects_response' => 'DmEfsHotplugDeviceInfoResponse',
+		'unpack_base' => true,
+		'fields'  => [
+			'sequence' => [ 
+				'type' => FIELD_TYPE_UINT16,
+				'size' => $fieldSizes[FIELD_TYPE_UINT16],
+			],
+			'path' => [ 
+				'type' => FIELD_TYPE_VARIABLE,
+				'size' => 0,
+			]
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsHotplugDeviceInfo'
+		]
+	],
+
+
+	'DmEfsHotplugDeviceInfoResponse' => [
+		'namespace' => 'QC',
+		'path'	  => 'qualcomm/packet',
+		'extends' => 'DmEfsPacket',
+		'extends_namespace' => 'OpenPST::QC',
+		'source'  => 'remote',
+		'expects_response' => '',
+		'unpack_base' => true,
+		'fields'  => [
+			'sequence' => [ 
+				'type' => FIELD_TYPE_UINT16,
+				'size' => $fieldSizes[FIELD_TYPE_UINT16],
+			],
+			'error' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'manufacturer_id' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'oem_id' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'product_revision' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'product_name' => [ 
+				'type' => FIELD_TYPE_UARRAY,
+				'size' => $fieldSizes[FIELD_TYPE_UINT8] * 16,
+			],
+			'manufactured_date' => [ 
+				'type' => FIELD_TYPE_UARRAY,
+				'size' => $fieldSizes[FIELD_TYPE_UINT8] * 16,
+			],
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsHotplugDeviceInfo'
+		]
+	],
+
+	'DmEfsSyncRequest' => [
+		'namespace' => 'QC',
+		'path'	  => 'qualcomm/packet',
+		'extends' => 'DmEfsPacket',
+		'extends_namespace' => 'OpenPST::QC',
+		'source'  => 'local',
+		'expects_response' => '',
+		'unpack_base' => true,
+		'fields'  => [
+			'sequence' => [ 
+				'type' => FIELD_TYPE_UINT16,
+				'size' => $fieldSizes[FIELD_TYPE_UINT16],
+			],
+			'path' => [ 
+				'type' => FIELD_TYPE_VARIABLE,
+				'size' => 0,
+			]
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsSyncNoWait'
+		]
+	],
+
+
+	'DmEfsSyncResponse' => [
+		'namespace' => 'QC',
+		'path'	  => 'qualcomm/packet',
+		'extends' => 'DmEfsPacket',
+		'extends_namespace' => 'OpenPST::QC',
+		'source'  => 'remote',
+		'expects_response' => '',
+		'unpack_base' => true,
+		'fields'  => [
+			'sequence' => [ 
+				'type' => FIELD_TYPE_UINT16,
+				'size' => $fieldSizes[FIELD_TYPE_UINT16],
+			],
+			'token' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'error' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			]
+		],
+		'default_exends' => [
+			'subsys_command' => 'kDiagEfsSyncNoWait'
+		]
+	],
+/*
+	'Request' => [
+		'namespace' => 'QC',
+		'path'	  => 'qualcomm/packet',
+		'extends' => 'DmEfsPacket',
+		'extends_namespace' => 'OpenPST::QC',
+		'source'  => 'local',
+		'expects_response' => '',
+		'unpack_base' => true,
+		'fields'  => [
+			'sequence' => [ 
+				'type' => FIELD_TYPE_UINT16,
+				'size' => $fieldSizes[FIELD_TYPE_UINT16],
+			],
+		],
+		'default_exends' => [
+			'subsys_command' => ''
+		]
+	],
+
+
+	'Response' => [
+		'namespace' => 'QC',
+		'path'	  => 'qualcomm/packet',
+		'extends' => 'DmEfsPacket',
+		'extends_namespace' => 'OpenPST::QC',
+		'source'  => 'remote',
+		'expects_response' => '',
+		'unpack_base' => true,
+		'fields'  => [
+			'sequence' => [ 
+				'type' => FIELD_TYPE_UINT16,
+				'size' => $fieldSizes[FIELD_TYPE_UINT16],
+			],
+			'error' => [ 
+				'type' => FIELD_TYPE_UINT32,
+				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			]
+		],
+		'default_exends' => [
+			'subsys_command' => ''
+		]
+	],
+*/
 ];
 
 /**

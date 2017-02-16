@@ -33,6 +33,7 @@ DmEfsReadDirRequest::DmEfsReadDirRequest(PacketEndianess targetEndian) : DmEfsPa
 	addField("dp", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("sequence_number", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
+	setSubsysCommand(kDiagEfsReadDir);
 }
 
 DmEfsReadDirRequest::~DmEfsReadDirRequest()
@@ -62,4 +63,11 @@ void DmEfsReadDirRequest::setSequenceNumber(uint32_t sequenceNumber)
 void DmEfsReadDirRequest::unpack(std::vector<uint8_t>& data)
 {
 	DmEfsPacket::unpack(data);
+}
+void DmEfsReadDirRequest::prepareResponse()
+{
+	if (response == nullptr) {
+		DmEfsReadDirResponse* resp = new DmEfsReadDirResponse();
+		response = resp;
+	}
 }

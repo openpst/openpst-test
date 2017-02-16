@@ -32,6 +32,7 @@ DmEfsCreateLinkResponse::DmEfsCreateLinkResponse(PacketEndianess targetEndian) :
 {
 	addField("error", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
+	setSubsysCommand(kDiagEfsSymlink);
 }
 
 DmEfsCreateLinkResponse::~DmEfsCreateLinkResponse()

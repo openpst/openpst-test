@@ -19,7 +19,7 @@
 *
 * @file messaged_async_serial.h
 * @package openpst/libopenpst
-* @brief Read from serial and parse out messages from the serial port
+* @brief Read and write serial data. Read data are parsed messages based on control character(s), asynchronous
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
