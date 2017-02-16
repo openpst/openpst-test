@@ -1,5 +1,10 @@
 ## libopenpst > Qualcomm > Sahara
 
+### Sahara Protocol
+
+About sahara protocol here.
+
+### Library Classes Related to Sahara
 `libopenpst` provides a few classes for working with Qualcomm Sahara protocol.
 
  1. SaharaSerial
@@ -8,7 +13,7 @@
 ----------
 
 ### SaharaSerial
-This class exposes all Sahara protocol functionality. It is  a wrapper around GenericSerial class which provides the serial data transfer.
+This class exposes all Sahara protocol functionality. It is  a wrapper around `GenericSerial` class which provides the serial data transfer.
 
 #### SaharaSerial Constructor
 
