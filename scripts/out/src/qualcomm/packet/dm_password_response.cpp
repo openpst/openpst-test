@@ -26,7 +26,7 @@
 
 #include "qualcomm/packet/dm_password_response.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 DmPasswordResponse::DmPasswordResponse(PacketEndianess targetEndian) : DmPacket(targetEndian)
 {

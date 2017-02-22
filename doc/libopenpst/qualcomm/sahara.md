@@ -55,11 +55,11 @@ The `sendClientCommand` method will execute a client command. This will only wor
     size_t sendImage(std::string filePath, SaharaReadDataRequest initialReadRequest);
 	SaharaReadDataRequest sendImage(std::ifstream& file, uint32_t offset, size_t size);
 	
-The `sendImage` method will
+The `sendImage` method will send a requested image over serial to the device. This method should be used after receiving a SaharaReadDataRequest from the method readNextImageOffset.
 
     SaharaReadDataRequest readNextImageOffset();
 
-The `readNextImageOffset` method will
+The `readNextImageOffset` method expects the device to send a packet containing information on what image and offset to send the device.
 
     size_t readMemory(uint32_t address, size_t size, std::vector<uint8_t>&out);
     size_t readMemory(uint32_t address, size_t size, std::string outFilePath);
@@ -67,11 +67,11 @@ The `readNextImageOffset` method will
 
     void sendDone();
 
-The `sendDone` method will
+The `sendDone` method will end the sahara session and the device will attempt to boot, or in the case of EDL attempt to execute the sent programmer to recover the flash.
 
     void sendReset();
 
-The `sendReset` method will
+The `sendReset` method will reset the device.
 
 
 Below is a code example for initializing SaharaSerial:

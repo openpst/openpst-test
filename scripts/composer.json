@@ -2,7 +2,9 @@
     "name": "ghassani/scripts",
     "description": "LOL",
     "require": {
-        "twig/twig": "1.31.0"
+        "twig/twig": "1.31.0",
+        "symfony/filesystem" : "*",
+        "symfony/finder" : "*"
     },
     "authors": [
         {

@@ -26,7 +26,7 @@
 
 #include "qualcomm/packet/dm_guid_response.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 DmGuidResponse::DmGuidResponse(PacketEndianess targetEndian) : DmPacket(targetEndian)
 {

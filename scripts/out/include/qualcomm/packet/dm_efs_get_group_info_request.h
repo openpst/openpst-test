@@ -29,11 +29,11 @@
 #include "qualcomm/packet/dm_efs_packet.h"
 #include "qualcomm/packet/dm_efs_get_group_info_response.h"
 
-using OpenPST::QC::DmEfsPacket;
-using OpenPST::QC::DmEfsGetGroupInfoResponse;
+using OpenPST::Qualcomm::DmEfsPacket;
+using OpenPST::Qualcomm::DmEfsGetGroupInfoResponse;
 
 namespace OpenPST {
-    namespace QC {
+    namespace Qualcomm {
         
         class DmEfsGetGroupInfoRequest : public DmEfsPacket
         {

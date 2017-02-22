@@ -26,7 +26,7 @@
 
 #include "qualcomm/packet/dm_efs_md5_sum_request.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 DmEfsMd5SumRequest::DmEfsMd5SumRequest(PacketEndianess targetEndian) : DmEfsPacket(targetEndian)
 {

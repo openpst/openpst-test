@@ -26,7 +26,7 @@
 
 #include "qualcomm/packet/dm_efs_read_link_request.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 DmEfsReadLinkRequest::DmEfsReadLinkRequest(PacketEndianess targetEndian) : DmEfsPacket(targetEndian)
 {

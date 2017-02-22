@@ -29,11 +29,11 @@
 #include "qualcomm/packet/streaming_dload_packet.h"
 #include "qualcomm/packet/streaming_dload_partition_table_response.h"
 
-using OpenPST::QC::StreamingDloadPacket;
-using OpenPST::QC::StreamingDloadPartitionTableResponse;
+using OpenPST::Qualcomm::StreamingDloadPacket;
+using OpenPST::Qualcomm::StreamingDloadPartitionTableResponse;
 
 namespace OpenPST {
-    namespace QC {
+    namespace Qualcomm {
         
         class StreamingDloadPartitionTableRequest : public StreamingDloadPacket
         {

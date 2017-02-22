@@ -28,10 +28,10 @@
 
 #include "qualcomm/packet/dm_packet.h"
 
-using OpenPST::QC::DmPacket;
+using OpenPST::Qualcomm::DmPacket;
 
 namespace OpenPST {
-    namespace QC {
+    namespace Qualcomm {
         
         class DmPasswordResponse : public DmPacket
         {

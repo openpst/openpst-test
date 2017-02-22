@@ -26,7 +26,7 @@
 
 #include "qualcomm/packet/dm_efs_set_quota_response.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 DmEfsSetQuotaResponse::DmEfsSetQuotaResponse(PacketEndianess targetEndian) : DmEfsPacket(targetEndian)
 {

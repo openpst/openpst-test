@@ -29,11 +29,11 @@
 #include "qualcomm/packet/dm_efs_packet.h"
 #include "qualcomm/packet/dm_efs_fstat_response.h"
 
-using OpenPST::QC::DmEfsPacket;
-using OpenPST::QC::DmEfsFstatResponse;
+using OpenPST::Qualcomm::DmEfsPacket;
+using OpenPST::Qualcomm::DmEfsFstatResponse;
 
 namespace OpenPST {
-    namespace QC {
+    namespace Qualcomm {
         
         class DmEfsFstatRequest : public DmEfsPacket
         {

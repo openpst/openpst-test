@@ -26,7 +26,7 @@
 
 #include "qualcomm/packet/dm_efs_mkdir_response.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 DmEfsMkdirResponse::DmEfsMkdirResponse(PacketEndianess targetEndian) : DmEfsPacket(targetEndian)
 {

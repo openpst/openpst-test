@@ -29,11 +29,11 @@
 #include "qualcomm/packet/dm_efs_packet.h"
 #include "qualcomm/packet/dm_efs_hotplug_format_response.h"
 
-using OpenPST::QC::DmEfsPacket;
-using OpenPST::QC::DmEfsHotplugFormatResponse;
+using OpenPST::Qualcomm::DmEfsPacket;
+using OpenPST::Qualcomm::DmEfsHotplugFormatResponse;
 
 namespace OpenPST {
-    namespace QC {
+    namespace Qualcomm {
         
         class DmEfsHotplugFormatRequest : public DmEfsPacket
         {

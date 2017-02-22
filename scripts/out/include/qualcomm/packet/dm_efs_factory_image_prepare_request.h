@@ -29,11 +29,11 @@
 #include "qualcomm/packet/dm_efs_packet.h"
 #include "qualcomm/packet/dm_efs_factory_image_prepare_response.h"
 
-using OpenPST::QC::DmEfsPacket;
-using OpenPST::QC::DmEfsFactoryImagePrepareResponse;
+using OpenPST::Qualcomm::DmEfsPacket;
+using OpenPST::Qualcomm::DmEfsFactoryImagePrepareResponse;
 
 namespace OpenPST {
-    namespace QC {
+    namespace Qualcomm {
         
         class DmEfsFactoryImagePrepareRequest : public DmEfsPacket
         {

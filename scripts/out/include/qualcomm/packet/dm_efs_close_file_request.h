@@ -29,11 +29,11 @@
 #include "qualcomm/packet/dm_efs_packet.h"
 #include "qualcomm/packet/dm_efs_close_file_reponse.h"
 
-using OpenPST::QC::DmEfsPacket;
-using OpenPST::QC::DmEfsCloseFileReponse;
+using OpenPST::Qualcomm::DmEfsPacket;
+using OpenPST::Qualcomm::DmEfsCloseFileReponse;
 
 namespace OpenPST {
-    namespace QC {
+    namespace Qualcomm {
         
         class DmEfsCloseFileRequest : public DmEfsPacket
         {

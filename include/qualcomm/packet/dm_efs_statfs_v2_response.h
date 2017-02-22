@@ -28,10 +28,10 @@
 
 #include "qualcomm/packet/dm_efs_packet.h"
 
-using OpenPST::QC::DmEfsPacket;
+using OpenPST::Qualcomm::DmEfsPacket;
 
 namespace OpenPST {
-    namespace QC {
+    namespace Qualcomm {
         
         class DmEfsStatfsV2Response : public DmEfsPacket
         {

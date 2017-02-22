@@ -26,7 +26,7 @@
 
 #include "qualcomm/packet/dm_efs_sync_request.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 DmEfsSyncRequest::DmEfsSyncRequest(PacketEndianess targetEndian) : DmEfsPacket(targetEndian)
 {

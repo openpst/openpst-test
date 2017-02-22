@@ -26,7 +26,7 @@
 
 #include "qualcomm/packet/streaming_dload_hello_request.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 StreamingDloadHelloRequest::StreamingDloadHelloRequest(PacketEndianess targetEndian) : StreamingDloadPacket(targetEndian)
 {
@@ -36,7 +36,7 @@ StreamingDloadHelloRequest::StreamingDloadHelloRequest(PacketEndianess targetEnd
 	addField("feature_bits", kPacketFieldTypePrimitive, sizeof(uint8_t));
 
 	setCommand(kStreamingDloadHello);
-	setMagic("QCOM fast download protocol host");
+	setMagic("QualcommOM fast download protocol host");
 	setVersion(0x05);
 	setCompatibleVersion(0x02);
 	setFeatureBits(0x19);

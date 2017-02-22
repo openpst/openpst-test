@@ -26,7 +26,7 @@
 
 #include "qualcomm/packet/streaming_dload_power_off_response.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 StreamingDloadPowerOffResponse::StreamingDloadPowerOffResponse(PacketEndianess targetEndian) : StreamingDloadPacket(targetEndian)
 {

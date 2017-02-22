@@ -26,7 +26,7 @@
 
 #include "qualcomm/packet/streaming_dload_close_response.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 StreamingDloadCloseResponse::StreamingDloadCloseResponse(PacketEndianess targetEndian) : StreamingDloadPacket(targetEndian)
 {

@@ -29,11 +29,11 @@
 #include "qualcomm/packet/streaming_dload_packet.h"
 #include "qualcomm/packet/streaming_dload_open_response.h"
 
-using OpenPST::QC::StreamingDloadPacket;
-using OpenPST::QC::StreamingDloadOpenResponse;
+using OpenPST::Qualcomm::StreamingDloadPacket;
+using OpenPST::Qualcomm::StreamingDloadOpenResponse;
 
 namespace OpenPST {
-    namespace QC {
+    namespace Qualcomm {
         
         class StreamingDloadOpenRequest : public StreamingDloadPacket
         {

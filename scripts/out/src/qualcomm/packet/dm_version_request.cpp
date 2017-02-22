@@ -26,7 +26,7 @@
 
 #include "qualcomm/packet/dm_version_request.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 DmVersionRequest::DmVersionRequest(PacketEndianess targetEndian) : DmPacket(targetEndian)
 {

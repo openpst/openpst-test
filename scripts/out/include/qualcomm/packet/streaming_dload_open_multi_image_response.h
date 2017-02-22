@@ -28,10 +28,10 @@
 
 #include "qualcomm/packet/streaming_dload_packet.h"
 
-using OpenPST::QC::StreamingDloadPacket;
+using OpenPST::Qualcomm::StreamingDloadPacket;
 
 namespace OpenPST {
-    namespace QC {
+    namespace Qualcomm {
         
         class StreamingDloadOpenMultiImageResponse : public StreamingDloadPacket
         {

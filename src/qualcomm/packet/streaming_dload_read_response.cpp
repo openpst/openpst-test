@@ -26,7 +26,7 @@
 
 #include "qualcomm/packet/streaming_dload_read_response.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 StreamingDloadReadResponse::StreamingDloadReadResponse(PacketEndianess targetEndian) : StreamingDloadPacket(targetEndian)
 {

@@ -26,7 +26,7 @@
 
 #include "qualcomm/packet/dm_efs_statfs_v2_response.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 DmEfsStatfsV2Response::DmEfsStatfsV2Response(PacketEndianess targetEndian) : DmEfsPacket(targetEndian)
 {

@@ -26,7 +26,7 @@
 
 #include "qualcomm/packet/streaming_dload_security_mode_response.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 StreamingDloadSecurityModeResponse::StreamingDloadSecurityModeResponse(PacketEndianess targetEndian) : StreamingDloadPacket(targetEndian)
 {

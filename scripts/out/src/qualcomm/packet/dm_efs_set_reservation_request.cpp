@@ -26,7 +26,7 @@
 
 #include "qualcomm/packet/dm_efs_set_reservation_request.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 DmEfsSetReservationRequest::DmEfsSetReservationRequest(PacketEndianess targetEndian) : DmEfsPacket(targetEndian)
 {

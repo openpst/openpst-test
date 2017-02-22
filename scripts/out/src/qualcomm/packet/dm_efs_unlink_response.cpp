@@ -26,7 +26,7 @@
 
 #include "qualcomm/packet/dm_efs_unlink_response.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 DmEfsUnlinkResponse::DmEfsUnlinkResponse(PacketEndianess targetEndian) : DmEfsPacket(targetEndian)
 {

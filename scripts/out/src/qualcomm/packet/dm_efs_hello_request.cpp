@@ -26,7 +26,7 @@
 
 #include "qualcomm/packet/dm_efs_hello_request.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 DmEfsHelloRequest::DmEfsHelloRequest(PacketEndianess targetEndian) : DmEfsPacket(targetEndian)
 {

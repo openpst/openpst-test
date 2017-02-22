@@ -26,7 +26,7 @@
 
 #include "qualcomm/packet/dm_efs_md5_sum_response.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 DmEfsMd5SumResponse::DmEfsMd5SumResponse(PacketEndianess targetEndian) : DmEfsPacket(targetEndian)
 {

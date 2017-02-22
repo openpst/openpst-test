@@ -26,7 +26,7 @@
 
 #include "qualcomm/packet/dm_efs_truncate_response.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 DmEfsTruncateResponse::DmEfsTruncateResponse(PacketEndianess targetEndian) : DmEfsPacket(targetEndian)
 {

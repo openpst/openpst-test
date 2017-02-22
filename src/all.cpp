@@ -24,6 +24,7 @@
 #include <time.h> 
 
 using namespace OpenPST::Transport;
+using namespace OpenPST::Qualcomm;
 using namespace OpenPST::QC;
 
 

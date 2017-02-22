@@ -29,11 +29,11 @@
 #include "qualcomm/packet/sahara_packet.h"
 #include "qualcomm/packet/sahara_done_response.h"
 
-using OpenPST::QC::SaharaPacket;
-using OpenPST::QC::SaharaDoneResponse;
+using OpenPST::Qualcomm::SaharaPacket;
+using OpenPST::Qualcomm::SaharaDoneResponse;
 
 namespace OpenPST {
-    namespace QC {
+    namespace Qualcomm {
         
         class SaharaDoneRequest : public SaharaPacket
         {

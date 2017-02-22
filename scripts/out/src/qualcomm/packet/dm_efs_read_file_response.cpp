@@ -26,7 +26,7 @@
 
 #include "qualcomm/packet/dm_efs_read_file_response.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 DmEfsReadFileResponse::DmEfsReadFileResponse(PacketEndianess targetEndian) : DmEfsPacket(targetEndian)
 {

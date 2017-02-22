@@ -26,7 +26,7 @@
 
 #include "qualcomm/packet/dm_efs_close_dir_response.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 DmEfsCloseDirResponse::DmEfsCloseDirResponse(PacketEndianess targetEndian) : DmEfsPacket(targetEndian)
 {

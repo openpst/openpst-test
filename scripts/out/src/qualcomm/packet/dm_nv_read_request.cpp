@@ -26,7 +26,7 @@
 
 #include "qualcomm/packet/dm_nv_read_request.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 DmNvReadRequest::DmNvReadRequest(PacketEndianess targetEndian) : DmPacket(targetEndian)
 {

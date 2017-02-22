@@ -26,7 +26,7 @@
 
 #include "qualcomm/packet/dm_efs_device_info_request.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 DmEfsDeviceInfoRequest::DmEfsDeviceInfoRequest(PacketEndianess targetEndian) : DmEfsPacket(targetEndian)
 {

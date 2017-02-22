@@ -26,7 +26,7 @@
 
 #include "qualcomm/packet/dm_efs_hotplug_format_response.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 DmEfsHotplugFormatResponse::DmEfsHotplugFormatResponse(PacketEndianess targetEndian) : DmEfsPacket(targetEndian)
 {

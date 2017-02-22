@@ -110,8 +110,6 @@ void MessagedAsyncSerial::open(
 
 void MessagedAsyncSerial::close()
 {
-	//std::cout << __PRETTY_FUNCTION__ << std::endl;
-
 	if (port.is_open()) {
 		port.cancel();
 		port.close();
@@ -127,8 +125,6 @@ void MessagedAsyncSerial::close()
 
 size_t MessagedAsyncSerial::write(std::vector<uint8_t>& out)
 {
-	//std::cout << __PRETTY_FUNCTION__ << std::endl;
-
 	if (!isOpen()) {
 		throw SerialError("Not open");
 	}
@@ -160,7 +156,6 @@ size_t MessagedAsyncSerial::write(Packet* packet)
 
 size_t MessagedAsyncSerial::read(std::vector<uint8_t>& in, size_t amount)
 {
-	//std::cout << __PRETTY_FUNCTION__ << std::endl;
 
 	io_service io_; // create a new io service, since our main one is running in another thread
 	deadline_timer timer(io_);

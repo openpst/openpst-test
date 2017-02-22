@@ -26,7 +26,7 @@
 
 #include "qualcomm/packet/sahara_switch_mode_request.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 SaharaSwitchModeRequest::SaharaSwitchModeRequest(PacketEndianess targetEndian) : SaharaPacket(targetEndian)
 {

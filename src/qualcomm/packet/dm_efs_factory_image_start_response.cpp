@@ -26,7 +26,7 @@
 
 #include "qualcomm/packet/dm_efs_factory_image_start_response.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 DmEfsFactoryImageStartResponse::DmEfsFactoryImageStartResponse(PacketEndianess targetEndian) : DmEfsPacket(targetEndian)
 {

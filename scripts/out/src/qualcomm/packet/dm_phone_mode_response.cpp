@@ -26,7 +26,7 @@
 
 #include "qualcomm/packet/dm_phone_mode_response.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 DmPhoneModeResponse::DmPhoneModeResponse(PacketEndianess targetEndian) : DmPacket(targetEndian)
 {

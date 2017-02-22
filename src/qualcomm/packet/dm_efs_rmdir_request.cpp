@@ -26,7 +26,7 @@
 
 #include "qualcomm/packet/dm_efs_rmdir_request.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 DmEfsRmdirRequest::DmEfsRmdirRequest(PacketEndianess targetEndian) : DmEfsPacket(targetEndian)
 {

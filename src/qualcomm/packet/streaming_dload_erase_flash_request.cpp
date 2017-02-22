@@ -26,7 +26,7 @@
 
 #include "qualcomm/packet/streaming_dload_erase_flash_request.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 StreamingDloadEraseFlashRequest::StreamingDloadEraseFlashRequest(PacketEndianess targetEndian) : StreamingDloadPacket(targetEndian)
 {

@@ -29,11 +29,11 @@
 #include "qualcomm/packet/dm_packet.h"
 #include "qualcomm/packet/dm_spc_response.h"
 
-using OpenPST::QC::DmPacket;
-using OpenPST::QC::DmSpcResponse;
+using OpenPST::Qualcomm::DmPacket;
+using OpenPST::Qualcomm::DmSpcResponse;
 
 namespace OpenPST {
-    namespace QC {
+    namespace Qualcomm {
         
         class DmSpcRequest : public DmPacket
         {

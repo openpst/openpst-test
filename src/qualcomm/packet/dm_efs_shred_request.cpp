@@ -26,7 +26,7 @@
 
 #include "qualcomm/packet/dm_efs_shred_request.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 DmEfsShredRequest::DmEfsShredRequest(PacketEndianess targetEndian) : DmEfsPacket(targetEndian)
 {

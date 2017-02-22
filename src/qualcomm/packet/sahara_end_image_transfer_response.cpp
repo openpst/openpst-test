@@ -26,7 +26,7 @@
 
 #include "qualcomm/packet/sahara_end_image_transfer_response.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 SaharaEndImageTransferResponse::SaharaEndImageTransferResponse(PacketEndianess targetEndian) : SaharaPacket(targetEndian)
 {

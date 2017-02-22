@@ -26,7 +26,7 @@
 
 #include "qualcomm/packet/dm_spc_response.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 DmSpcResponse::DmSpcResponse(PacketEndianess targetEndian) : DmPacket(targetEndian)
 {

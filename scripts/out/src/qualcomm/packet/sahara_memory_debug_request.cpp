@@ -26,7 +26,7 @@
 
 #include "qualcomm/packet/sahara_memory_debug_request.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 SaharaMemoryDebugRequest::SaharaMemoryDebugRequest(PacketEndianess targetEndian) : SaharaPacket(targetEndian)
 {

@@ -26,7 +26,7 @@
 
 #include "qualcomm/packet/streaming_dload_nop_response.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 StreamingDloadNopResponse::StreamingDloadNopResponse(PacketEndianess targetEndian) : StreamingDloadPacket(targetEndian)
 {

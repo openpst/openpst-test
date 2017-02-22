@@ -26,7 +26,7 @@
 
 #include "qualcomm/packet/dm_efs_get_group_info_response.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 DmEfsGetGroupInfoResponse::DmEfsGetGroupInfoResponse(PacketEndianess targetEndian) : DmEfsPacket(targetEndian)
 {

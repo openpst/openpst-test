@@ -26,7 +26,7 @@
 
 #include "qualcomm/packet/dm_efs_open_file_request.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 DmEfsOpenFileRequest::DmEfsOpenFileRequest(PacketEndianess targetEndian) : DmEfsPacket(targetEndian)
 {

@@ -26,7 +26,7 @@
 
 #include "qualcomm/packet/dm_efs_rename_request.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 DmEfsRenameRequest::DmEfsRenameRequest(PacketEndianess targetEndian) : DmEfsPacket(targetEndian)
 {

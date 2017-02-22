@@ -26,7 +26,7 @@
 
 #include "qualcomm/packet/sahara_client_command_response.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 SaharaClientCommandResponse::SaharaClientCommandResponse(PacketEndianess targetEndian) : SaharaPacket(targetEndian)
 {

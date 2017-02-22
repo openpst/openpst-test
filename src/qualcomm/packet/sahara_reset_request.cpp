@@ -26,7 +26,7 @@
 
 #include "qualcomm/packet/sahara_reset_request.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 SaharaResetRequest::SaharaResetRequest(PacketEndianess targetEndian) : SaharaPacket(targetEndian)
 {

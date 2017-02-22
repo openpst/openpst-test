@@ -28,10 +28,10 @@
 
 #include "qualcomm/packet/sahara_packet.h"
 
-using OpenPST::QC::SaharaPacket;
+using OpenPST::Qualcomm::SaharaPacket;
 
 namespace OpenPST {
-    namespace QC {
+    namespace Qualcomm {
         
         class SaharaHelloResponse : public SaharaPacket
         {

@@ -31,7 +31,7 @@
 using OpenPST::Transport::Packet;
 
 namespace OpenPST {
-    namespace QC {
+    namespace Qualcomm {
         
         class SaharaReadDataResponse : public Packet
         {

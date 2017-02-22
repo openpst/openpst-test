@@ -33,10 +33,10 @@ $packets['sahara'] = [
 		'path' => 'qualcomm/packet'
 	],
 	'SaharaHelloRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'SaharaPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => 'SaharaHelloResponse',
 		'fields'  => [
@@ -70,10 +70,10 @@ $packets['sahara'] = [
 		]
 	],
 	'SaharaHelloResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'SaharaPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => '',
 		'fields'  => [
@@ -107,10 +107,10 @@ $packets['sahara'] = [
 		]
 	],
 	'SaharaReadDataRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'SaharaPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => 'SaharaReadDataResponse',
 		'fields'  => [
@@ -129,7 +129,7 @@ $packets['sahara'] = [
 		]
 	],
 	'SaharaReadDataResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'Packet',
 		'extends_namespace' => 'OpenPST::Transport',
@@ -148,10 +148,10 @@ $packets['sahara'] = [
 		]
 	],
 	'SaharaEndImageTransferResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'SaharaPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'fields'  => [
@@ -169,10 +169,10 @@ $packets['sahara'] = [
 		]
 	],
 	'SaharaDoneRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'SaharaPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'fields'  => [],
 		'expects_response' => 'SaharaDoneResponse',
@@ -181,10 +181,10 @@ $packets['sahara'] = [
 		]
 	],
 	'SaharaDoneResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'SaharaPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'fields'  => [],
 		'expects_response' => '',
@@ -193,10 +193,10 @@ $packets['sahara'] = [
 		]
 	],
 	'SaharaResetRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'SaharaPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'fields'  => [],
 		'expects_response' => 'SaharaResetResponse',
@@ -205,10 +205,10 @@ $packets['sahara'] = [
 		]
 	],
 	'SaharaResetResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'SaharaPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'fields'  => [],
 		'expects_response' => '',
@@ -217,10 +217,10 @@ $packets['sahara'] = [
 		]
 	],
 	'SaharaMemoryDebugRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'SaharaPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => 'SaharaMemoryReadRequest',
 		'fields'  => [
@@ -238,10 +238,10 @@ $packets['sahara'] = [
 		]
 	],
 	'SaharaMemoryReadRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'SaharaPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => '',
 		'fields'  => [
@@ -259,10 +259,10 @@ $packets['sahara'] = [
 		]
 	],
 	'SaharaCommandReadyResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'SaharaPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'fields'  => [
@@ -276,10 +276,10 @@ $packets['sahara'] = [
 		]
 	],
 	'SaharaSwitchModeRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'SaharaPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => '',
 		'fields'  => [
@@ -293,10 +293,10 @@ $packets['sahara'] = [
 		]
 	],
 	'SaharaClientCommandRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'SaharaPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => '',
 		'fields'  => [
@@ -310,10 +310,10 @@ $packets['sahara'] = [
 		]
 	],
 	'SaharaClientCommandResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'SaharaPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'fields'  => [
@@ -331,10 +331,10 @@ $packets['sahara'] = [
 		]
 	],
 	'SaharaClientCommandExecuteDataRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'SaharaPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => '',
 		'fields'  => [
@@ -348,10 +348,10 @@ $packets['sahara'] = [
 		]
 	],
 	'SaharaMemoryDebug64Request' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'SaharaPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'fields'  => [
@@ -369,10 +369,10 @@ $packets['sahara'] = [
 		]
 	],
 	'SaharaMemoryRead64Request' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'SaharaPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => '',
 		'fields'  => [
@@ -390,10 +390,10 @@ $packets['sahara'] = [
 		]
 	],
 	'SaharaCommandMemoryDebug64Request' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'SaharaPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => '',
 		'fields'  => [
@@ -417,10 +417,10 @@ $packets['streaming_dload'] = [
 		'path' => 'qualcomm/packet'
 	],
 	'StreamingDloadHelloRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'StreamingDloadPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'StreamingDloadHelloResponse',
 		'unpack_base' => true,
@@ -429,7 +429,7 @@ $packets['streaming_dload'] = [
 				'type' => FIELD_TYPE_UARRAY,
 				'size' => $fieldSizes[FIELD_TYPE_UINT8] * 32,
 				'size_const' => 'STREAMING_DLOAD_MAGIC_SIZE',
-				'default_string' => 'QCOM fast download protocol host',
+				'default_string' => 'QualcommOM fast download protocol host',
 				'allowed_getters' => ['string'],
 				'allowed_setters' => ['string'],
 			],
@@ -456,10 +456,10 @@ $packets['streaming_dload'] = [
 	// TODO: Response has dynamic size fields..
 	// kStreamingDloadHelloResponse
 	'StreamingDloadHelloResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'StreamingDloadPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -519,10 +519,10 @@ $packets['streaming_dload'] = [
 
 
 	'StreamingDloadReadRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'StreamingDloadPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'StreamingDloadReadResponse',
 		'unpack_base' => true,
@@ -541,10 +541,10 @@ $packets['streaming_dload'] = [
 		]
 	],	
 	'StreamingDloadReadResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'StreamingDloadPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -566,10 +566,10 @@ $packets['streaming_dload'] = [
 	],
 
 	'StreamingDloadStreamWriteRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'StreamingDloadPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'StreamingDloadStreamWriteResponse',
 		'unpack_base' => true,
@@ -590,10 +590,10 @@ $packets['streaming_dload'] = [
 		]
 	],	
 	'StreamingDloadStreamWriteResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'StreamingDloadPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -610,10 +610,10 @@ $packets['streaming_dload'] = [
 
 
 	'StreamingDloadNopRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'StreamingDloadPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'StreamingDloadNopResponse',
 		'unpack_base' => true,
@@ -628,10 +628,10 @@ $packets['streaming_dload'] = [
 		]
 	],	
 	'StreamingDloadNopResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'StreamingDloadPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -647,10 +647,10 @@ $packets['streaming_dload'] = [
 	],
 
 	'StreamingDloadResetRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'StreamingDloadPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'StreamingDloadResetResponse',
 		'unpack_base' => true,
@@ -661,10 +661,10 @@ $packets['streaming_dload'] = [
 		]
 	],	
 	'StreamingDloadResetResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'StreamingDloadPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -676,10 +676,10 @@ $packets['streaming_dload'] = [
 	],
 
 	'StreamingDloadUnlockRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'StreamingDloadPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'StreamingDloadUnlockResponse',
 		'unpack_base' => true,
@@ -694,10 +694,10 @@ $packets['streaming_dload'] = [
 		]
 	],	
 	'StreamingDloadUnlockResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'StreamingDloadPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -709,10 +709,10 @@ $packets['streaming_dload'] = [
 	],
 
 	'StreamingDloadOpenRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'StreamingDloadPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'StreamingDloadOpenResponse',
 		'unpack_base' => true,
@@ -727,10 +727,10 @@ $packets['streaming_dload'] = [
 		]
 	],	
 	'StreamingDloadOpenResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'StreamingDloadPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -743,10 +743,10 @@ $packets['streaming_dload'] = [
 
 
 	'StreamingDloadCloseRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'StreamingDloadPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'StreamingDloadCloseResponse',
 		'unpack_base' => true,
@@ -761,10 +761,10 @@ $packets['streaming_dload'] = [
 		]
 	],	
 	'StreamingDloadCloseResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'StreamingDloadPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -776,10 +776,10 @@ $packets['streaming_dload'] = [
 	],
 
 	'StreamingDloadSecurityModeRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'StreamingDloadPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'StreamingDloadSecurityModeResponse',
 		'unpack_base' => true,
@@ -794,10 +794,10 @@ $packets['streaming_dload'] = [
 		]
 	],	
 	'StreamingDloadSecurityModeResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'StreamingDloadPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -809,10 +809,10 @@ $packets['streaming_dload'] = [
 	],
 
 	'StreamingDloadPartitionTableRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'StreamingDloadPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'StreamingDloadPartitionTableResponse',
 		'unpack_base' => true,
@@ -831,10 +831,10 @@ $packets['streaming_dload'] = [
 		]
 	],	
 	'StreamingDloadPartitionTableResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'StreamingDloadPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -850,10 +850,10 @@ $packets['streaming_dload'] = [
 	],
 
 	'StreamingDloadOpenMultiImageRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'StreamingDloadPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'StreamingDloadOpenMultiImageResponse',
 		'unpack_base' => true,
@@ -869,10 +869,10 @@ $packets['streaming_dload'] = [
 	],	
 
 	'StreamingDloadOpenMultiImageWithPayloadRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'StreamingDloadPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'StreamingDloadOpenMultiImageResponse',
 		'unpack_base' => true,
@@ -894,10 +894,10 @@ $packets['streaming_dload'] = [
 	],	
 
 	'StreamingDloadOpenMultiImageResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'StreamingDloadPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -913,10 +913,10 @@ $packets['streaming_dload'] = [
 	],
 
 	'StreamingDloadEraseFlashRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'StreamingDloadPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'StreamingDloadEraseFlashResponse',
 		'unpack_base' => true,
@@ -927,10 +927,10 @@ $packets['streaming_dload'] = [
 		]
 	],	
 	'StreamingDloadEraseFlashResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'StreamingDloadPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -942,10 +942,10 @@ $packets['streaming_dload'] = [
 	],
 
 	'StreamingDloadGetEccStateRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'StreamingDloadPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'StreamingDloadGetEccStateResponse',
 		'unpack_base' => true,
@@ -956,10 +956,10 @@ $packets['streaming_dload'] = [
 		]
 	],	
 	'StreamingDloadGetEccStateResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'StreamingDloadPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -975,10 +975,10 @@ $packets['streaming_dload'] = [
 	],
 
 	'StreamingDloadSetEccStateRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'StreamingDloadPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'StreamingDloadSetEccStateResponse',
 		'unpack_base' => true,
@@ -993,10 +993,10 @@ $packets['streaming_dload'] = [
 		]
 	],	
 	'StreamingDloadSetEccStateResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'StreamingDloadPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -1008,10 +1008,10 @@ $packets['streaming_dload'] = [
 	],
 
 	'StreamingDloadUnframedStreamWriteRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'StreamingDloadPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'StreamingDloadUnframedStreamWriteResponse',
 		'unpack_base' => true,
@@ -1040,10 +1040,10 @@ $packets['streaming_dload'] = [
 		]
 	],	
 	'StreamingDloadUnframedStreamWriteResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'StreamingDloadPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -1059,10 +1059,10 @@ $packets['streaming_dload'] = [
 	],
 
 	'StreamingDloadPowerOffRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'StreamingDloadPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'StreamingDloadPowerOffResponse',
 		'unpack_base' => true,
@@ -1073,10 +1073,10 @@ $packets['streaming_dload'] = [
 		]
 	],	
 	'StreamingDloadPowerOffResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'StreamingDloadPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -1093,7 +1093,7 @@ $packets['streaming_dload'] = [
 ];
 
 /**
-* DM/DIAG/QCDM Packet Definitions
+* DM/DIAG/QualcommDM Packet Definitions
 */
 $packets['qcdm'] = [
 	'DmPacket' => [
@@ -1102,10 +1102,10 @@ $packets['qcdm'] = [
 	],
 
 	'DmPhoneModeRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -1124,10 +1124,10 @@ $packets['qcdm'] = [
 		]
 	],
 	'DmPhoneModeResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -1143,10 +1143,10 @@ $packets['qcdm'] = [
 	],
 
 	'DmSpcRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'DmSpcResponse',
 		'unpack_base' => true,
@@ -1164,10 +1164,10 @@ $packets['qcdm'] = [
 		]
 	],
 	'DmSpcResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -1183,10 +1183,10 @@ $packets['qcdm'] = [
 	],
 
 	'DmPasswordRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -1205,10 +1205,10 @@ $packets['qcdm'] = [
 	],
 	
 	'DmPasswordResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -1224,10 +1224,10 @@ $packets['qcdm'] = [
 	],
 
 	'DmNvReadRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -1247,10 +1247,10 @@ $packets['qcdm'] = [
 		]
 	],
 	'DmNvReadResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -1273,10 +1273,10 @@ $packets['qcdm'] = [
 	],
 
 	'DmVersionRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -1291,10 +1291,10 @@ $packets['qcdm'] = [
 		]
 	],
 	'DmVersionResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -1398,10 +1398,10 @@ $packets['qcdm'] = [
 	],
 
 	'DmGuidRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -1413,10 +1413,10 @@ $packets['qcdm'] = [
 	],
 
 	'DmGuidResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -1435,7 +1435,7 @@ $packets['qcdm'] = [
 ];
 
 /**
-* QCDM EFS Packet Definitions
+* QualcommDM EFS Packet Definitions
 */
 $packets['qcdm_efs'] = [
 	'DmEfsPacket' => [
@@ -1445,10 +1445,10 @@ $packets['qcdm_efs'] = [
 
 
 	'DmEfsHelloRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'DmEfsHelloResponse',
 		'unpack_base' => true,
@@ -1500,10 +1500,10 @@ $packets['qcdm_efs'] = [
 	],
 
 	'DmEfsHelloResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -1557,10 +1557,10 @@ $packets['qcdm_efs'] = [
 
 
 	'DmEfsQueryRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'DmEfsQueryResponse',
 		'unpack_base' => true,
@@ -1572,10 +1572,10 @@ $packets['qcdm_efs'] = [
 	],
 
 	'DmEfsQueryResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -1611,10 +1611,10 @@ $packets['qcdm_efs'] = [
 	],
 
 	'DmEfsOpenFileRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'DmEfsOpenFileResponse',
 		'unpack_base' => true,
@@ -1638,10 +1638,10 @@ $packets['qcdm_efs'] = [
 	],
 
 	'DmEfsOpenFileResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -1661,10 +1661,10 @@ $packets['qcdm_efs'] = [
 	],
 
 	'DmEfsCloseFileRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'DmEfsCloseFileReponse',
 		'unpack_base' => true,
@@ -1680,10 +1680,10 @@ $packets['qcdm_efs'] = [
 	],
 
 	'DmEfsCloseFileReponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -1699,10 +1699,10 @@ $packets['qcdm_efs'] = [
 	],
 
 	'DmEfsReadFileRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'DmEfsReadFileResponse',
 		'unpack_base' => true,
@@ -1726,10 +1726,10 @@ $packets['qcdm_efs'] = [
 	],
 
 	'DmEfsReadFileResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -1762,10 +1762,10 @@ $packets['qcdm_efs'] = [
 
 
 	'DmEfsWriteFileRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'DmEfsWriteFileResponse',
 		'unpack_base' => true,
@@ -1789,10 +1789,10 @@ $packets['qcdm_efs'] = [
 	],
 
 	'DmEfsWriteFileResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -1820,10 +1820,10 @@ $packets['qcdm_efs'] = [
 	],
 
 	'DmEfsCreateLinkRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'DmEfsCreateLinkResponse',
 		'unpack_base' => true,
@@ -1843,10 +1843,10 @@ $packets['qcdm_efs'] = [
 	],
 
 	'DmEfsCreateLinkResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -1862,10 +1862,10 @@ $packets['qcdm_efs'] = [
 	],
 
 	'DmEfsReadLinkRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'DmEfsReadLinkResponse',
 		'unpack_base' => true,
@@ -1880,10 +1880,10 @@ $packets['qcdm_efs'] = [
 		]
 	],
 	'DmEfsReadLinkResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -1904,10 +1904,10 @@ $packets['qcdm_efs'] = [
 
 
 	'DmEfsUnlinkRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'DmEfsUnlinkResponse',
 		'unpack_base' => true,
@@ -1924,10 +1924,10 @@ $packets['qcdm_efs'] = [
 
 
 	'DmEfsUnlinkResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -1943,10 +1943,10 @@ $packets['qcdm_efs'] = [
 	],
 
 	'DmEfsMkdirRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'DmEfsMkdirResponse',
 		'unpack_base' => true,
@@ -1967,10 +1967,10 @@ $packets['qcdm_efs'] = [
 
 
 	'DmEfsMkdirResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -1986,10 +1986,10 @@ $packets['qcdm_efs'] = [
 	],
 
 	'DmEfsRmdirRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'expects_response' => 'DmEfsRmdirResponse',
 		'source'  => 'local',
 		'fields'  => [
@@ -2005,10 +2005,10 @@ $packets['qcdm_efs'] = [
 
 
 	'DmEfsRmdirResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -2024,10 +2024,10 @@ $packets['qcdm_efs'] = [
 	],
 
 	'DmEfsOpenDirRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'DmEfsOpenDirResponse',
 		'unpack_base' => true,
@@ -2044,10 +2044,10 @@ $packets['qcdm_efs'] = [
 
 
 	'DmEfsOpenDirResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -2067,10 +2067,10 @@ $packets['qcdm_efs'] = [
 	],
 
 	'DmEfsReadDirRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'DmEfsReadDirResponse',
 		'unpack_base' => true,
@@ -2091,10 +2091,10 @@ $packets['qcdm_efs'] = [
 
 
 	'DmEfsReadDirResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -2147,10 +2147,10 @@ $packets['qcdm_efs'] = [
 
 
 	'DmEfsCloseDirRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'DmEfsCloseDirResponse',
 		'unpack_base' => true,
@@ -2167,10 +2167,10 @@ $packets['qcdm_efs'] = [
 
 
 	'DmEfsCloseDirResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -2186,10 +2186,10 @@ $packets['qcdm_efs'] = [
 	],
 
 	'DmEfsRenameRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -2210,10 +2210,10 @@ $packets['qcdm_efs'] = [
 
 
 	'DmEfsRenameResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -2229,10 +2229,10 @@ $packets['qcdm_efs'] = [
 	],
 
 	'DmEfsStatRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -2249,10 +2249,10 @@ $packets['qcdm_efs'] = [
 
 
 	'DmEfsStatResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -2292,10 +2292,10 @@ $packets['qcdm_efs'] = [
 	],
 
 	'DmEfsLstatRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -2312,10 +2312,10 @@ $packets['qcdm_efs'] = [
 
 
 	'DmEfsLstatResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -2348,10 +2348,10 @@ $packets['qcdm_efs'] = [
 
 
 	'DmEfsFstatRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'DmEfsFstatResponse',
 		'unpack_base' => true,
@@ -2368,10 +2368,10 @@ $packets['qcdm_efs'] = [
 
 
 	'DmEfsFstatResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -2411,10 +2411,10 @@ $packets['qcdm_efs'] = [
 	],
 
 	'DmEfsChmodRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'DmEfsChmodResponse',
 		'unpack_base' => true,
@@ -2435,10 +2435,10 @@ $packets['qcdm_efs'] = [
 
 
 	'DmEfsChmodResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -2454,10 +2454,10 @@ $packets['qcdm_efs'] = [
 	],
 
 	'DmEfsStatfsRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'DmEfsStatfsResponse',
 		'unpack_base' => true,
@@ -2474,10 +2474,10 @@ $packets['qcdm_efs'] = [
 
 
 	'DmEfsStatfsResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -2529,10 +2529,10 @@ $packets['qcdm_efs'] = [
 	],
 
 	'DmEfsAccessRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'DmEfsAccessResponse',
 		'unpack_base' => true,
@@ -2553,10 +2553,10 @@ $packets['qcdm_efs'] = [
 
 
 	'DmEfsAccessResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -2573,10 +2573,10 @@ $packets['qcdm_efs'] = [
 
 
 	'DmEfsDeviceInfoRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'DmEfsDeviceInfoResponse',
 		'unpack_base' => true,
@@ -2589,10 +2589,10 @@ $packets['qcdm_efs'] = [
 	],
 
 	'DmEfsDeviceInfoResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -2642,10 +2642,10 @@ $packets['qcdm_efs'] = [
 
 
 	'DmEfsFactoryImageStartRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'DmEfsFactoryImageStartResponse',
 		'unpack_base' => true,
@@ -2659,10 +2659,10 @@ $packets['qcdm_efs'] = [
 
 
 	'DmEfsFactoryImageStartResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -2678,10 +2678,10 @@ $packets['qcdm_efs'] = [
 	],
 
 	'DmEfsFactoryImageReadRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'DmEfsFactoryImageReadResponse',
 		'unpack_base' => true,
@@ -2710,10 +2710,10 @@ $packets['qcdm_efs'] = [
 
 
 	'DmEfsFactoryImageReadResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -2749,10 +2749,10 @@ $packets['qcdm_efs'] = [
 	],
 
 	'DmEfsFactoryImageEndRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'DmEfsFactoryImageEndResponse',
 		'unpack_base' => true,
@@ -2766,10 +2766,10 @@ $packets['qcdm_efs'] = [
 
 
 	'DmEfsFactoryImageEndResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -2785,10 +2785,10 @@ $packets['qcdm_efs'] = [
 	],
 
 	'DmEfsFactoryImagePrepareRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'DmEfsFactoryImagePrepareResponse',
 		'unpack_base' => true,
@@ -2802,10 +2802,10 @@ $packets['qcdm_efs'] = [
 
 
 	'DmEfsFactoryImagePrepareResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -2821,10 +2821,10 @@ $packets['qcdm_efs'] = [
 	],
 
 	'DmEfsChownRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'DmEfsChownResponse',
 		'unpack_base' => true,
@@ -2849,10 +2849,10 @@ $packets['qcdm_efs'] = [
 
 
 	'DmEfsChownResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -2868,10 +2868,10 @@ $packets['qcdm_efs'] = [
 	],
 
 	'DmEfsSetReservationRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'DmEfsSetReservationResponse',
 		'unpack_base' => true,
@@ -2896,10 +2896,10 @@ $packets['qcdm_efs'] = [
 
 
 	'DmEfsSetReservationResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -2915,10 +2915,10 @@ $packets['qcdm_efs'] = [
 	],
 
 	'DmEfsSetQuotaRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'DmEfsSetQuotaResponse',
 		'unpack_base' => true,
@@ -2943,10 +2943,10 @@ $packets['qcdm_efs'] = [
 
 
 	'DmEfsSetQuotaResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -2962,10 +2962,10 @@ $packets['qcdm_efs'] = [
 	],
 
 	'DmEfsGetGroupInfoRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'DmEfsGetGroupInfoResponse',
 		'unpack_base' => true,
@@ -2986,10 +2986,10 @@ $packets['qcdm_efs'] = [
 
 
 	'DmEfsGetGroupInfoResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -3017,10 +3017,10 @@ $packets['qcdm_efs'] = [
 	],
 
 	'DmEfsDeltreeRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'DmEfsDeltreeResponse',
 		'unpack_base' => true,
@@ -3041,10 +3041,10 @@ $packets['qcdm_efs'] = [
 
 
 	'DmEfsDeltreeResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -3064,10 +3064,10 @@ $packets['qcdm_efs'] = [
 	],
 
 	'DmEfsTruncateRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'DmEfsTruncateResponse',
 		'unpack_base' => true,
@@ -3092,10 +3092,10 @@ $packets['qcdm_efs'] = [
 
 
 	'DmEfsTruncateResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -3115,10 +3115,10 @@ $packets['qcdm_efs'] = [
 	],
 
 	'DmEfsFtruncateRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'DmEfsFtruncateResponse',
 		'unpack_base' => true,
@@ -3143,10 +3143,10 @@ $packets['qcdm_efs'] = [
 
 
 	'DmEfsFtruncateResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -3166,10 +3166,10 @@ $packets['qcdm_efs'] = [
 	],
 
 	'DmEfsStatfsV2Request' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'DmEfsStatfsV2Response',
 		'unpack_base' => true,
@@ -3190,10 +3190,10 @@ $packets['qcdm_efs'] = [
 
 
 	'DmEfsStatfsV2Response' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -3285,10 +3285,10 @@ $packets['qcdm_efs'] = [
 	],
 
 	'DmEfsMd5SumRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'DmEfsMd5SumResponse',
 		'unpack_base' => true,
@@ -3309,10 +3309,10 @@ $packets['qcdm_efs'] = [
 
 
 	'DmEfsMd5SumResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -3336,10 +3336,10 @@ $packets['qcdm_efs'] = [
 	],
 
 	'DmEfsHotplugFormatRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'DmEfsHotplugFormatResponse',
 		'unpack_base' => true,
@@ -3360,10 +3360,10 @@ $packets['qcdm_efs'] = [
 
 
 	'DmEfsHotplugFormatResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -3383,10 +3383,10 @@ $packets['qcdm_efs'] = [
 	],
 
 	'DmEfsShredRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'DmEfsHotplugFormatResponse',
 		'unpack_base' => true,
@@ -3407,10 +3407,10 @@ $packets['qcdm_efs'] = [
 
 
 	'DmEfsShredResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -3434,10 +3434,10 @@ $packets['qcdm_efs'] = [
 	],
 
 	'DmEfsHotplugDeviceInfoRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => 'DmEfsHotplugDeviceInfoResponse',
 		'unpack_base' => true,
@@ -3458,10 +3458,10 @@ $packets['qcdm_efs'] = [
 
 
 	'DmEfsHotplugDeviceInfoResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -3501,10 +3501,10 @@ $packets['qcdm_efs'] = [
 	],
 
 	'DmEfsSyncRequest' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -3525,10 +3525,10 @@ $packets['qcdm_efs'] = [
 
 
 	'DmEfsSyncResponse' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -3552,10 +3552,10 @@ $packets['qcdm_efs'] = [
 	],
 /*
 	'Request' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'local',
 		'expects_response' => '',
 		'unpack_base' => true,
@@ -3572,10 +3572,10 @@ $packets['qcdm_efs'] = [
 
 
 	'Response' => [
-		'namespace' => 'QC',
+		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'DmEfsPacket',
-		'extends_namespace' => 'OpenPST::QC',
+		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
 		'expects_response' => '',
 		'unpack_base' => true,

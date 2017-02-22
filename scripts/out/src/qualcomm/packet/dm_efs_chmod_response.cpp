@@ -26,7 +26,7 @@
 
 #include "qualcomm/packet/dm_efs_chmod_response.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 DmEfsChmodResponse::DmEfsChmodResponse(PacketEndianess targetEndian) : DmEfsPacket(targetEndian)
 {
