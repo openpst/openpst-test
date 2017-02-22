@@ -2,18 +2,18 @@
 
 #include "transport/packet.h"
 #include "qualcomm/streaming_dload.h"
-#include "qualcomm/hdlc_encoder.h"
+//#include "qualcomm/hdlc_encoder.h"
 
 using namespace OpenPST::Transport;
 using OpenPST::QC::HdlcEncoder;
 
 namespace OpenPST {
-    namespace QC {
+    namespace Qualcomm {
         
         class StreamingDloadPacket : public Packet
         {
             protected:
-                HdlcEncoder encoder;
+                //HdlcEncoder encoder;
 
             public:
                 /**
@@ -59,7 +59,7 @@ namespace OpenPST {
                 }
 
                 void prepare() override {
-                    encoder.encode(data);
+                    //encoder.encode(data);
                 }
 
         };

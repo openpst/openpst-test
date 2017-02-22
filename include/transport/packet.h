@@ -336,6 +336,90 @@ namespace OpenPST {
                 */
                 virtual void unpack(std::vector<uint8_t>& data) = 0;
 
+                /**
+                * @brief Get a fields starting offset in the packet data buffer
+                */
+                inline off_t getFieldOffset(const std::string& name) 
+                {
+                    int ret = 0;
+
+                    if (!hasField(name)) {
+                        throw PacketInvalidArgument("Field does not exist");
+                    }
+
+                    PacketFieldMeta* field = getField(name);
+
+                    for (auto &f : getFields()) {       
+                        if (f.name.compare(field->name) == 0) {
+                            break;
+                        }
+                        ret += f.size;
+                    }
+
+                    return ret;
+                }
+
+                /**
+                * @brief Get a fields starting offset in the packet data buffer by field zero-based index
+                */
+                inline off_t getFieldOffset(int index) 
+                {
+                    off_t ret = 0;
+
+                    if (!hasField(index)) {
+                        throw PacketInvalidArgument("Field does not exist");
+                    }
+
+                    auto field = getField(index);
+
+                    int i = 0;
+
+                    for (auto &f : getFields()) {       
+                        if (i == index) {
+                            break;
+                        }
+                        ret += f.size;
+                        i++;
+                    }
+
+                    return ret;
+                }
+
+                /**
+                * @brief 
+                */
+                inline size_t getFieldSize(int index) 
+                {
+                    PacketFieldMeta* field = getField(index);
+
+                    int i = 0;
+
+                    for (auto &f : getFields()) {       
+                        if (i == index) {
+                            return field->size;
+                        }
+                        i++;
+                    }
+
+                    throw PacketInvalidArgument("Field does not exist");
+                }
+
+                /**
+                * @brief 
+                */
+                inline size_t getFieldSize(const std::string& name) 
+                {
+
+                    PacketFieldMeta* field = getField(name);
+
+                    for (auto &f : getFields()) {       
+                        if (f.name.compare(field->name) == 0) {
+                            return field->size;
+                        }
+                    }
+
+                    throw PacketInvalidArgument("Field does not exist");
+                }
             protected:
                 /**
                 * @brief Read primitive type T from the data buffer at offset
@@ -538,91 +622,6 @@ namespace OpenPST {
                     }
 
                     field->size = size;
-                }
-
-                /**
-                * @brief Get a fields starting offset in the packet data buffer
-                */
-                inline off_t getFieldOffset(const std::string& name) 
-                {
-                    int ret = 0;
-
-                    if (!hasField(name)) {
-                        throw PacketInvalidArgument("Field does not exist");
-                    }
-
-                    PacketFieldMeta* field = getField(name);
-
-                    for (auto &f : getFields()) {       
-                        if (f.name.compare(field->name) == 0) {
-                            break;
-                        }
-                        ret += f.size;
-                    }
-
-                    return ret;
-                }
-
-                /**
-                * @brief Get a fields starting offset in the packet data buffer by field zero-based index
-                */
-                inline off_t getFieldOffset(int index) 
-                {
-                    off_t ret = 0;
-
-                    if (!hasField(index)) {
-                        throw PacketInvalidArgument("Field does not exist");
-                    }
-
-                    auto field = getField(index);
-
-                    int i = 0;
-
-                    for (auto &f : getFields()) {       
-                        if (i == index) {
-                            break;
-                        }
-                        ret += f.size;
-                        i++;
-                    }
-
-                    return ret;
-                }
-
-                /**
-                * @brief 
-                */
-                inline size_t getFieldSize(int index) 
-                {
-                    PacketFieldMeta* field = getField(index);
-
-                    int i = 0;
-
-                    for (auto &f : getFields()) {       
-                        if (i == index) {
-                            return field->size;
-                        }
-                        i++;
-                    }
-
-                    throw PacketInvalidArgument("Field does not exist");
-                }
-
-                /**
-                * @brief 
-                */
-                inline size_t getFieldSize(const std::string& name) 
-                {
-
-                    PacketFieldMeta* field = getField(name);
-
-                    for (auto &f : getFields()) {       
-                        if (f.name.compare(field->name) == 0) {
-                            return field->size;
-                        }
-                    }
-
-                    throw PacketInvalidArgument("Field does not exist");
                 }
 
                 /**

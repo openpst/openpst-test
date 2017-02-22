@@ -8,16 +8,18 @@
 
 #include "transport/packet_writer.h"
 
-#include "qualcomm/streaming_dload.h"
-#include "qualcomm/packet/streaming_dload_hello_request.h"
-#include "qualcomm/packet/streaming_dload_security_mode_request.h"
-#include "qualcomm/packet/streaming_dload_open_multi_image_request.h"
-#include "qualcomm/packet/streaming_dload_read_request.h"
+//#include "qualcomm/streaming_dload.h"
+//#include "qualcomm/packet/streaming_dload_hello_request.h"
+//#include "qualcomm/packet/streaming_dload_security_mode_request.h"
+//#include "qualcomm/packet/streaming_dload_open_multi_image_request.h"
+//#include "qualcomm/packet/streaming_dload_read_request.h"
+#include "qualcomm/sahara_client.h"
+#include "qualcomm/sahara_packets.h"
 
 
 #include "qualcomm/hdlc_encoder.h"
-#include "qualcomm/packet/dm_spc_request.h"
-#include "qualcomm/packet/dm_spc_response.h"
+//#include "qualcomm/packet/dm_spc_request.h"
+//#include "qualcomm/packet/dm_spc_response.h"
 
 #include <iostream>
 #include <fstream>
@@ -27,8 +29,8 @@ using namespace OpenPST::Transport;
 using namespace OpenPST::Qualcomm;
 using namespace OpenPST::QC;
 
-
-void hello(TransportInterface& interface, PacketWriter& writer, int argc, char* argv[]) {
+/*
+void sdload_hello(TransportInterface& interface, PacketWriter& writer, int argc, char* argv[]) {
 	StreamingDloadHelloRequest request;
 	
 	writer.write(&request);
@@ -64,7 +66,7 @@ void hello(TransportInterface& interface, PacketWriter& writer, int argc, char* 
 	}
 }
 
-void security_mode(TransportInterface& interface, PacketWriter& writer, int argc, char* argv[]) {
+void sdload_security_mode(TransportInterface& interface, PacketWriter& writer, int argc, char* argv[]) {
 	StreamingDloadSecurityModeRequest request;
 	
 	request.setMode(kStreamingDloadSecurityModeUntrusted);
@@ -74,7 +76,7 @@ void security_mode(TransportInterface& interface, PacketWriter& writer, int argc
 	auto response = reinterpret_cast<StreamingDloadSecurityModeResponse*>(request.getResponse());
 }
 
-void open_multi(TransportInterface& interface, PacketWriter& writer, int argc, char* argv[]) {
+void sdload_open_multi(TransportInterface& interface, PacketWriter& writer, int argc, char* argv[]) {
 	StreamingDloadOpenMultiImageRequest request;
 	
 	request.setType(kStreamingDloadOpenModeMultiEmmcUser);
@@ -84,7 +86,7 @@ void open_multi(TransportInterface& interface, PacketWriter& writer, int argc, c
 	auto response = reinterpret_cast<StreamingDloadOpenMultiImageResponse*>(request.getResponse());
 }
 
-void read_emmc(TransportInterface& interface, PacketWriter& writer, int argc, char* argv[]) {
+void sdload_read_emmc(TransportInterface& interface, PacketWriter& writer, int argc, char* argv[]) {
 	
 	uint32_t startAddress = 0x00000000;
 	uint32_t endAddress   = startAddress + (1024 * 1024 * 100);
@@ -146,11 +148,79 @@ void diag_test(TransportInterface& interface, PacketWriter& writer, int argc, ch
 	DmSpcRequest request;
 
 	writer.write(&request);
+}*/
+
+int main_sahara(int argc, char* argv[])
+{
+	if (argc < 3) {
+		std::cout << "Usage: program [device] [file]" << std::endl;
+		return 1;
+	}
+
+
+	std::ifstream file(argv[2], std::ios::in | std::ios::binary);
+
+	if (!file.is_open()) {
+		std::cout << "Could not open " << argv[2] << " for reading" << std::endl;
+		return 1;
+	}
+
+	try {
+		Serial port(argv[1]);
+
+		if (port.isOpen()) {
+			std::cout << "Opened " << port.getDevice() << std::endl;
+		}
+
+		SaharaClient client(port);
+
+		SaharaHello hello = client.readHello();
+
+		SaharaState state = client.sendHello(hello);
+
+		if (hello.mode == kSaharaModeImageTxPending) {
+
+			std::cout << "Device in kSaharaModeImageTxPending" << std::endl;
+
+			SaharaReadDataInfo imageInfo = client.readNextImageOffset();
+
+			std::cout << "Device requesting image 0x" << std::hex << imageInfo.imageId <<
+				<< ". Requesting " << std::dec <<  imageInfo.amount << " bytes from offset " << imageInfo.offset << std::endl;
+
+			SaharaReadDataInfo nextImageInfo = client.sendImage(argv[2], imageInfo);
+
+		} else if (hello.mode == kSaharaModeMemoryDebug) {
+
+		} else if (hello.mode == kSaharaModeCommand) {
+
+		}
+
+		
+
+		std::cout << "EXITING" << std::endl;
+
+	} catch (SaharaClientError& e) {
+		
+		std::cout << "SaharaClientError: " << e.what() << std::endl;
+		
+		client.reset();
+
+	} catch (SerialError& e) {
+		std::cout << "SerialError: " << e.what() << std::endl;
+	} catch (PacketError& e) {
+		std::cout << "PacketError: " << e.what() << std::endl;
+	} catch (std::exception& e) {
+		std::cout << "std::exception: " << e.what() << std::endl;
+	} 
+
+	return 0;
 }
 
 int main(int argc, char* argv[])
 {
-	if (argc < 2) {
+	return main_sahara(argc, argv);
+
+	/*if (argc < 2) {
 		std::cout << "Provide device as argument" << std::endl;
 		return 1;
 	}
@@ -190,5 +260,5 @@ int main(int argc, char* argv[])
 	}
 
 	time(&etime);
-	std::cout << "Time: " << difftime(etime, stime) << std::endl;
+	std::cout << "Time: " << difftime(etime, stime) << std::endl;*/
 }

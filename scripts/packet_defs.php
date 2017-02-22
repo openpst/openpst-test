@@ -32,6 +32,10 @@ $packets['sahara'] = [
 		'skip' => true,
 		'path' => 'qualcomm/packet'
 	],
+	'RawDataPacket' => [
+		'skip' => true,
+		'path' => 'transport/packet'
+	],
 	'SaharaHelloRequest' => [
 		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
@@ -56,13 +60,15 @@ $packets['sahara'] = [
 				'type' => FIELD_TYPE_UINT32,
 				'size' => $fieldSizes[FIELD_TYPE_UINT32],
 			],
-			'reserved' => [ 
-				'type' => FIELD_TYPE_UARRAY,
-				'size' => $fieldSizes[FIELD_TYPE_UINT32] * 6,
-			],
 			'mode' => [ 
 				'type' => FIELD_TYPE_UINT32,
 				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],
+			'reserved' => [ 
+				'type' => FIELD_TYPE_UARRAY,
+				'size' => '(sizeof(uint32_t) * 5)',
+				'allowed_getters' => ['vector'],
+				'allowed_setters' => ['raw'],
 			],
 		],
 		'default_exends' => [
@@ -85,21 +91,17 @@ $packets['sahara'] = [
 				'type' => FIELD_TYPE_UINT32,
 				'size' => $fieldSizes[FIELD_TYPE_UINT32],
 			],
-			'max_command_packet_size' => [ 
-				'type' => FIELD_TYPE_UINT32,
-				'size' => $fieldSizes[FIELD_TYPE_UINT32],
-			],
 			'status' => [ 
 				'type' => FIELD_TYPE_UINT32,
 				'size' => $fieldSizes[FIELD_TYPE_UINT32],
 			],
-			'reserved' => [ 
-				'type' => FIELD_TYPE_UARRAY,
-				'size' => $fieldSizes[FIELD_TYPE_UINT32] * 6,
-			],
 			'mode' => [ 
 				'type' => FIELD_TYPE_UINT32,
 				'size' => $fieldSizes[FIELD_TYPE_UINT32],
+			],			
+			'reserved' => [ 
+				'type' => FIELD_TYPE_UARRAY,
+				'size' => '(sizeof(uint32_t) * 6)',
 			],
 		],
 		'default_exends' => [
@@ -112,7 +114,7 @@ $packets['sahara'] = [
 		'extends' => 'SaharaPacket',
 		'extends_namespace' => 'OpenPST::Qualcomm',
 		'source'  => 'remote',
-		'expects_response' => 'SaharaReadDataResponse',
+		'expects_response' => '',
 		'fields'  => [
 			'image_id' => [ 
 				'type' => FIELD_TYPE_UINT32,
@@ -122,7 +124,7 @@ $packets['sahara'] = [
 				'type' => FIELD_TYPE_UINT32,
 				'size' => $fieldSizes[FIELD_TYPE_UINT32],
 			],
-			'size' => [ 
+			'amount' => [ 
 				'type' => FIELD_TYPE_UINT32,
 				'size' => $fieldSizes[FIELD_TYPE_UINT32],
 			]
@@ -131,20 +133,13 @@ $packets['sahara'] = [
 	'SaharaReadDataResponse' => [
 		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
-		'extends' => 'Packet',
+		'extends' => 'RawDataPacket',
 		'extends_namespace' => 'OpenPST::Transport',
 		'source'  => 'local',
 		'expects_response' => '',
 		'fields'  => [
-			'data' => [ 
-				'type' => FIELD_TYPE_VARIABLE,
-				'size' => 0,
-				'allowed_setters' => ['file','raw','string'],
-				'allowed_getters' => ['vector','string'],
-			],
 		],
 		'default_exends' => [
-			'command' => 'kSaharaCommandReadData'
 		]
 	],
 	'SaharaEndImageTransferResponse' => [
@@ -347,7 +342,7 @@ $packets['sahara'] = [
 			'command' => 'kSaharaCommandExecuteData'
 		]
 	],
-	'SaharaMemoryDebug64Request' => [
+	/*'SaharaMemoryDebug64Request' => [
 		'namespace' => 'Qualcomm',
 		'path'	  => 'qualcomm/packet',
 		'extends' => 'SaharaPacket',
@@ -365,7 +360,7 @@ $packets['sahara'] = [
 			]
 		],
 		'default_exends' => [
-			'command' => 'kSaharaCommandMemoryDebug64Request'
+			'command' => 'kSaharaCommandMemoryDebug64'
 		]
 	],
 	'SaharaMemoryRead64Request' => [
@@ -386,7 +381,7 @@ $packets['sahara'] = [
 			]
 		],
 		'default_exends' => [
-			'command' => 'kSaharaCommandMemoryDebug64'
+			'command' => 'kSaharaCommandMemoryRead64'
 		]
 	],
 	'SaharaCommandMemoryDebug64Request' => [
@@ -405,7 +400,7 @@ $packets['sahara'] = [
 		'default_exends' => [
 			'command' => 'kSaharaCommandMemoryRead64'
 		]
-	],
+	],*/
 ];
 
 /**

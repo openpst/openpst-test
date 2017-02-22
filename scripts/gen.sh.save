@@ -1,0 +1,5 @@
+#!/bin/bash
+
+if [ -f "gen_packets.php" ]; then php gen_packets.php;fi
+
+../

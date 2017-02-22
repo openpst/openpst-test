@@ -71,18 +71,6 @@ namespace OpenPST {
                 */
                 void setMinVersion(uint32_t minVersion);
                 /**
-                * @brief Get max_command_packet_size
-                * @return uint32_t
-                */
-                uint32_t getMaxCommandPacketSize();
-                
-                /**
-                * @brief Set max_command_packet_size
-                * @param uint32_t maxCommandPacketSize
-                * @return void
-                */
-                void setMaxCommandPacketSize(uint32_t maxCommandPacketSize);
-                /**
                 * @brief Get status
                 * @return uint32_t
                 */
@@ -94,6 +82,18 @@ namespace OpenPST {
                 * @return void
                 */
                 void setStatus(uint32_t status);
+                /**
+                * @brief Get mode
+                * @return uint32_t
+                */
+                uint32_t getMode();
+                
+                /**
+                * @brief Set mode
+                * @param uint32_t mode
+                * @return void
+                */
+                void setMode(uint32_t mode);
                 /**
                 * @brief Get reserved
                 * @return std::vector<uint8_t>
@@ -107,18 +107,6 @@ namespace OpenPST {
                 * @return void
                 */
                 void setReserved(uint8_t* data, size_t size);
-                /**
-                * @brief Get mode
-                * @return uint32_t
-                */
-                uint32_t getMode();
-                
-                /**
-                * @brief Set mode
-                * @param uint32_t mode
-                * @return void
-                */
-                void setMode(uint32_t mode);
 				/**
 				* @overload Packet::unpack
 				*/

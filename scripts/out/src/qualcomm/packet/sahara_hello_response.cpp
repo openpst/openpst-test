@@ -32,10 +32,9 @@ SaharaHelloResponse::SaharaHelloResponse(PacketEndianess targetEndian) : SaharaP
 {
 	addField("version", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("min_version", kPacketFieldTypePrimitive, sizeof(uint32_t));
-	addField("max_command_packet_size", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("status", kPacketFieldTypePrimitive, sizeof(uint32_t));
-	addField("reserved", kPacketFieldTypeArray, 24);
 	addField("mode", kPacketFieldTypePrimitive, sizeof(uint32_t));
+	addField("reserved", kPacketFieldTypeArray, (sizeof(uint32_t) * 6));
 
 	setCommand(kSaharaCommandHelloResponse);
 }
@@ -63,15 +62,6 @@ void SaharaHelloResponse::setMinVersion(uint32_t minVersion)
 {
     write<uint32_t>("min_version", minVersion);
 }
-uint32_t SaharaHelloResponse::getMaxCommandPacketSize()
-{
-    return read<uint32_t>(getFieldOffset("max_command_packet_size"));
-}
-                
-void SaharaHelloResponse::setMaxCommandPacketSize(uint32_t maxCommandPacketSize)
-{
-    write<uint32_t>("max_command_packet_size", maxCommandPacketSize);
-}
 uint32_t SaharaHelloResponse::getStatus()
 {
     return read<uint32_t>(getFieldOffset("status"));
@@ -81,15 +71,6 @@ void SaharaHelloResponse::setStatus(uint32_t status)
 {
     write<uint32_t>("status", status);
 }
-std::vector<uint8_t> SaharaHelloResponse::getReserved()
-{
-	return read(getFieldSize("reserved"), getFieldOffset("reserved"));
-}
-                
-void SaharaHelloResponse::setReserved(uint8_t* data, size_t size)
-{
-    write("reserved", data, size);
-}
 uint32_t SaharaHelloResponse::getMode()
 {
     return read<uint32_t>(getFieldOffset("mode"));
@@ -98,6 +79,15 @@ uint32_t SaharaHelloResponse::getMode()
 void SaharaHelloResponse::setMode(uint32_t mode)
 {
     write<uint32_t>("mode", mode);
+}
+std::vector<uint8_t> SaharaHelloResponse::getReserved()
+{
+	return read(getFieldSize("reserved"), getFieldOffset("reserved"));
+}
+                
+void SaharaHelloResponse::setReserved(uint8_t* data, size_t size)
+{
+    write("reserved", data, size);
 }
 
 void SaharaHelloResponse::unpack(std::vector<uint8_t>& data)

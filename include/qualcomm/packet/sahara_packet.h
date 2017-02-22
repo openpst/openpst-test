@@ -4,10 +4,10 @@
 #include "qualcomm/sahara.h"
 
 
-using namespace OpenPST::Serial;
+using namespace OpenPST::Transport;
 
 namespace OpenPST {
-    namespace QC {
+    namespace Qualcomm {
     	
         class SaharaPacket : public Packet
         {
@@ -18,7 +18,7 @@ namespace OpenPST {
                 SaharaPacket(PacketEndianess targetEndian) : Packet(targetEndian, getMaxDataSize()) 
                 {
                    addField("command", kPacketFieldTypePrimitive, sizeof(uint32_t));
-                   addField("size", kPacketFieldTypePrimitive, sizeof(uint32_t));
+                   addField("packet_size", kPacketFieldTypePrimitive, sizeof(uint32_t));
                 }
                 
                 /**
@@ -44,18 +44,24 @@ namespace OpenPST {
                     write<uint32_t>("command", command);
                 }
 
-                uint32_t getSize()
+                uint32_t getPacketSize()
                 {
-                    return read<uint32_t>(getFieldOffset("size")); 
+                    return read<uint32_t>(getFieldOffset("packet_size")); 
                 }
 
-                void setSize(uint32_t size)
+                void setPacketSize(uint32_t size)
                 {
-                    write<uint32_t>("size", size);
+                    write<uint32_t>("packet_size", size);
                 }
 
                 void prepare() override {
-                    setSize(data.size());
+                    setPacketSize(data.size());
+                }
+
+                void unpack(std::vector<uint8_t>& data) override {
+                    if (!data.size()) {
+                        return;
+                    }
                 }
 
         };

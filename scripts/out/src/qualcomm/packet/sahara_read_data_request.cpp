@@ -32,7 +32,7 @@ SaharaReadDataRequest::SaharaReadDataRequest(PacketEndianess targetEndian) : Sah
 {
 	addField("image_id", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("offset", kPacketFieldTypePrimitive, sizeof(uint32_t));
-	addField("size", kPacketFieldTypePrimitive, sizeof(uint32_t));
+	addField("amount", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
 }
 
@@ -59,23 +59,26 @@ void SaharaReadDataRequest::setOffset(uint32_t offset)
 {
     write<uint32_t>("offset", offset);
 }
-uint32_t SaharaReadDataRequest::getSize()
+uint32_t SaharaReadDataRequest::getAmount()
 {
-    return read<uint32_t>(getFieldOffset("size"));
+    return read<uint32_t>(getFieldOffset("amount"));
 }
                 
-void SaharaReadDataRequest::setSize(uint32_t size)
+void SaharaReadDataRequest::setAmount(uint32_t amount)
 {
-    write<uint32_t>("size", size);
+    write<uint32_t>("amount", amount);
 }
 
 void SaharaReadDataRequest::unpack(std::vector<uint8_t>& data)
 {
-}
-void SaharaReadDataRequest::prepareResponse()
-{
-	if (response == nullptr) {
-		SaharaReadDataResponse* resp = new SaharaReadDataResponse();
-		response = resp;
+	if (data.size() != this->data.size()) {
+		throw PacketInvalidArgument("Unexptected Response");
 	}
+
+	setCommand(read<uint32_t>(data, getFieldOffset("command")));
+	setPacketSize(read<uint32_t>(data, getFieldOffset("packet_size")));
+	setImageId(read<uint32_t>(data, getFieldOffset("image_id")));
+	setOffset(read<uint32_t>(data, getFieldOffset("offset")));
+	setAmount(read<uint32_t>(data, getFieldOffset("amount")));
+
 }

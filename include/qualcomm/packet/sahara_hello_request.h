@@ -97,19 +97,6 @@ namespace OpenPST {
                 */
                 void setStatus(uint32_t status);
                 /**
-                * @brief Get reserved
-                * @return std::vector<uint8_t>
-                */
-                std::vector<uint8_t> getReserved();
-                
-                /**
-                * @brief Set reserved
-                * @param uint8_t* reserved
-                * @param size_t size
-                * @return void
-                */
-                void setReserved(uint8_t* data, size_t size);
-                /**
                 * @brief Get mode
                 * @return uint32_t
                 */
@@ -121,6 +108,19 @@ namespace OpenPST {
                 * @return void
                 */
                 void setMode(uint32_t mode);
+                /**
+                * @brief Get reserved
+                * @return uint8_t[]
+                */
+                std::vector<uint8_t> getReserved();
+                
+                /**
+                * @brief Set reserved
+                * @param uint8_t* reserved
+                * @param size_t size
+                * @return void
+                */
+                void setReserved(uint8_t* data, size_t size);
 				/**
 				* @overload Packet::unpack
 				*/

@@ -2,17 +2,17 @@
 
 #include "transport/packet.h"
 #include "qualcomm/dm.h"
-#include "qualcomm/hdlc_encoder.h"
+//#include "qualcomm/hdlc_encoder.h"
 
 using namespace OpenPST::Transport;
 
 namespace OpenPST {
-    namespace QC {
+    namespace Qualcomm {
     	
         class DmEfsPacket : public Packet
         {
             protected:
-                HdlcEncoder encoder;
+                //HdlcEncoder encoder;
 
             public:
                 /**
@@ -76,7 +76,7 @@ namespace OpenPST {
                         throw PacketError("No data to unpack");
                     }
 
-                    encoder.decode(resp);
+                    //encoder.decode(resp);
 
                     if (resp[0] != getCommand()) {
                         throw PacketError("Unexpected Response");
@@ -84,7 +84,7 @@ namespace OpenPST {
                 }
 
                 void prepare() override {
-                    encoder.encode(data);
+                    //encoder.encode(data);
                 }
 
         };

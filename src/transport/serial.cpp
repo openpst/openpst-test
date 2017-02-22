@@ -161,7 +161,9 @@ size_t Serial::write(uint8_t* out, size_t amount)
 
 size_t Serial::write(Packet* packet)
 {
-	return 0;
+	packet->prepare();
+
+	return write(packet->getData());
 }
 
 size_t Serial::read(std::vector<uint8_t>& in, size_t amount)
@@ -229,7 +231,16 @@ size_t Serial::read(uint8_t* in, size_t amount)
 
 size_t Serial::read(Packet* packet, size_t amount)
 {
-	return 0;
+	std::vector<uint8_t> rbuffer;
+
+	if (amount > 0) {
+		read(rbuffer, amount);
+	} else {
+		read(rbuffer, packet->getMaxDataSize());
+	}
+
+	packet->unpack(rbuffer);
+	
 }
 
 size_t Serial::available()

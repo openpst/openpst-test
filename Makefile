@@ -192,16 +192,8 @@ all_serial:
 		./src/transport/messaged_async_serial.cpp \
 		./src/transport/packet_writer.cpp \
 		./src/server/tcp_serial_server.cpp \
-		./src/qualcomm/packet/dm_spc_request.cpp \
-		./src/qualcomm/packet/dm_spc_response.cpp \
-		./src/qualcomm/packet/streaming_dload_hello_request.cpp \
-		./src/qualcomm/packet/streaming_dload_hello_response.cpp \
-		./src/qualcomm/packet/streaming_dload_security_mode_request.cpp \
-		./src/qualcomm/packet/streaming_dload_security_mode_response.cpp \
-		./src/qualcomm/packet/streaming_dload_open_multi_image_request.cpp \
-		./src/qualcomm/packet/streaming_dload_open_multi_image_response.cpp \
-		./src/qualcomm/packet/streaming_dload_read_request.cpp \
-		./src/qualcomm/packet/streaming_dload_read_response.cpp \
+		./src/qualcomm/packet/sahara_*.cpp \
+		./src/qualcomm/sahara_client.cpp \
 		./src/all.cpp -o build/all -Bstatic -lpthread -lboost_system -lboost_thread
 
 		#./src/transport/tcp_serial_client.cpp

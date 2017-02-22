@@ -51,7 +51,7 @@ TransportInterface& PacketWriter::getTransport()
 void PacketWriter::write(Packet* packet)
 {
 	if (!transport.isOpen()) {
-		throw PacketWriterError("Device not open");
+		throw PacketWriterError("Transport not open");
 	}
 
 	packet->prepare();

@@ -34,8 +34,8 @@ SaharaHelloRequest::SaharaHelloRequest(PacketEndianess targetEndian) : SaharaPac
 	addField("min_version", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("max_command_packet_size", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("status", kPacketFieldTypePrimitive, sizeof(uint32_t));
-	addField("reserved", kPacketFieldTypeArray, 24);
 	addField("mode", kPacketFieldTypePrimitive, sizeof(uint32_t));
+	addField("reserved", kPacketFieldTypeArray, (sizeof(uint32_t) * 5));
 
 	setCommand(kSaharaCommandHello);
 }
@@ -81,15 +81,6 @@ void SaharaHelloRequest::setStatus(uint32_t status)
 {
     write<uint32_t>("status", status);
 }
-std::vector<uint8_t> SaharaHelloRequest::getReserved()
-{
-	return read(getFieldSize("reserved"), getFieldOffset("reserved"));
-}
-                
-void SaharaHelloRequest::setReserved(uint8_t* data, size_t size)
-{
-    write("reserved", data, size);
-}
 uint32_t SaharaHelloRequest::getMode()
 {
     return read<uint32_t>(getFieldOffset("mode"));
@@ -99,9 +90,29 @@ void SaharaHelloRequest::setMode(uint32_t mode)
 {
     write<uint32_t>("mode", mode);
 }
+std::vector<uint8_t> SaharaHelloRequest::getReserved()
+{
+	return read(getFieldSize("reserved"), getFieldOffset("reserved"));
+}
+                
+void SaharaHelloRequest::setReserved(uint8_t* data, size_t size)
+{
+    write("reserved", data, size);
+}
 
 void SaharaHelloRequest::unpack(std::vector<uint8_t>& data)
 {
+	if (data.size() != this->data.size()) {
+		throw PacketInvalidArgument("Unexptected Response");
+	}
+
+	setCommand(read<uint32_t>(data, getFieldOffset("command")));
+	setPacketSize(read<uint32_t>(data, getFieldOffset("packet_size")));
+	setVersion(read<uint32_t>(data, getFieldOffset("version")));
+	setMinVersion(read<uint32_t>(data, getFieldOffset("min_version")));
+	setMaxCommandPacketSize(read<uint32_t>(data, getFieldOffset("max_command_packet_size")));
+	setStatus(read<uint32_t>(data, getFieldOffset("status")));
+	setMode(read<uint32_t>(data, getFieldOffset("mode")));
 }
 void SaharaHelloRequest::prepareResponse()
 {

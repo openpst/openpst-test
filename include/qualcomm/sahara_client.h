@@ -43,8 +43,8 @@ namespace OpenPST {
 
 		struct SaharaReadDataInfo {
 			uint32_t imageId;
-			uint32_t size;
 			uint32_t offset;
+			uint32_t amount;
 		};
 
 		struct SaharaHello {

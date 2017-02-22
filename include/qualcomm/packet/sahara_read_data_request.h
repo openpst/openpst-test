@@ -27,10 +27,8 @@
 #pragma once
 
 #include "qualcomm/packet/sahara_packet.h"
-#include "qualcomm/packet/sahara_read_data_response.h"
 
 using OpenPST::Qualcomm::SaharaPacket;
-using OpenPST::Qualcomm::SaharaReadDataResponse;
 
 namespace OpenPST {
     namespace Qualcomm {
@@ -73,26 +71,21 @@ namespace OpenPST {
                 */
                 void setOffset(uint32_t offset);
                 /**
-                * @brief Get size
+                * @brief Get amount
                 * @return uint32_t
                 */
-                uint32_t getSize();
+                uint32_t getAmount();
                 
                 /**
-                * @brief Set size
-                * @param uint32_t size
+                * @brief Set amount
+                * @param uint32_t amount
                 * @return void
                 */
-                void setSize(uint32_t size);
+                void setAmount(uint32_t amount);
 				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data) override;
-
-				/**
-				* @overload Packet::prepareResponse
-				*/
-				void prepareResponse() override;
 
         };
     }
