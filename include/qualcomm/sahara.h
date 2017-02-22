@@ -154,7 +154,7 @@ typedef struct {
 	uint16_t unknown1;
 	uint16_t unknown2;
 	uint16_t msmId;
-} SaharaMsmHwIdResponse;
+} SaharaMsmHwId;
 
 /**
 * SaharaSerialNumberResponse
@@ -164,7 +164,7 @@ typedef struct {
 */
 typedef struct {
 	uint32_t serial;
-} SaharaSerialNumberResponse;
+} SaharaSerialNumber;
 
 /**
 * SaharaSblVersionResponse
@@ -174,7 +174,7 @@ typedef struct {
 */
 typedef struct {
 	uint32_t version;
-} SaharaSblVersionResponse;
+} SaharaSblVersion;
 
 /**
 * SaharaSblVersionResponse
@@ -184,7 +184,7 @@ typedef struct {
 */
 typedef struct {
 	uint8_t hash[32];
-} SaharaOemPkHashResponse;
+} SaharaOemPkHash;
 
 
 /**

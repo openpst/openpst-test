@@ -166,6 +166,7 @@ int main_sahara(int argc, char* argv[])
 	}
 
 	try {
+
 		Serial port(argv[1]);
 
 		if (port.isOpen()) {
@@ -174,28 +175,25 @@ int main_sahara(int argc, char* argv[])
 
 		SaharaClient client(port);
 
-		SaharaHello hello = client.readHello();
+		SaharaState state = client.hello();
 
-		SaharaState state = client.sendHello(hello);
-
-		if (hello.mode == kSaharaModeImageTxPending) {
+		if (state.mode == kSaharaModeImageTxPending) {
 
 			std::cout << "Device in kSaharaModeImageTxPending" << std::endl;
 
-			SaharaReadDataInfo imageInfo = client.readNextImageOffset();
+			SaharaImageRequestInfo imageInfo = client.readNextImageOffset();
 
-			std::cout << "Device requesting image 0x" << std::hex << imageInfo.imageId <<
-				<< ". Requesting " << std::dec <<  imageInfo.amount << " bytes from offset " << imageInfo.offset << std::endl;
+			std::cout << "Device requesting image 0x" << std::hex << imageInfo.imageId;
+			std::cout << ". Requesting " << std::dec <<  imageInfo.size << " bytes from offset " << imageInfo.offset << std::endl;
 
-			SaharaReadDataInfo nextImageInfo = client.sendImage(argv[2], imageInfo);
+			SaharaImageRequestInfo nextImageInfo = client.sendImage(argv[2], imageInfo);
 
-		} else if (hello.mode == kSaharaModeMemoryDebug) {
 
-		} else if (hello.mode == kSaharaModeCommand) {
+		} else if (state.mode == kSaharaModeMemoryDebug) {
+
+		} else if (state.mode == kSaharaModeCommand) {
 
 		}
-
-		
 
 		std::cout << "EXITING" << std::endl;
 
@@ -203,8 +201,6 @@ int main_sahara(int argc, char* argv[])
 		
 		std::cout << "SaharaClientError: " << e.what() << std::endl;
 		
-		client.reset();
-
 	} catch (SerialError& e) {
 		std::cout << "SerialError: " << e.what() << std::endl;
 	} catch (PacketError& e) {

@@ -13,7 +13,8 @@ namespace OpenPST {
                 /**
                 * @brief Constructor
                 */
-                RawDataPacket(PacketEndianess targetEndian) : Packet(targetEndian, getMaxDataSize()) 
+                RawDataPacket(PacketEndianess targetEndian) : 
+                    Packet(targetEndian, getMaxDataSize()) 
                 {
                     addField("data", kPacketFieldTypeVariant, 0);
                 }
@@ -34,6 +35,23 @@ namespace OpenPST {
                 void setData(uint8_t* data, size_t size)
                 {
                     write("data", data, size);
+                }
+
+                void setData(std::ifstream& file, size_t size)
+                {
+                    write("data", file, size);
+                }
+
+                void prepare() override {
+
+                }
+
+                void prepareResponse() override {
+
+                }
+
+                void unpack(std::vector<uint8_t>& data) override {
+
                 }
 
         };

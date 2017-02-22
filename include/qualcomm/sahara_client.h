@@ -29,8 +29,12 @@
 #include "definitions.h"
 #include "transport/transport_interface.h"
 #include "transport/packet.h"
+#include "transport/packet/raw_data_packet.h"
 #include "qualcomm/sahara.h"
 #include "qualcomm/sahara_packets.h"
+#include "qualcomm/mbn.h"
+
+using OpenPST::Transport::RawDataPacket;
 
 namespace OpenPST {
 	namespace Qualcomm {
@@ -38,13 +42,15 @@ namespace OpenPST {
 		struct SaharaState {
 			uint32_t version;
 			uint32_t minVersion;
+			uint32_t initialMode;
 			uint32_t mode;
+			SaharaImageRequestInfo lastImageRequest;
 		};
 
-		struct SaharaReadDataInfo {
+		struct SaharaImageRequestInfo {
 			uint32_t imageId;
 			uint32_t offset;
-			uint32_t amount;
+			uint32_t size;
 		};
 
 		struct SaharaHello {
@@ -54,16 +60,30 @@ namespace OpenPST {
 			uint32_t status;
 		};
 
+		struct SaharaHostInfo {			
+			bool  			    requested;
+			uint32_t  			serial;
+			uint32_t 			sblVersion;
+			SaharaMsmHwId		hwId;
+			uint8_t 			oemPublicKeyHash[32];
+		};
+
 		class SaharaClient {
 			protected:
 				TransportInterface& transport;
 				PacketEndianess deviceEndianess;
+				SaharaState state = {};
+				SaharaHostInfo hostInfo = {};
 			public:
 				SaharaClient(TransportInterface& transport, PacketEndianess deviceEndianess = kPacketEndianessLittle);
 
 				~SaharaClient();
 
 				TransportInterface* getTransport();
+
+				const SaharaState& getState();
+
+				SaharaState hello();
 
 				SaharaHello readHello();
 
@@ -73,17 +93,19 @@ namespace OpenPST {
 
 				SaharaState switchModeAndHello(uint32_t mode);
 
+				const SaharaHostInfo& getHostInfo();
+
 				std::vector<uint8_t> sendClientCommand(uint32_t command);
 
-				SaharaReadDataInfo sendImage(std::string filePath, SaharaReadDataInfo initialReadRequest);
+				SaharaImageRequestInfo sendImage(const std::string& filePath, SaharaImageRequestInfo requestInfo);
 
-				SaharaReadDataInfo sendImage(std::ifstream& file, uint32_t offset, size_t size);
+				SaharaImageRequestInfo sendImage(std::ifstream& file, uint32_t offset, size_t size);
 
-				SaharaReadDataInfo readNextImageOffset();
+				SaharaImageRequestInfo readNextImageOffset();
 
-				size_t readMemory(uint32_t address, size_t size, std::vector<uint8_t>&out);
+				size_t readMemory(uint32_t address, size_t size, std::vector<uint8_t>& out);
 
-				size_t readMemory(uint32_t address, size_t size, std::string outFilePath);
+				size_t readMemory(uint32_t address, size_t size, const std::string& outFilePath);
 
 				size_t readMemory(uint32_t address, size_t size, std::ofstream& out);
 
@@ -91,6 +113,7 @@ namespace OpenPST {
 
 				void reset();
 
+				const std::string getRequestedImageName(uint32_t imageId);
 		};
 
 		class SaharaClientError : public std::exception
@@ -100,7 +123,7 @@ namespace OpenPST {
 			uint8_t code;
 			
 			public:
-				SaharaClientError(std::string message, uint8_t code = 0) : _what(message), code(code)  { }
+				SaharaClientError(std::string message, uint8_t code = 0) : _what(message), code(code)  {}
 				SaharaClientError(const SaharaClientError& second) : _what(second._what), code(second.code) {}
 				virtual ~SaharaClientError() throw() {}
 				virtual const char* what() const throw () {
