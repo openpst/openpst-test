@@ -31,7 +31,7 @@ using namespace OpenPST::Qualcomm;
 SaharaClientCommandResponse::SaharaClientCommandResponse(PacketEndianess targetEndian) : SaharaPacket(targetEndian)
 {
 	addField("client_command", kPacketFieldTypePrimitive, sizeof(uint32_t));
-	addField("size", kPacketFieldTypePrimitive, sizeof(uint32_t));
+	addField("data_size", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
 	setCommand(kSaharaCommandExecuteResponse);
 }
@@ -50,14 +50,14 @@ void SaharaClientCommandResponse::setClientCommand(uint32_t clientCommand)
 {
     write<uint32_t>("client_command", clientCommand);
 }
-uint32_t SaharaClientCommandResponse::getSize()
+uint32_t SaharaClientCommandResponse::getDataSize()
 {
-    return read<uint32_t>(getFieldOffset("size"));
+    return read<uint32_t>(getFieldOffset("data_size"));
 }
                 
-void SaharaClientCommandResponse::setSize(uint32_t size)
+void SaharaClientCommandResponse::setDataSize(uint32_t dataSize)
 {
-    write<uint32_t>("size", size);
+    write<uint32_t>("data_size", dataSize);
 }
 
 void SaharaClientCommandResponse::unpack(std::vector<uint8_t>& data)

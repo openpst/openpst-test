@@ -112,7 +112,7 @@ SaharaState SaharaClient::sendHello(SaharaHello hello)
 	state.initialMode = hello.mode;
 	state.mode   	  = hello.mode;
 
-	return ret;
+	return state;
 }
 
 void SaharaClient::switchMode(uint32_t mode)
@@ -125,7 +125,7 @@ void SaharaClient::switchMode(uint32_t mode)
 
 	request.setMode(mode);
 
-	transport.write(&mode);
+	transport.write(&request);
 }
 
 SaharaState SaharaClient::switchModeAndHello(uint32_t mode)
@@ -220,17 +220,26 @@ SaharaImageRequestInfo SaharaClient::sendImage(const std::string& filePath, Saha
 	
 	try {
 		while(sent < total) {
-			
+			std::cout << "Device is now requesting " << next.size << " bytes from image starting at offset " << next.offset << std::endl;
+
 			if (next.offset > total || (next.offset + next.size) > total) {
 				file.close();
 				throw SaharaClientError("Requested image offset and size exceed the total size of file " + filePath);
 			}
 
-			file.seekg(next.offset, file.end);
+			file.seekg(next.offset, file.beg);
+			
+			if (file.tellg() != next.offset) {
+				throw SaharaClientError("LOL GHEY");
+			}
+			
+			std::cout << "Cur: " << file.tellg() << " - " << next.size << std::endl;
 
 			response.setData(file, next.size);
 
 			transport.write(&response);
+
+			sent += next.size;
 
 			next = readNextImageOffset();
 			

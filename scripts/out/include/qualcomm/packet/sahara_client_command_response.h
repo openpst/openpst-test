@@ -59,17 +59,17 @@ namespace OpenPST {
                 */
                 void setClientCommand(uint32_t clientCommand);
                 /**
-                * @brief Get size
+                * @brief Get data_size
                 * @return uint32_t
                 */
-                uint32_t getSize();
+                uint32_t getDataSize();
                 
                 /**
-                * @brief Set size
-                * @param uint32_t size
+                * @brief Set data_size
+                * @param uint32_t dataSize
                 * @return void
                 */
-                void setSize(uint32_t size);
+                void setDataSize(uint32_t dataSize);
 				/**
 				* @overload Packet::unpack
 				*/

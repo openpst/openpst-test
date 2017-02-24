@@ -71,14 +71,20 @@ void SaharaReadDataRequest::setAmount(uint32_t amount)
 
 void SaharaReadDataRequest::unpack(std::vector<uint8_t>& data)
 {
-	if (data.size() != this->data.size()) {
-		throw PacketInvalidArgument("Unexptected Response");
+	SaharaPacket::unpack(data);
+
+	if (!data.size()) {
+		return;
 	}
 
-	setCommand(read<uint32_t>(data, getFieldOffset("command")));
-	setPacketSize(read<uint32_t>(data, getFieldOffset("packet_size")));
-	setImageId(read<uint32_t>(data, getFieldOffset("image_id")));
-	setOffset(read<uint32_t>(data, getFieldOffset("offset")));
-	setAmount(read<uint32_t>(data, getFieldOffset("amount")));
-
+	if (getCommand() == kSaharaCommandEndImageTransfer) {
+		setImageId(0);
+		setOffset(0);
+		setAmount(0);
+	} else {
+		setImageId(read<uint32_t>(data, getFieldOffset("image_id")));
+		setOffset(read<uint32_t>(data, getFieldOffset("offset")));
+		setAmount(read<uint32_t>(data, getFieldOffset("amount")));
+	}
+	
 }

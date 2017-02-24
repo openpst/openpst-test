@@ -39,13 +39,6 @@ using OpenPST::Transport::RawDataPacket;
 namespace OpenPST {
 	namespace Qualcomm {
 
-		struct SaharaState {
-			uint32_t version;
-			uint32_t minVersion;
-			uint32_t initialMode;
-			uint32_t mode;
-			SaharaImageRequestInfo lastImageRequest;
-		};
 
 		struct SaharaImageRequestInfo {
 			uint32_t imageId;
@@ -68,6 +61,14 @@ namespace OpenPST {
 			uint8_t 			oemPublicKeyHash[32];
 		};
 
+		struct SaharaState {
+			uint32_t version;
+			uint32_t minVersion;
+			uint32_t initialMode;
+			uint32_t mode;
+			SaharaImageRequestInfo lastImageRequest;
+		};
+		
 		class SaharaClient {
 			protected:
 				TransportInterface& transport;
