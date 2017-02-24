@@ -175,7 +175,13 @@ int main_sahara(int argc, char* argv[])
 
 		SaharaClient client(port);
 
-		SaharaState state = client.hello();
+		SaharaHello hello = client.readHello();
+
+		uint32_t startMode = hello.mode;
+
+		hello.mode = kSaharaModeCommand;
+
+		SaharaState state = client.sendHello(hello);
 
 		if (state.mode == kSaharaModeImageTxPending) {
 
@@ -188,14 +194,24 @@ int main_sahara(int argc, char* argv[])
 
 			SaharaImageRequestInfo nextImageInfo = client.sendImage(argv[2], imageInfo);
 
+			if (nextImageInfo.imageId) {
+				// handle next image
+			}
+
+			client.done();
 
 		} else if (state.mode == kSaharaModeMemoryDebug) {
-
+			std::cout << "kSaharaModeMemoryDebug" << std::endl;
 		} else if (state.mode == kSaharaModeCommand) {
-
+			std::cout << "kSaharaModeCommand" << std::endl;
+			std::vector<uint8_t> t(1024);
+			port.read(t, 1024);
 		}
 
 		std::cout << "EXITING" << std::endl;
+
+		port.flush();
+		port.close();
 
 	} catch (SaharaClientError& e) {
 		

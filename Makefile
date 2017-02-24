@@ -194,7 +194,7 @@ all_serial:
 		./src/server/tcp_serial_server.cpp \
 		./src/qualcomm/packet/sahara_*.cpp \
 		./src/qualcomm/sahara_client.cpp \
-		./src/all.cpp -o build/all -Bstatic -lpthread -lboost_system -lboost_thread
+		./src/all.cpp -o build/all -lpthread -lboost_system -lboost_thread
 
 		#./src/transport/tcp_serial_client.cpp
 clean:

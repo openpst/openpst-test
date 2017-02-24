@@ -570,7 +570,7 @@ namespace OpenPST {
                         throw PacketInvalidArgument("Write data is larger than static field size");
                     }
 
-                    /*off_t current = static_cast<off_t>(file.tellg());
+                    off_t current = static_cast<off_t>(file.tellg());
 
                     file.seekg(0, file.end);
 
@@ -583,7 +583,7 @@ namespace OpenPST {
                     if (end < size) {
                         throw PacketOutOfRange("Requested size exceeds file size from its current position in the stream");
                     }
-                    */
+                    
                     
                     if(field->type == kPacketFieldTypeVariant && field->size != size) {
                         resizeField(field, size);
@@ -619,13 +619,21 @@ namespace OpenPST {
                     off_t offset = getFieldOffset(field->name);
 
                     if (field->size > size) {
-                        size_t diff = size - field->size;
-                        std::cout << "ERASING: " << diff << " of " << size << std::endl;
-                        data.erase(data.begin() + offset + diff, data.begin() + offset + field->size);
-                    } else if (field->size < size) {
                         size_t diff = field->size - size;
-                        std::cout << "ADDING: " << diff << " to " << size << std::endl;
-                        data.insert(data.begin() + offset + field->size, diff, 0x00);
+                        
+                        data.erase(
+                        	data.begin() + offset + field->size - diff, 
+                        	data.begin() + offset + field->size
+                        );
+
+                    } else if (field->size < size) {
+                        size_t diff = size - field->size;
+
+                        data.insert(
+                        	data.begin() + offset + field->size, 
+                        	diff, 
+                        	0x00
+                        );
                     }
 
                     field->size = size;
