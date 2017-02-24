@@ -44,6 +44,11 @@ TransportInterface* SaharaClient::getTransport()
 	return &transport;
 }
 
+void SaharaClient::setTransport(TransportInterface& transport)
+{
+	this->transport = transport;
+}
+
 const SaharaState& SaharaClient::getState()
 {
 	return state;
@@ -176,7 +181,7 @@ std::vector<uint8_t> SaharaClient::sendClientCommand(uint32_t command)
 
 	transport.read(response);
 
-	size_t dataSize = response->getDataSize(); // amount of data to expect
+	size_t dataSize = static_cast<size_t>(response->getDataSize()); // amount of data to expect
 
 	// ok let sahara know we are ready to receive data
 	// SaharaClientCommandExecuteDataRequest execRequest(deviceEndianess);
@@ -237,6 +242,9 @@ SaharaImageRequestInfo SaharaClient::sendImage(const std::string& filePath, Saha
 	} catch (std::exception& e) {
 		file.close();
 		throw SaharaClientError(e.what());
+	} catch (...) {
+		file.close();
+		throw;
 	}
 
 	file.close();

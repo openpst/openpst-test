@@ -74,12 +74,15 @@ namespace OpenPST {
 				PacketEndianess deviceEndianess;
 				SaharaState state = {};
 				SaharaHostInfo hostInfo = {};
+
 			public:
 				SaharaClient(TransportInterface& transport, PacketEndianess deviceEndianess = kPacketEndianessLittle);
 
 				~SaharaClient();
 
 				TransportInterface* getTransport();
+
+				void setTransport(TransportInterface& transport);
 
 				const SaharaState& getState();
 
