@@ -62,4 +62,9 @@ void SaharaClientCommandResponse::setDataSize(uint32_t dataSize)
 
 void SaharaClientCommandResponse::unpack(std::vector<uint8_t>& data)
 {
+	SaharaPacket::unpack(data);
+
+	setClientCommand(read<uint32_t>(data, getFieldOffset("client_command")));
+	setDataSize(read<uint32_t>(data, getFieldOffset("data_size")));
+
 }

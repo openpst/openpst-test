@@ -165,23 +165,34 @@ int main_sahara(int argc, char* argv[])
 		return 1;
 	}
 
+	// settings
+	bool getHostInfo = true;
+
 	try {
 
 		Serial port(argv[1]);
 
 		if (port.isOpen()) {
-			std::cout << "Opened " << port.getDevice() << std::endl;
+			std::cout << "Opened " << port.getDevice() << " - Data Waiting: " << port.available() << std::endl;
 		}
 
 		SaharaClient client(port);
+		SaharaState state;
 
-		SaharaHello hello = client.readHello();
+		if(getHostInfo) {
+			SaharaHello hello = client.readHello();
 
-		uint32_t startMode = hello.mode;
+			hello.mode = kSaharaModeCommand;
 
-		hello.mode = kSaharaModeCommand;
+			state = client.sendHello(hello);
 
-		SaharaState state = client.sendHello(hello);
+			auto hostInfo = client.getHostInfo();
+
+			state = client.switchModeAndHello(state.initialMode);
+
+		} else {
+			state = client.hello();
+		}
 
 		if (state.mode == kSaharaModeImageTxPending) {
 
@@ -204,13 +215,11 @@ int main_sahara(int argc, char* argv[])
 			std::cout << "kSaharaModeMemoryDebug" << std::endl;
 		} else if (state.mode == kSaharaModeCommand) {
 			std::cout << "kSaharaModeCommand" << std::endl;
-			std::vector<uint8_t> t(1024);
-			port.read(t, 1024);
 		}
 
 		std::cout << "EXITING" << std::endl;
 
-		port.flush();
+		
 		port.close();
 
 	} catch (SaharaClientError& e) {

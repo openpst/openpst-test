@@ -57,16 +57,24 @@ namespace OpenPST {
 			bool  			    requested;
 			uint32_t  			serial;
 			uint32_t 			sblVersion;
-			SaharaMsmHwId		hwId;
+			uint32_t 			hwId;
+			//SaharaMsmHwId		hwId;
 			uint8_t 			oemPublicKeyHash[32];
 		};
 
+		struct SaharaMemoryDebugTableInfo {
+			uint32_t address;
+			uint32_t size;
+		};
+
 		struct SaharaState {
+			bool 	 establishedSession;
 			uint32_t version;
 			uint32_t minVersion;
 			uint32_t initialMode;
 			uint32_t mode;
 			SaharaImageRequestInfo lastImageRequest;
+			SaharaMemoryDebugTableInfo debugTableInfo;
 		};
 		
 		class SaharaClient {
@@ -87,25 +95,29 @@ namespace OpenPST {
 
 				const SaharaState& getState();
 
-				SaharaState hello();
+				const SaharaState& hello();
 
 				SaharaHello readHello();
 
-				SaharaState sendHello(SaharaHello resp);
+				const SaharaState& sendHello(SaharaHello resp);
 
 				void switchMode(uint32_t mode);
 
-				SaharaState switchModeAndHello(uint32_t mode);
+				const SaharaState& switchModeAndHello(uint32_t mode);
 
 				const SaharaHostInfo& getHostInfo();
 
 				std::vector<uint8_t> sendClientCommand(uint32_t command);
 
+				void sendClientCommand(uint32_t command, uint8_t* in, size_t amount);
+
 				SaharaImageRequestInfo sendImage(const std::string& filePath, SaharaImageRequestInfo requestInfo);
 
 				SaharaImageRequestInfo sendImage(std::ifstream& file, uint32_t offset, size_t size);
 
-				SaharaImageRequestInfo readNextImageOffset();
+				const SaharaImageRequestInfo& readNextImageOffset();
+
+				bool readCommandModeReady();
 
 				size_t readMemory(uint32_t address, size_t size, std::vector<uint8_t>& out);
 

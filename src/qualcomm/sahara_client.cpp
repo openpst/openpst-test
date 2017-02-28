@@ -54,7 +54,7 @@ const SaharaState& SaharaClient::getState()
 	return state;
 }
 
-SaharaState SaharaClient::hello()
+const SaharaState& SaharaClient::hello()
 {
 	SaharaHello hello = readHello();
 
@@ -66,14 +66,18 @@ SaharaHello SaharaClient::readHello()
 {
 	if (!transport.isOpen()) {
 		throw SaharaClientError("Transport is not open");
-	} else if(!transport.available()) {
-		throw SaharaClientError("No data waiting. Not in sahara mode or device requires restart.");
 	}
 
 	SaharaHello ret = {};
 	SaharaHelloRequest request(deviceEndianess);
 
-	transport.read(&request);
+	try {
+		transport.read(&request);
+	} catch(std::exception& e) {
+		std::stringstream ss;
+		ss << "Error reading hello: " << e.what();
+		throw SaharaClientError(ss.str());
+	}
 
 	if (request.getCommand() != kSaharaCommandHello) {
 		throw SaharaClientError("Received an unexpected response");
@@ -85,14 +89,19 @@ SaharaHello SaharaClient::readHello()
 	ret.status 		= request.getStatus();
 
 	state.version 	  = ret.version;
-	state.minVersion  = ret.minVersion;
-	state.initialMode = ret.mode;
+	state.minVersion  = ret.minVersion;	
 	state.mode   	  = ret.mode;
+
+	if (!state.establishedSession) {
+		state.initialMode = ret.mode;
+	}
+
+	state.establishedSession = true;
 
 	return ret;
 }
 
-SaharaState SaharaClient::sendHello(SaharaHello hello)
+const SaharaState& SaharaClient::sendHello(SaharaHello hello)
 {
 	if (!transport.isOpen()) {
 		throw SaharaClientError("Transport is not open");
@@ -109,8 +118,15 @@ SaharaState SaharaClient::sendHello(SaharaHello hello)
 
 	state.version 	  = hello.version;
 	state.minVersion  = hello.minVersion;
-	state.initialMode = hello.mode;
 	state.mode   	  = hello.mode;
+
+	if (state.mode == kSaharaModeImageTxPending) {
+		readNextImageOffset();
+	} else if (state.mode == kSaharaModeCommand) {
+		readCommandModeReady();
+	} else if (state.mode == kSaharaModeMemoryDebug) {
+
+	}
 
 	return state;
 }
@@ -128,16 +144,17 @@ void SaharaClient::switchMode(uint32_t mode)
 	transport.write(&request);
 }
 
-SaharaState SaharaClient::switchModeAndHello(uint32_t mode)
+const SaharaState& SaharaClient::switchModeAndHello(uint32_t mode)
 {
 	if (!transport.isOpen()) {
 		throw SaharaClientError("Transport is not open");
 	}
 
-	SaharaState ret = {};
+	switchMode(mode);
 
+	SaharaHello hello = readHello();
 
-	return ret;
+	return sendHello(hello);;
 }
 
 const SaharaHostInfo& SaharaClient::getHostInfo()
@@ -146,15 +163,10 @@ const SaharaHostInfo& SaharaClient::getHostInfo()
 		return hostInfo;
 	}
 
-	//std::vector data;
-
-	//data = sendClientCommand(kSaharaClientCmdSerialNumRead);
-
-	//data = sendClientCommand(kSaharaClientCmdMsmHWIDRead);
-
-	//data = sendClientCommand(kSaharaClientOemPkHashRead);
-
-	//data = sendClientCommand(kSaharaClientCmdGetSblVersion);
+	sendClientCommand(kSaharaClientCmdSerialNumRead, reinterpret_cast<uint8_t*>(&hostInfo.serial), sizeof(hostInfo.serial));
+	sendClientCommand(kSaharaClientCmdMsmHWIDRead, 	 reinterpret_cast<uint8_t*>(&hostInfo.hwId), sizeof(hostInfo.hwId));
+	sendClientCommand(kSaharaClientCmdGetSblVersion, reinterpret_cast<uint8_t*>(&hostInfo.sblVersion), sizeof(hostInfo.sblVersion));
+	sendClientCommand(kSaharaClientOemPkHashRead, 	 &hostInfo.oemPublicKeyHash[0], sizeof(hostInfo.oemPublicKeyHash));
 
 	hostInfo.requested = true;
 
@@ -166,8 +178,6 @@ std::vector<uint8_t> SaharaClient::sendClientCommand(uint32_t command)
 	if (!transport.isOpen()) {
 		throw SaharaClientError("Transport is not open");
 	}
-
-	std::vector<uint8_t> ret;
 
 	SaharaClientCommandRequest  request(deviceEndianess);
 
@@ -184,15 +194,27 @@ std::vector<uint8_t> SaharaClient::sendClientCommand(uint32_t command)
 	size_t dataSize = static_cast<size_t>(response->getDataSize()); // amount of data to expect
 
 	// ok let sahara know we are ready to receive data
-	// SaharaClientCommandExecuteDataRequest execRequest(deviceEndianess);
-	// transport.write(&request);
+	SaharaClientCommandExecuteDataRequest execRequest(deviceEndianess);
 
-	// RawDataPacket execResponse;
-	//transport.read(&requested, response->getDataSize());
+	execRequest.setClientCommand(command);
 
-	// ret.insert(ret.begin(), execResponse.getData().begin(), execResponse.getData().end());
-	
+	transport.write(&execRequest);
+
+	// read the data
+	std::vector<uint8_t> ret;
+
+	ret.reserve(dataSize);
+
+	transport.read(ret, SAHARA_MAX_PACKET_SIZE);
+
 	return ret;
+}
+
+void SaharaClient::sendClientCommand(uint32_t command, uint8_t* in, size_t amount)
+{
+	auto data = sendClientCommand(command);
+
+	std::copy(data.begin(), data.begin() + amount, in);
 }
 
 SaharaImageRequestInfo SaharaClient::sendImage(const std::string& filePath, SaharaImageRequestInfo requestInfo)
@@ -220,7 +242,10 @@ SaharaImageRequestInfo SaharaClient::sendImage(const std::string& filePath, Saha
 	
 	try {
 		while(sent < total) {
-			std::cout << "Device is now requesting " << next.size << " bytes from image starting at offset " << next.offset << std::endl;
+
+			#ifdef SAHARA_CLIENT_DEBUG
+				std::cout << "Device is now requesting " << next.size << " bytes from image starting at offset " << next.offset << std::endl;
+			#endif
 
 			if (next.offset > total || (next.offset + next.size) > total) {
 				file.close();
@@ -233,8 +258,6 @@ SaharaImageRequestInfo SaharaClient::sendImage(const std::string& filePath, Saha
 				throw SaharaClientError("LOL GHEY");
 			}
 			
-			std::cout << "Cur: " << file.tellg() << " - " << next.size << std::endl;
-
 			response.setData(file, next.size);
 
 			transport.write(&response);
@@ -258,12 +281,14 @@ SaharaImageRequestInfo SaharaClient::sendImage(const std::string& filePath, Saha
 
 	file.close();
 
-	std::cout << "Sent a total of " << sent << "/" << total << " bytes from " << filePath << std::endl;
+	#ifdef SAHARA_CLIENT_DEBUG
+		std::cout << "Sent a total of " << sent << "/" << total << " bytes from " << filePath << std::endl;
 
-	if (requestInfo.imageId != next.imageId) {
-		std::cout << "Device is now requesting " << next.size << " bytes from image ";
-		std::cout << next.imageId << " - " << getRequestedImageName(next.imageId) << std::endl;
-	}
+		if (requestInfo.imageId != next.imageId) {
+			std::cout << "Device is now requesting " << next.size << " bytes from image ";
+			std::cout << next.imageId << " - " << getRequestedImageName(next.imageId) << std::endl;
+		}
+	#endif
 
 	return next;
 }
@@ -274,17 +299,13 @@ SaharaImageRequestInfo SaharaClient::sendImage(std::ifstream& file, uint32_t off
 		throw SaharaClientError("Transport is not open");
 	}
 
-
-
 	return readNextImageOffset();
 }
 
-SaharaImageRequestInfo SaharaClient::readNextImageOffset()
+const SaharaImageRequestInfo& SaharaClient::readNextImageOffset()
 {
 	if (!transport.isOpen()) {
 		throw SaharaClientError("Transport is not open");
-	} else if(!transport.available()) {
-		throw SaharaClientError("No data waiting. Not requesting an image transfer.");
 	}
 
 	SaharaReadDataRequest request;
@@ -296,6 +317,20 @@ SaharaImageRequestInfo SaharaClient::readNextImageOffset()
 	state.lastImageRequest.size 	= request.getAmount();
 
 	return state.lastImageRequest;
+}
+
+bool SaharaClient::readCommandModeReady()
+{
+	SaharaCommandReadyResponse isReadyRequest(deviceEndianess);
+
+	try {
+		transport.read(&isReadyRequest);
+
+		return true;
+
+	} catch (...) {
+		return false;
+	}
 }
 
 size_t SaharaClient::readMemory(uint32_t address, size_t size, std::vector<uint8_t>&out)

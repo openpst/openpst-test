@@ -53,3 +53,10 @@ void SaharaClientCommandRequest::setClientCommand(uint32_t clientCommand)
 void SaharaClientCommandRequest::unpack(std::vector<uint8_t>& data)
 {
 }
+void SaharaClientCommandRequest::prepareResponse()
+{
+	if (response == nullptr) {
+		SaharaClientCommandResponse* resp = new SaharaClientCommandResponse();
+		response = resp;
+	}
+}

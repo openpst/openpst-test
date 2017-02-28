@@ -27,8 +27,10 @@
 #pragma once
 
 #include "qualcomm/packet/sahara_packet.h"
+#include "qualcomm/packet/sahara_client_command_response.h"
 
 using OpenPST::Qualcomm::SaharaPacket;
+using OpenPST::Qualcomm::SaharaClientCommandResponse;
 
 namespace OpenPST {
     namespace Qualcomm {
@@ -62,6 +64,11 @@ namespace OpenPST {
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data) override;
+
+				/**
+				* @overload Packet::prepareResponse
+				*/
+				void prepareResponse() override;
 
         };
     }

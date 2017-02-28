@@ -101,8 +101,10 @@ void SaharaHelloRequest::setReserved(uint8_t* data, size_t size)
 }
 
 void SaharaHelloRequest::unpack(std::vector<uint8_t>& data)
-{
-	if (data.size() != this->data.size()) {
+{	
+	if (!data.size()) {
+		throw PacketInvalidArgument("No data to unpack");
+	} else if (data.size() && data.size() != this->data.size()) {
 		throw PacketInvalidArgument("Unexptected Response");
 	}
 
