@@ -70,9 +70,9 @@ void DmEfsChownRequest::setPath(uint8_t* data, size_t size)
     write("path", data, size);
 }
 
-void DmEfsChownRequest::unpack(std::vector<uint8_t>& data)
+void DmEfsChownRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	DmEfsPacket::unpack(data);
+	DmEfsPacket::unpack(data, transport);
 }
 void DmEfsChownRequest::prepareResponse()
 {

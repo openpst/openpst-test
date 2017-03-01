@@ -70,9 +70,9 @@ void DmEfsWriteFileRequest::setData(uint8_t* data, size_t size)
     write("data", data, size);
 }
 
-void DmEfsWriteFileRequest::unpack(std::vector<uint8_t>& data)
+void DmEfsWriteFileRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	DmEfsPacket::unpack(data);
+	DmEfsPacket::unpack(data, transport);
 }
 void DmEfsWriteFileRequest::prepareResponse()
 {

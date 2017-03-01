@@ -60,9 +60,9 @@ void DmEfsCreateLinkRequest::setNewPath(uint8_t* data, size_t size)
     write("new_path", data, size);
 }
 
-void DmEfsCreateLinkRequest::unpack(std::vector<uint8_t>& data)
+void DmEfsCreateLinkRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	DmEfsPacket::unpack(data);
+	DmEfsPacket::unpack(data, transport);
 }
 void DmEfsCreateLinkRequest::prepareResponse()
 {

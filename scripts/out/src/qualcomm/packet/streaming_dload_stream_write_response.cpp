@@ -50,7 +50,7 @@ void StreamingDloadStreamWriteResponse::setAddress(uint32_t address)
     write<uint32_t>("address", address);
 }
 
-void StreamingDloadStreamWriteResponse::unpack(std::vector<uint8_t>& data)
+void StreamingDloadStreamWriteResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	StreamingDloadPacket::unpack(data);
+	StreamingDloadPacket::unpack(data, transport);
 }

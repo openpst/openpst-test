@@ -50,7 +50,7 @@ void DmEfsFactoryImagePrepareResponse::setError(uint32_t error)
     write<uint32_t>("error", error);
 }
 
-void DmEfsFactoryImagePrepareResponse::unpack(std::vector<uint8_t>& data)
+void DmEfsFactoryImagePrepareResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	DmEfsPacket::unpack(data);
+	DmEfsPacket::unpack(data, transport);
 }

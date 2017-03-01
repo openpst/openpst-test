@@ -60,9 +60,9 @@ void StreamingDloadPartitionTableRequest::setData(uint8_t* data, size_t size)
     write("data", data, size);
 }
 
-void StreamingDloadPartitionTableRequest::unpack(std::vector<uint8_t>& data)
+void StreamingDloadPartitionTableRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	StreamingDloadPacket::unpack(data);
+	StreamingDloadPacket::unpack(data, transport);
 }
 void StreamingDloadPartitionTableRequest::prepareResponse()
 {

@@ -129,14 +129,8 @@ void LafPacket::setData(uint8_t* data, size_t size)
     write("data", data, size);
 }
 
-void LafPacket::unpack(std::vector<uint8_t>& data)
+void LafPacket::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-void LafPacket::prepareResponse()
-{
-	if (response == nullptr) {
-		LafPacket* resp = new LafPacket();
-		response = resp;
-	}
 }
 void LafPacket::prepareResponse()
 {

@@ -50,9 +50,9 @@ void StreamingDloadUnlockRequest::setCode(uint64_t code)
     write<uint64_t>("code", code);
 }
 
-void StreamingDloadUnlockRequest::unpack(std::vector<uint8_t>& data)
+void StreamingDloadUnlockRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	StreamingDloadPacket::unpack(data);
+	StreamingDloadPacket::unpack(data, transport);
 }
 void StreamingDloadUnlockRequest::prepareResponse()
 {

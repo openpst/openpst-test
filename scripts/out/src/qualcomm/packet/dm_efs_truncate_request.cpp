@@ -70,9 +70,9 @@ void DmEfsTruncateRequest::setPath(uint8_t* data, size_t size)
     write("path", data, size);
 }
 
-void DmEfsTruncateRequest::unpack(std::vector<uint8_t>& data)
+void DmEfsTruncateRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	DmEfsPacket::unpack(data);
+	DmEfsPacket::unpack(data, transport);
 }
 void DmEfsTruncateRequest::prepareResponse()
 {

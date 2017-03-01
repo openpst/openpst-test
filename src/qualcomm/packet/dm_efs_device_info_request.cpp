@@ -40,9 +40,9 @@ DmEfsDeviceInfoRequest::~DmEfsDeviceInfoRequest()
 }
 
 
-void DmEfsDeviceInfoRequest::unpack(std::vector<uint8_t>& data)
+void DmEfsDeviceInfoRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	DmEfsPacket::unpack(data);
+	DmEfsPacket::unpack(data, transport);
 }
 void DmEfsDeviceInfoRequest::prepareResponse()
 {

@@ -90,7 +90,7 @@ void DmEfsLstatResponse::setCtime(uint32_t ctime)
     write<uint32_t>("ctime", ctime);
 }
 
-void DmEfsLstatResponse::unpack(std::vector<uint8_t>& data)
+void DmEfsLstatResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	DmEfsPacket::unpack(data);
+	DmEfsPacket::unpack(data, transport);
 }

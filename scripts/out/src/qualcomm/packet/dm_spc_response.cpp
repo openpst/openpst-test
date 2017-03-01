@@ -50,7 +50,7 @@ void DmSpcResponse::setStatus(uint8_t status)
     write<uint8_t>("status", status);
 }
 
-void DmSpcResponse::unpack(std::vector<uint8_t>& data)
+void DmSpcResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	DmPacket::unpack(data);
+	DmPacket::unpack(data, transport);
 }

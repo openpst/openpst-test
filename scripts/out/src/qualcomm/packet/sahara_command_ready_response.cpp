@@ -50,6 +50,7 @@ void SaharaCommandReadyResponse::setImageTxStatus(uint32_t imageTxStatus)
     write<uint32_t>("image_tx_status", imageTxStatus);
 }
 
-void SaharaCommandReadyResponse::unpack(std::vector<uint8_t>& data)
+void SaharaCommandReadyResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
+	SaharaPacket::unpack(data, transport);
 }

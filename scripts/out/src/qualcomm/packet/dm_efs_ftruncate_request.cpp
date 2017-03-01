@@ -70,9 +70,9 @@ void DmEfsFtruncateRequest::setFp(uint32_t fp)
     write<uint32_t>("fp", fp);
 }
 
-void DmEfsFtruncateRequest::unpack(std::vector<uint8_t>& data)
+void DmEfsFtruncateRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	DmEfsPacket::unpack(data);
+	DmEfsPacket::unpack(data, transport);
 }
 void DmEfsFtruncateRequest::prepareResponse()
 {

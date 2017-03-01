@@ -50,6 +50,6 @@ void SaharaClientCommandExecuteDataRequest::setClientCommand(uint32_t clientComm
     write<uint32_t>("client_command", clientCommand);
 }
 
-void SaharaClientCommandExecuteDataRequest::unpack(std::vector<uint8_t>& data)
+void SaharaClientCommandExecuteDataRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
 }

@@ -70,7 +70,7 @@ void DmEfsMd5SumResponse::setHash(uint8_t* data, size_t size)
     write("hash", data, size);
 }
 
-void DmEfsMd5SumResponse::unpack(std::vector<uint8_t>& data)
+void DmEfsMd5SumResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	DmEfsPacket::unpack(data);
+	DmEfsPacket::unpack(data, transport);
 }

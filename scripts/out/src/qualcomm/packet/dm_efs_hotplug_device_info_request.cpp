@@ -60,9 +60,9 @@ void DmEfsHotplugDeviceInfoRequest::setPath(uint8_t* data, size_t size)
     write("path", data, size);
 }
 
-void DmEfsHotplugDeviceInfoRequest::unpack(std::vector<uint8_t>& data)
+void DmEfsHotplugDeviceInfoRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	DmEfsPacket::unpack(data);
+	DmEfsPacket::unpack(data, transport);
 }
 void DmEfsHotplugDeviceInfoRequest::prepareResponse()
 {

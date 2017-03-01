@@ -50,9 +50,9 @@ void DmEfsCloseFileRequest::setFp(uint32_t fp)
     write<uint32_t>("fp", fp);
 }
 
-void DmEfsCloseFileRequest::unpack(std::vector<uint8_t>& data)
+void DmEfsCloseFileRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	DmEfsPacket::unpack(data);
+	DmEfsPacket::unpack(data, transport);
 }
 void DmEfsCloseFileRequest::prepareResponse()
 {

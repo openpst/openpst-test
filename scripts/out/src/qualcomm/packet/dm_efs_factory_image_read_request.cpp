@@ -80,9 +80,9 @@ void DmEfsFactoryImageReadRequest::setCusterDataSequence(uint16_t custerDataSequ
     write<uint16_t>("custer_data_sequence", custerDataSequence);
 }
 
-void DmEfsFactoryImageReadRequest::unpack(std::vector<uint8_t>& data)
+void DmEfsFactoryImageReadRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	DmEfsPacket::unpack(data);
+	DmEfsPacket::unpack(data, transport);
 }
 void DmEfsFactoryImageReadRequest::prepareResponse()
 {

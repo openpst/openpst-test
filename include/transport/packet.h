@@ -17,7 +17,7 @@
 * You should have received a copy of the GNU General Public License
 * along with libopenpst. If not, see <http://www.gnu.org/licenses/>.
 *
-* @file serial.h
+* @file packet.h
 * @package openpst/libopenpst
 * @brief Represents a packet of data to be read or written from a TransportInterface
 *
@@ -35,12 +35,16 @@
 #include <fstream>
 #include <iterator>
 #include <sstream>
-
+#include "transport/transport_interface.h"
 
 namespace OpenPST {
     namespace Transport {
         
+        // forward declaration required here cause Packet and TransportInterface depend on eachother
+        class TransportInterface; 
+
         enum PacketEndianess{
+            kPacketEndianessUnknown,
             kPacketEndianessLittle,
             kPacketEndianessBig,
             kPacketEndianessLast      // last entry, equal or over is invalid
@@ -56,8 +60,8 @@ namespace OpenPST {
         };
 
         enum PacketFieldType {
-            kPacketFieldTypePrimitive, // a primitive type
-            kPacketFieldTypeArray,    // a byte type
+            kPacketFieldTypePrimitive, // a primitive type (byte, short, word, qword)
+            kPacketFieldTypeArray,    // a byte array type
             kPacketFieldTypeVariant,  // a variable length type
             kPacketFieldTypeLast     // last entry, equal or over is invalid
         };
@@ -334,7 +338,7 @@ namespace OpenPST {
                 /**
                 * @brief Unpack a buffer into the packet
                 */
-                virtual void unpack(std::vector<uint8_t>& data) = 0;
+                virtual void unpack(std::vector<uint8_t>& data, TransportInterface* transport) = 0;
 
                 /**
                 * @brief Get a fields starting offset in the packet data buffer

@@ -32,6 +32,10 @@
 
 namespace OpenPST {
 	namespace Transport {
+
+		// forward declaration required here cause Packet and TransportInterface depend on eachother
+		class Packet; 
+
 		class TransportInterface
 		{
 			public:
@@ -84,6 +88,10 @@ namespace OpenPST {
 				* 		Otherwise the amount to read will be determined by the Packet
 				*/
 				virtual size_t read(Packet* packet, size_t amount = 0) = 0;
+
+				//virtual void readAndWrite(Packet* packet);
+
+				//virtual void writeAndRead(Packet* packet);
 				
 				/**
 				* @brief available

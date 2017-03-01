@@ -70,9 +70,9 @@ void DmEfsOpenFileRequest::setFilePath(uint8_t* data, size_t size)
     write("file_path", data, size);
 }
 
-void DmEfsOpenFileRequest::unpack(std::vector<uint8_t>& data)
+void DmEfsOpenFileRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	DmEfsPacket::unpack(data);
+	DmEfsPacket::unpack(data, transport);
 }
 void DmEfsOpenFileRequest::prepareResponse()
 {

@@ -68,10 +68,10 @@ using namespace OpenPST::{{namespace}};
 {% if unpacked_custom %}
 {{unpacked_custom|raw}}
 {% else %}
-void {{class_name}}::unpack(std::vector<uint8_t>& data)
+void {{class_name}}::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
 {% if unpack_base %}
-	{{extends_class_name}}::unpack(data);
+	{{extends_class_name}}::unpack(data, transport);
 {% endif %}
 }
 {% endif %}

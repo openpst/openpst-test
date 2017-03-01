@@ -40,7 +40,7 @@ StreamingDloadSecurityModeResponse::~StreamingDloadSecurityModeResponse()
 }
 
 
-void StreamingDloadSecurityModeResponse::unpack(std::vector<uint8_t>& data)
+void StreamingDloadSecurityModeResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	StreamingDloadPacket::unpack(data);
+	StreamingDloadPacket::unpack(data, transport);
 }

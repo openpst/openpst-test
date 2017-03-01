@@ -50,7 +50,7 @@ void DmEfsUnlinkResponse::setError(uint32_t error)
     write<uint32_t>("error", error);
 }
 
-void DmEfsUnlinkResponse::unpack(std::vector<uint8_t>& data)
+void DmEfsUnlinkResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	DmEfsPacket::unpack(data);
+	DmEfsPacket::unpack(data, transport);
 }

@@ -60,9 +60,9 @@ void DmEfsReadDirRequest::setSequenceNumber(uint32_t sequenceNumber)
     write<uint32_t>("sequence_number", sequenceNumber);
 }
 
-void DmEfsReadDirRequest::unpack(std::vector<uint8_t>& data)
+void DmEfsReadDirRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	DmEfsPacket::unpack(data);
+	DmEfsPacket::unpack(data, transport);
 }
 void DmEfsReadDirRequest::prepareResponse()
 {

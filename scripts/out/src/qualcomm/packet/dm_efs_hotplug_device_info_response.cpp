@@ -110,7 +110,7 @@ void DmEfsHotplugDeviceInfoResponse::setManufacturedDate(uint8_t* data, size_t s
     write("manufactured_date", data, size);
 }
 
-void DmEfsHotplugDeviceInfoResponse::unpack(std::vector<uint8_t>& data)
+void DmEfsHotplugDeviceInfoResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	DmEfsPacket::unpack(data);
+	DmEfsPacket::unpack(data, transport);
 }

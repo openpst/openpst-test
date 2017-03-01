@@ -68,7 +68,7 @@ void DmNvReadResponse::setData(const std::string& data)
     write("data", data);
 }
 
-void DmNvReadResponse::unpack(std::vector<uint8_t>& data)
+void DmNvReadResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	DmPacket::unpack(data);
+	DmPacket::unpack(data, transport);
 }

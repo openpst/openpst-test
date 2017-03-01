@@ -84,9 +84,9 @@ void StreamingDloadHelloRequest::setFeatureBits(uint8_t featureBits)
     write<uint8_t>("feature_bits", featureBits);
 }
 
-void StreamingDloadHelloRequest::unpack(std::vector<uint8_t>& data)
+void StreamingDloadHelloRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	StreamingDloadPacket::unpack(data);
+	StreamingDloadPacket::unpack(data, transport);
 }
 void StreamingDloadHelloRequest::prepareResponse()
 {

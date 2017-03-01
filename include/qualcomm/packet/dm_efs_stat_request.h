@@ -62,7 +62,7 @@ namespace OpenPST {
 				/**
 				* @overload Packet::unpack
 				*/
-	            void unpack(std::vector<uint8_t>& data) override;
+	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;
 
         };
     }

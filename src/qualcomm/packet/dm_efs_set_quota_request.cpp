@@ -70,9 +70,9 @@ void DmEfsSetQuotaRequest::setPath(uint8_t* data, size_t size)
     write("path", data, size);
 }
 
-void DmEfsSetQuotaRequest::unpack(std::vector<uint8_t>& data)
+void DmEfsSetQuotaRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	DmEfsPacket::unpack(data);
+	DmEfsPacket::unpack(data, transport);
 }
 void DmEfsSetQuotaRequest::prepareResponse()
 {

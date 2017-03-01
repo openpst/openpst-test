@@ -276,7 +276,7 @@ void DmVersionResponse::setPower(uint8_t power)
     write<uint8_t>("power", power);
 }
 
-void DmVersionResponse::unpack(std::vector<uint8_t>& data)
+void DmVersionResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	DmPacket::unpack(data);
+	DmPacket::unpack(data, transport);
 }

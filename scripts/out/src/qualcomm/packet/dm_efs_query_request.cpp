@@ -40,9 +40,9 @@ DmEfsQueryRequest::~DmEfsQueryRequest()
 }
 
 
-void DmEfsQueryRequest::unpack(std::vector<uint8_t>& data)
+void DmEfsQueryRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	DmEfsPacket::unpack(data);
+	DmEfsPacket::unpack(data, transport);
 }
 void DmEfsQueryRequest::prepareResponse()
 {

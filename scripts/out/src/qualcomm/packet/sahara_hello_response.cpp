@@ -90,6 +90,6 @@ void SaharaHelloResponse::setReserved(uint8_t* data, size_t size)
     write("reserved", data, size);
 }
 
-void SaharaHelloResponse::unpack(std::vector<uint8_t>& data)
+void SaharaHelloResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
 }

@@ -89,7 +89,7 @@ void PacketWriter::write(Packet* packet)
 			std::cout << transport.available() << " bytes of data is still waiting to be read!" << std::endl;
 		}
 #endif
-		response->unpack(rbuffer);
+		response->unpack(rbuffer, &transport);
 	}
 }
 
@@ -104,7 +104,7 @@ void PacketWriter::read(Packet* packet)
 
 	transport.read(rbuffer, packet->getMaxDataSize());
 
-	packet->unpack(rbuffer);
+	packet->unpack(rbuffer, &transport);
 
 	if (packet->isResponseExpected()) {
 

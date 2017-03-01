@@ -130,9 +130,9 @@ void DmEfsHelloRequest::setFeatureBits(uint32_t featureBits)
     write<uint32_t>("feature_bits", featureBits);
 }
 
-void DmEfsHelloRequest::unpack(std::vector<uint8_t>& data)
+void DmEfsHelloRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	DmEfsPacket::unpack(data);
+	DmEfsPacket::unpack(data, transport);
 }
 void DmEfsHelloRequest::prepareResponse()
 {

@@ -100,7 +100,7 @@ void DmEfsQueryResponse::setMaxMounts(uint32_t maxMounts)
     write<uint32_t>("max_mounts", maxMounts);
 }
 
-void DmEfsQueryResponse::unpack(std::vector<uint8_t>& data)
+void DmEfsQueryResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	DmEfsPacket::unpack(data);
+	DmEfsPacket::unpack(data, transport);
 }

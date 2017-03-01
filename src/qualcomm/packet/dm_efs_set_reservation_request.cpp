@@ -70,9 +70,9 @@ void DmEfsSetReservationRequest::setPath(uint8_t* data, size_t size)
     write("path", data, size);
 }
 
-void DmEfsSetReservationRequest::unpack(std::vector<uint8_t>& data)
+void DmEfsSetReservationRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	DmEfsPacket::unpack(data);
+	DmEfsPacket::unpack(data, transport);
 }
 void DmEfsSetReservationRequest::prepareResponse()
 {

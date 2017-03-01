@@ -51,22 +51,29 @@ namespace OpenPST {
 			std::string flashId;
 		};
 
+		struct StreamingDloadFlashInfo {
+			size_t sectorSize;
+			size_t maxSectors;
+		};
 
 		class StreamingDloadClient {
 			protected:
 				TransportInterface& transport;
-				size_t sectorSize;
+				StreamingDloadFlashInfo flashInfo;
 				PacketEndianess deviceEndianess;
-				size_t maxDiskSectors;
 
 			public:
-				StreamingDloadClient(TransportInterface& transport, size_t sectorSize = 512, PacketEndianess deviceEndianess = kPacketEndianessLittle);
+				StreamingDloadClient(TransportInterface& transport, const StreamingDloadFlashInfo& flashInfo, PacketEndianess deviceEndianess = kPacketEndianessLittle);
+
+				StreamingDloadClient(TransportInterface& transport, PacketEndianess deviceEndianess = kPacketEndianessLittle);
 
 				~StreamingDloadClient();
 
 				TransportInterface* getTransport();
 				
-				StreamingDloadDeviceInfo sendHello(std::string magic = "QCOM fast download protocol host", uint8_t version = 0x05, uint8_t compatibleVersion = 0x02, uint8_t featureBits = STREAMING_DLOAD_FEATURE_ALL);
+				void setTransport(TransportInterface& transport);
+
+				StreamingDloadDeviceInfo hello(std::string magic = "QCOM fast download protocol host", uint8_t version = 0x05, uint8_t compatibleVersion = 0x02, uint8_t featureBits = STREAMING_DLOAD_FEATURE_ALL);
 
 				bool unlock(uint64_t code);
 
@@ -109,6 +116,18 @@ namespace OpenPST {
 				void setMaxDiskSectors(size_t maxDiskSector);
 
 				size_t getMaxDiskSectors();
+
+				size_t readEncoded(const std::vector<uint8_t>& data);
+
+				size_t readEncoded(uint8_t* data, size_t amount);
+				
+				size_t readEncoded(Packet* packet);
+
+				size_t writeEncoded(const std::vector<uint8_t>& data);
+
+				size_t writeEncoded(uint8_t* data, size_t amount);
+
+				size_t writeEncoded(Packet* packet);
 		};
 
 		class StreamingDloadClientError : public std::exception

@@ -68,9 +68,9 @@ void StreamingDloadOpenMultiImageWithPayloadRequest::setPayload(const std::strin
     write("payload", payload);
 }
 
-void StreamingDloadOpenMultiImageWithPayloadRequest::unpack(std::vector<uint8_t>& data)
+void StreamingDloadOpenMultiImageWithPayloadRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	StreamingDloadPacket::unpack(data);
+	StreamingDloadPacket::unpack(data, transport);
 }
 void StreamingDloadOpenMultiImageWithPayloadRequest::prepareResponse()
 {

@@ -50,7 +50,7 @@ void StreamingDloadPartitionTableResponse::setStatus(uint8_t status)
     write<uint8_t>("status", status);
 }
 
-void StreamingDloadPartitionTableResponse::unpack(std::vector<uint8_t>& data)
+void StreamingDloadPartitionTableResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	StreamingDloadPacket::unpack(data);
+	StreamingDloadPacket::unpack(data, transport);
 }

@@ -230,7 +230,7 @@ void DmEfsStatfsV2Response::setNameEncoding(uint32_t nameEncoding)
     write<uint32_t>("name_encoding", nameEncoding);
 }
 
-void DmEfsStatfsV2Response::unpack(std::vector<uint8_t>& data)
+void DmEfsStatfsV2Response::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	DmEfsPacket::unpack(data);
+	DmEfsPacket::unpack(data, transport);
 }

@@ -88,9 +88,9 @@ void StreamingDloadUnframedStreamWriteRequest::setData(const std::string& data)
     write("data", data);
 }
 
-void StreamingDloadUnframedStreamWriteRequest::unpack(std::vector<uint8_t>& data)
+void StreamingDloadUnframedStreamWriteRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	StreamingDloadPacket::unpack(data);
+	StreamingDloadPacket::unpack(data, transport);
 }
 void StreamingDloadUnframedStreamWriteRequest::prepareResponse()
 {

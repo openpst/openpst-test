@@ -80,7 +80,7 @@ void DmEfsGetGroupInfoResponse::setSpaceUsed(uint32_t spaceUsed)
     write<uint32_t>("space_used", spaceUsed);
 }
 
-void DmEfsGetGroupInfoResponse::unpack(std::vector<uint8_t>& data)
+void DmEfsGetGroupInfoResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	DmEfsPacket::unpack(data);
+	DmEfsPacket::unpack(data, transport);
 }

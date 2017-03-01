@@ -60,9 +60,9 @@ void StreamingDloadReadRequest::setLength(uint16_t length)
     write<uint16_t>("length", length);
 }
 
-void StreamingDloadReadRequest::unpack(std::vector<uint8_t>& data)
+void StreamingDloadReadRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	StreamingDloadPacket::unpack(data);
+	StreamingDloadPacket::unpack(data, transport);
 }
 void StreamingDloadReadRequest::prepareResponse()
 {

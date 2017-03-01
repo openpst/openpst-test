@@ -140,7 +140,7 @@ void DmEfsReadDirResponse::setName(uint8_t* data, size_t size)
     write("name", data, size);
 }
 
-void DmEfsReadDirResponse::unpack(std::vector<uint8_t>& data)
+void DmEfsReadDirResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	DmEfsPacket::unpack(data);
+	DmEfsPacket::unpack(data, transport);
 }

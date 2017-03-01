@@ -14,7 +14,8 @@ namespace OpenPST {
                 /**
                 * @brief Constructor
                 */
-                SaharaPacket(PacketEndianess targetEndian) : Packet(targetEndian, getMaxDataSize()) 
+                SaharaPacket(PacketEndianess targetEndian) : 
+                	Packet(targetEndian, getMaxDataSize()) 
                 {
                    addField("command", kPacketFieldTypePrimitive, sizeof(uint32_t));
                    addField("packet_size", kPacketFieldTypePrimitive, sizeof(uint32_t));
@@ -57,7 +58,7 @@ namespace OpenPST {
                     setPacketSize(data.size());
                 }
 
-                void unpack(std::vector<uint8_t>& data) override {
+                void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override {
                     if (!data.size()) {
                         return;
                     }

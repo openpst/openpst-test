@@ -90,7 +90,7 @@ void DmEfsReadFileResponse::setData(uint8_t* data, size_t size)
     write("data", data, size);
 }
 
-void DmEfsReadFileResponse::unpack(std::vector<uint8_t>& data)
+void DmEfsReadFileResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	DmEfsPacket::unpack(data);
+	DmEfsPacket::unpack(data, transport);
 }

@@ -50,9 +50,9 @@ void DmSpcRequest::setSpc(uint8_t* data, size_t size)
     write("spc", data, size);
 }
 
-void DmSpcRequest::unpack(std::vector<uint8_t>& data)
+void DmSpcRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	DmPacket::unpack(data);
+	DmPacket::unpack(data, transport);
 }
 void DmSpcRequest::prepareResponse()
 {

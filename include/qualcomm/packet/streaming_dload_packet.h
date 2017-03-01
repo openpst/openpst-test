@@ -2,24 +2,20 @@
 
 #include "transport/packet.h"
 #include "qualcomm/streaming_dload.h"
-//#include "qualcomm/hdlc_encoder.h"
 
-using namespace OpenPST::Transport;
-using OpenPST::QC::HdlcEncoder;
+using namespace OpenPST::Qualcomm;
 
 namespace OpenPST {
     namespace Qualcomm {
         
         class StreamingDloadPacket : public Packet
         {
-            protected:
-                //HdlcEncoder encoder;
-
             public:
                 /**
                 * @brief Constructor
                 */
-                StreamingDloadPacket(PacketEndianess targetEndian) : Packet(targetEndian, getMaxDataSize()) 
+                StreamingDloadPacket(PacketEndianess targetEndian) : 
+                	Packet(targetEndian, getMaxDataSize()) 
                 {
                    addField("command", kPacketFieldTypePrimitive, sizeof(uint8_t));
                 }
@@ -46,22 +42,19 @@ namespace OpenPST {
                     write<uint8_t>("command", command);
                 }
                
-                void unpack(std::vector<uint8_t>& resp) override {
+                void unpack(std::vector<uint8_t>& resp, TransportInterface* transport) override {
                     if (!resp.size()) {
                         throw PacketError("No data to unpack");
                     }
 
-                    encoder.decode(resp);
-
-                    if (resp[0] != getCommand()) {
+                    if (getCommand() && resp[0] != getCommand()) {
                         throw PacketError("Unexpected Response");
                     }
                 }
 
                 void prepare() override {
-                    //encoder.encode(data);
-                }
 
+                }
         };
     }
 }

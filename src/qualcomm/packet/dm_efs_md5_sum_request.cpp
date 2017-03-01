@@ -60,9 +60,9 @@ void DmEfsMd5SumRequest::setPath(uint8_t* data, size_t size)
     write("path", data, size);
 }
 
-void DmEfsMd5SumRequest::unpack(std::vector<uint8_t>& data)
+void DmEfsMd5SumRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	DmEfsPacket::unpack(data);
+	DmEfsPacket::unpack(data, transport);
 }
 void DmEfsMd5SumRequest::prepareResponse()
 {

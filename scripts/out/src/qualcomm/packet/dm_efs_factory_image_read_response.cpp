@@ -100,7 +100,7 @@ void DmEfsFactoryImageReadResponse::setData(uint8_t* data, size_t size)
     write("data", data, size);
 }
 
-void DmEfsFactoryImageReadResponse::unpack(std::vector<uint8_t>& data)
+void DmEfsFactoryImageReadResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	DmEfsPacket::unpack(data);
+	DmEfsPacket::unpack(data, transport);
 }

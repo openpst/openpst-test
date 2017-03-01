@@ -60,9 +60,9 @@ void DmEfsChmodRequest::setPath(uint8_t* data, size_t size)
     write("path", data, size);
 }
 
-void DmEfsChmodRequest::unpack(std::vector<uint8_t>& data)
+void DmEfsChmodRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	DmEfsPacket::unpack(data);
+	DmEfsPacket::unpack(data, transport);
 }
 void DmEfsChmodRequest::prepareResponse()
 {

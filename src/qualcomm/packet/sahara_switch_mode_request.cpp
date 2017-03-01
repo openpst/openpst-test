@@ -50,6 +50,6 @@ void SaharaSwitchModeRequest::setMode(uint32_t mode)
     write<uint32_t>("mode", mode);
 }
 
-void SaharaSwitchModeRequest::unpack(std::vector<uint8_t>& data)
+void SaharaSwitchModeRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
 }

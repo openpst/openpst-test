@@ -60,9 +60,9 @@ void DmEfsMkdirRequest::setPath(uint8_t* data, size_t size)
     write("path", data, size);
 }
 
-void DmEfsMkdirRequest::unpack(std::vector<uint8_t>& data)
+void DmEfsMkdirRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	DmEfsPacket::unpack(data);
+	DmEfsPacket::unpack(data, transport);
 }
 void DmEfsMkdirRequest::prepareResponse()
 {

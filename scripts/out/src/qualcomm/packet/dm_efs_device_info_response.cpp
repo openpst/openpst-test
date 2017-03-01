@@ -130,7 +130,7 @@ void DmEfsDeviceInfoResponse::setName(uint8_t* data, size_t size)
     write("name", data, size);
 }
 
-void DmEfsDeviceInfoResponse::unpack(std::vector<uint8_t>& data)
+void DmEfsDeviceInfoResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	DmEfsPacket::unpack(data);
+	DmEfsPacket::unpack(data, transport);
 }

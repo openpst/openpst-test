@@ -140,7 +140,7 @@ void DmEfsStatfsResponse::setMaxFileCount(uint32_t maxFileCount)
     write<uint32_t>("max_file_count", maxFileCount);
 }
 
-void DmEfsStatfsResponse::unpack(std::vector<uint8_t>& data)
+void DmEfsStatfsResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	DmEfsPacket::unpack(data);
+	DmEfsPacket::unpack(data, transport);
 }

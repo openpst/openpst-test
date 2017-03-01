@@ -14,7 +14,7 @@
 //#include "qualcomm/packet/streaming_dload_open_multi_image_request.h"
 //#include "qualcomm/packet/streaming_dload_read_request.h"
 #include "qualcomm/sahara_client.h"
-#include "qualcomm/sahara_packets.h"
+//#include "qualcomm/streaming_dload_client.h"
 
 
 #include "qualcomm/hdlc_encoder.h"
@@ -198,9 +198,15 @@ int main_sahara(int argc, char* argv[])
 
 			std::cout << "Device in kSaharaModeImageTxPending" << std::endl;
 
-			SaharaImageRequestInfo imageInfo = client.readNextImageOffset();
+			SaharaImageRequestInfo imageInfo;
 
-			std::cout << "Device requesting image 0x" << std::hex << imageInfo.imageId;
+			if (state.lastImageRequest.imageId) {
+				imageInfo = state.lastImageRequest;
+			} else {
+				imageInfo = client.readNextImageOffset();
+			}
+
+			std::cout << "Device requesting image 0x" << std::hex << state.lastImageRequest.imageId;
 			std::cout << ". Requesting " << std::dec <<  imageInfo.size << " bytes from offset " << imageInfo.offset << std::endl;
 
 			SaharaImageRequestInfo nextImageInfo = client.sendImage(argv[2], imageInfo);
@@ -218,6 +224,8 @@ int main_sahara(int argc, char* argv[])
 		}
 
 		std::cout << "EXITING" << std::endl;
+
+
 
 		
 		port.close();

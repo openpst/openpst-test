@@ -60,6 +60,7 @@ void SaharaEndImageTransferResponse::setStatus(uint32_t status)
     write<uint32_t>("status", status);
 }
 
-void SaharaEndImageTransferResponse::unpack(std::vector<uint8_t>& data)
+void SaharaEndImageTransferResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
+	SaharaPacket::unpack(data, transport);
 }

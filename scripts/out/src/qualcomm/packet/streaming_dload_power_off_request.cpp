@@ -40,9 +40,9 @@ StreamingDloadPowerOffRequest::~StreamingDloadPowerOffRequest()
 }
 
 
-void StreamingDloadPowerOffRequest::unpack(std::vector<uint8_t>& data)
+void StreamingDloadPowerOffRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	StreamingDloadPacket::unpack(data);
+	StreamingDloadPacket::unpack(data, transport);
 }
 void StreamingDloadPowerOffRequest::prepareResponse()
 {

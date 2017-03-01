@@ -150,44 +150,7 @@ void StreamingDloadHelloResponse::setFeatureBits(uint8_t featureBits)
     write<uint8_t>("feature_bits", featureBits);
 }
 
-void StreamingDloadHelloResponse::unpack(std::vector<uint8_t>& data)
+void StreamingDloadHelloResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-    StreamingDloadPacket::unpack(data);
-    
-    size_t ssize = 0;
-    off_t offset = 0;
-
-    setCommand(read<uint8_t>(data, offset++));
-
-    setMagic(reinterpret_cast<uint8_t*>(&data[offset]), STREAMING_DLOAD_MAGIC_SIZE);
-    offset += STREAMING_DLOAD_MAGIC_SIZE;
-    
-    setVersion(read<uint8_t>(data, offset++));
-    setCompatibleVersion(read<uint8_t>(data, offset++));
-    
-    setPreferredBlockSize(read<uint32_t>(data, offset));
-    offset += sizeof(uint32_t);
-    
-    setBaseFlashAddress(read<uint32_t>(data, offset));
-    offset += sizeof(uint32_t);
-
-    setFlashIdLength(read<uint8_t>(data, offset++));
-
-    setFlashId(reinterpret_cast<uint8_t*>(&data[offset]), getFlashIdLength());
-
-    offset += getFlashIdLength();
-
-    setWindowSize(read<uint16_t>(data, offset));
-    offset += sizeof(uint16_t);
-
-    setNumberOfSectors(read<uint16_t>(data, offset));
-    offset += sizeof(uint16_t);
-
-    ssize = getNumberOfSectors() * sizeof(uint32_t);
-
-    setSectorSizes(reinterpret_cast<uint8_t*>(&data[offset]), ssize);
-
-    offset += ssize;
-
-    setFeatureBits(read<uint8_t>(data, offset));
+	StreamingDloadPacket::unpack(data, transport);
 }

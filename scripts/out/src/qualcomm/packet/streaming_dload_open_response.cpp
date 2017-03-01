@@ -40,7 +40,7 @@ StreamingDloadOpenResponse::~StreamingDloadOpenResponse()
 }
 
 
-void StreamingDloadOpenResponse::unpack(std::vector<uint8_t>& data)
+void StreamingDloadOpenResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	StreamingDloadPacket::unpack(data);
+	StreamingDloadPacket::unpack(data, transport);
 }

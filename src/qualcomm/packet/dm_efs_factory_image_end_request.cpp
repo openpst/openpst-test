@@ -40,9 +40,9 @@ DmEfsFactoryImageEndRequest::~DmEfsFactoryImageEndRequest()
 }
 
 
-void DmEfsFactoryImageEndRequest::unpack(std::vector<uint8_t>& data)
+void DmEfsFactoryImageEndRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	DmEfsPacket::unpack(data);
+	DmEfsPacket::unpack(data, transport);
 }
 void DmEfsFactoryImageEndRequest::prepareResponse()
 {

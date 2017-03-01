@@ -40,6 +40,7 @@ SaharaDoneResponse::~SaharaDoneResponse()
 }
 
 
-void SaharaDoneResponse::unpack(std::vector<uint8_t>& data)
+void SaharaDoneResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
+	SaharaPacket::unpack(data, transport);
 }

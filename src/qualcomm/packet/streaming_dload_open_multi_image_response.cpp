@@ -50,7 +50,7 @@ void StreamingDloadOpenMultiImageResponse::setStatus(uint8_t status)
     write<uint8_t>("status", status);
 }
 
-void StreamingDloadOpenMultiImageResponse::unpack(std::vector<uint8_t>& data)
+void StreamingDloadOpenMultiImageResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	StreamingDloadPacket::unpack(data);
+	StreamingDloadPacket::unpack(data, transport);
 }

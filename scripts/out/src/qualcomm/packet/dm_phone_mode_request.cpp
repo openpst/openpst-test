@@ -59,7 +59,7 @@ void DmPhoneModeRequest::setPadding(uint8_t padding)
     write<uint8_t>("padding", padding);
 }
 
-void DmPhoneModeRequest::unpack(std::vector<uint8_t>& data)
+void DmPhoneModeRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	DmPacket::unpack(data);
+	DmPacket::unpack(data, transport);
 }

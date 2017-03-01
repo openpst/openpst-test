@@ -50,7 +50,7 @@ void StreamingDloadNopResponse::setIdentifier(uint32_t identifier)
     write<uint32_t>("identifier", identifier);
 }
 
-void StreamingDloadNopResponse::unpack(std::vector<uint8_t>& data)
+void StreamingDloadNopResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	StreamingDloadPacket::unpack(data);
+	StreamingDloadPacket::unpack(data, transport);
 }

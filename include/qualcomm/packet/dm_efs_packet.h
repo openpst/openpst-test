@@ -2,7 +2,6 @@
 
 #include "transport/packet.h"
 #include "qualcomm/dm.h"
-//#include "qualcomm/hdlc_encoder.h"
 
 using namespace OpenPST::Transport;
 
@@ -11,9 +10,6 @@ namespace OpenPST {
     	
         class DmEfsPacket : public Packet
         {
-            protected:
-                //HdlcEncoder encoder;
-
             public:
                 /**
                 * @brief Constructor
@@ -71,12 +67,10 @@ namespace OpenPST {
                     return read<uint16_t>(getFieldOffset("subsys_command"));
                 }
                 
-                void unpack(std::vector<uint8_t>& resp) override {
+                void unpack(std::vector<uint8_t>& resp, TransportInterface* transport) override {
                     if (!resp.size()) {
                         throw PacketError("No data to unpack");
                     }
-
-                    //encoder.decode(resp);
 
                     if (resp[0] != getCommand()) {
                         throw PacketError("Unexpected Response");
@@ -84,7 +78,7 @@ namespace OpenPST {
                 }
 
                 void prepare() override {
-                    //encoder.encode(data);
+
                 }
 
         };

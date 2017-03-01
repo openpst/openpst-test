@@ -147,38 +147,37 @@ enum StreamingDloadOpenMode {
 };
 
 enum StreamingDloadOpenMultiMode {
-	kStreamingDloadOpenModeMultiNone        = 0x00,  
-	kStreamingDloadOpenModeMultiPbl         = 0x01,  // Primary boot loader
+	kStreamingDloadOpenModeMultiNone         = 0x00,  
+	kStreamingDloadOpenModeMultiPbl          = 0x01,  // Primary boot loader
 	kStreamingDloadOpenModeMultiQcsblhHdCfg  = 0x02,  // Qualcomm secondary boot loader header and config data 
-	kStreamingDloadOpenModeMultiQcsbl       = 0x03,  // Qualcomm secondary boot loader
-	kStreamingDloadOpenModeMultiOemsbl      = 0x04,  // OEM secondary boot loader (max payload: 512 octets)
-	kStreamingDloadOpenModeMultiAmss        = 0x05,  // AMSS modem executable (max payload: 512 octets)
-	kStreamingDloadOpenModeMultiApps        = 0x06,  // AMSS applications executable (max payload: 512 octets)
-	kStreamingDloadOpenModeMultiObl         = 0x07,  // MSM6250 OTP boot loader 
-	kStreamingDloadOpenModeMultiFotaui      = 0x08,  // FOTA UI binary 
-	kStreamingDloadOpenModeMultiCefs        = 0x09,  // Compact EFS2 image
-	kStreamingDloadOpenModeMultiAppsBL      = 0x0A,  // AMSS applications boot loader (max payload: 512 octets)
-	kStreamingDloadOpenModeMultiApps_CEFS   = 0x0B,  // Apps CEFS image
-	kStreamingDloadOpenModeMultiFlashBin   = 0x0C,  // Flash.bin for Windows Mobile
-	kStreamingDloadOpenModeMultiDsp1        = 0x0D,  // DSP1 runtime image
-	kStreamingDloadOpenModeMultiCustom      = 0x0E,  // Image for user-defined partition User (max payload: 512 octets)
-	kStreamingDloadOpenModeMultiDbl         = 0x0F,  // DBL image for Secure  Boot 2.0 architecture 
-	kStreamingDloadOpenModeMultiOsbl        = 0x10,  // OSBL image for Secure  Boot 2.0 architecture 
-	kStreamingDloadOpenModeMultiFsbl        = 0x11,  // FSBL image for Secure  Boot 2.0 architecture 
-	kStreamingDloadOpenModeMultiDsp2        = 0x12,  // DSP2 executable 
-	kStreamingDloadOpenModeMultiRaw         = 0x13,  // Apps EFS2 raw image 
-	kStreamingDloadOpenModeMultiRofs1       = 0x14,  // Symbian
-	kStreamingDloadOpenModeMultiRofs2       = 0x15,  // Symbian
-	kStreamingDloadOpenModeMultiRofs3       = 0x16,  // Symbian
-														 // 0x17-0x1F - RESERVED
-	kStreamingDloadOpenModeMultiEmmcUser   = 0x21,  // EMMC card USER partition image 
-	kStreamingDloadOpenModeMultiEmmcBoot0  = 0x22,  // EMMC card BOOT0 partition image 
-	kStreamingDloadOpenModeMultiEmmcBoot1  = 0x23,  // EMMC card BOOT1 partition image 
-	kStreamingDloadOpenModeMultiRpmb   = 0x24,  // partition1
-	kStreamingDloadOpenModeMultiGpp1   = 0x25,  // partition1-4
-	kStreamingDloadOpenModeMultiGpp2   = 0x26,   
-	kStreamingDloadOpenModeMultiGpp3   = 0x27,   
-	kStreamingDloadOpenModeMultiGpp4   = 0x28    
+	kStreamingDloadOpenModeMultiQcsbl        = 0x03,  // Qualcomm secondary boot loader
+	kStreamingDloadOpenModeMultiOemsbl       = 0x04,  // OEM secondary boot loader (max payload: 512 octets)
+	kStreamingDloadOpenModeMultiAmss         = 0x05,  // AMSS modem executable (max payload: 512 octets)
+	kStreamingDloadOpenModeMultiApps         = 0x06,  // AMSS applications executable (max payload: 512 octets)
+	kStreamingDloadOpenModeMultiObl          = 0x07,  // MSM6250 OTP boot loader 
+	kStreamingDloadOpenModeMultiFotaui       = 0x08,  // FOTA UI binary 
+	kStreamingDloadOpenModeMultiCefs         = 0x09,  // Compact EFS2 image
+	kStreamingDloadOpenModeMultiAppsBL       = 0x0A,  // AMSS applications boot loader (max payload: 512 octets)
+	kStreamingDloadOpenModeMultiApps_CEFS    = 0x0B,  // Apps CEFS image
+	kStreamingDloadOpenModeMultiFlashBin     = 0x0C,  // Flash.bin for Windows Mobile
+	kStreamingDloadOpenModeMultiDsp1         = 0x0D,  // DSP1 runtime image
+	kStreamingDloadOpenModeMultiCustom       = 0x0E,  // Image for user-defined partition User (max payload: 512 octets)
+	kStreamingDloadOpenModeMultiDbl          = 0x0F,  // DBL image for Secure  Boot 2.0 architecture 
+	kStreamingDloadOpenModeMultiOsbl         = 0x10,  // OSBL image for Secure  Boot 2.0 architecture 
+	kStreamingDloadOpenModeMultiFsbl         = 0x11,  // FSBL image for Secure  Boot 2.0 architecture 
+	kStreamingDloadOpenModeMultiDsp2         = 0x12,  // DSP2 executable 
+	kStreamingDloadOpenModeMultiRaw          = 0x13,  // Apps EFS2 raw image 
+	kStreamingDloadOpenModeMultiRofs1        = 0x14,  // Symbian
+	kStreamingDloadOpenModeMultiRofs2        = 0x15,  // Symbian
+	kStreamingDloadOpenModeMultiRofs3        = 0x16,  // Symbian  0x17-0x1F - RESERVED
+	kStreamingDloadOpenModeMultiEmmcUser     = 0x21,  // EMMC card USER partition image 
+	kStreamingDloadOpenModeMultiEmmcBoot0    = 0x22,  // EMMC card BOOT0 partition image 
+	kStreamingDloadOpenModeMultiEmmcBoot1    = 0x23,  // EMMC card BOOT1 partition image 
+	kStreamingDloadOpenModeMultiRpmb   		 = 0x24,  // partition1
+	kStreamingDloadOpenModeMultiGpp1   		 = 0x25,  // partition1-4
+	kStreamingDloadOpenModeMultiGpp2   		 = 0x26,   
+	kStreamingDloadOpenModeMultiGpp3   		 = 0x27,   
+	kStreamingDloadOpenModeMultiGpp4   		 = 0x28    
 };
 
 enum StreamingDloadOpenMultiState {

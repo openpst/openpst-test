@@ -239,7 +239,7 @@ size_t Serial::read(Packet* packet, size_t amount)
 		read(rbuffer, packet->getMaxDataSize());
 	}
 
-	packet->unpack(rbuffer);
+	packet->unpack(rbuffer, this);
 	
 }
 

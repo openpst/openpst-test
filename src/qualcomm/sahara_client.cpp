@@ -254,10 +254,6 @@ SaharaImageRequestInfo SaharaClient::sendImage(const std::string& filePath, Saha
 
 			file.seekg(next.offset, file.beg);
 			
-			if (file.tellg() != next.offset) {
-				throw SaharaClientError("LOL GHEY");
-			}
-			
 			response.setData(file, next.size);
 
 			transport.write(&response);

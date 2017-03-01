@@ -60,6 +60,6 @@ void SaharaMemoryReadRequest::setSize(uint32_t size)
     write<uint32_t>("size", size);
 }
 
-void SaharaMemoryReadRequest::unpack(std::vector<uint8_t>& data)
+void SaharaMemoryReadRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
 }
