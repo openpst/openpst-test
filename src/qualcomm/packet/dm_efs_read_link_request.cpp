@@ -50,14 +50,16 @@ void DmEfsReadLinkRequest::setPath(uint8_t* data, size_t size)
     write("path", data, size);
 }
 
-void DmEfsReadLinkRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-	DmEfsPacket::unpack(data, transport);
-}
 void DmEfsReadLinkRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		DmEfsReadLinkResponse* resp = new DmEfsReadLinkResponse();
 		response = resp;
 	}
+}
+
+void DmEfsReadLinkRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	DmEfsPacket::unpack(data, transport);
+	//variable
 }

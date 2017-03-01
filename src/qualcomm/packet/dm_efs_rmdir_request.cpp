@@ -50,13 +50,15 @@ void DmEfsRmdirRequest::setPath(uint8_t* data, size_t size)
     write("path", data, size);
 }
 
-void DmEfsRmdirRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-}
 void DmEfsRmdirRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		DmEfsRmdirResponse* resp = new DmEfsRmdirResponse();
 		response = resp;
 	}
+}
+
+void DmEfsRmdirRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	//variable
 }

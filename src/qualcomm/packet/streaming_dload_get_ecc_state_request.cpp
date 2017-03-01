@@ -40,14 +40,15 @@ StreamingDloadGetEccStateRequest::~StreamingDloadGetEccStateRequest()
 }
 
 
-void StreamingDloadGetEccStateRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-	StreamingDloadPacket::unpack(data, transport);
-}
 void StreamingDloadGetEccStateRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		StreamingDloadGetEccStateResponse* resp = new StreamingDloadGetEccStateResponse();
 		response = resp;
 	}
+}
+
+void StreamingDloadGetEccStateRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	StreamingDloadPacket::unpack(data, transport);
 }

@@ -60,7 +60,10 @@ void DmEfsSyncRequest::setPath(uint8_t* data, size_t size)
     write("path", data, size);
 }
 
+
 void DmEfsSyncRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
 	DmEfsPacket::unpack(data, transport);
+	setSequence(read<uint16_t>(data, getFieldOffset("sequence")));
+	//variable
 }

@@ -50,14 +50,16 @@ void StreamingDloadOpenMultiImageRequest::setType(uint8_t type)
     write<uint8_t>("type", type);
 }
 
-void StreamingDloadOpenMultiImageRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-	StreamingDloadPacket::unpack(data, transport);
-}
 void StreamingDloadOpenMultiImageRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		StreamingDloadOpenMultiImageResponse* resp = new StreamingDloadOpenMultiImageResponse();
 		response = resp;
 	}
+}
+
+void StreamingDloadOpenMultiImageRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	StreamingDloadPacket::unpack(data, transport);
+	setType(read<uint8_t>(data, getFieldOffset("type")));
 }

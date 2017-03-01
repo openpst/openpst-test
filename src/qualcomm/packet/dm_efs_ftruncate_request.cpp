@@ -70,14 +70,18 @@ void DmEfsFtruncateRequest::setFp(uint32_t fp)
     write<uint32_t>("fp", fp);
 }
 
-void DmEfsFtruncateRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-	DmEfsPacket::unpack(data, transport);
-}
 void DmEfsFtruncateRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		DmEfsFtruncateResponse* resp = new DmEfsFtruncateResponse();
 		response = resp;
 	}
+}
+
+void DmEfsFtruncateRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	DmEfsPacket::unpack(data, transport);
+	setSequence(read<uint16_t>(data, getFieldOffset("sequence")));
+	setLength(read<uint32_t>(data, getFieldOffset("length")));
+	setFp(read<uint32_t>(data, getFieldOffset("fp")));
 }

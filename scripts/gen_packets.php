@@ -2,8 +2,12 @@
 
 require_once('loader.php');
 
-define('REAL_SRC_DIR', dirname(__FILE__).'/../src');
-define('REAL_INC_DIR', dirname(__FILE__).'/../include');
+if (!defined('REAL_SRC_DIR')) {
+	define('REAL_SRC_DIR', dirname(__FILE__).'/../src');
+}
+if (!defined('REAL_INC_DIR')) {
+	define('REAL_INC_DIR', dirname(__FILE__).'/../include');
+}
 
 $out_dir = dirname(__FILE__).'/out';
 
@@ -60,11 +64,16 @@ foreach ($packets as $group => $pkts) {
 			$packet['response_class_name'] = $packet['expects_response'];
 		}
 
+		$packet['all_fields_primitive'] = true;
 
 		foreach ($packet['fields'] as $fname => &$field) {
-			$field['name'] 					  = $fname;
-			$field['name_camel']  	  = to_camel($fname);
+			$field['name'] 				= $fname;
+			$field['name_camel']  	  	= to_camel($fname);
 			$field['name_lower_camel']  = to_lower_camel($fname);
+
+			if ($field['type'] == FIELD_TYPE_VARIABLE) {
+				$packet['all_fields_primitive'] = false;
+			}
 		}
 
 		$realSrcFile = sprintf('%s/%s/%s.cpp', REAL_SRC_DIR, $packet['path'], to_lower_name($name));

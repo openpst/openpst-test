@@ -130,6 +130,11 @@ namespace OpenPST {
 				void reset();
 
 				const std::string getRequestedImageName(uint32_t imageId);
+				
+				const std::string getModeName(uint32_t mode);
+
+				const std::string getClientCommandName(uint32_t command);
+
 		};
 
 		class SaharaClientError : public std::exception

@@ -60,14 +60,17 @@ void DmEfsStatfsV2Request::setPath(uint8_t* data, size_t size)
     write("path", data, size);
 }
 
-void DmEfsStatfsV2Request::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-	DmEfsPacket::unpack(data, transport);
-}
 void DmEfsStatfsV2Request::prepareResponse()
 {
 	if (response == nullptr) {
 		DmEfsStatfsV2Response* resp = new DmEfsStatfsV2Response();
 		response = resp;
 	}
+}
+
+void DmEfsStatfsV2Request::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	DmEfsPacket::unpack(data, transport);
+	setSequence(read<uint16_t>(data, getFieldOffset("sequence")));
+	//variable
 }

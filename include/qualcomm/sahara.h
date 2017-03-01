@@ -77,7 +77,7 @@ enum SaharaCommand {
  * The initial hello lets you know which
  * mode the device is currently in.
  */
-enum SaharaMode {
+enum SaharaMode : uint32_t {
 	kSaharaModeImageTxPending  = 0x00,
 	kSaharaModeImageTxComplete = 0x01,  
 	kSaharaModeMemoryDebug     = 0x02,
@@ -85,12 +85,12 @@ enum SaharaMode {
 };
 
 /**
- * SaharaClientCmd
+ * SaharaClientCommand
  *
  * When in or switched to command mode, these are
  * all commands that are currently known
  */
-enum SaharaClientCmd {
+enum SaharaClientCommand : uint32_t {
 	  kSaharaClientCmdNop                    = 0x00,
 	  kSaharaClientCmdSerialNumRead          = 0x01,
 	  kSaharaClientCmdMsmHWIDRead            = 0x02,
@@ -101,7 +101,7 @@ enum SaharaClientCmd {
 	  kSaharaClientCmdGetSblVersion			 = 0x07,
 };
 
-enum SaharaStatusCode {
+enum SaharaStatusCode : uint32_t {
 	kSaharaStatusSuccess                      = 0x00,
 	kSaharaStatusInvalidCmd                   = 0x01,
 	kSaharaStatusProtocolMismatch             = 0x02,

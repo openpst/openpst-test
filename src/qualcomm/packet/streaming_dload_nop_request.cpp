@@ -50,14 +50,16 @@ void StreamingDloadNopRequest::setIdentifier(uint32_t identifier)
     write<uint32_t>("identifier", identifier);
 }
 
-void StreamingDloadNopRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-	StreamingDloadPacket::unpack(data, transport);
-}
 void StreamingDloadNopRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		StreamingDloadNopResponse* resp = new StreamingDloadNopResponse();
 		response = resp;
 	}
+}
+
+void StreamingDloadNopRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	StreamingDloadPacket::unpack(data, transport);
+	setIdentifier(read<uint32_t>(data, getFieldOffset("identifier")));
 }

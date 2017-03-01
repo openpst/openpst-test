@@ -57,7 +57,9 @@ void DmGuidResponse::setGuid(const std::string& guid)
     write("guid", guid);
 }
 
+
 void DmGuidResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
 	DmPacket::unpack(data, transport);
+	//uint8_t[]
 }

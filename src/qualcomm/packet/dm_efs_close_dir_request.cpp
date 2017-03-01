@@ -50,14 +50,16 @@ void DmEfsCloseDirRequest::setDp(uint32_t dp)
     write<uint32_t>("dp", dp);
 }
 
-void DmEfsCloseDirRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-	DmEfsPacket::unpack(data, transport);
-}
 void DmEfsCloseDirRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		DmEfsCloseDirResponse* resp = new DmEfsCloseDirResponse();
 		response = resp;
 	}
+}
+
+void DmEfsCloseDirRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	DmEfsPacket::unpack(data, transport);
+	setDp(read<uint32_t>(data, getFieldOffset("dp")));
 }

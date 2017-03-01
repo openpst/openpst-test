@@ -60,14 +60,17 @@ void DmEfsHotplugDeviceInfoRequest::setPath(uint8_t* data, size_t size)
     write("path", data, size);
 }
 
-void DmEfsHotplugDeviceInfoRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-	DmEfsPacket::unpack(data, transport);
-}
 void DmEfsHotplugDeviceInfoRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		DmEfsHotplugDeviceInfoResponse* resp = new DmEfsHotplugDeviceInfoResponse();
 		response = resp;
 	}
+}
+
+void DmEfsHotplugDeviceInfoRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	DmEfsPacket::unpack(data, transport);
+	setSequence(read<uint16_t>(data, getFieldOffset("sequence")));
+	//variable
 }

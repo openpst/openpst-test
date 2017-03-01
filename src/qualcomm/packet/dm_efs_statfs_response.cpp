@@ -140,7 +140,18 @@ void DmEfsStatfsResponse::setMaxFileCount(uint32_t maxFileCount)
     write<uint32_t>("max_file_count", maxFileCount);
 }
 
+
 void DmEfsStatfsResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
 	DmEfsPacket::unpack(data, transport);
+	setError(read<uint32_t>(data, getFieldOffset("error")));
+	//uint8_t[]
+	setFilesystemType(read<uint32_t>(data, getFieldOffset("filesystem_type")));
+	setBlockSize(read<uint32_t>(data, getFieldOffset("block_size")));
+	setTotalBlocks(read<uint32_t>(data, getFieldOffset("total_blocks")));
+	setAvailableBlocks(read<uint32_t>(data, getFieldOffset("available_blocks")));
+	setFreeBlocks(read<uint32_t>(data, getFieldOffset("free_blocks")));
+	setMaxFileSize(read<uint32_t>(data, getFieldOffset("max_file_size")));
+	setFileCount(read<uint32_t>(data, getFieldOffset("file_count")));
+	setMaxFileCount(read<uint32_t>(data, getFieldOffset("max_file_count")));
 }

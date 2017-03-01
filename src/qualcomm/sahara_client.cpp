@@ -83,6 +83,10 @@ SaharaHello SaharaClient::readHello()
 		throw SaharaClientError("Received an unexpected response");
 	}
 
+	#ifdef SAHARA_CLIENT_DEBUG
+		std::cout << "Received Hello. Device in mode " << getModeName(request.getMode()) << std::endl;
+	#endif
+
 	ret.mode 	    = request.getMode();
 	ret.version 	= request.getVersion();
 	ret.minVersion  = request.getMinVersion();
@@ -106,6 +110,10 @@ const SaharaState& SaharaClient::sendHello(SaharaHello hello)
 	if (!transport.isOpen()) {
 		throw SaharaClientError("Transport is not open");
 	}
+
+	#ifdef SAHARA_CLIENT_DEBUG
+		std::cout << "Sending hello response requesting mode " << getModeName(hello.mode) << std::endl;
+	#endif
 
 	SaharaHelloResponse response(deviceEndianess);
 
@@ -136,6 +144,10 @@ void SaharaClient::switchMode(uint32_t mode)
 	if (!transport.isOpen()) {
 		throw SaharaClientError("Transport is not open");
 	}
+
+	#ifdef SAHARA_CLIENT_DEBUG
+		std::cout << "Attempting mode switch to " << getModeName(mode) << std::endl;
+	#endif
 
 	SaharaSwitchModeRequest request(deviceEndianess);
 
@@ -178,6 +190,10 @@ std::vector<uint8_t> SaharaClient::sendClientCommand(uint32_t command)
 	if (!transport.isOpen()) {
 		throw SaharaClientError("Transport is not open");
 	}
+
+	#ifdef SAHARA_CLIENT_DEBUG
+		std::cout << "Requesting Client Command " << getClientCommandName(command) << std::endl;
+	#endif
 
 	SaharaClientCommandRequest  request(deviceEndianess);
 
@@ -370,6 +386,32 @@ void SaharaClient::reset()
 
 	state = {};
 	hostInfo = {};
+}
+
+const std::string SaharaClient::getModeName(uint32_t mode)
+{
+	switch (mode) {
+		case kSaharaModeImageTxPending:  return "Image Transfer Pending";
+		case kSaharaModeImageTxComplete: return "Image Transfer Complete";
+		case kSaharaModeMemoryDebug:     return "Memory Debug";
+		case kSaharaModeCommand:         return "Command Mode";
+		default:                         return "Unknown";
+	}
+}
+
+const std::string SaharaClient::getClientCommandName(uint32_t command)
+{
+	switch (command) {
+		case kSaharaClientCmdNop:                       return "NOP";
+		case kSaharaClientCmdSerialNumRead:             return "Read Serial Number";
+		case kSaharaClientCmdMsmHWIDRead:               return "Read MSM HW ID";
+		case kSaharaClientOemPkHashRead:                return "Read OEM PK Hash";
+		case kSaharaClientCmdSwitchDMSS:                return "Switch To DMSS DLOAD";
+		case kSaharaClientCmdSwitchToStreamingDload:    return "Switch To Streaming DLOAD";
+		case kSaharaClientCmdReadDebugData:             return "Read Debug Data";
+		case kSaharaClientCmdGetSblVersion:             return "Read SBL SW Version";
+		default:                                        return "Unknown";
+	}
 }
 
 const std::string SaharaClient::getRequestedImageName(uint32_t imageId)

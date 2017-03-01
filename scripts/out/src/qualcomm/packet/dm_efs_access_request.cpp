@@ -60,14 +60,17 @@ void DmEfsAccessRequest::setPath(uint8_t* data, size_t size)
     write("path", data, size);
 }
 
-void DmEfsAccessRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-	DmEfsPacket::unpack(data, transport);
-}
 void DmEfsAccessRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		DmEfsAccessResponse* resp = new DmEfsAccessResponse();
 		response = resp;
 	}
+}
+
+void DmEfsAccessRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	DmEfsPacket::unpack(data, transport);
+	setPermissionMask(read<uint32_t>(data, getFieldOffset("permission_mask")));
+	//variable
 }

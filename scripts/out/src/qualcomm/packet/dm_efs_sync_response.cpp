@@ -70,7 +70,11 @@ void DmEfsSyncResponse::setError(uint32_t error)
     write<uint32_t>("error", error);
 }
 
+
 void DmEfsSyncResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
 	DmEfsPacket::unpack(data, transport);
+	setSequence(read<uint16_t>(data, getFieldOffset("sequence")));
+	setToken(read<uint32_t>(data, getFieldOffset("token")));
+	setError(read<uint32_t>(data, getFieldOffset("error")));
 }

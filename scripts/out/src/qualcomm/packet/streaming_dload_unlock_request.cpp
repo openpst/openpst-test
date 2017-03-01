@@ -50,14 +50,16 @@ void StreamingDloadUnlockRequest::setCode(uint64_t code)
     write<uint64_t>("code", code);
 }
 
-void StreamingDloadUnlockRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-	StreamingDloadPacket::unpack(data, transport);
-}
 void StreamingDloadUnlockRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		StreamingDloadUnlockResponse* resp = new StreamingDloadUnlockResponse();
 		response = resp;
 	}
+}
+
+void StreamingDloadUnlockRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	StreamingDloadPacket::unpack(data, transport);
+	setCode(read<uint64_t>(data, getFieldOffset("code")));
 }

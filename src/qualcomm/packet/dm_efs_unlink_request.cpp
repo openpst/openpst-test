@@ -50,14 +50,16 @@ void DmEfsUnlinkRequest::setPath(uint8_t* data, size_t size)
     write("path", data, size);
 }
 
-void DmEfsUnlinkRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-	DmEfsPacket::unpack(data, transport);
-}
 void DmEfsUnlinkRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		DmEfsUnlinkResponse* resp = new DmEfsUnlinkResponse();
 		response = resp;
 	}
+}
+
+void DmEfsUnlinkRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	DmEfsPacket::unpack(data, transport);
+	//variable
 }

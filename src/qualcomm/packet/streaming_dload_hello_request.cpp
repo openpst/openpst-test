@@ -84,14 +84,19 @@ void StreamingDloadHelloRequest::setFeatureBits(uint8_t featureBits)
     write<uint8_t>("feature_bits", featureBits);
 }
 
-void StreamingDloadHelloRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-	StreamingDloadPacket::unpack(data, transport);
-}
 void StreamingDloadHelloRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		StreamingDloadHelloResponse* resp = new StreamingDloadHelloResponse();
 		response = resp;
 	}
+}
+
+void StreamingDloadHelloRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	StreamingDloadPacket::unpack(data, transport);
+	//uint8_t[]
+	setVersion(read<uint8_t>(data, getFieldOffset("version")));
+	setCompatibleVersion(read<uint8_t>(data, getFieldOffset("compatible_version")));
+	setFeatureBits(read<uint8_t>(data, getFieldOffset("feature_bits")));
 }

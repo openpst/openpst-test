@@ -448,7 +448,9 @@ namespace OpenPST {
                     assert(std::is_fundamental<T>::value);
         
                     if ((offset + sizeof(T)) > buffer.size()) {
-                        throw PacketOutOfRange("Attempted to read outside buffer");
+                        std::stringstream ss;
+                        ss << "Attempted to read outside buffer. Requested offset " << offset << " but max data is " << buffer.size() << std::endl;
+                        throw PacketOutOfRange(ss.str());
                     }
 
                     T* p = reinterpret_cast<T*>(&buffer[offset]);

@@ -3,7 +3,7 @@
 #include "transport/packet.h"
 #include "qualcomm/streaming_dload.h"
 
-using namespace OpenPST::Qualcomm;
+using namespace OpenPST::Transport;
 
 namespace OpenPST {
     namespace Qualcomm {

@@ -19,6 +19,8 @@ default:
 		-DSERIAL_DEBUG \
 		-DSERIAL_DEBUG_TX \
 		-DSERIAL_DEBUG_RX \
+		-DSAHARA_CLIENT_DEBUG \
+		-DSTREAMING_DLOAD_CLIENT_DEBUG \
 		./../libopenpst/src/qualcomm/hdlc_encoder.cpp \
 		./../libopenpst/src/util/hexdump.cpp \
 		./src/transport/packet.cpp \
@@ -29,12 +31,14 @@ default:
 		./src/transport/packet_writer.cpp \
 		./src/server/tcp_serial_server.cpp \
 		./src/qualcomm/packet/sahara_*.cpp \
-		./src/qualcomm/packet/streaming_dload_*.cpp 
+		./src/qualcomm/packet/streaming_dload_*.cpp \
 		./src/qualcomm/sahara_client.cpp \
-		./src/transport/tcp_serial_client.cpp \
+		./src/qualcomm/streaming_dload_client.cpp \
 		./src/all.cpp -o build/all -lpthread -lboost_system -lboost_thread
 
-		#./src/qualcomm/streaming_dload_client.cpp 
 
+		#./src/qualcomm/streaming_dload_client.cpp 
+		#
+		#./src/transport/tcp_serial_client.cpp
 clean:
 	rm -rf build/*

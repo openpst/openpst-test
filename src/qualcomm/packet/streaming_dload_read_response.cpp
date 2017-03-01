@@ -60,7 +60,10 @@ void StreamingDloadReadResponse::setData(uint8_t* data, size_t size)
     write("data", data, size);
 }
 
+
 void StreamingDloadReadResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
 	StreamingDloadPacket::unpack(data, transport);
+	setAddress(read<uint32_t>(data, getFieldOffset("address")));
+	//variable
 }

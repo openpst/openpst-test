@@ -40,13 +40,14 @@ SaharaDoneRequest::~SaharaDoneRequest()
 }
 
 
-void SaharaDoneRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-}
 void SaharaDoneRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		SaharaDoneResponse* resp = new SaharaDoneResponse();
 		response = resp;
 	}
+}
+
+void SaharaDoneRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
 }

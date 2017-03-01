@@ -40,6 +40,7 @@ StreamingDloadResetResponse::~StreamingDloadResetResponse()
 }
 
 
+
 void StreamingDloadResetResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
 	StreamingDloadPacket::unpack(data, transport);

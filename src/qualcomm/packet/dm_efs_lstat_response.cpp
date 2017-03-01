@@ -90,7 +90,13 @@ void DmEfsLstatResponse::setCtime(uint32_t ctime)
     write<uint32_t>("ctime", ctime);
 }
 
+
 void DmEfsLstatResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
 	DmEfsPacket::unpack(data, transport);
+	setError(read<uint32_t>(data, getFieldOffset("error")));
+	setMode(read<uint32_t>(data, getFieldOffset("mode")));
+	setAtime(read<uint32_t>(data, getFieldOffset("atime")));
+	setMtime(read<uint32_t>(data, getFieldOffset("mtime")));
+	setCtime(read<uint32_t>(data, getFieldOffset("ctime")));
 }

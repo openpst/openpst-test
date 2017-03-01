@@ -68,14 +68,17 @@ void StreamingDloadStreamWriteRequest::setData(const std::string& data)
     write("data", data);
 }
 
-void StreamingDloadStreamWriteRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-	StreamingDloadPacket::unpack(data, transport);
-}
 void StreamingDloadStreamWriteRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		StreamingDloadStreamWriteResponse* resp = new StreamingDloadStreamWriteResponse();
 		response = resp;
 	}
+}
+
+void StreamingDloadStreamWriteRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	StreamingDloadPacket::unpack(data, transport);
+	setAddress(read<uint32_t>(data, getFieldOffset("address")));
+	//variable
 }

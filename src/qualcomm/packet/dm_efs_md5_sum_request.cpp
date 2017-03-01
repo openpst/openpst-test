@@ -60,14 +60,17 @@ void DmEfsMd5SumRequest::setPath(uint8_t* data, size_t size)
     write("path", data, size);
 }
 
-void DmEfsMd5SumRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-	DmEfsPacket::unpack(data, transport);
-}
 void DmEfsMd5SumRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		DmEfsMd5SumResponse* resp = new DmEfsMd5SumResponse();
 		response = resp;
 	}
+}
+
+void DmEfsMd5SumRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	DmEfsPacket::unpack(data, transport);
+	setSequence(read<uint16_t>(data, getFieldOffset("sequence")));
+	//variable
 }

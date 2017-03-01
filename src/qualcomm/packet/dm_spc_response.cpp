@@ -50,7 +50,9 @@ void DmSpcResponse::setStatus(uint8_t status)
     write<uint8_t>("status", status);
 }
 
+
 void DmSpcResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
 	DmPacket::unpack(data, transport);
+	setStatus(read<uint8_t>(data, getFieldOffset("status")));
 }

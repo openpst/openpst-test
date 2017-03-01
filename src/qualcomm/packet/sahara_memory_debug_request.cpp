@@ -60,13 +60,16 @@ void SaharaMemoryDebugRequest::setSize(uint32_t size)
     write<uint32_t>("size", size);
 }
 
-void SaharaMemoryDebugRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-}
 void SaharaMemoryDebugRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		SaharaMemoryReadRequest* resp = new SaharaMemoryReadRequest();
 		response = resp;
 	}
+}
+
+void SaharaMemoryDebugRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	setAddress(read<uint32_t>(data, getFieldOffset("address")));
+	setSize(read<uint32_t>(data, getFieldOffset("size")));
 }

@@ -230,7 +230,27 @@ void DmEfsStatfsV2Response::setNameEncoding(uint32_t nameEncoding)
     write<uint32_t>("name_encoding", nameEncoding);
 }
 
+
 void DmEfsStatfsV2Response::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
 	DmEfsPacket::unpack(data, transport);
+	setSequence(read<uint16_t>(data, getFieldOffset("sequence")));
+	setError(read<uint32_t>(data, getFieldOffset("error")));
+	setFsId(read<uint32_t>(data, getFieldOffset("fs_id")));
+	//uint8_t[]
+	setBlockSize(read<uint32_t>(data, getFieldOffset("block_size")));
+	setTotalBlocks(read<uint32_t>(data, getFieldOffset("total_blocks")));
+	setAvailableBlocks(read<uint32_t>(data, getFieldOffset("available_blocks")));
+	setFreeBlocks(read<uint32_t>(data, getFieldOffset("free_blocks")));
+	setMaxFileSize(read<uint32_t>(data, getFieldOffset("max_file_size")));
+	setFileCount(read<uint32_t>(data, getFieldOffset("file_count")));
+	setMaxFiles(read<uint32_t>(data, getFieldOffset("max_files")));
+	setMaxWriteSize(read<uint32_t>(data, getFieldOffset("max_write_size")));
+	setMaxPathSize(read<uint32_t>(data, getFieldOffset("max_path_size")));
+	setCaseSensitive(read<uint32_t>(data, getFieldOffset("case_sensitive")));
+	setCasePreserving(read<uint32_t>(data, getFieldOffset("case_preserving")));
+	setFileSizeUnits(read<uint32_t>(data, getFieldOffset("file_size_units")));
+	setMaxOpenFiles(read<uint32_t>(data, getFieldOffset("max_open_files")));
+	setNameRule(read<uint32_t>(data, getFieldOffset("name_rule")));
+	setNameEncoding(read<uint32_t>(data, getFieldOffset("name_encoding")));
 }

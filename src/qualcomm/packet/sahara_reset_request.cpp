@@ -40,13 +40,14 @@ SaharaResetRequest::~SaharaResetRequest()
 }
 
 
-void SaharaResetRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-}
 void SaharaResetRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		SaharaResetResponse* resp = new SaharaResetResponse();
 		response = resp;
 	}
+}
+
+void SaharaResetRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
 }

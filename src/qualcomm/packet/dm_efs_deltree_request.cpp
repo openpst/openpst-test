@@ -60,14 +60,17 @@ void DmEfsDeltreeRequest::setPath(uint8_t* data, size_t size)
     write("path", data, size);
 }
 
-void DmEfsDeltreeRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-	DmEfsPacket::unpack(data, transport);
-}
 void DmEfsDeltreeRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		DmEfsDeltreeResponse* resp = new DmEfsDeltreeResponse();
 		response = resp;
 	}
+}
+
+void DmEfsDeltreeRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	DmEfsPacket::unpack(data, transport);
+	setSequence(read<uint16_t>(data, getFieldOffset("sequence")));
+	//variable
 }

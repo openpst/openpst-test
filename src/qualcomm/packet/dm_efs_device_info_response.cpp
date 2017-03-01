@@ -130,7 +130,17 @@ void DmEfsDeviceInfoResponse::setName(uint8_t* data, size_t size)
     write("name", data, size);
 }
 
+
 void DmEfsDeviceInfoResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
 	DmEfsPacket::unpack(data, transport);
+	setError(read<uint32_t>(data, getFieldOffset("error")));
+	setTotalBlocks(read<uint32_t>(data, getFieldOffset("total_blocks")));
+	setPagesPerBlock(read<uint32_t>(data, getFieldOffset("pages_per_block")));
+	setPageSize(read<uint32_t>(data, getFieldOffset("page_size")));
+	setTotalPageSize(read<uint32_t>(data, getFieldOffset("total_page_size")));
+	setMakerId(read<uint32_t>(data, getFieldOffset("maker_id")));
+	setDeviceId(read<uint32_t>(data, getFieldOffset("device_id")));
+	setDeviceType(read<uint8_t>(data, getFieldOffset("device_type")));
+	//variable
 }

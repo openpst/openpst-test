@@ -70,14 +70,18 @@ void DmEfsWriteFileRequest::setData(uint8_t* data, size_t size)
     write("data", data, size);
 }
 
-void DmEfsWriteFileRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-	DmEfsPacket::unpack(data, transport);
-}
 void DmEfsWriteFileRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		DmEfsWriteFileResponse* resp = new DmEfsWriteFileResponse();
 		response = resp;
 	}
+}
+
+void DmEfsWriteFileRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	DmEfsPacket::unpack(data, transport);
+	setFp(read<uint32_t>(data, getFieldOffset("fp")));
+	setOffset(read<uint32_t>(data, getFieldOffset("offset")));
+	//variable
 }

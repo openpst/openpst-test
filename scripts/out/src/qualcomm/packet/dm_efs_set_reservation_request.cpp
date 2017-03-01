@@ -70,14 +70,18 @@ void DmEfsSetReservationRequest::setPath(uint8_t* data, size_t size)
     write("path", data, size);
 }
 
-void DmEfsSetReservationRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-	DmEfsPacket::unpack(data, transport);
-}
 void DmEfsSetReservationRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		DmEfsSetReservationResponse* resp = new DmEfsSetReservationResponse();
 		response = resp;
 	}
+}
+
+void DmEfsSetReservationRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	DmEfsPacket::unpack(data, transport);
+	setGid(read<uint32_t>(data, getFieldOffset("gid")));
+	setAmount(read<uint32_t>(data, getFieldOffset("amount")));
+	//variable
 }

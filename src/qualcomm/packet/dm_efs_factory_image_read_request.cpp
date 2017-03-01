@@ -80,14 +80,19 @@ void DmEfsFactoryImageReadRequest::setCusterDataSequence(uint16_t custerDataSequ
     write<uint16_t>("custer_data_sequence", custerDataSequence);
 }
 
-void DmEfsFactoryImageReadRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-	DmEfsPacket::unpack(data, transport);
-}
 void DmEfsFactoryImageReadRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		DmEfsFactoryImageReadResponse* resp = new DmEfsFactoryImageReadResponse();
 		response = resp;
 	}
+}
+
+void DmEfsFactoryImageReadRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	DmEfsPacket::unpack(data, transport);
+	setStreamState(read<uint8_t>(data, getFieldOffset("stream_state")));
+	setInfoClusterSent(read<uint8_t>(data, getFieldOffset("info_cluster_sent")));
+	setCusterMapSequence(read<uint16_t>(data, getFieldOffset("custer_map_sequence")));
+	setCusterDataSequence(read<uint16_t>(data, getFieldOffset("custer_data_sequence")));
 }

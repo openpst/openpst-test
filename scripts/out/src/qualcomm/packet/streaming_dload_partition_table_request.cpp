@@ -60,14 +60,17 @@ void StreamingDloadPartitionTableRequest::setData(uint8_t* data, size_t size)
     write("data", data, size);
 }
 
-void StreamingDloadPartitionTableRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-	StreamingDloadPacket::unpack(data, transport);
-}
 void StreamingDloadPartitionTableRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		StreamingDloadPartitionTableResponse* resp = new StreamingDloadPartitionTableResponse();
 		response = resp;
 	}
+}
+
+void StreamingDloadPartitionTableRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	StreamingDloadPacket::unpack(data, transport);
+	setOverrideExisting(read<uint8_t>(data, getFieldOffset("override_existing")));
+	//uint8_t[]
 }

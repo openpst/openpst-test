@@ -70,14 +70,18 @@ void DmEfsChownRequest::setPath(uint8_t* data, size_t size)
     write("path", data, size);
 }
 
-void DmEfsChownRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-	DmEfsPacket::unpack(data, transport);
-}
 void DmEfsChownRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		DmEfsChownResponse* resp = new DmEfsChownResponse();
 		response = resp;
 	}
+}
+
+void DmEfsChownRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	DmEfsPacket::unpack(data, transport);
+	setUid(read<uint32_t>(data, getFieldOffset("uid")));
+	setGid(read<uint32_t>(data, getFieldOffset("gid")));
+	//variable
 }

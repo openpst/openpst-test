@@ -70,14 +70,18 @@ void DmEfsOpenFileRequest::setFilePath(uint8_t* data, size_t size)
     write("file_path", data, size);
 }
 
-void DmEfsOpenFileRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-	DmEfsPacket::unpack(data, transport);
-}
 void DmEfsOpenFileRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		DmEfsOpenFileResponse* resp = new DmEfsOpenFileResponse();
 		response = resp;
 	}
+}
+
+void DmEfsOpenFileRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	DmEfsPacket::unpack(data, transport);
+	setFlags(read<uint32_t>(data, getFieldOffset("flags")));
+	setMode(read<uint32_t>(data, getFieldOffset("mode")));
+	//variable
 }

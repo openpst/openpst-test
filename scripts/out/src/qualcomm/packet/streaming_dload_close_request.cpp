@@ -50,14 +50,16 @@ void StreamingDloadCloseRequest::setMode(uint8_t mode)
     write<uint8_t>("mode", mode);
 }
 
-void StreamingDloadCloseRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-	StreamingDloadPacket::unpack(data, transport);
-}
 void StreamingDloadCloseRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		StreamingDloadCloseResponse* resp = new StreamingDloadCloseResponse();
 		response = resp;
 	}
+}
+
+void StreamingDloadCloseRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	StreamingDloadPacket::unpack(data, transport);
+	setMode(read<uint8_t>(data, getFieldOffset("mode")));
 }

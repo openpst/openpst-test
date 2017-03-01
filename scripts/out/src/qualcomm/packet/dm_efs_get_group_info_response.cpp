@@ -80,7 +80,12 @@ void DmEfsGetGroupInfoResponse::setSpaceUsed(uint32_t spaceUsed)
     write<uint32_t>("space_used", spaceUsed);
 }
 
+
 void DmEfsGetGroupInfoResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
 	DmEfsPacket::unpack(data, transport);
+	setError(read<uint32_t>(data, getFieldOffset("error")));
+	setQuotaSize(read<uint32_t>(data, getFieldOffset("quota_size")));
+	setReservationSize(read<uint32_t>(data, getFieldOffset("reservation_size")));
+	setSpaceUsed(read<uint32_t>(data, getFieldOffset("space_used")));
 }

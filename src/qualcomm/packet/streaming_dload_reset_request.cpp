@@ -40,14 +40,15 @@ StreamingDloadResetRequest::~StreamingDloadResetRequest()
 }
 
 
-void StreamingDloadResetRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-	StreamingDloadPacket::unpack(data, transport);
-}
 void StreamingDloadResetRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		StreamingDloadResetResponse* resp = new StreamingDloadResetResponse();
 		response = resp;
 	}
+}
+
+void StreamingDloadResetRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	StreamingDloadPacket::unpack(data, transport);
 }

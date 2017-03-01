@@ -68,14 +68,17 @@ void StreamingDloadOpenMultiImageWithPayloadRequest::setPayload(const std::strin
     write("payload", payload);
 }
 
-void StreamingDloadOpenMultiImageWithPayloadRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-	StreamingDloadPacket::unpack(data, transport);
-}
 void StreamingDloadOpenMultiImageWithPayloadRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		StreamingDloadOpenMultiImageResponse* resp = new StreamingDloadOpenMultiImageResponse();
 		response = resp;
 	}
+}
+
+void StreamingDloadOpenMultiImageWithPayloadRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	StreamingDloadPacket::unpack(data, transport);
+	setType(read<uint8_t>(data, getFieldOffset("type")));
+	//variable
 }

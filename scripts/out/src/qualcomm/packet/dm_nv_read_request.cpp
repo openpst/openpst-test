@@ -60,7 +60,10 @@ void DmNvReadRequest::setData(uint8_t* data, size_t size)
     write("data", data, size);
 }
 
+
 void DmNvReadRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
 	DmPacket::unpack(data, transport);
+	setNvItem(read<uint16_t>(data, getFieldOffset("nv_item")));
+	//uint8_t[]
 }

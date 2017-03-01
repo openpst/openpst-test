@@ -130,7 +130,17 @@ void DmEfsHelloResponse::setFeatureBits(uint32_t featureBits)
     write<uint32_t>("feature_bits", featureBits);
 }
 
+
 void DmEfsHelloResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
 	DmEfsPacket::unpack(data, transport);
+	setTargetPacketWindowSize(read<uint32_t>(data, getFieldOffset("target_packet_window_size")));
+	setTargetPacketWindowByteSize(read<uint32_t>(data, getFieldOffset("target_packet_window_byte_size")));
+	setHostPacketWindowSize(read<uint32_t>(data, getFieldOffset("host_packet_window_size")));
+	setHostPacketWindowByteSize(read<uint32_t>(data, getFieldOffset("host_packet_window_byte_size")));
+	setDirIteratorWindowSize(read<uint32_t>(data, getFieldOffset("dir_iterator_window_size")));
+	setDirIteratorWindowByteSize(read<uint32_t>(data, getFieldOffset("dir_iterator_window_byte_size")));
+	setVersion(read<uint32_t>(data, getFieldOffset("version")));
+	setMaxVersion(read<uint32_t>(data, getFieldOffset("max_version")));
+	setFeatureBits(read<uint32_t>(data, getFieldOffset("feature_bits")));
 }

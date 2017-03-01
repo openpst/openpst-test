@@ -40,14 +40,15 @@ DmEfsQueryRequest::~DmEfsQueryRequest()
 }
 
 
-void DmEfsQueryRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-	DmEfsPacket::unpack(data, transport);
-}
 void DmEfsQueryRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		DmEfsQueryResponse* resp = new DmEfsQueryResponse();
 		response = resp;
 	}
+}
+
+void DmEfsQueryRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	DmEfsPacket::unpack(data, transport);
 }

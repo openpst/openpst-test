@@ -40,14 +40,15 @@ DmEfsFactoryImagePrepareRequest::~DmEfsFactoryImagePrepareRequest()
 }
 
 
-void DmEfsFactoryImagePrepareRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-	DmEfsPacket::unpack(data, transport);
-}
 void DmEfsFactoryImagePrepareRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		DmEfsFactoryImagePrepareResponse* resp = new DmEfsFactoryImagePrepareResponse();
 		response = resp;
 	}
+}
+
+void DmEfsFactoryImagePrepareRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	DmEfsPacket::unpack(data, transport);
 }

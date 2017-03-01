@@ -150,7 +150,19 @@ void StreamingDloadHelloResponse::setFeatureBits(uint8_t featureBits)
     write<uint8_t>("feature_bits", featureBits);
 }
 
+
 void StreamingDloadHelloResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
 	StreamingDloadPacket::unpack(data, transport);
+	//uint8_t[]
+	setVersion(read<uint8_t>(data, getFieldOffset("version")));
+	setCompatibleVersion(read<uint8_t>(data, getFieldOffset("compatible_version")));
+	setPreferredBlockSize(read<uint32_t>(data, getFieldOffset("preferred_block_size")));
+	setBaseFlashAddress(read<uint32_t>(data, getFieldOffset("base_flash_address")));
+	setFlashIdLength(read<uint8_t>(data, getFieldOffset("flash_id_length")));
+	//variable
+	setWindowSize(read<uint16_t>(data, getFieldOffset("window_size")));
+	setNumberOfSectors(read<uint16_t>(data, getFieldOffset("number_of_sectors")));
+	//variable
+	setFeatureBits(read<uint8_t>(data, getFieldOffset("feature_bits")));
 }

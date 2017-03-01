@@ -60,14 +60,17 @@ void DmEfsReadDirRequest::setSequenceNumber(uint32_t sequenceNumber)
     write<uint32_t>("sequence_number", sequenceNumber);
 }
 
-void DmEfsReadDirRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-	DmEfsPacket::unpack(data, transport);
-}
 void DmEfsReadDirRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		DmEfsReadDirResponse* resp = new DmEfsReadDirResponse();
 		response = resp;
 	}
+}
+
+void DmEfsReadDirRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	DmEfsPacket::unpack(data, transport);
+	setDp(read<uint32_t>(data, getFieldOffset("dp")));
+	setSequenceNumber(read<uint32_t>(data, getFieldOffset("sequence_number")));
 }

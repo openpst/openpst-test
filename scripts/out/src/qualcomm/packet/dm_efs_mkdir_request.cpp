@@ -60,14 +60,17 @@ void DmEfsMkdirRequest::setPath(uint8_t* data, size_t size)
     write("path", data, size);
 }
 
-void DmEfsMkdirRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-	DmEfsPacket::unpack(data, transport);
-}
 void DmEfsMkdirRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		DmEfsMkdirResponse* resp = new DmEfsMkdirResponse();
 		response = resp;
 	}
+}
+
+void DmEfsMkdirRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	DmEfsPacket::unpack(data, transport);
+	setMode(read<uint32_t>(data, getFieldOffset("mode")));
+	//variable
 }

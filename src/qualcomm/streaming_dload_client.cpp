@@ -28,18 +28,18 @@
 
 using namespace OpenPST::Qualcomm;
 
-StreamingDloadClient::StreamingDloadClient(TransportInterface& transport, const StreamingDloadFlashInfo& flashInfo, PacketEndianess deviceEndianess = kPacketEndianessLittle) :
+StreamingDloadClient::StreamingDloadClient(TransportInterface& transport, const StreamingDloadFlashInfo& flashInfo, PacketEndianess deviceEndianess) :
 	transport(transport), deviceEndianess(deviceEndianess)
 {
 	this->flashInfo.sectorSize = flashInfo.sectorSize;
 	this->flashInfo.maxSectors = flashInfo.maxSectors;
 }
 
-StreamingDloadClient::StreamingDloadClient(TransportInterface& transport, PacketEndianess deviceEndianess = kPacketEndianessLittle) :
+StreamingDloadClient::StreamingDloadClient(TransportInterface& transport, PacketEndianess deviceEndianess) :
 	transport(transport), deviceEndianess(deviceEndianess)
 {
 	this->flashInfo.sectorSize = 512;
-	this->flashInfo.maxSectors = 512 * (1024 * 1024 * 2000); // TODO
+	this->flashInfo.maxSectors = 0;
 }
 
 StreamingDloadClient::~StreamingDloadClient()
@@ -57,7 +57,7 @@ void StreamingDloadClient::setTransport(TransportInterface& transport)
 	this->transport = transport;
 }
 
-StreamingDloadDeviceInfo StreamingDloadClient::hello(std::string magic = "QCOM fast download protocol host", uint8_t version = 0x05, uint8_t compatibleVersion = 0x02, uint8_t featureBits = STREAMING_DLOAD_FEATURE_ALL)
+StreamingDloadDeviceInfo StreamingDloadClient::hello(std::string magic, uint8_t version, uint8_t compatibleVersion, uint8_t featureBits)
 {
 	StreamingDloadDeviceInfo ret = {};
 
@@ -68,36 +68,6 @@ StreamingDloadDeviceInfo StreamingDloadClient::hello(std::string magic = "QCOM f
 	transport.write(&request);
 	
 	auto response = reinterpret_cast<StreamingDloadHelloResponse*>(request.getResponse());
-	
-	#ifdef STREAMING_DLOAD_DEBUG
-		std::cout << "[!] Version: " 			 << (int)response->getVersion() << std::endl;
-		std::cout << "[!] Compatible Version: "  << (int)response->getCompatibleVersion() << std::endl;
-		std::cout << "[!] Preferred Block Size " << response->getPreferredBlockSize() << std::endl;
-		std::cout << "[!] Base Flash Address "   << response->getBaseFlashAddress() << std::endl;
-		std::cout << "[!] Flash ID " 			 << response->getFlashId() << std::endl;
-		std::cout << "[!] Number of Sectors " 	 << response->getNumberOfSectors() << std::endl;
-		std::cout << "[!] Feature Bits 0x" 		 << std::hex << (int)response->getFeatureBits() << std::endl;
-		
-		if (response->getFeatureBits() & STREAMING_DLOAD_FEATURE_BIT_UNCOMPRESSED_DOWNLOAD) {
-			std::cout << "[!] Device requires an uncompressed download" << std::endl;
-		}
-
-		if (response->getFeatureBits() & STREAMING_DLOAD_FEATURE_BIT_NAND_BOOTABLE_IMAGE) {
-			std::cout << "[!] Device features NAND Bootable Image" << std::endl;
-		}
-
-		if (response->getFeatureBits() & STREAMING_DLOAD_FEATURE_BIT_NAND_BOOT_LOADER) {
-			std::cout << "[!] Device features NAND Bootloader" << std::endl;
-		}
-
-		if (response->getFeatureBits() & STREAMING_DLOAD_FEATURE_BIT_MULTI_IMAGE) {
-			std::cout << "[!] Supports multi-image" << std::endl;
-		}
-
-		if (response->getFeatureBits() & STREAMING_DLOAD_FEATURE_BIT_SECTOR_ADDRESSES) {
-			std::cout << "[!] Device features sector addresses" << std::endl;
-		}
-	#endif
 
 	ret.version 				= response->getVersion();
 	ret.compatibleVersion 		= response->getCompatibleVersion();
@@ -192,7 +162,7 @@ size_t StreamingDloadClient::readFlash(uint32_t lba, size_t amount, std::ofstrea
 	return 0;
 }
 
-uint8_t StreamingDloadClient::writePartitionTable(std::string filePath, bool overwrite = false)
+uint8_t StreamingDloadClient::writePartitionTable(std::string filePath, bool overwrite)
 {
 	return 0;
 }
@@ -259,10 +229,10 @@ size_t StreamingDloadClient::writeEncoded(uint8_t* data, size_t amount)
 
 size_t StreamingDloadClient::readEncoded(Packet* packet)
 {
-	
+	return 0;
 }
 
 size_t StreamingDloadClient::writeEncoded(Packet* packet)
 {
-	
+	return 0;
 }

@@ -50,7 +50,9 @@ void SaharaCommandReadyResponse::setImageTxStatus(uint32_t imageTxStatus)
     write<uint32_t>("image_tx_status", imageTxStatus);
 }
 
+
 void SaharaCommandReadyResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
 	SaharaPacket::unpack(data, transport);
+	setImageTxStatus(read<uint32_t>(data, getFieldOffset("image_tx_status")));
 }

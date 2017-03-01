@@ -70,14 +70,18 @@ void DmEfsTruncateRequest::setPath(uint8_t* data, size_t size)
     write("path", data, size);
 }
 
-void DmEfsTruncateRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-	DmEfsPacket::unpack(data, transport);
-}
 void DmEfsTruncateRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		DmEfsTruncateResponse* resp = new DmEfsTruncateResponse();
 		response = resp;
 	}
+}
+
+void DmEfsTruncateRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	DmEfsPacket::unpack(data, transport);
+	setSequence(read<uint16_t>(data, getFieldOffset("sequence")));
+	setLength(read<uint32_t>(data, getFieldOffset("length")));
+	//variable
 }

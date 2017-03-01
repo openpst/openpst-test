@@ -50,14 +50,16 @@ void StreamingDloadSetEccStateRequest::setStatus(uint8_t status)
     write<uint8_t>("status", status);
 }
 
-void StreamingDloadSetEccStateRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-	StreamingDloadPacket::unpack(data, transport);
-}
 void StreamingDloadSetEccStateRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		StreamingDloadSetEccStateResponse* resp = new StreamingDloadSetEccStateResponse();
 		response = resp;
 	}
+}
+
+void StreamingDloadSetEccStateRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	StreamingDloadPacket::unpack(data, transport);
+	setStatus(read<uint8_t>(data, getFieldOffset("status")));
 }

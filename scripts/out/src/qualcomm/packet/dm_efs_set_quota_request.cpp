@@ -70,14 +70,18 @@ void DmEfsSetQuotaRequest::setPath(uint8_t* data, size_t size)
     write("path", data, size);
 }
 
-void DmEfsSetQuotaRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-	DmEfsPacket::unpack(data, transport);
-}
 void DmEfsSetQuotaRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		DmEfsSetQuotaResponse* resp = new DmEfsSetQuotaResponse();
 		response = resp;
 	}
+}
+
+void DmEfsSetQuotaRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	DmEfsPacket::unpack(data, transport);
+	setGid(read<uint32_t>(data, getFieldOffset("gid")));
+	setAmount(read<uint32_t>(data, getFieldOffset("amount")));
+	//variable
 }

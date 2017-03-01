@@ -60,14 +60,17 @@ void DmEfsHotplugFormatRequest::setPath(uint8_t* data, size_t size)
     write("path", data, size);
 }
 
-void DmEfsHotplugFormatRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-	DmEfsPacket::unpack(data, transport);
-}
 void DmEfsHotplugFormatRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		DmEfsHotplugFormatResponse* resp = new DmEfsHotplugFormatResponse();
 		response = resp;
 	}
+}
+
+void DmEfsHotplugFormatRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	DmEfsPacket::unpack(data, transport);
+	setSequence(read<uint16_t>(data, getFieldOffset("sequence")));
+	//variable
 }

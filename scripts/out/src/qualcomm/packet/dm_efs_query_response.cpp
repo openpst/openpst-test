@@ -100,7 +100,14 @@ void DmEfsQueryResponse::setMaxMounts(uint32_t maxMounts)
     write<uint32_t>("max_mounts", maxMounts);
 }
 
+
 void DmEfsQueryResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
 	DmEfsPacket::unpack(data, transport);
+	setMaxFileNameLength(read<uint32_t>(data, getFieldOffset("max_file_name_length")));
+	setMaxPathnameLength(read<uint32_t>(data, getFieldOffset("max_pathname_length")));
+	setMaxSymlinkDepth(read<uint32_t>(data, getFieldOffset("max_symlink_depth")));
+	setMaxFileSize(read<uint32_t>(data, getFieldOffset("max_file_size")));
+	setMaxDirectories(read<uint32_t>(data, getFieldOffset("max_directories")));
+	setMaxMounts(read<uint32_t>(data, getFieldOffset("max_mounts")));
 }

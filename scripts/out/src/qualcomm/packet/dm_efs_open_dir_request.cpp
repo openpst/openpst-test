@@ -50,14 +50,16 @@ void DmEfsOpenDirRequest::setPath(uint8_t* data, size_t size)
     write("path", data, size);
 }
 
-void DmEfsOpenDirRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-	DmEfsPacket::unpack(data, transport);
-}
 void DmEfsOpenDirRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		DmEfsOpenDirResponse* resp = new DmEfsOpenDirResponse();
 		response = resp;
 	}
+}
+
+void DmEfsOpenDirRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	DmEfsPacket::unpack(data, transport);
+	//variable
 }

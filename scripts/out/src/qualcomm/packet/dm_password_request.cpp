@@ -58,7 +58,9 @@ void DmPasswordRequest::setPassword(const std::string& password)
     write("password", password);
 }
 
+
 void DmPasswordRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
 	DmPacket::unpack(data, transport);
+	//uint8_t[]
 }

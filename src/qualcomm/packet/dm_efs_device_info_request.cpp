@@ -40,14 +40,15 @@ DmEfsDeviceInfoRequest::~DmEfsDeviceInfoRequest()
 }
 
 
-void DmEfsDeviceInfoRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-	DmEfsPacket::unpack(data, transport);
-}
 void DmEfsDeviceInfoRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		DmEfsDeviceInfoResponse* resp = new DmEfsDeviceInfoResponse();
 		response = resp;
 	}
+}
+
+void DmEfsDeviceInfoRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	DmEfsPacket::unpack(data, transport);
 }

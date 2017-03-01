@@ -140,7 +140,18 @@ void DmEfsReadDirResponse::setName(uint8_t* data, size_t size)
     write("name", data, size);
 }
 
+
 void DmEfsReadDirResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
 	DmEfsPacket::unpack(data, transport);
+	setDp(read<uint32_t>(data, getFieldOffset("dp")));
+	setSequenceNumber(read<uint32_t>(data, getFieldOffset("sequence_number")));
+	setError(read<uint32_t>(data, getFieldOffset("error")));
+	setEntryType(read<uint32_t>(data, getFieldOffset("entry_type")));
+	setMode(read<uint32_t>(data, getFieldOffset("mode")));
+	setSize(read<uint32_t>(data, getFieldOffset("size")));
+	setAtime(read<uint32_t>(data, getFieldOffset("atime")));
+	setMtime(read<uint32_t>(data, getFieldOffset("mtime")));
+	setCtime(read<uint32_t>(data, getFieldOffset("ctime")));
+	//variable
 }

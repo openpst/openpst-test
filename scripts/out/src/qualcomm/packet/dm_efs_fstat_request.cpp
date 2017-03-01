@@ -50,14 +50,16 @@ void DmEfsFstatRequest::setFp(uint32_t fp)
     write<uint32_t>("fp", fp);
 }
 
-void DmEfsFstatRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-	DmEfsPacket::unpack(data, transport);
-}
 void DmEfsFstatRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		DmEfsFstatResponse* resp = new DmEfsFstatResponse();
 		response = resp;
 	}
+}
+
+void DmEfsFstatRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	DmEfsPacket::unpack(data, transport);
+	setFp(read<uint32_t>(data, getFieldOffset("fp")));
 }

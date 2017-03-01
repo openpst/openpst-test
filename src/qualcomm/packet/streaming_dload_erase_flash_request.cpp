@@ -40,14 +40,15 @@ StreamingDloadEraseFlashRequest::~StreamingDloadEraseFlashRequest()
 }
 
 
-void StreamingDloadEraseFlashRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-	StreamingDloadPacket::unpack(data, transport);
-}
 void StreamingDloadEraseFlashRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		StreamingDloadEraseFlashResponse* resp = new StreamingDloadEraseFlashResponse();
 		response = resp;
 	}
+}
+
+void StreamingDloadEraseFlashRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	StreamingDloadPacket::unpack(data, transport);
 }

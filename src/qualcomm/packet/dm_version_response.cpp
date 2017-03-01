@@ -276,7 +276,30 @@ void DmVersionResponse::setPower(uint8_t power)
     write<uint8_t>("power", power);
 }
 
+
 void DmVersionResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
 	DmPacket::unpack(data, transport);
+	setDemod(read<uint8_t>(data, getFieldOffset("demod")));
+	setDecode(read<uint8_t>(data, getFieldOffset("decode")));
+	setInterleaverId(read<uint8_t>(data, getFieldOffset("interleaver_id")));
+	setEsn(read<uint32_t>(data, getFieldOffset("esn")));
+	setRmMode(read<uint16_t>(data, getFieldOffset("rm_mode")));
+	//uint8_t[]
+	//uint8_t[]
+	setMinIndex(read<uint8_t>(data, getFieldOffset("min_index")));
+	setCdmaRmState(read<uint16_t>(data, getFieldOffset("cdma_rm_state")));
+	setCdmaGoodFrames(read<uint8_t>(data, getFieldOffset("cdma_good_frames")));
+	setAnalogCorrectFrames(read<uint16_t>(data, getFieldOffset("analog_correct_frames")));
+	setAnalogBadFrames(read<uint16_t>(data, getFieldOffset("analog_bad_frames")));
+	setAnalogWordSyncs(read<uint16_t>(data, getFieldOffset("analog_word_syncs")));
+	setEntryReason(read<uint16_t>(data, getFieldOffset("entry_reason")));
+	setCurrentChannel(read<uint16_t>(data, getFieldOffset("current_channel")));
+	setCdmaCodeChannel(read<uint8_t>(data, getFieldOffset("cdma_code_channel")));
+	setPilotBase(read<uint16_t>(data, getFieldOffset("pilot_base")));
+	setSid(read<uint16_t>(data, getFieldOffset("sid")));
+	setNid(read<uint16_t>(data, getFieldOffset("nid")));
+	setLocationId(read<uint16_t>(data, getFieldOffset("location_id")));
+	setRssiLevel(read<uint16_t>(data, getFieldOffset("rssi_level")));
+	setPower(read<uint8_t>(data, getFieldOffset("power")));
 }

@@ -50,7 +50,9 @@ void StreamingDloadPowerOffResponse::setAddress(uint32_t address)
     write<uint32_t>("address", address);
 }
 
+
 void StreamingDloadPowerOffResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
 	StreamingDloadPacket::unpack(data, transport);
+	setAddress(read<uint32_t>(data, getFieldOffset("address")));
 }

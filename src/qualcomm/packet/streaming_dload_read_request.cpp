@@ -60,14 +60,17 @@ void StreamingDloadReadRequest::setLength(uint16_t length)
     write<uint16_t>("length", length);
 }
 
-void StreamingDloadReadRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-	StreamingDloadPacket::unpack(data, transport);
-}
 void StreamingDloadReadRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		StreamingDloadReadResponse* resp = new StreamingDloadReadResponse();
 		response = resp;
 	}
+}
+
+void StreamingDloadReadRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	StreamingDloadPacket::unpack(data, transport);
+	setAddress(read<uint32_t>(data, getFieldOffset("address")));
+	setLength(read<uint16_t>(data, getFieldOffset("length")));
 }

@@ -50,14 +50,16 @@ void StreamingDloadSecurityModeRequest::setMode(uint8_t mode)
     write<uint8_t>("mode", mode);
 }
 
-void StreamingDloadSecurityModeRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-	StreamingDloadPacket::unpack(data, transport);
-}
 void StreamingDloadSecurityModeRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		StreamingDloadSecurityModeResponse* resp = new StreamingDloadSecurityModeResponse();
 		response = resp;
 	}
+}
+
+void StreamingDloadSecurityModeRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	StreamingDloadPacket::unpack(data, transport);
+	setMode(read<uint8_t>(data, getFieldOffset("mode")));
 }

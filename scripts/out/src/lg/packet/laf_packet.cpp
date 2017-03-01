@@ -129,13 +129,23 @@ void LafPacket::setData(uint8_t* data, size_t size)
     write("data", data, size);
 }
 
-void LafPacket::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-}
 void LafPacket::prepareResponse()
 {
 	if (response == nullptr) {
 		LafPacket* resp = new LafPacket();
 		response = resp;
 	}
+}
+
+void LafPacket::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	setCommand(read<uint32_t>(data, getFieldOffset("command")));
+	setArg0(read<uint32_t>(data, getFieldOffset("arg0")));
+	setArg1(read<uint32_t>(data, getFieldOffset("arg1")));
+	setArgOpt0(read<uint32_t>(data, getFieldOffset("arg_opt0")));
+	setArgOpt1(read<uint32_t>(data, getFieldOffset("arg_opt1")));
+	setSize(read<uint32_t>(data, getFieldOffset("size")));
+	setCrc(read<uint32_t>(data, getFieldOffset("crc")));
+	setMagic(read<uint32_t>(data, getFieldOffset("magic")));
+	//variable
 }

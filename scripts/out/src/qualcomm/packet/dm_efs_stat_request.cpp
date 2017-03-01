@@ -50,7 +50,9 @@ void DmEfsStatRequest::setPath(uint8_t* data, size_t size)
     write("path", data, size);
 }
 
+
 void DmEfsStatRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
 	DmEfsPacket::unpack(data, transport);
+	//variable
 }

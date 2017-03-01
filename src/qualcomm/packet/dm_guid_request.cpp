@@ -39,6 +39,7 @@ DmGuidRequest::~DmGuidRequest()
 }
 
 
+
 void DmGuidRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
 	DmPacket::unpack(data, transport);

@@ -70,7 +70,11 @@ void DmEfsMd5SumResponse::setHash(uint8_t* data, size_t size)
     write("hash", data, size);
 }
 
+
 void DmEfsMd5SumResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
 	DmEfsPacket::unpack(data, transport);
+	setSequence(read<uint16_t>(data, getFieldOffset("sequence")));
+	setError(read<uint32_t>(data, getFieldOffset("error")));
+	//uint8_t[]
 }

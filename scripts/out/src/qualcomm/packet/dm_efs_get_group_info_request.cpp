@@ -60,14 +60,17 @@ void DmEfsGetGroupInfoRequest::setPath(uint8_t* data, size_t size)
     write("path", data, size);
 }
 
-void DmEfsGetGroupInfoRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-	DmEfsPacket::unpack(data, transport);
-}
 void DmEfsGetGroupInfoRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		DmEfsGetGroupInfoResponse* resp = new DmEfsGetGroupInfoResponse();
 		response = resp;
 	}
+}
+
+void DmEfsGetGroupInfoRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	DmEfsPacket::unpack(data, transport);
+	setGid(read<uint32_t>(data, getFieldOffset("gid")));
+	//variable
 }

@@ -65,6 +65,16 @@ using namespace OpenPST::{{namespace}};
 {% include 'method_set.twig' %}
 {% endfor %}
 
+{% if expects_response %}
+void {{class_name}}::prepareResponse()
+{
+	if (response == nullptr) {
+		{{expects_response}}* resp = new {{expects_response}}();
+		response = resp;
+	}
+}
+{% endif %}
+
 {% if unpacked_custom %}
 {{unpacked_custom|raw}}
 {% else %}
@@ -73,14 +83,16 @@ void {{class_name}}::unpack(std::vector<uint8_t>& data, TransportInterface* tran
 {% if unpack_base %}
 	{{extends_class_name}}::unpack(data, transport);
 {% endif %}
-}
+{% for field in fields %}
+{% if field.type == 'variable' %}
+	//variable
+{% elseif field.type == 'uint8_t[]' %}
+	//uint8_t[]
+{% elseif field.type == 'int8_t[]' %}
+	//int8_t[]
+{% else %}
+	set{{field.name_camel}}(read<{{field.type}}>(data, getFieldOffset("{{field.name}}")));
 {% endif %}
-{% if expects_response %}
-void {{class_name}}::prepareResponse()
-{
-	if (response == nullptr) {
-		{{expects_response}}* resp = new {{expects_response}}();
-		response = resp;
-	}
+{% endfor %}
 }
 {% endif %}

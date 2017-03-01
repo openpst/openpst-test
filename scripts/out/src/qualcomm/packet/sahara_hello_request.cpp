@@ -100,14 +100,21 @@ void SaharaHelloRequest::setReserved(uint8_t* data, size_t size)
     write("reserved", data, size);
 }
 
-void SaharaHelloRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-	SaharaPacket::unpack(data, transport);
-}
 void SaharaHelloRequest::prepareResponse()
 {
 	if (response == nullptr) {
 		SaharaHelloResponse* resp = new SaharaHelloResponse();
 		response = resp;
 	}
+}
+
+void SaharaHelloRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
+{
+	SaharaPacket::unpack(data, transport);
+	setVersion(read<uint32_t>(data, getFieldOffset("version")));
+	setMinVersion(read<uint32_t>(data, getFieldOffset("min_version")));
+	setMaxCommandPacketSize(read<uint32_t>(data, getFieldOffset("max_command_packet_size")));
+	setStatus(read<uint32_t>(data, getFieldOffset("status")));
+	setMode(read<uint32_t>(data, getFieldOffset("mode")));
+	//uint8_t[]
 }

@@ -60,7 +60,10 @@ void DmEfsOpenDirResponse::setError(uint32_t error)
     write<uint32_t>("error", error);
 }
 
+
 void DmEfsOpenDirResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
 	DmEfsPacket::unpack(data, transport);
+	setDp(read<uint32_t>(data, getFieldOffset("dp")));
+	setError(read<uint32_t>(data, getFieldOffset("error")));
 }

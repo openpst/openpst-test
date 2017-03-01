@@ -39,6 +39,7 @@ SaharaReadDataResponse::~SaharaReadDataResponse()
 }
 
 
+
 void SaharaReadDataResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
 }

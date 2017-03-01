@@ -110,7 +110,15 @@ void DmEfsHotplugDeviceInfoResponse::setManufacturedDate(uint8_t* data, size_t s
     write("manufactured_date", data, size);
 }
 
+
 void DmEfsHotplugDeviceInfoResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
 	DmEfsPacket::unpack(data, transport);
+	setSequence(read<uint16_t>(data, getFieldOffset("sequence")));
+	setError(read<uint32_t>(data, getFieldOffset("error")));
+	setManufacturerId(read<uint32_t>(data, getFieldOffset("manufacturer_id")));
+	setOemId(read<uint32_t>(data, getFieldOffset("oem_id")));
+	setProductRevision(read<uint32_t>(data, getFieldOffset("product_revision")));
+	//uint8_t[]
+	//uint8_t[]
 }
