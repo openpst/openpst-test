@@ -119,9 +119,6 @@ int main_sahara(int argc, char* argv[])
 
 		std::cout << "EXITING" << std::endl;
 
-
-
-		
 		port.close();
 
 	} catch (SaharaClientError& e) {

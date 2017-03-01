@@ -43,13 +43,11 @@ DmEfsCreateLinkResponse::~DmEfsCreateLinkResponse()
 uint32_t DmEfsCreateLinkResponse::getError()
 {
     return read<uint32_t>(getFieldOffset("error"));
-}
-                
+}                
 void DmEfsCreateLinkResponse::setError(uint32_t error)
 {
     write<uint32_t>("error", error);
 }
-
 
 void DmEfsCreateLinkResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {

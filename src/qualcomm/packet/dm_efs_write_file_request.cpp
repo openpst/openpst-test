@@ -45,31 +45,25 @@ DmEfsWriteFileRequest::~DmEfsWriteFileRequest()
 uint32_t DmEfsWriteFileRequest::getFp()
 {
     return read<uint32_t>(getFieldOffset("fp"));
-}
-                
+}                
 void DmEfsWriteFileRequest::setFp(uint32_t fp)
 {
     write<uint32_t>("fp", fp);
-}
-uint32_t DmEfsWriteFileRequest::getOffset()
+}uint32_t DmEfsWriteFileRequest::getOffset()
 {
     return read<uint32_t>(getFieldOffset("offset"));
-}
-                
+}                
 void DmEfsWriteFileRequest::setOffset(uint32_t offset)
 {
     write<uint32_t>("offset", offset);
-}
-std::vector<uint8_t> DmEfsWriteFileRequest::getData()
+}std::vector<uint8_t> DmEfsWriteFileRequest::getData()
 {
 	return read(getFieldSize("data"), getFieldOffset("data"));
-}
-                
+}                
 void DmEfsWriteFileRequest::setData(uint8_t* data, size_t size)
 {
     write("data", data, size);
 }
-
 void DmEfsWriteFileRequest::prepareResponse()
 {
 	if (response == nullptr) {

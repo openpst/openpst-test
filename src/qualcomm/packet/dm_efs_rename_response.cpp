@@ -43,13 +43,11 @@ DmEfsRenameResponse::~DmEfsRenameResponse()
 uint32_t DmEfsRenameResponse::getError()
 {
     return read<uint32_t>(getFieldOffset("error"));
-}
-                
+}                
 void DmEfsRenameResponse::setError(uint32_t error)
 {
     write<uint32_t>("error", error);
 }
-
 
 void DmEfsRenameResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {

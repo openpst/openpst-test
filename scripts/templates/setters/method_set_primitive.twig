@@ -1,0 +1,4 @@
+void {{class_name}}::set{{field.name_camel}}({{field.type}} {{field.name_lower_camel}})
+{
+    write<{{field.type}}>("{{field.name}}", {{field.name_lower_camel}});
+}

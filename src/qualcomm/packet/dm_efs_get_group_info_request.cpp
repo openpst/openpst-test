@@ -44,22 +44,18 @@ DmEfsGetGroupInfoRequest::~DmEfsGetGroupInfoRequest()
 uint32_t DmEfsGetGroupInfoRequest::getGid()
 {
     return read<uint32_t>(getFieldOffset("gid"));
-}
-                
+}                
 void DmEfsGetGroupInfoRequest::setGid(uint32_t gid)
 {
     write<uint32_t>("gid", gid);
-}
-std::vector<uint8_t> DmEfsGetGroupInfoRequest::getPath()
+}std::vector<uint8_t> DmEfsGetGroupInfoRequest::getPath()
 {
 	return read(getFieldSize("path"), getFieldOffset("path"));
-}
-                
+}                
 void DmEfsGetGroupInfoRequest::setPath(uint8_t* data, size_t size)
 {
     write("path", data, size);
 }
-
 void DmEfsGetGroupInfoRequest::prepareResponse()
 {
 	if (response == nullptr) {

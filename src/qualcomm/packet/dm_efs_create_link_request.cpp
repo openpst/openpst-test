@@ -44,22 +44,18 @@ DmEfsCreateLinkRequest::~DmEfsCreateLinkRequest()
 std::vector<uint8_t> DmEfsCreateLinkRequest::getPath()
 {
 	return read(getFieldSize("path"), getFieldOffset("path"));
-}
-                
+}                
 void DmEfsCreateLinkRequest::setPath(uint8_t* data, size_t size)
 {
     write("path", data, size);
-}
-std::vector<uint8_t> DmEfsCreateLinkRequest::getNewPath()
+}std::vector<uint8_t> DmEfsCreateLinkRequest::getNewPath()
 {
 	return read(getFieldSize("new_path"), getFieldOffset("new_path"));
-}
-                
+}                
 void DmEfsCreateLinkRequest::setNewPath(uint8_t* data, size_t size)
 {
     write("new_path", data, size);
 }
-
 void DmEfsCreateLinkRequest::prepareResponse()
 {
 	if (response == nullptr) {

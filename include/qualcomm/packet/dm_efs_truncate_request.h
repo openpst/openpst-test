@@ -52,40 +52,34 @@ namespace OpenPST {
                 * @brief Get sequence
                 * @return uint16_t
                 */
-                uint16_t getSequence();
-                
+                uint16_t getSequence();                
                 /**
                 * @brief Set sequence
                 * @param uint16_t sequence
                 * @return void
                 */
-                void setSequence(uint16_t sequence);
-                /**
+                void setSequence(uint16_t sequence);                /**
                 * @brief Get length
                 * @return uint32_t
                 */
-                uint32_t getLength();
-                
+                uint32_t getLength();                
                 /**
                 * @brief Set length
                 * @param uint32_t length
                 * @return void
                 */
-                void setLength(uint32_t length);
-                /**
+                void setLength(uint32_t length);                /**
                 * @brief Get path
-                * @return std::vector<uint8_t>
+                * @return variable
                 */
-                std::vector<uint8_t> getPath();
-                
+                std::vector<uint8_t> getPath();                
                 /**
                 * @brief Set path
                 * @param uint8_t* path
-                * @param size_t path
+                * @param size_t size
                 * @return void
                 */
-                void setPath(uint8_t* data, size_t size);
-				/**
+                void setPath(uint8_t* data, size_t size);				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;

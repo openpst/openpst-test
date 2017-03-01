@@ -50,27 +50,23 @@ namespace OpenPST {
                 * @brief Get client_command
                 * @return uint32_t
                 */
-                uint32_t getClientCommand();
-                
+                uint32_t getClientCommand();                
                 /**
                 * @brief Set client_command
                 * @param uint32_t clientCommand
                 * @return void
                 */
-                void setClientCommand(uint32_t clientCommand);
-                /**
+                void setClientCommand(uint32_t clientCommand);                /**
                 * @brief Get data_size
                 * @return uint32_t
                 */
-                uint32_t getDataSize();
-                
+                uint32_t getDataSize();                
                 /**
                 * @brief Set data_size
                 * @param uint32_t dataSize
                 * @return void
                 */
-                void setDataSize(uint32_t dataSize);
-				/**
+                void setDataSize(uint32_t dataSize);				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;

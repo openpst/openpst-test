@@ -44,22 +44,18 @@ DmEfsReadLinkResponse::~DmEfsReadLinkResponse()
 uint32_t DmEfsReadLinkResponse::getError()
 {
     return read<uint32_t>(getFieldOffset("error"));
-}
-                
+}                
 void DmEfsReadLinkResponse::setError(uint32_t error)
 {
     write<uint32_t>("error", error);
-}
-std::vector<uint8_t> DmEfsReadLinkResponse::getPath()
+}std::vector<uint8_t> DmEfsReadLinkResponse::getPath()
 {
 	return read(getFieldSize("path"), getFieldOffset("path"));
-}
-                
+}                
 void DmEfsReadLinkResponse::setPath(uint8_t* data, size_t size)
 {
     write("path", data, size);
 }
-
 
 void DmEfsReadLinkResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {

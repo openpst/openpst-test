@@ -43,13 +43,11 @@ DmEfsChmodResponse::~DmEfsChmodResponse()
 uint32_t DmEfsChmodResponse::getError()
 {
     return read<uint32_t>(getFieldOffset("error"));
-}
-                
+}                
 void DmEfsChmodResponse::setError(uint32_t error)
 {
     write<uint32_t>("error", error);
 }
-
 
 void DmEfsChmodResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {

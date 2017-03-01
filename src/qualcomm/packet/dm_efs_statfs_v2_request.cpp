@@ -44,22 +44,18 @@ DmEfsStatfsV2Request::~DmEfsStatfsV2Request()
 uint16_t DmEfsStatfsV2Request::getSequence()
 {
     return read<uint16_t>(getFieldOffset("sequence"));
-}
-                
+}                
 void DmEfsStatfsV2Request::setSequence(uint16_t sequence)
 {
     write<uint16_t>("sequence", sequence);
-}
-std::vector<uint8_t> DmEfsStatfsV2Request::getPath()
+}std::vector<uint8_t> DmEfsStatfsV2Request::getPath()
 {
 	return read(getFieldSize("path"), getFieldOffset("path"));
-}
-                
+}                
 void DmEfsStatfsV2Request::setPath(uint8_t* data, size_t size)
 {
     write("path", data, size);
 }
-
 void DmEfsStatfsV2Request::prepareResponse()
 {
 	if (response == nullptr) {

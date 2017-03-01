@@ -43,13 +43,11 @@ DmSpcRequest::~DmSpcRequest()
 std::vector<uint8_t> DmSpcRequest::getSpc()
 {
 	return read(getFieldSize("spc"), getFieldOffset("spc"));
-}
-                
+}                
 void DmSpcRequest::setSpc(uint8_t* data, size_t size)
 {
     write("spc", data, size);
 }
-
 void DmSpcRequest::prepareResponse()
 {
 	if (response == nullptr) {

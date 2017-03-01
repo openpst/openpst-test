@@ -52,16 +52,14 @@ namespace OpenPST {
                 * @brief Get spc
                 * @return uint8_t[]
                 */
-                std::vector<uint8_t> getSpc();
-                
+                std::vector<uint8_t> getSpc();                
                 /**
                 * @brief Set spc
                 * @param uint8_t* spc
                 * @param size_t size
                 * @return void
                 */
-                void setSpc(uint8_t* data, size_t size);
-				/**
+                void setSpc(uint8_t* data, size_t size);				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;

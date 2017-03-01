@@ -52,15 +52,13 @@ namespace OpenPST {
                 * @brief Get dp
                 * @return uint32_t
                 */
-                uint32_t getDp();
-                
+                uint32_t getDp();                
                 /**
                 * @brief Set dp
                 * @param uint32_t dp
                 * @return void
                 */
-                void setDp(uint32_t dp);
-				/**
+                void setDp(uint32_t dp);				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;

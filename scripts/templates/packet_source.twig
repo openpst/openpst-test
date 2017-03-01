@@ -60,9 +60,9 @@ using namespace OpenPST::{{namespace}};
 }
 
 {% for field in fields %}
-{% include 'method_get.twig' %}
+{% include 'getters/method_get.twig' %}
                 
-{% include 'method_set.twig' %}
+{% include 'setters/method_set.twig' %}
 {% endfor %}
 
 {% if expects_response %}

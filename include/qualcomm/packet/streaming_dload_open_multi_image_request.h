@@ -52,15 +52,13 @@ namespace OpenPST {
                 * @brief Get type
                 * @return uint8_t
                 */
-                uint8_t getType();
-                
+                uint8_t getType();                
                 /**
                 * @brief Set type
                 * @param uint8_t type
                 * @return void
                 */
-                void setType(uint8_t type);
-				/**
+                void setType(uint8_t type);				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;

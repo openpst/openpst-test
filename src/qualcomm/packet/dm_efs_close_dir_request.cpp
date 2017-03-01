@@ -43,13 +43,11 @@ DmEfsCloseDirRequest::~DmEfsCloseDirRequest()
 uint32_t DmEfsCloseDirRequest::getDp()
 {
     return read<uint32_t>(getFieldOffset("dp"));
-}
-                
+}                
 void DmEfsCloseDirRequest::setDp(uint32_t dp)
 {
     write<uint32_t>("dp", dp);
 }
-
 void DmEfsCloseDirRequest::prepareResponse()
 {
 	if (response == nullptr) {

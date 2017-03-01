@@ -43,13 +43,11 @@ StreamingDloadSecurityModeRequest::~StreamingDloadSecurityModeRequest()
 uint8_t StreamingDloadSecurityModeRequest::getMode()
 {
     return read<uint8_t>(getFieldOffset("mode"));
-}
-                
+}                
 void StreamingDloadSecurityModeRequest::setMode(uint8_t mode)
 {
     write<uint8_t>("mode", mode);
 }
-
 void StreamingDloadSecurityModeRequest::prepareResponse()
 {
 	if (response == nullptr) {

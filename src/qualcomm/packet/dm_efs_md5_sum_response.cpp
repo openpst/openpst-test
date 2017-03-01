@@ -45,31 +45,25 @@ DmEfsMd5SumResponse::~DmEfsMd5SumResponse()
 uint16_t DmEfsMd5SumResponse::getSequence()
 {
     return read<uint16_t>(getFieldOffset("sequence"));
-}
-                
+}                
 void DmEfsMd5SumResponse::setSequence(uint16_t sequence)
 {
     write<uint16_t>("sequence", sequence);
-}
-uint32_t DmEfsMd5SumResponse::getError()
+}uint32_t DmEfsMd5SumResponse::getError()
 {
     return read<uint32_t>(getFieldOffset("error"));
-}
-                
+}                
 void DmEfsMd5SumResponse::setError(uint32_t error)
 {
     write<uint32_t>("error", error);
-}
-std::vector<uint8_t> DmEfsMd5SumResponse::getHash()
+}std::vector<uint8_t> DmEfsMd5SumResponse::getHash()
 {
 	return read(getFieldSize("hash"), getFieldOffset("hash"));
-}
-                
+}                
 void DmEfsMd5SumResponse::setHash(uint8_t* data, size_t size)
 {
     write("hash", data, size);
 }
-
 
 void DmEfsMd5SumResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {

@@ -43,13 +43,11 @@ StreamingDloadOpenMultiImageRequest::~StreamingDloadOpenMultiImageRequest()
 uint8_t StreamingDloadOpenMultiImageRequest::getType()
 {
     return read<uint8_t>(getFieldOffset("type"));
-}
-                
+}                
 void StreamingDloadOpenMultiImageRequest::setType(uint8_t type)
 {
     write<uint8_t>("type", type);
 }
-
 void StreamingDloadOpenMultiImageRequest::prepareResponse()
 {
 	if (response == nullptr) {

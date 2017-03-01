@@ -43,13 +43,11 @@ StreamingDloadOpenMultiImageResponse::~StreamingDloadOpenMultiImageResponse()
 uint8_t StreamingDloadOpenMultiImageResponse::getStatus()
 {
     return read<uint8_t>(getFieldOffset("status"));
-}
-                
+}                
 void StreamingDloadOpenMultiImageResponse::setStatus(uint8_t status)
 {
     write<uint8_t>("status", status);
 }
-
 
 void StreamingDloadOpenMultiImageResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {

@@ -52,41 +52,35 @@ namespace OpenPST {
                 * @brief Get type
                 * @return uint8_t
                 */
-                uint8_t getType();
-                
+                uint8_t getType();                
                 /**
                 * @brief Set type
                 * @param uint8_t type
                 * @return void
                 */
-                void setType(uint8_t type);
-                /**
+                void setType(uint8_t type);                /**
                 * @brief Get payload
-                * @return std::vector<uint8_t>
+                * @return variable
                 */
-                std::vector<uint8_t> getPayload();
-                
+                std::vector<uint8_t> getPayload();                
                 /**
                 * @brief Set payload
                 * @param std::ifstream& file
                 * @param size_t size
                 * @return void
                 */
-                void setPayload(std::ifstream& file, size_t size);
-                /**
+                void setPayload(std::ifstream& file, size_t size);                /**
                 * @brief Set payload
                 * @param uint8_t* payload
-                * @param size_t payload
+                * @param size_t size
                 * @return void
                 */
-                void setPayload(uint8_t* data, size_t size);
-                /**
+                void setPayload(uint8_t* data, size_t size);                /**
                 * @brief Set payload
                 * @param const std::string& payload
                 * @return void
                 */
-                void setPayload(const std::string& payload);
-				/**
+                void setPayload(const std::string& payload);				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;

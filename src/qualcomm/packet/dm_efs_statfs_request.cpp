@@ -43,13 +43,11 @@ DmEfsStatfsRequest::~DmEfsStatfsRequest()
 std::vector<uint8_t> DmEfsStatfsRequest::getPath()
 {
 	return read(getFieldSize("path"), getFieldOffset("path"));
-}
-                
+}                
 void DmEfsStatfsRequest::setPath(uint8_t* data, size_t size)
 {
     write("path", data, size);
 }
-
 void DmEfsStatfsRequest::prepareResponse()
 {
 	if (response == nullptr) {

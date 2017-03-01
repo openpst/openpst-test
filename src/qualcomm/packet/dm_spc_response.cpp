@@ -43,13 +43,11 @@ DmSpcResponse::~DmSpcResponse()
 uint8_t DmSpcResponse::getStatus()
 {
     return read<uint8_t>(getFieldOffset("status"));
-}
-                
+}                
 void DmSpcResponse::setStatus(uint8_t status)
 {
     write<uint8_t>("status", status);
 }
-
 
 void DmSpcResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {

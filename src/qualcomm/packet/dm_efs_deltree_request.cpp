@@ -44,22 +44,18 @@ DmEfsDeltreeRequest::~DmEfsDeltreeRequest()
 uint16_t DmEfsDeltreeRequest::getSequence()
 {
     return read<uint16_t>(getFieldOffset("sequence"));
-}
-                
+}                
 void DmEfsDeltreeRequest::setSequence(uint16_t sequence)
 {
     write<uint16_t>("sequence", sequence);
-}
-std::vector<uint8_t> DmEfsDeltreeRequest::getPath()
+}std::vector<uint8_t> DmEfsDeltreeRequest::getPath()
 {
 	return read(getFieldSize("path"), getFieldOffset("path"));
-}
-                
+}                
 void DmEfsDeltreeRequest::setPath(uint8_t* data, size_t size)
 {
     write("path", data, size);
 }
-
 void DmEfsDeltreeRequest::prepareResponse()
 {
 	if (response == nullptr) {

@@ -43,13 +43,11 @@ DmEfsUnlinkRequest::~DmEfsUnlinkRequest()
 std::vector<uint8_t> DmEfsUnlinkRequest::getPath()
 {
 	return read(getFieldSize("path"), getFieldOffset("path"));
-}
-                
+}                
 void DmEfsUnlinkRequest::setPath(uint8_t* data, size_t size)
 {
     write("path", data, size);
 }
-
 void DmEfsUnlinkRequest::prepareResponse()
 {
 	if (response == nullptr) {

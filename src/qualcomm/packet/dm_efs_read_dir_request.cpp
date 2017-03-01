@@ -44,22 +44,18 @@ DmEfsReadDirRequest::~DmEfsReadDirRequest()
 uint32_t DmEfsReadDirRequest::getDp()
 {
     return read<uint32_t>(getFieldOffset("dp"));
-}
-                
+}                
 void DmEfsReadDirRequest::setDp(uint32_t dp)
 {
     write<uint32_t>("dp", dp);
-}
-uint32_t DmEfsReadDirRequest::getSequenceNumber()
+}uint32_t DmEfsReadDirRequest::getSequenceNumber()
 {
     return read<uint32_t>(getFieldOffset("sequence_number"));
-}
-                
+}                
 void DmEfsReadDirRequest::setSequenceNumber(uint32_t sequenceNumber)
 {
     write<uint32_t>("sequence_number", sequenceNumber);
 }
-
 void DmEfsReadDirRequest::prepareResponse()
 {
 	if (response == nullptr) {

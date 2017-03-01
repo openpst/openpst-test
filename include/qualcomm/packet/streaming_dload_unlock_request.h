@@ -52,15 +52,13 @@ namespace OpenPST {
                 * @brief Get code
                 * @return uint64_t
                 */
-                uint64_t getCode();
-                
+                uint64_t getCode();                
                 /**
                 * @brief Set code
                 * @param uint64_t code
                 * @return void
                 */
-                void setCode(uint64_t code);
-				/**
+                void setCode(uint64_t code);				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;

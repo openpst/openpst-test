@@ -1,0 +1,14 @@
+{% if field.allowed_getters %}
+{% for getter in field.allowed_getters %}
+{% if getter == 'vector' %}
+std::vector<uint8_t> {{class_name}}::get{{field.name_camel}}()
+{
+	return read(getFieldSize("{{field.name}}"), getFieldOffset("{{field.name}}"));
+}
+{% elseif getter == 'string' %}
+std::string {{class_name}}::get{{field.name_camel}}()
+{
+	return getString({{field.size}}, getFieldOffset("{{field.name}}"));
+}
+{% endif %}
+{% endfor %}

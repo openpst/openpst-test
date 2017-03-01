@@ -50,111 +50,93 @@ namespace OpenPST {
                 * @brief Get target_packet_window_size
                 * @return uint32_t
                 */
-                uint32_t getTargetPacketWindowSize();
-                
+                uint32_t getTargetPacketWindowSize();                
                 /**
                 * @brief Set target_packet_window_size
                 * @param uint32_t targetPacketWindowSize
                 * @return void
                 */
-                void setTargetPacketWindowSize(uint32_t targetPacketWindowSize);
-                /**
+                void setTargetPacketWindowSize(uint32_t targetPacketWindowSize);                /**
                 * @brief Get target_packet_window_byte_size
                 * @return uint32_t
                 */
-                uint32_t getTargetPacketWindowByteSize();
-                
+                uint32_t getTargetPacketWindowByteSize();                
                 /**
                 * @brief Set target_packet_window_byte_size
                 * @param uint32_t targetPacketWindowByteSize
                 * @return void
                 */
-                void setTargetPacketWindowByteSize(uint32_t targetPacketWindowByteSize);
-                /**
+                void setTargetPacketWindowByteSize(uint32_t targetPacketWindowByteSize);                /**
                 * @brief Get host_packet_window_size
                 * @return uint32_t
                 */
-                uint32_t getHostPacketWindowSize();
-                
+                uint32_t getHostPacketWindowSize();                
                 /**
                 * @brief Set host_packet_window_size
                 * @param uint32_t hostPacketWindowSize
                 * @return void
                 */
-                void setHostPacketWindowSize(uint32_t hostPacketWindowSize);
-                /**
+                void setHostPacketWindowSize(uint32_t hostPacketWindowSize);                /**
                 * @brief Get host_packet_window_byte_size
                 * @return uint32_t
                 */
-                uint32_t getHostPacketWindowByteSize();
-                
+                uint32_t getHostPacketWindowByteSize();                
                 /**
                 * @brief Set host_packet_window_byte_size
                 * @param uint32_t hostPacketWindowByteSize
                 * @return void
                 */
-                void setHostPacketWindowByteSize(uint32_t hostPacketWindowByteSize);
-                /**
+                void setHostPacketWindowByteSize(uint32_t hostPacketWindowByteSize);                /**
                 * @brief Get dir_iterator_window_size
                 * @return uint32_t
                 */
-                uint32_t getDirIteratorWindowSize();
-                
+                uint32_t getDirIteratorWindowSize();                
                 /**
                 * @brief Set dir_iterator_window_size
                 * @param uint32_t dirIteratorWindowSize
                 * @return void
                 */
-                void setDirIteratorWindowSize(uint32_t dirIteratorWindowSize);
-                /**
+                void setDirIteratorWindowSize(uint32_t dirIteratorWindowSize);                /**
                 * @brief Get dir_iterator_window_byte_size
                 * @return uint32_t
                 */
-                uint32_t getDirIteratorWindowByteSize();
-                
+                uint32_t getDirIteratorWindowByteSize();                
                 /**
                 * @brief Set dir_iterator_window_byte_size
                 * @param uint32_t dirIteratorWindowByteSize
                 * @return void
                 */
-                void setDirIteratorWindowByteSize(uint32_t dirIteratorWindowByteSize);
-                /**
+                void setDirIteratorWindowByteSize(uint32_t dirIteratorWindowByteSize);                /**
                 * @brief Get version
                 * @return uint32_t
                 */
-                uint32_t getVersion();
-                
+                uint32_t getVersion();                
                 /**
                 * @brief Set version
                 * @param uint32_t version
                 * @return void
                 */
-                void setVersion(uint32_t version);
-                /**
+                void setVersion(uint32_t version);                /**
                 * @brief Get max_version
                 * @return uint32_t
                 */
-                uint32_t getMaxVersion();
-                
+                uint32_t getMaxVersion();                
                 /**
                 * @brief Set max_version
                 * @param uint32_t maxVersion
                 * @return void
                 */
-                void setMaxVersion(uint32_t maxVersion);
-                /**
+                void setMaxVersion(uint32_t maxVersion);                /**
                 * @brief Get feature_bits
                 * @return uint32_t
                 */
-                uint32_t getFeatureBits();
-                
+                uint32_t getFeatureBits();                
                 /**
                 * @brief Set feature_bits
                 * @param uint32_t featureBits
                 * @return void
                 */
-                void setFeatureBits(uint32_t featureBits);
-				/**
+                void setFeatureBits(uint32_t featureBits);				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;

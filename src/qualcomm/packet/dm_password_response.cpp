@@ -43,13 +43,11 @@ DmPasswordResponse::~DmPasswordResponse()
 uint8_t DmPasswordResponse::getStatus()
 {
     return read<uint8_t>(getFieldOffset("status"));
-}
-                
+}                
 void DmPasswordResponse::setStatus(uint8_t status)
 {
     write<uint8_t>("status", status);
 }
-
 
 void DmPasswordResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {

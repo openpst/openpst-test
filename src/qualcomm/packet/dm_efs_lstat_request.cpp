@@ -43,13 +43,11 @@ DmEfsLstatRequest::~DmEfsLstatRequest()
 std::vector<uint8_t> DmEfsLstatRequest::getPath()
 {
 	return read(getFieldSize("path"), getFieldOffset("path"));
-}
-                
+}                
 void DmEfsLstatRequest::setPath(uint8_t* data, size_t size)
 {
     write("path", data, size);
 }
-
 
 void DmEfsLstatRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {

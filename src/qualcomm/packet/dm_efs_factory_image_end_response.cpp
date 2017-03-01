@@ -43,13 +43,11 @@ DmEfsFactoryImageEndResponse::~DmEfsFactoryImageEndResponse()
 uint32_t DmEfsFactoryImageEndResponse::getError()
 {
     return read<uint32_t>(getFieldOffset("error"));
-}
-                
+}                
 void DmEfsFactoryImageEndResponse::setError(uint32_t error)
 {
     write<uint32_t>("error", error);
 }
-
 
 void DmEfsFactoryImageEndResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {

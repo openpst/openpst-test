@@ -43,13 +43,11 @@ StreamingDloadNopResponse::~StreamingDloadNopResponse()
 uint32_t StreamingDloadNopResponse::getIdentifier()
 {
     return read<uint32_t>(getFieldOffset("identifier"));
-}
-                
+}                
 void StreamingDloadNopResponse::setIdentifier(uint32_t identifier)
 {
     write<uint32_t>("identifier", identifier);
 }
-
 
 void StreamingDloadNopResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {

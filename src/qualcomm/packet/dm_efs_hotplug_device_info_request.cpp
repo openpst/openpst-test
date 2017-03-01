@@ -44,22 +44,18 @@ DmEfsHotplugDeviceInfoRequest::~DmEfsHotplugDeviceInfoRequest()
 uint16_t DmEfsHotplugDeviceInfoRequest::getSequence()
 {
     return read<uint16_t>(getFieldOffset("sequence"));
-}
-                
+}                
 void DmEfsHotplugDeviceInfoRequest::setSequence(uint16_t sequence)
 {
     write<uint16_t>("sequence", sequence);
-}
-std::vector<uint8_t> DmEfsHotplugDeviceInfoRequest::getPath()
+}std::vector<uint8_t> DmEfsHotplugDeviceInfoRequest::getPath()
 {
 	return read(getFieldSize("path"), getFieldOffset("path"));
-}
-                
+}                
 void DmEfsHotplugDeviceInfoRequest::setPath(uint8_t* data, size_t size)
 {
     write("path", data, size);
 }
-
 void DmEfsHotplugDeviceInfoRequest::prepareResponse()
 {
 	if (response == nullptr) {

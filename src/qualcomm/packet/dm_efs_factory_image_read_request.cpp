@@ -46,40 +46,32 @@ DmEfsFactoryImageReadRequest::~DmEfsFactoryImageReadRequest()
 uint8_t DmEfsFactoryImageReadRequest::getStreamState()
 {
     return read<uint8_t>(getFieldOffset("stream_state"));
-}
-                
+}                
 void DmEfsFactoryImageReadRequest::setStreamState(uint8_t streamState)
 {
     write<uint8_t>("stream_state", streamState);
-}
-uint8_t DmEfsFactoryImageReadRequest::getInfoClusterSent()
+}uint8_t DmEfsFactoryImageReadRequest::getInfoClusterSent()
 {
     return read<uint8_t>(getFieldOffset("info_cluster_sent"));
-}
-                
+}                
 void DmEfsFactoryImageReadRequest::setInfoClusterSent(uint8_t infoClusterSent)
 {
     write<uint8_t>("info_cluster_sent", infoClusterSent);
-}
-uint16_t DmEfsFactoryImageReadRequest::getCusterMapSequence()
+}uint16_t DmEfsFactoryImageReadRequest::getCusterMapSequence()
 {
     return read<uint16_t>(getFieldOffset("custer_map_sequence"));
-}
-                
+}                
 void DmEfsFactoryImageReadRequest::setCusterMapSequence(uint16_t custerMapSequence)
 {
     write<uint16_t>("custer_map_sequence", custerMapSequence);
-}
-uint16_t DmEfsFactoryImageReadRequest::getCusterDataSequence()
+}uint16_t DmEfsFactoryImageReadRequest::getCusterDataSequence()
 {
     return read<uint16_t>(getFieldOffset("custer_data_sequence"));
-}
-                
+}                
 void DmEfsFactoryImageReadRequest::setCusterDataSequence(uint16_t custerDataSequence)
 {
     write<uint16_t>("custer_data_sequence", custerDataSequence);
 }
-
 void DmEfsFactoryImageReadRequest::prepareResponse()
 {
 	if (response == nullptr) {

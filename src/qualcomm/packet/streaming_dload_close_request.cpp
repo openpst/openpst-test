@@ -43,13 +43,11 @@ StreamingDloadCloseRequest::~StreamingDloadCloseRequest()
 uint8_t StreamingDloadCloseRequest::getMode()
 {
     return read<uint8_t>(getFieldOffset("mode"));
-}
-                
+}                
 void StreamingDloadCloseRequest::setMode(uint8_t mode)
 {
     write<uint8_t>("mode", mode);
 }
-
 void StreamingDloadCloseRequest::prepareResponse()
 {
 	if (response == nullptr) {

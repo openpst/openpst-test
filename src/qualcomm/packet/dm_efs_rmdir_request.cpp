@@ -43,13 +43,11 @@ DmEfsRmdirRequest::~DmEfsRmdirRequest()
 std::vector<uint8_t> DmEfsRmdirRequest::getPath()
 {
 	return read(getFieldSize("path"), getFieldOffset("path"));
-}
-                
+}                
 void DmEfsRmdirRequest::setPath(uint8_t* data, size_t size)
 {
     write("path", data, size);
 }
-
 void DmEfsRmdirRequest::prepareResponse()
 {
 	if (response == nullptr) {

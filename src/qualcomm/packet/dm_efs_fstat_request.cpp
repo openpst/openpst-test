@@ -43,13 +43,11 @@ DmEfsFstatRequest::~DmEfsFstatRequest()
 uint32_t DmEfsFstatRequest::getFp()
 {
     return read<uint32_t>(getFieldOffset("fp"));
-}
-                
+}                
 void DmEfsFstatRequest::setFp(uint32_t fp)
 {
     write<uint32_t>("fp", fp);
 }
-
 void DmEfsFstatRequest::prepareResponse()
 {
 	if (response == nullptr) {

@@ -42,13 +42,11 @@ DmPhoneModeResponse::~DmPhoneModeResponse()
 uint8_t DmPhoneModeResponse::getStatus()
 {
     return read<uint8_t>(getFieldOffset("status"));
-}
-                
+}                
 void DmPhoneModeResponse::setStatus(uint8_t status)
 {
     write<uint8_t>("status", status);
 }
-
 
 void DmPhoneModeResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {

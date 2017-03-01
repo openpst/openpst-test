@@ -43,13 +43,11 @@ DmEfsReadLinkRequest::~DmEfsReadLinkRequest()
 std::vector<uint8_t> DmEfsReadLinkRequest::getPath()
 {
 	return read(getFieldSize("path"), getFieldOffset("path"));
-}
-                
+}                
 void DmEfsReadLinkRequest::setPath(uint8_t* data, size_t size)
 {
     write("path", data, size);
 }
-
 void DmEfsReadLinkRequest::prepareResponse()
 {
 	if (response == nullptr) {

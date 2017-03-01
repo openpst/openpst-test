@@ -45,31 +45,25 @@ DmEfsSyncResponse::~DmEfsSyncResponse()
 uint16_t DmEfsSyncResponse::getSequence()
 {
     return read<uint16_t>(getFieldOffset("sequence"));
-}
-                
+}                
 void DmEfsSyncResponse::setSequence(uint16_t sequence)
 {
     write<uint16_t>("sequence", sequence);
-}
-uint32_t DmEfsSyncResponse::getToken()
+}uint32_t DmEfsSyncResponse::getToken()
 {
     return read<uint32_t>(getFieldOffset("token"));
-}
-                
+}                
 void DmEfsSyncResponse::setToken(uint32_t token)
 {
     write<uint32_t>("token", token);
-}
-uint32_t DmEfsSyncResponse::getError()
+}uint32_t DmEfsSyncResponse::getError()
 {
     return read<uint32_t>(getFieldOffset("error"));
-}
-                
+}                
 void DmEfsSyncResponse::setError(uint32_t error)
 {
     write<uint32_t>("error", error);
 }
-
 
 void DmEfsSyncResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {

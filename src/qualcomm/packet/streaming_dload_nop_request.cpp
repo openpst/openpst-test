@@ -43,13 +43,11 @@ StreamingDloadNopRequest::~StreamingDloadNopRequest()
 uint32_t StreamingDloadNopRequest::getIdentifier()
 {
     return read<uint32_t>(getFieldOffset("identifier"));
-}
-                
+}                
 void StreamingDloadNopRequest::setIdentifier(uint32_t identifier)
 {
     write<uint32_t>("identifier", identifier);
 }
-
 void StreamingDloadNopRequest::prepareResponse()
 {
 	if (response == nullptr) {

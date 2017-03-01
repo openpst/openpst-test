@@ -44,22 +44,18 @@ DmEfsShredRequest::~DmEfsShredRequest()
 uint16_t DmEfsShredRequest::getSequence()
 {
     return read<uint16_t>(getFieldOffset("sequence"));
-}
-                
+}                
 void DmEfsShredRequest::setSequence(uint16_t sequence)
 {
     write<uint16_t>("sequence", sequence);
-}
-std::vector<uint8_t> DmEfsShredRequest::getPath()
+}std::vector<uint8_t> DmEfsShredRequest::getPath()
 {
 	return read(getFieldSize("path"), getFieldOffset("path"));
-}
-                
+}                
 void DmEfsShredRequest::setPath(uint8_t* data, size_t size)
 {
     write("path", data, size);
 }
-
 void DmEfsShredRequest::prepareResponse()
 {
 	if (response == nullptr) {

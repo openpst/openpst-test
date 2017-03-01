@@ -50,27 +50,23 @@ namespace OpenPST {
                 * @brief Get image_id
                 * @return uint32_t
                 */
-                uint32_t getImageId();
-                
+                uint32_t getImageId();                
                 /**
                 * @brief Set image_id
                 * @param uint32_t imageId
                 * @return void
                 */
-                void setImageId(uint32_t imageId);
-                /**
+                void setImageId(uint32_t imageId);                /**
                 * @brief Get status
                 * @return uint32_t
                 */
-                uint32_t getStatus();
-                
+                uint32_t getStatus();                
                 /**
                 * @brief Set status
                 * @param uint32_t status
                 * @return void
                 */
-                void setStatus(uint32_t status);
-				/**
+                void setStatus(uint32_t status);				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;

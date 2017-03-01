@@ -50,28 +50,24 @@ namespace OpenPST {
                 * @brief Get nv_item
                 * @return uint16_t
                 */
-                uint16_t getNvItem();
-                
+                uint16_t getNvItem();                
                 /**
                 * @brief Set nv_item
                 * @param uint16_t nvItem
                 * @return void
                 */
-                void setNvItem(uint16_t nvItem);
-                /**
+                void setNvItem(uint16_t nvItem);                /**
                 * @brief Get data
-                * @return std::vector<uint8_t>
+                * @return uint8_t[]
                 */
-                std::vector<uint8_t> getData();
-                
+                std::vector<uint8_t> getData();                
                 /**
                 * @brief Set data
                 * @param uint8_t* data
                 * @param size_t size
                 * @return void
                 */
-                void setData(uint8_t* data, size_t size);
-				/**
+                void setData(uint8_t* data, size_t size);				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;

@@ -43,13 +43,11 @@ DmEfsCloseFileRequest::~DmEfsCloseFileRequest()
 uint32_t DmEfsCloseFileRequest::getFp()
 {
     return read<uint32_t>(getFieldOffset("fp"));
-}
-                
+}                
 void DmEfsCloseFileRequest::setFp(uint32_t fp)
 {
     write<uint32_t>("fp", fp);
 }
-
 void DmEfsCloseFileRequest::prepareResponse()
 {
 	if (response == nullptr) {

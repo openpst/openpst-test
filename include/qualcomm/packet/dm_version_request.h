@@ -50,15 +50,13 @@ namespace OpenPST {
                 * @brief Get version
                 * @return uint16_t
                 */
-                uint16_t getVersion();
-                
+                uint16_t getVersion();                
                 /**
                 * @brief Set version
                 * @param uint16_t version
                 * @return void
                 */
-                void setVersion(uint16_t version);
-				/**
+                void setVersion(uint16_t version);				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;

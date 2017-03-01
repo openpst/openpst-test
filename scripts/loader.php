@@ -2,6 +2,8 @@
 
 require_once('vendor/autoload.php');
 require_once('packet_defs.php');
+require_once('lib/console.php');
+require_once('lib/argument_parser.php');
 
 // load twig
 $twig = new \Twig_Environment(
@@ -69,7 +71,7 @@ function extract_unpack_method($filePath) {
 
 	$hit = false;
 	foreach ($lines as $line) {
-		if (preg_match(sprintf('/%s/i', preg_quote('::unpack(std::vector<uint8_t>& data)')), $line)) {
+		if (preg_match(sprintf('/%s/i', preg_quote('::unpack(std::vector<uint8_t>& data, TransportInterface* transport)')), $line)) {
 			$hit = true;	
 		}
 

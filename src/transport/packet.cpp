@@ -164,14 +164,12 @@ void Packet::addField(PacketFieldMeta field)
 {
 	if (!field.size && field.type != kPacketFieldTypeVariant) {
 		throw PacketInvalidArgument("Invalid field size");
-	} else if ( kPacketFieldTypeLast <= field.type) {
+	} else if (kPacketFieldTypeLast <= field.type) {
 		throw PacketInvalidArgument("Invalid field type");
 	} else if (!field.name.size()) {
 		throw PacketInvalidArgument("Field name must be set");
 	} else if(hasField(field.name)) {
-		std::stringstream ss;
-		ss << "Field " << field.name << " already exists";
-		throw PacketInvalidArgument(ss.str());
+		throw PacketInvalidArgument("Field " + field.name + " already exists");
 	}
 	
 	if (field.size > 0) {

@@ -52,28 +52,24 @@ namespace OpenPST {
                 * @brief Get permission_mask
                 * @return uint32_t
                 */
-                uint32_t getPermissionMask();
-                
+                uint32_t getPermissionMask();                
                 /**
                 * @brief Set permission_mask
                 * @param uint32_t permissionMask
                 * @return void
                 */
-                void setPermissionMask(uint32_t permissionMask);
-                /**
+                void setPermissionMask(uint32_t permissionMask);                /**
                 * @brief Get path
-                * @return std::vector<uint8_t>
+                * @return variable
                 */
-                std::vector<uint8_t> getPath();
-                
+                std::vector<uint8_t> getPath();                
                 /**
                 * @brief Set path
                 * @param uint8_t* path
-                * @param size_t path
+                * @param size_t size
                 * @return void
                 */
-                void setPath(uint8_t* data, size_t size);
-				/**
+                void setPath(uint8_t* data, size_t size);				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;

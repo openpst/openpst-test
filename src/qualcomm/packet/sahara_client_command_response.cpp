@@ -44,22 +44,18 @@ SaharaClientCommandResponse::~SaharaClientCommandResponse()
 uint32_t SaharaClientCommandResponse::getClientCommand()
 {
     return read<uint32_t>(getFieldOffset("client_command"));
-}
-                
+}                
 void SaharaClientCommandResponse::setClientCommand(uint32_t clientCommand)
 {
     write<uint32_t>("client_command", clientCommand);
-}
-uint32_t SaharaClientCommandResponse::getDataSize()
+}uint32_t SaharaClientCommandResponse::getDataSize()
 {
     return read<uint32_t>(getFieldOffset("data_size"));
-}
-                
+}                
 void SaharaClientCommandResponse::setDataSize(uint32_t dataSize)
 {
     write<uint32_t>("data_size", dataSize);
 }
-
 
 void SaharaClientCommandResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {

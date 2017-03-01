@@ -1,0 +1,27 @@
+{% if '[]' in field.type %}
+{% if field.allowed_getters %}
+{% for getter in field.allowed_getters %}
+{% if getter == 'vector' %}
+{% include 'getters/method_get_vector_declaration.twig' %}
+{% elseif getter == 'string' %}
+{% include 'getters/method_get_string_declaration.twig' %}
+{% endif %}
+{% endfor %}
+{% else %}
+{% include 'getters/method_get_vector_declaration.twig' %}
+{% endif %}
+{% elseif field.type == 'variable' %}
+{% if field.allowed_getters %}
+{% for getter in field.allowed_getters %}
+{% if getter == 'vector' %}
+{% include 'getters/method_get_vector_declaration.twig' %}
+{% elseif getter == 'string' %}
+{% include 'getters/method_get_string_declaration.twig' %}
+{% endif %}
+{% endfor %}
+{% else %}
+{% include 'getters/method_get_vector_declaration.twig' %}
+{% endif %}
+{% else %}
+{% include 'getters/method_get_primitive_declaration.twig' %}
+{% endif %}

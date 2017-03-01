@@ -43,13 +43,11 @@ DmEfsAccessResponse::~DmEfsAccessResponse()
 uint32_t DmEfsAccessResponse::getError()
 {
     return read<uint32_t>(getFieldOffset("error"));
-}
-                
+}                
 void DmEfsAccessResponse::setError(uint32_t error)
 {
     write<uint32_t>("error", error);
 }
-
 
 void DmEfsAccessResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {

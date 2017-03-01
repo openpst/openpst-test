@@ -49,67 +49,53 @@ DmEfsHotplugDeviceInfoResponse::~DmEfsHotplugDeviceInfoResponse()
 uint16_t DmEfsHotplugDeviceInfoResponse::getSequence()
 {
     return read<uint16_t>(getFieldOffset("sequence"));
-}
-                
+}                
 void DmEfsHotplugDeviceInfoResponse::setSequence(uint16_t sequence)
 {
     write<uint16_t>("sequence", sequence);
-}
-uint32_t DmEfsHotplugDeviceInfoResponse::getError()
+}uint32_t DmEfsHotplugDeviceInfoResponse::getError()
 {
     return read<uint32_t>(getFieldOffset("error"));
-}
-                
+}                
 void DmEfsHotplugDeviceInfoResponse::setError(uint32_t error)
 {
     write<uint32_t>("error", error);
-}
-uint32_t DmEfsHotplugDeviceInfoResponse::getManufacturerId()
+}uint32_t DmEfsHotplugDeviceInfoResponse::getManufacturerId()
 {
     return read<uint32_t>(getFieldOffset("manufacturer_id"));
-}
-                
+}                
 void DmEfsHotplugDeviceInfoResponse::setManufacturerId(uint32_t manufacturerId)
 {
     write<uint32_t>("manufacturer_id", manufacturerId);
-}
-uint32_t DmEfsHotplugDeviceInfoResponse::getOemId()
+}uint32_t DmEfsHotplugDeviceInfoResponse::getOemId()
 {
     return read<uint32_t>(getFieldOffset("oem_id"));
-}
-                
+}                
 void DmEfsHotplugDeviceInfoResponse::setOemId(uint32_t oemId)
 {
     write<uint32_t>("oem_id", oemId);
-}
-uint32_t DmEfsHotplugDeviceInfoResponse::getProductRevision()
+}uint32_t DmEfsHotplugDeviceInfoResponse::getProductRevision()
 {
     return read<uint32_t>(getFieldOffset("product_revision"));
-}
-                
+}                
 void DmEfsHotplugDeviceInfoResponse::setProductRevision(uint32_t productRevision)
 {
     write<uint32_t>("product_revision", productRevision);
-}
-std::vector<uint8_t> DmEfsHotplugDeviceInfoResponse::getProductName()
+}std::vector<uint8_t> DmEfsHotplugDeviceInfoResponse::getProductName()
 {
 	return read(getFieldSize("product_name"), getFieldOffset("product_name"));
-}
-                
+}                
 void DmEfsHotplugDeviceInfoResponse::setProductName(uint8_t* data, size_t size)
 {
     write("product_name", data, size);
-}
-std::vector<uint8_t> DmEfsHotplugDeviceInfoResponse::getManufacturedDate()
+}std::vector<uint8_t> DmEfsHotplugDeviceInfoResponse::getManufacturedDate()
 {
 	return read(getFieldSize("manufactured_date"), getFieldOffset("manufactured_date"));
-}
-                
+}                
 void DmEfsHotplugDeviceInfoResponse::setManufacturedDate(uint8_t* data, size_t size)
 {
     write("manufactured_date", data, size);
 }
-
 
 void DmEfsHotplugDeviceInfoResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {

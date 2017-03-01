@@ -43,13 +43,11 @@ DmVersionRequest::~DmVersionRequest()
 uint16_t DmVersionRequest::getVersion()
 {
     return read<uint16_t>(getFieldOffset("version"));
-}
-                
+}                
 void DmVersionRequest::setVersion(uint16_t version)
 {
     write<uint16_t>("version", version);
 }
-
 
 void DmVersionRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {

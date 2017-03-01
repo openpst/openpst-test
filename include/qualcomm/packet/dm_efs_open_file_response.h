@@ -50,27 +50,23 @@ namespace OpenPST {
                 * @brief Get fp
                 * @return uint32_t
                 */
-                uint32_t getFp();
-                
+                uint32_t getFp();                
                 /**
                 * @brief Set fp
                 * @param uint32_t fp
                 * @return void
                 */
-                void setFp(uint32_t fp);
-                /**
+                void setFp(uint32_t fp);                /**
                 * @brief Get error
                 * @return uint32_t
                 */
-                uint32_t getError();
-                
+                uint32_t getError();                
                 /**
                 * @brief Set error
                 * @param uint32_t error
                 * @return void
                 */
-                void setError(uint32_t error);
-				/**
+                void setError(uint32_t error);				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;

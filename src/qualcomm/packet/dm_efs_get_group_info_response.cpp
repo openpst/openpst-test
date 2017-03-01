@@ -46,40 +46,32 @@ DmEfsGetGroupInfoResponse::~DmEfsGetGroupInfoResponse()
 uint32_t DmEfsGetGroupInfoResponse::getError()
 {
     return read<uint32_t>(getFieldOffset("error"));
-}
-                
+}                
 void DmEfsGetGroupInfoResponse::setError(uint32_t error)
 {
     write<uint32_t>("error", error);
-}
-uint32_t DmEfsGetGroupInfoResponse::getQuotaSize()
+}uint32_t DmEfsGetGroupInfoResponse::getQuotaSize()
 {
     return read<uint32_t>(getFieldOffset("quota_size"));
-}
-                
+}                
 void DmEfsGetGroupInfoResponse::setQuotaSize(uint32_t quotaSize)
 {
     write<uint32_t>("quota_size", quotaSize);
-}
-uint32_t DmEfsGetGroupInfoResponse::getReservationSize()
+}uint32_t DmEfsGetGroupInfoResponse::getReservationSize()
 {
     return read<uint32_t>(getFieldOffset("reservation_size"));
-}
-                
+}                
 void DmEfsGetGroupInfoResponse::setReservationSize(uint32_t reservationSize)
 {
     write<uint32_t>("reservation_size", reservationSize);
-}
-uint32_t DmEfsGetGroupInfoResponse::getSpaceUsed()
+}uint32_t DmEfsGetGroupInfoResponse::getSpaceUsed()
 {
     return read<uint32_t>(getFieldOffset("space_used"));
-}
-                
+}                
 void DmEfsGetGroupInfoResponse::setSpaceUsed(uint32_t spaceUsed)
 {
     write<uint32_t>("space_used", spaceUsed);
 }
-
 
 void DmEfsGetGroupInfoResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {

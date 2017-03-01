@@ -44,22 +44,18 @@ DmNvReadRequest::~DmNvReadRequest()
 uint16_t DmNvReadRequest::getNvItem()
 {
     return read<uint16_t>(getFieldOffset("nv_item"));
-}
-                
+}                
 void DmNvReadRequest::setNvItem(uint16_t nvItem)
 {
     write<uint16_t>("nv_item", nvItem);
-}
-std::vector<uint8_t> DmNvReadRequest::getData()
+}std::vector<uint8_t> DmNvReadRequest::getData()
 {
 	return read(getFieldSize("data"), getFieldOffset("data"));
-}
-                
+}                
 void DmNvReadRequest::setData(uint8_t* data, size_t size)
 {
     write("data", data, size);
 }
-
 
 void DmNvReadRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {

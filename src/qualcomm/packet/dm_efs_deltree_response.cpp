@@ -44,22 +44,18 @@ DmEfsDeltreeResponse::~DmEfsDeltreeResponse()
 uint16_t DmEfsDeltreeResponse::getSequence()
 {
     return read<uint16_t>(getFieldOffset("sequence"));
-}
-                
+}                
 void DmEfsDeltreeResponse::setSequence(uint16_t sequence)
 {
     write<uint16_t>("sequence", sequence);
-}
-uint32_t DmEfsDeltreeResponse::getError()
+}uint32_t DmEfsDeltreeResponse::getError()
 {
     return read<uint32_t>(getFieldOffset("error"));
-}
-                
+}                
 void DmEfsDeltreeResponse::setError(uint32_t error)
 {
     write<uint32_t>("error", error);
 }
-
 
 void DmEfsDeltreeResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {

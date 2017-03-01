@@ -48,58 +48,46 @@ DmEfsFactoryImageReadResponse::~DmEfsFactoryImageReadResponse()
 uint32_t DmEfsFactoryImageReadResponse::getError()
 {
     return read<uint32_t>(getFieldOffset("error"));
-}
-                
+}                
 void DmEfsFactoryImageReadResponse::setError(uint32_t error)
 {
     write<uint32_t>("error", error);
-}
-uint8_t DmEfsFactoryImageReadResponse::getStreamState()
+}uint8_t DmEfsFactoryImageReadResponse::getStreamState()
 {
     return read<uint8_t>(getFieldOffset("stream_state"));
-}
-                
+}                
 void DmEfsFactoryImageReadResponse::setStreamState(uint8_t streamState)
 {
     write<uint8_t>("stream_state", streamState);
-}
-uint8_t DmEfsFactoryImageReadResponse::getInfoClusterSent()
+}uint8_t DmEfsFactoryImageReadResponse::getInfoClusterSent()
 {
     return read<uint8_t>(getFieldOffset("info_cluster_sent"));
-}
-                
+}                
 void DmEfsFactoryImageReadResponse::setInfoClusterSent(uint8_t infoClusterSent)
 {
     write<uint8_t>("info_cluster_sent", infoClusterSent);
-}
-uint16_t DmEfsFactoryImageReadResponse::getCusterMapSequence()
+}uint16_t DmEfsFactoryImageReadResponse::getCusterMapSequence()
 {
     return read<uint16_t>(getFieldOffset("custer_map_sequence"));
-}
-                
+}                
 void DmEfsFactoryImageReadResponse::setCusterMapSequence(uint16_t custerMapSequence)
 {
     write<uint16_t>("custer_map_sequence", custerMapSequence);
-}
-uint16_t DmEfsFactoryImageReadResponse::getCusterDataSequence()
+}uint16_t DmEfsFactoryImageReadResponse::getCusterDataSequence()
 {
     return read<uint16_t>(getFieldOffset("custer_data_sequence"));
-}
-                
+}                
 void DmEfsFactoryImageReadResponse::setCusterDataSequence(uint16_t custerDataSequence)
 {
     write<uint16_t>("custer_data_sequence", custerDataSequence);
-}
-std::vector<uint8_t> DmEfsFactoryImageReadResponse::getData()
+}std::vector<uint8_t> DmEfsFactoryImageReadResponse::getData()
 {
 	return read(getFieldSize("data"), getFieldOffset("data"));
-}
-                
+}                
 void DmEfsFactoryImageReadResponse::setData(uint8_t* data, size_t size)
 {
     write("data", data, size);
 }
-
 
 void DmEfsFactoryImageReadResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {

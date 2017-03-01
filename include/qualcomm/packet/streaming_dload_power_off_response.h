@@ -50,15 +50,13 @@ namespace OpenPST {
                 * @brief Get address
                 * @return uint32_t
                 */
-                uint32_t getAddress();
-                
+                uint32_t getAddress();                
                 /**
                 * @brief Set address
                 * @param uint32_t address
                 * @return void
                 */
-                void setAddress(uint32_t address);
-				/**
+                void setAddress(uint32_t address);				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;

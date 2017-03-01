@@ -44,22 +44,18 @@ DmEfsSyncRequest::~DmEfsSyncRequest()
 uint16_t DmEfsSyncRequest::getSequence()
 {
     return read<uint16_t>(getFieldOffset("sequence"));
-}
-                
+}                
 void DmEfsSyncRequest::setSequence(uint16_t sequence)
 {
     write<uint16_t>("sequence", sequence);
-}
-std::vector<uint8_t> DmEfsSyncRequest::getPath()
+}std::vector<uint8_t> DmEfsSyncRequest::getPath()
 {
 	return read(getFieldSize("path"), getFieldOffset("path"));
-}
-                
+}                
 void DmEfsSyncRequest::setPath(uint8_t* data, size_t size)
 {
     write("path", data, size);
 }
-
 
 void DmEfsSyncRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {

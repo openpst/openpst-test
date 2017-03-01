@@ -44,22 +44,18 @@ DmEfsHotplugFormatRequest::~DmEfsHotplugFormatRequest()
 uint16_t DmEfsHotplugFormatRequest::getSequence()
 {
     return read<uint16_t>(getFieldOffset("sequence"));
-}
-                
+}                
 void DmEfsHotplugFormatRequest::setSequence(uint16_t sequence)
 {
     write<uint16_t>("sequence", sequence);
-}
-std::vector<uint8_t> DmEfsHotplugFormatRequest::getPath()
+}std::vector<uint8_t> DmEfsHotplugFormatRequest::getPath()
 {
 	return read(getFieldSize("path"), getFieldOffset("path"));
-}
-                
+}                
 void DmEfsHotplugFormatRequest::setPath(uint8_t* data, size_t size)
 {
     write("path", data, size);
 }
-
 void DmEfsHotplugFormatRequest::prepareResponse()
 {
 	if (response == nullptr) {

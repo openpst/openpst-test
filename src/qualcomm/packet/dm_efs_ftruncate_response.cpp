@@ -44,22 +44,18 @@ DmEfsFtruncateResponse::~DmEfsFtruncateResponse()
 uint16_t DmEfsFtruncateResponse::getSequence()
 {
     return read<uint16_t>(getFieldOffset("sequence"));
-}
-                
+}                
 void DmEfsFtruncateResponse::setSequence(uint16_t sequence)
 {
     write<uint16_t>("sequence", sequence);
-}
-uint32_t DmEfsFtruncateResponse::getError()
+}uint32_t DmEfsFtruncateResponse::getError()
 {
     return read<uint32_t>(getFieldOffset("error"));
-}
-                
+}                
 void DmEfsFtruncateResponse::setError(uint32_t error)
 {
     write<uint32_t>("error", error);
 }
-
 
 void DmEfsFtruncateResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {

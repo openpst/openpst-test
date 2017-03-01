@@ -50,76 +50,64 @@ namespace OpenPST {
                 * @brief Get error
                 * @return uint32_t
                 */
-                uint32_t getError();
-                
+                uint32_t getError();                
                 /**
                 * @brief Set error
                 * @param uint32_t error
                 * @return void
                 */
-                void setError(uint32_t error);
-                /**
+                void setError(uint32_t error);                /**
                 * @brief Get stream_state
                 * @return uint8_t
                 */
-                uint8_t getStreamState();
-                
+                uint8_t getStreamState();                
                 /**
                 * @brief Set stream_state
                 * @param uint8_t streamState
                 * @return void
                 */
-                void setStreamState(uint8_t streamState);
-                /**
+                void setStreamState(uint8_t streamState);                /**
                 * @brief Get info_cluster_sent
                 * @return uint8_t
                 */
-                uint8_t getInfoClusterSent();
-                
+                uint8_t getInfoClusterSent();                
                 /**
                 * @brief Set info_cluster_sent
                 * @param uint8_t infoClusterSent
                 * @return void
                 */
-                void setInfoClusterSent(uint8_t infoClusterSent);
-                /**
+                void setInfoClusterSent(uint8_t infoClusterSent);                /**
                 * @brief Get custer_map_sequence
                 * @return uint16_t
                 */
-                uint16_t getCusterMapSequence();
-                
+                uint16_t getCusterMapSequence();                
                 /**
                 * @brief Set custer_map_sequence
                 * @param uint16_t custerMapSequence
                 * @return void
                 */
-                void setCusterMapSequence(uint16_t custerMapSequence);
-                /**
+                void setCusterMapSequence(uint16_t custerMapSequence);                /**
                 * @brief Get custer_data_sequence
                 * @return uint16_t
                 */
-                uint16_t getCusterDataSequence();
-                
+                uint16_t getCusterDataSequence();                
                 /**
                 * @brief Set custer_data_sequence
                 * @param uint16_t custerDataSequence
                 * @return void
                 */
-                void setCusterDataSequence(uint16_t custerDataSequence);
-                /**
+                void setCusterDataSequence(uint16_t custerDataSequence);                /**
                 * @brief Get data
-                * @return std::vector<uint8_t>
+                * @return variable
                 */
-                std::vector<uint8_t> getData();
-                
+                std::vector<uint8_t> getData();                
                 /**
                 * @brief Set data
                 * @param uint8_t* data
-                * @param size_t data
+                * @param size_t size
                 * @return void
                 */
-                void setData(uint8_t* data, size_t size);
-				/**
+                void setData(uint8_t* data, size_t size);				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;

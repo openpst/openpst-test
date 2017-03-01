@@ -43,13 +43,11 @@ StreamingDloadSetEccStateRequest::~StreamingDloadSetEccStateRequest()
 uint8_t StreamingDloadSetEccStateRequest::getStatus()
 {
     return read<uint8_t>(getFieldOffset("status"));
-}
-                
+}                
 void StreamingDloadSetEccStateRequest::setStatus(uint8_t status)
 {
     write<uint8_t>("status", status);
 }
-
 void StreamingDloadSetEccStateRequest::prepareResponse()
 {
 	if (response == nullptr) {

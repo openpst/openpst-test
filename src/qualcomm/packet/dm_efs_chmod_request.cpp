@@ -44,22 +44,18 @@ DmEfsChmodRequest::~DmEfsChmodRequest()
 uint32_t DmEfsChmodRequest::getMode()
 {
     return read<uint32_t>(getFieldOffset("mode"));
-}
-                
+}                
 void DmEfsChmodRequest::setMode(uint32_t mode)
 {
     write<uint32_t>("mode", mode);
-}
-std::vector<uint8_t> DmEfsChmodRequest::getPath()
+}std::vector<uint8_t> DmEfsChmodRequest::getPath()
 {
 	return read(getFieldSize("path"), getFieldOffset("path"));
-}
-                
+}                
 void DmEfsChmodRequest::setPath(uint8_t* data, size_t size)
 {
     write("path", data, size);
 }
-
 void DmEfsChmodRequest::prepareResponse()
 {
 	if (response == nullptr) {

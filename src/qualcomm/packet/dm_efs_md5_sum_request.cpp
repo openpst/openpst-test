@@ -44,22 +44,18 @@ DmEfsMd5SumRequest::~DmEfsMd5SumRequest()
 uint16_t DmEfsMd5SumRequest::getSequence()
 {
     return read<uint16_t>(getFieldOffset("sequence"));
-}
-                
+}                
 void DmEfsMd5SumRequest::setSequence(uint16_t sequence)
 {
     write<uint16_t>("sequence", sequence);
-}
-std::vector<uint8_t> DmEfsMd5SumRequest::getPath()
+}std::vector<uint8_t> DmEfsMd5SumRequest::getPath()
 {
 	return read(getFieldSize("path"), getFieldOffset("path"));
-}
-                
+}                
 void DmEfsMd5SumRequest::setPath(uint8_t* data, size_t size)
 {
     write("path", data, size);
 }
-
 void DmEfsMd5SumRequest::prepareResponse()
 {
 	if (response == nullptr) {

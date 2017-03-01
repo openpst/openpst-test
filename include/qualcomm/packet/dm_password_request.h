@@ -50,27 +50,23 @@ namespace OpenPST {
                 * @brief Get password
                 * @return uint8_t[]
                 */
-                std::vector<uint8_t> getPassword();
-                /**
+                std::vector<uint8_t> getPassword();                /**
                 * @brief Get password
                 * @return std::string
                 */
-                std::string getPassword();
-                
+                std::string getPassword();                
                 /**
                 * @brief Set password
                 * @param uint8_t* password
                 * @param size_t size
                 * @return void
                 */
-                void setPassword(uint8_t* data, size_t size);
-                /**
+                void setPassword(uint8_t* data, size_t size);                /**
                 * @brief Set password
                 * @param const std::string& password
                 * @return void
                 */
-                void setPassword(const std::string& password);
-				/**
+                void setPassword(const std::string& password);				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;

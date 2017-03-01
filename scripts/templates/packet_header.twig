@@ -53,9 +53,9 @@ namespace OpenPST {
                 ~{{class_name}}();
 
 {% for field in fields %}
-{% include 'method_get_declaration.twig' %}
+{% include 'getters/method_get_declaration.twig' %}
                 
-{% include 'method_set_declaration.twig' %}
+{% include 'setters/method_set_declaration.twig' %}
 {% endfor %}
 				/**
 				* @overload Packet::unpack

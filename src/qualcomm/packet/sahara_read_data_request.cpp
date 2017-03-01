@@ -44,31 +44,25 @@ SaharaReadDataRequest::~SaharaReadDataRequest()
 uint32_t SaharaReadDataRequest::getImageId()
 {
     return read<uint32_t>(getFieldOffset("image_id"));
-}
-                
+}                
 void SaharaReadDataRequest::setImageId(uint32_t imageId)
 {
     write<uint32_t>("image_id", imageId);
-}
-uint32_t SaharaReadDataRequest::getOffset()
+}uint32_t SaharaReadDataRequest::getOffset()
 {
     return read<uint32_t>(getFieldOffset("offset"));
-}
-                
+}                
 void SaharaReadDataRequest::setOffset(uint32_t offset)
 {
     write<uint32_t>("offset", offset);
-}
-uint32_t SaharaReadDataRequest::getAmount()
+}uint32_t SaharaReadDataRequest::getAmount()
 {
     return read<uint32_t>(getFieldOffset("amount"));
-}
-                
+}                
 void SaharaReadDataRequest::setAmount(uint32_t amount)
 {
     write<uint32_t>("amount", amount);
 }
-
 
 void SaharaReadDataRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {

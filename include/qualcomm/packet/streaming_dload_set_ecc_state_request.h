@@ -52,15 +52,13 @@ namespace OpenPST {
                 * @brief Get status
                 * @return uint8_t
                 */
-                uint8_t getStatus();
-                
+                uint8_t getStatus();                
                 /**
                 * @brief Set status
                 * @param uint8_t status
                 * @return void
                 */
-                void setStatus(uint8_t status);
-				/**
+                void setStatus(uint8_t status);				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;

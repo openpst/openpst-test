@@ -43,13 +43,11 @@ StreamingDloadGetEccStateResponse::~StreamingDloadGetEccStateResponse()
 uint8_t StreamingDloadGetEccStateResponse::getStatus()
 {
     return read<uint8_t>(getFieldOffset("status"));
-}
-                
+}                
 void StreamingDloadGetEccStateResponse::setStatus(uint8_t status)
 {
     write<uint8_t>("status", status);
 }
-
 
 void StreamingDloadGetEccStateResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {

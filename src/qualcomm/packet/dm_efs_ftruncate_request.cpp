@@ -45,31 +45,25 @@ DmEfsFtruncateRequest::~DmEfsFtruncateRequest()
 uint16_t DmEfsFtruncateRequest::getSequence()
 {
     return read<uint16_t>(getFieldOffset("sequence"));
-}
-                
+}                
 void DmEfsFtruncateRequest::setSequence(uint16_t sequence)
 {
     write<uint16_t>("sequence", sequence);
-}
-uint32_t DmEfsFtruncateRequest::getLength()
+}uint32_t DmEfsFtruncateRequest::getLength()
 {
     return read<uint32_t>(getFieldOffset("length"));
-}
-                
+}                
 void DmEfsFtruncateRequest::setLength(uint32_t length)
 {
     write<uint32_t>("length", length);
-}
-uint32_t DmEfsFtruncateRequest::getFp()
+}uint32_t DmEfsFtruncateRequest::getFp()
 {
     return read<uint32_t>(getFieldOffset("fp"));
-}
-                
+}                
 void DmEfsFtruncateRequest::setFp(uint32_t fp)
 {
     write<uint32_t>("fp", fp);
 }
-
 void DmEfsFtruncateRequest::prepareResponse()
 {
 	if (response == nullptr) {

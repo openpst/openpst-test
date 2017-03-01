@@ -44,22 +44,18 @@ DmEfsOpenFileResponse::~DmEfsOpenFileResponse()
 uint32_t DmEfsOpenFileResponse::getFp()
 {
     return read<uint32_t>(getFieldOffset("fp"));
-}
-                
+}                
 void DmEfsOpenFileResponse::setFp(uint32_t fp)
 {
     write<uint32_t>("fp", fp);
-}
-uint32_t DmEfsOpenFileResponse::getError()
+}uint32_t DmEfsOpenFileResponse::getError()
 {
     return read<uint32_t>(getFieldOffset("error"));
-}
-                
+}                
 void DmEfsOpenFileResponse::setError(uint32_t error)
 {
     write<uint32_t>("error", error);
 }
-
 
 void DmEfsOpenFileResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {

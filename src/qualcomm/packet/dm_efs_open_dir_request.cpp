@@ -43,13 +43,11 @@ DmEfsOpenDirRequest::~DmEfsOpenDirRequest()
 std::vector<uint8_t> DmEfsOpenDirRequest::getPath()
 {
 	return read(getFieldSize("path"), getFieldOffset("path"));
-}
-                
+}                
 void DmEfsOpenDirRequest::setPath(uint8_t* data, size_t size)
 {
     write("path", data, size);
 }
-
 void DmEfsOpenDirRequest::prepareResponse()
 {
 	if (response == nullptr) {

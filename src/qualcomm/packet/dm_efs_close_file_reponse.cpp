@@ -43,13 +43,11 @@ DmEfsCloseFileReponse::~DmEfsCloseFileReponse()
 uint32_t DmEfsCloseFileReponse::getError()
 {
     return read<uint32_t>(getFieldOffset("error"));
-}
-                
+}                
 void DmEfsCloseFileReponse::setError(uint32_t error)
 {
     write<uint32_t>("error", error);
 }
-
 
 void DmEfsCloseFileReponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {

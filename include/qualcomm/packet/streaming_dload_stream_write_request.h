@@ -52,41 +52,35 @@ namespace OpenPST {
                 * @brief Get address
                 * @return uint32_t
                 */
-                uint32_t getAddress();
-                
+                uint32_t getAddress();                
                 /**
                 * @brief Set address
                 * @param uint32_t address
                 * @return void
                 */
-                void setAddress(uint32_t address);
-                /**
+                void setAddress(uint32_t address);                /**
                 * @brief Get data
-                * @return std::vector<uint8_t>
+                * @return variable
                 */
-                std::vector<uint8_t> getData();
-                
+                std::vector<uint8_t> getData();                
                 /**
                 * @brief Set data
                 * @param std::ifstream& file
                 * @param size_t size
                 * @return void
                 */
-                void setData(std::ifstream& file, size_t size);
-                /**
+                void setData(std::ifstream& file, size_t size);                /**
                 * @brief Set data
                 * @param uint8_t* data
-                * @param size_t data
+                * @param size_t size
                 * @return void
                 */
-                void setData(uint8_t* data, size_t size);
-                /**
+                void setData(uint8_t* data, size_t size);                /**
                 * @brief Set data
                 * @param const std::string& data
                 * @return void
                 */
-                void setData(const std::string& data);
-				/**
+                void setData(const std::string& data);				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;

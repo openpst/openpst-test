@@ -43,13 +43,11 @@ DmEfsSetQuotaResponse::~DmEfsSetQuotaResponse()
 uint32_t DmEfsSetQuotaResponse::getError()
 {
     return read<uint32_t>(getFieldOffset("error"));
-}
-                
+}                
 void DmEfsSetQuotaResponse::setError(uint32_t error)
 {
     write<uint32_t>("error", error);
 }
-
 
 void DmEfsSetQuotaResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {

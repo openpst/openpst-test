@@ -43,13 +43,11 @@ StreamingDloadUnframedStreamWriteResponse::~StreamingDloadUnframedStreamWriteRes
 uint32_t StreamingDloadUnframedStreamWriteResponse::getAddress()
 {
     return read<uint32_t>(getFieldOffset("address"));
-}
-                
+}                
 void StreamingDloadUnframedStreamWriteResponse::setAddress(uint32_t address)
 {
     write<uint32_t>("address", address);
 }
-
 
 void StreamingDloadUnframedStreamWriteResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {

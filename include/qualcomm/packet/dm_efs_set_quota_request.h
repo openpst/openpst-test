@@ -52,40 +52,34 @@ namespace OpenPST {
                 * @brief Get gid
                 * @return uint32_t
                 */
-                uint32_t getGid();
-                
+                uint32_t getGid();                
                 /**
                 * @brief Set gid
                 * @param uint32_t gid
                 * @return void
                 */
-                void setGid(uint32_t gid);
-                /**
+                void setGid(uint32_t gid);                /**
                 * @brief Get amount
                 * @return uint32_t
                 */
-                uint32_t getAmount();
-                
+                uint32_t getAmount();                
                 /**
                 * @brief Set amount
                 * @param uint32_t amount
                 * @return void
                 */
-                void setAmount(uint32_t amount);
-                /**
+                void setAmount(uint32_t amount);                /**
                 * @brief Get path
-                * @return std::vector<uint8_t>
+                * @return variable
                 */
-                std::vector<uint8_t> getPath();
-                
+                std::vector<uint8_t> getPath();                
                 /**
                 * @brief Set path
                 * @param uint8_t* path
-                * @param size_t path
+                * @param size_t size
                 * @return void
                 */
-                void setPath(uint8_t* data, size_t size);
-				/**
+                void setPath(uint8_t* data, size_t size);				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;

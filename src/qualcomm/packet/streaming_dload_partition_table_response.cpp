@@ -43,13 +43,11 @@ StreamingDloadPartitionTableResponse::~StreamingDloadPartitionTableResponse()
 uint8_t StreamingDloadPartitionTableResponse::getStatus()
 {
     return read<uint8_t>(getFieldOffset("status"));
-}
-                
+}                
 void StreamingDloadPartitionTableResponse::setStatus(uint8_t status)
 {
     write<uint8_t>("status", status);
 }
-
 
 void StreamingDloadPartitionTableResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {

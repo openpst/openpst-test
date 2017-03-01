@@ -52,94 +52,74 @@ DmEfsReadDirResponse::~DmEfsReadDirResponse()
 uint32_t DmEfsReadDirResponse::getDp()
 {
     return read<uint32_t>(getFieldOffset("dp"));
-}
-                
+}                
 void DmEfsReadDirResponse::setDp(uint32_t dp)
 {
     write<uint32_t>("dp", dp);
-}
-uint32_t DmEfsReadDirResponse::getSequenceNumber()
+}uint32_t DmEfsReadDirResponse::getSequenceNumber()
 {
     return read<uint32_t>(getFieldOffset("sequence_number"));
-}
-                
+}                
 void DmEfsReadDirResponse::setSequenceNumber(uint32_t sequenceNumber)
 {
     write<uint32_t>("sequence_number", sequenceNumber);
-}
-uint32_t DmEfsReadDirResponse::getError()
+}uint32_t DmEfsReadDirResponse::getError()
 {
     return read<uint32_t>(getFieldOffset("error"));
-}
-                
+}                
 void DmEfsReadDirResponse::setError(uint32_t error)
 {
     write<uint32_t>("error", error);
-}
-uint32_t DmEfsReadDirResponse::getEntryType()
+}uint32_t DmEfsReadDirResponse::getEntryType()
 {
     return read<uint32_t>(getFieldOffset("entry_type"));
-}
-                
+}                
 void DmEfsReadDirResponse::setEntryType(uint32_t entryType)
 {
     write<uint32_t>("entry_type", entryType);
-}
-uint32_t DmEfsReadDirResponse::getMode()
+}uint32_t DmEfsReadDirResponse::getMode()
 {
     return read<uint32_t>(getFieldOffset("mode"));
-}
-                
+}                
 void DmEfsReadDirResponse::setMode(uint32_t mode)
 {
     write<uint32_t>("mode", mode);
-}
-uint32_t DmEfsReadDirResponse::getSize()
+}uint32_t DmEfsReadDirResponse::getSize()
 {
     return read<uint32_t>(getFieldOffset("size"));
-}
-                
+}                
 void DmEfsReadDirResponse::setSize(uint32_t size)
 {
     write<uint32_t>("size", size);
-}
-uint32_t DmEfsReadDirResponse::getAtime()
+}uint32_t DmEfsReadDirResponse::getAtime()
 {
     return read<uint32_t>(getFieldOffset("atime"));
-}
-                
+}                
 void DmEfsReadDirResponse::setAtime(uint32_t atime)
 {
     write<uint32_t>("atime", atime);
-}
-uint32_t DmEfsReadDirResponse::getMtime()
+}uint32_t DmEfsReadDirResponse::getMtime()
 {
     return read<uint32_t>(getFieldOffset("mtime"));
-}
-                
+}                
 void DmEfsReadDirResponse::setMtime(uint32_t mtime)
 {
     write<uint32_t>("mtime", mtime);
-}
-uint32_t DmEfsReadDirResponse::getCtime()
+}uint32_t DmEfsReadDirResponse::getCtime()
 {
     return read<uint32_t>(getFieldOffset("ctime"));
-}
-                
+}                
 void DmEfsReadDirResponse::setCtime(uint32_t ctime)
 {
     write<uint32_t>("ctime", ctime);
-}
-std::vector<uint8_t> DmEfsReadDirResponse::getName()
+}std::vector<uint8_t> DmEfsReadDirResponse::getName()
 {
 	return read(getFieldSize("name"), getFieldOffset("name"));
-}
-                
+}                
 void DmEfsReadDirResponse::setName(uint8_t* data, size_t size)
 {
     write("name", data, size);
 }
-
 
 void DmEfsReadDirResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {

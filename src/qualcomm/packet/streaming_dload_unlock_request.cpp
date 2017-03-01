@@ -43,13 +43,11 @@ StreamingDloadUnlockRequest::~StreamingDloadUnlockRequest()
 uint64_t StreamingDloadUnlockRequest::getCode()
 {
     return read<uint64_t>(getFieldOffset("code"));
-}
-                
+}                
 void StreamingDloadUnlockRequest::setCode(uint64_t code)
 {
     write<uint64_t>("code", code);
 }
-
 void StreamingDloadUnlockRequest::prepareResponse()
 {
 	if (response == nullptr) {

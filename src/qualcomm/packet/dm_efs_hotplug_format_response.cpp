@@ -44,22 +44,18 @@ DmEfsHotplugFormatResponse::~DmEfsHotplugFormatResponse()
 uint16_t DmEfsHotplugFormatResponse::getSequence()
 {
     return read<uint16_t>(getFieldOffset("sequence"));
-}
-                
+}                
 void DmEfsHotplugFormatResponse::setSequence(uint16_t sequence)
 {
     write<uint16_t>("sequence", sequence);
-}
-uint32_t DmEfsHotplugFormatResponse::getError()
+}uint32_t DmEfsHotplugFormatResponse::getError()
 {
     return read<uint32_t>(getFieldOffset("error"));
-}
-                
+}                
 void DmEfsHotplugFormatResponse::setError(uint32_t error)
 {
     write<uint32_t>("error", error);
 }
-
 
 void DmEfsHotplugFormatResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {

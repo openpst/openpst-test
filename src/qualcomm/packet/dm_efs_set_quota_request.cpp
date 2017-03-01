@@ -45,31 +45,25 @@ DmEfsSetQuotaRequest::~DmEfsSetQuotaRequest()
 uint32_t DmEfsSetQuotaRequest::getGid()
 {
     return read<uint32_t>(getFieldOffset("gid"));
-}
-                
+}                
 void DmEfsSetQuotaRequest::setGid(uint32_t gid)
 {
     write<uint32_t>("gid", gid);
-}
-uint32_t DmEfsSetQuotaRequest::getAmount()
+}uint32_t DmEfsSetQuotaRequest::getAmount()
 {
     return read<uint32_t>(getFieldOffset("amount"));
-}
-                
+}                
 void DmEfsSetQuotaRequest::setAmount(uint32_t amount)
 {
     write<uint32_t>("amount", amount);
-}
-std::vector<uint8_t> DmEfsSetQuotaRequest::getPath()
+}std::vector<uint8_t> DmEfsSetQuotaRequest::getPath()
 {
 	return read(getFieldSize("path"), getFieldOffset("path"));
-}
-                
+}                
 void DmEfsSetQuotaRequest::setPath(uint8_t* data, size_t size)
 {
     write("path", data, size);
 }
-
 void DmEfsSetQuotaRequest::prepareResponse()
 {
 	if (response == nullptr) {

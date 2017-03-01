@@ -49,67 +49,53 @@ DmEfsFstatResponse::~DmEfsFstatResponse()
 uint32_t DmEfsFstatResponse::getError()
 {
     return read<uint32_t>(getFieldOffset("error"));
-}
-                
+}                
 void DmEfsFstatResponse::setError(uint32_t error)
 {
     write<uint32_t>("error", error);
-}
-uint32_t DmEfsFstatResponse::getMode()
+}uint32_t DmEfsFstatResponse::getMode()
 {
     return read<uint32_t>(getFieldOffset("mode"));
-}
-                
+}                
 void DmEfsFstatResponse::setMode(uint32_t mode)
 {
     write<uint32_t>("mode", mode);
-}
-uint32_t DmEfsFstatResponse::getSize()
+}uint32_t DmEfsFstatResponse::getSize()
 {
     return read<uint32_t>(getFieldOffset("size"));
-}
-                
+}                
 void DmEfsFstatResponse::setSize(uint32_t size)
 {
     write<uint32_t>("size", size);
-}
-uint32_t DmEfsFstatResponse::getLinkCount()
+}uint32_t DmEfsFstatResponse::getLinkCount()
 {
     return read<uint32_t>(getFieldOffset("link_count"));
-}
-                
+}                
 void DmEfsFstatResponse::setLinkCount(uint32_t linkCount)
 {
     write<uint32_t>("link_count", linkCount);
-}
-uint32_t DmEfsFstatResponse::getAtime()
+}uint32_t DmEfsFstatResponse::getAtime()
 {
     return read<uint32_t>(getFieldOffset("atime"));
-}
-                
+}                
 void DmEfsFstatResponse::setAtime(uint32_t atime)
 {
     write<uint32_t>("atime", atime);
-}
-uint32_t DmEfsFstatResponse::getMtime()
+}uint32_t DmEfsFstatResponse::getMtime()
 {
     return read<uint32_t>(getFieldOffset("mtime"));
-}
-                
+}                
 void DmEfsFstatResponse::setMtime(uint32_t mtime)
 {
     write<uint32_t>("mtime", mtime);
-}
-uint32_t DmEfsFstatResponse::getCtime()
+}uint32_t DmEfsFstatResponse::getCtime()
 {
     return read<uint32_t>(getFieldOffset("ctime"));
-}
-                
+}                
 void DmEfsFstatResponse::setCtime(uint32_t ctime)
 {
     write<uint32_t>("ctime", ctime);
 }
-
 
 void DmEfsFstatResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {

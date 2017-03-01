@@ -1,0 +1,4 @@
+{{field.type}} {{class_name}}::get{{field.name_camel}}()
+{
+    return read<{{field.type}}>(getFieldOffset("{{field.name}}"));
+}

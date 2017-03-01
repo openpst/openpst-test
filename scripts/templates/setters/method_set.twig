@@ -1,0 +1,31 @@
+{% if '[]' in field.type %}
+{% if field.allowed_setters %}
+{% for setter in field.allowed_setters %}
+{% if setter == 'file' %}
+{% include 'setters/method_set_file.twig' %}
+{% elseif setter == 'raw' %}
+{% include 'setters/method_set_raw.twig' %}
+{% elseif setter == 'string' %}
+{% include 'setters/method_set_string.twig' %}
+{% endif %}
+{% endfor %}
+{% else %}
+{% include 'setters/method_set_raw.twig' %}
+{% endif %}
+{% elseif field.type == 'variable' %}
+{% if field.allowed_setters %}
+{% for setter in field.allowed_setters %}
+{% if setter == 'file' %}
+{% include 'setters/method_set_file.twig' %}
+{% elseif setter == 'raw' %}
+{% include 'setters/method_set_raw.twig' %}
+{% elseif setter == 'string' %}
+{% include 'setters/method_set_string.twig' %}
+{% endif %}
+{% endfor %}
+{% else %}
+{% include 'setters/method_set_raw.twig' %}
+{% endif %}
+{% else %}
+{% include 'setters/method_set_primitive.twig' %}
+{% endif %}

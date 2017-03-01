@@ -43,13 +43,11 @@ StreamingDloadPowerOffResponse::~StreamingDloadPowerOffResponse()
 uint32_t StreamingDloadPowerOffResponse::getAddress()
 {
     return read<uint32_t>(getFieldOffset("address"));
-}
-                
+}                
 void StreamingDloadPowerOffResponse::setAddress(uint32_t address)
 {
     write<uint32_t>("address", address);
 }
-
 
 void StreamingDloadPowerOffResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {

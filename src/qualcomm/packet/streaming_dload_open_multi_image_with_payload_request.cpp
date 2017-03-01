@@ -44,30 +44,24 @@ StreamingDloadOpenMultiImageWithPayloadRequest::~StreamingDloadOpenMultiImageWit
 uint8_t StreamingDloadOpenMultiImageWithPayloadRequest::getType()
 {
     return read<uint8_t>(getFieldOffset("type"));
-}
-                
+}                
 void StreamingDloadOpenMultiImageWithPayloadRequest::setType(uint8_t type)
 {
     write<uint8_t>("type", type);
-}
-std::vector<uint8_t> StreamingDloadOpenMultiImageWithPayloadRequest::getPayload()
+}std::vector<uint8_t> StreamingDloadOpenMultiImageWithPayloadRequest::getPayload()
 {
 	return read(getFieldSize("payload"), getFieldOffset("payload"));
-}
-                
+}                
 void StreamingDloadOpenMultiImageWithPayloadRequest::setPayload(std::ifstream& file, size_t size)
 {
     write("payload", file, size);
-}
-void StreamingDloadOpenMultiImageWithPayloadRequest::setPayload(uint8_t* data, size_t size)
+}void StreamingDloadOpenMultiImageWithPayloadRequest::setPayload(uint8_t* data, size_t size)
 {
     write("payload", data, size);
-}
-void StreamingDloadOpenMultiImageWithPayloadRequest::setPayload(const std::string& payload)
+}void StreamingDloadOpenMultiImageWithPayloadRequest::setPayload(const std::string& payload)
 {
     write("payload", payload);
 }
-
 void StreamingDloadOpenMultiImageWithPayloadRequest::prepareResponse()
 {
 	if (response == nullptr) {

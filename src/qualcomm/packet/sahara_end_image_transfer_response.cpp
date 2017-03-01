@@ -44,22 +44,18 @@ SaharaEndImageTransferResponse::~SaharaEndImageTransferResponse()
 uint32_t SaharaEndImageTransferResponse::getImageId()
 {
     return read<uint32_t>(getFieldOffset("image_id"));
-}
-                
+}                
 void SaharaEndImageTransferResponse::setImageId(uint32_t imageId)
 {
     write<uint32_t>("image_id", imageId);
-}
-uint32_t SaharaEndImageTransferResponse::getStatus()
+}uint32_t SaharaEndImageTransferResponse::getStatus()
 {
     return read<uint32_t>(getFieldOffset("status"));
-}
-                
+}                
 void SaharaEndImageTransferResponse::setStatus(uint32_t status)
 {
     write<uint32_t>("status", status);
 }
-
 
 void SaharaEndImageTransferResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
