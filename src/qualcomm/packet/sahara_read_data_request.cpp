@@ -19,7 +19,7 @@
 *
 * @file sahara_read_data_request.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -34,6 +34,7 @@ SaharaReadDataRequest::SaharaReadDataRequest(PacketEndianess targetEndian) : Sah
 	addField("offset", kPacketFieldTypePrimitive, sizeof(uint32_t));
 	addField("amount", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
+	setResponseExpected(false);
 }
 
 SaharaReadDataRequest::~SaharaReadDataRequest()
@@ -44,21 +45,31 @@ SaharaReadDataRequest::~SaharaReadDataRequest()
 uint32_t SaharaReadDataRequest::getImageId()
 {
     return read<uint32_t>(getFieldOffset("image_id"));
-}                
+}
+                
+
 void SaharaReadDataRequest::setImageId(uint32_t imageId)
 {
     write<uint32_t>("image_id", imageId);
-}uint32_t SaharaReadDataRequest::getOffset()
+}
+
+uint32_t SaharaReadDataRequest::getOffset()
 {
     return read<uint32_t>(getFieldOffset("offset"));
-}                
+}
+                
+
 void SaharaReadDataRequest::setOffset(uint32_t offset)
 {
     write<uint32_t>("offset", offset);
-}uint32_t SaharaReadDataRequest::getAmount()
+}
+
+uint32_t SaharaReadDataRequest::getAmount()
 {
     return read<uint32_t>(getFieldOffset("amount"));
-}                
+}
+                
+
 void SaharaReadDataRequest::setAmount(uint32_t amount)
 {
     write<uint32_t>("amount", amount);

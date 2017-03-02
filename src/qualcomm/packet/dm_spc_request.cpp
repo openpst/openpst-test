@@ -19,7 +19,7 @@
 *
 * @file dm_spc_request.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -33,6 +33,8 @@ DmSpcRequest::DmSpcRequest(PacketEndianess targetEndian) : DmPacket(targetEndian
 	addField("spc", kPacketFieldTypeArray, DIAG_SPC_LENGTH);
 
 	setCommand(kDiagSpc);
+
+	setResponseExpected(true);
 }
 
 DmSpcRequest::~DmSpcRequest()
@@ -43,11 +45,14 @@ DmSpcRequest::~DmSpcRequest()
 std::vector<uint8_t> DmSpcRequest::getSpc()
 {
 	return read(getFieldSize("spc"), getFieldOffset("spc"));
-}                
+}
+                
+
 void DmSpcRequest::setSpc(uint8_t* data, size_t size)
 {
     write("spc", data, size);
 }
+
 void DmSpcRequest::prepareResponse()
 {
 	if (response == nullptr) {

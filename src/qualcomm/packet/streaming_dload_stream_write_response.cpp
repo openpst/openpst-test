@@ -19,7 +19,7 @@
 *
 * @file streaming_dload_stream_write_response.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -33,6 +33,8 @@ StreamingDloadStreamWriteResponse::StreamingDloadStreamWriteResponse(PacketEndia
 	addField("address", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
 	setCommand(kStreamingDloadBlockWritten);
+
+	setResponseExpected(false);
 }
 
 StreamingDloadStreamWriteResponse::~StreamingDloadStreamWriteResponse()
@@ -43,7 +45,9 @@ StreamingDloadStreamWriteResponse::~StreamingDloadStreamWriteResponse()
 uint32_t StreamingDloadStreamWriteResponse::getAddress()
 {
     return read<uint32_t>(getFieldOffset("address"));
-}                
+}
+                
+
 void StreamingDloadStreamWriteResponse::setAddress(uint32_t address)
 {
     write<uint32_t>("address", address);

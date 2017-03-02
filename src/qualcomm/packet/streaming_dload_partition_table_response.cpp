@@ -19,7 +19,7 @@
 *
 * @file streaming_dload_partition_table_response.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -33,6 +33,8 @@ StreamingDloadPartitionTableResponse::StreamingDloadPartitionTableResponse(Packe
 	addField("status", kPacketFieldTypePrimitive, sizeof(uint8_t));
 
 	setCommand(kStreamingDloadPartitionTableReceived);
+
+	setResponseExpected(false);
 }
 
 StreamingDloadPartitionTableResponse::~StreamingDloadPartitionTableResponse()
@@ -43,7 +45,9 @@ StreamingDloadPartitionTableResponse::~StreamingDloadPartitionTableResponse()
 uint8_t StreamingDloadPartitionTableResponse::getStatus()
 {
     return read<uint8_t>(getFieldOffset("status"));
-}                
+}
+                
+
 void StreamingDloadPartitionTableResponse::setStatus(uint8_t status)
 {
     write<uint8_t>("status", status);

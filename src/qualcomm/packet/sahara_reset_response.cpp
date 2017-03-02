@@ -19,7 +19,7 @@
 *
 * @file sahara_reset_response.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -32,14 +32,14 @@ SaharaResetResponse::SaharaResetResponse(PacketEndianess targetEndian) : SaharaP
 {
 
 	setCommand(kSaharaCommandResetResponse);
+
+	setResponseExpected(false);
 }
 
 SaharaResetResponse::~SaharaResetResponse()
 {
 
 }
-
-
 
 void SaharaResetResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {

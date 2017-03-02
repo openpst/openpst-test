@@ -19,7 +19,7 @@
 *
 * @file sahara_hello_response.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -37,6 +37,8 @@ SaharaHelloResponse::SaharaHelloResponse(PacketEndianess targetEndian) : SaharaP
 	addField("reserved", kPacketFieldTypeArray, (sizeof(uint32_t) * 6));
 
 	setCommand(kSaharaCommandHelloResponse);
+
+	setResponseExpected(false);
 }
 
 SaharaHelloResponse::~SaharaHelloResponse()
@@ -47,35 +49,53 @@ SaharaHelloResponse::~SaharaHelloResponse()
 uint32_t SaharaHelloResponse::getVersion()
 {
     return read<uint32_t>(getFieldOffset("version"));
-}                
+}
+                
+
 void SaharaHelloResponse::setVersion(uint32_t version)
 {
     write<uint32_t>("version", version);
-}uint32_t SaharaHelloResponse::getMinVersion()
+}
+
+uint32_t SaharaHelloResponse::getMinVersion()
 {
     return read<uint32_t>(getFieldOffset("min_version"));
-}                
+}
+                
+
 void SaharaHelloResponse::setMinVersion(uint32_t minVersion)
 {
     write<uint32_t>("min_version", minVersion);
-}uint32_t SaharaHelloResponse::getStatus()
+}
+
+uint32_t SaharaHelloResponse::getStatus()
 {
     return read<uint32_t>(getFieldOffset("status"));
-}                
+}
+                
+
 void SaharaHelloResponse::setStatus(uint32_t status)
 {
     write<uint32_t>("status", status);
-}uint32_t SaharaHelloResponse::getMode()
+}
+
+uint32_t SaharaHelloResponse::getMode()
 {
     return read<uint32_t>(getFieldOffset("mode"));
-}                
+}
+                
+
 void SaharaHelloResponse::setMode(uint32_t mode)
 {
     write<uint32_t>("mode", mode);
-}std::vector<uint8_t> SaharaHelloResponse::getReserved()
+}
+
+std::vector<uint8_t> SaharaHelloResponse::getReserved()
 {
 	return read(getFieldSize("reserved"), getFieldOffset("reserved"));
-}                
+}
+                
+
 void SaharaHelloResponse::setReserved(uint8_t* data, size_t size)
 {
     write("reserved", data, size);

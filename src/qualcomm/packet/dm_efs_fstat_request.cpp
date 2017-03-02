@@ -19,7 +19,7 @@
 *
 * @file dm_efs_fstat_request.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -33,6 +33,8 @@ DmEfsFstatRequest::DmEfsFstatRequest(PacketEndianess targetEndian) : DmEfsPacket
 	addField("fp", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
 	setSubsysCommand(kDiagEfsFstat);
+
+	setResponseExpected(true);
 }
 
 DmEfsFstatRequest::~DmEfsFstatRequest()
@@ -43,11 +45,14 @@ DmEfsFstatRequest::~DmEfsFstatRequest()
 uint32_t DmEfsFstatRequest::getFp()
 {
     return read<uint32_t>(getFieldOffset("fp"));
-}                
+}
+                
+
 void DmEfsFstatRequest::setFp(uint32_t fp)
 {
     write<uint32_t>("fp", fp);
 }
+
 void DmEfsFstatRequest::prepareResponse()
 {
 	if (response == nullptr) {

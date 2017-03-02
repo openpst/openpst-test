@@ -19,7 +19,7 @@
 *
 * @file dm_efs_fstat_response.h
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -46,77 +46,105 @@ namespace OpenPST {
                 */
                 ~DmEfsFstatResponse();
 
+                
                 /**
                 * @brief Get error
                 * @return uint32_t
                 */
-                uint32_t getError();                
+                uint32_t getError();
+                                
+
                 /**
                 * @brief Set error
                 * @param uint32_t error
                 * @return void
                 */
-                void setError(uint32_t error);                /**
+                void setError(uint32_t error);
+                                
+                /**
                 * @brief Get mode
                 * @return uint32_t
                 */
-                uint32_t getMode();                
+                uint32_t getMode();
+                                
+
                 /**
                 * @brief Set mode
                 * @param uint32_t mode
                 * @return void
                 */
-                void setMode(uint32_t mode);                /**
+                void setMode(uint32_t mode);
+                                
+                /**
                 * @brief Get size
                 * @return uint32_t
                 */
-                uint32_t getSize();                
+                uint32_t getSize();
+                                
+
                 /**
                 * @brief Set size
                 * @param uint32_t size
                 * @return void
                 */
-                void setSize(uint32_t size);                /**
+                void setSize(uint32_t size);
+                                
+                /**
                 * @brief Get link_count
                 * @return uint32_t
                 */
-                uint32_t getLinkCount();                
+                uint32_t getLinkCount();
+                                
+
                 /**
                 * @brief Set link_count
                 * @param uint32_t linkCount
                 * @return void
                 */
-                void setLinkCount(uint32_t linkCount);                /**
+                void setLinkCount(uint32_t linkCount);
+                                
+                /**
                 * @brief Get atime
                 * @return uint32_t
                 */
-                uint32_t getAtime();                
+                uint32_t getAtime();
+                                
+
                 /**
                 * @brief Set atime
                 * @param uint32_t atime
                 * @return void
                 */
-                void setAtime(uint32_t atime);                /**
+                void setAtime(uint32_t atime);
+                                
+                /**
                 * @brief Get mtime
                 * @return uint32_t
                 */
-                uint32_t getMtime();                
+                uint32_t getMtime();
+                                
+
                 /**
                 * @brief Set mtime
                 * @param uint32_t mtime
                 * @return void
                 */
-                void setMtime(uint32_t mtime);                /**
+                void setMtime(uint32_t mtime);
+                                
+                /**
                 * @brief Get ctime
                 * @return uint32_t
                 */
-                uint32_t getCtime();                
+                uint32_t getCtime();
+                                
+
                 /**
                 * @brief Set ctime
                 * @param uint32_t ctime
                 * @return void
                 */
-                void setCtime(uint32_t ctime);				/**
+                void setCtime(uint32_t ctime);
+                				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;

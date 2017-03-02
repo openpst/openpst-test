@@ -17,9 +17,9 @@
 * You should have received a copy of the GNU General Public License
 * along with libopenpst. If not, see <http://www.gnu.org/licenses/>.
 *
-* @file packet_writer.h
+* @file packet_transporter.h
 * @package openpst/libopenpst
-* @brief Writes packet objects over a TransportInterface
+* @brief Writes and reads packet objects over a TransportInterface
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -31,7 +31,7 @@
 
 namespace OpenPST {
     namespace Transport {
-        class PacketWriter
+        class PacketTransporter
         {
         	protected:
                 TransportInterface& transport;
@@ -40,54 +40,64 @@ namespace OpenPST {
                 /**
                 * Constructor
                 */ 
-                PacketWriter(TransportInterface& transport);
+                PacketTransporter(TransportInterface& transport);
                 
                 /**
                 * Destructor
                 */
-                ~PacketWriter();
+                ~PacketTransporter();
             private:
                   // no copy
-                  PacketWriter(const PacketWriter&);
+                  PacketTransporter(const PacketTransporter&);
 
             public:
+
                 /**
-                * @brief Get the transport interface reference
+                * @brief Get the transport interface pointer
                 * @return TransportInterface&
                 */
-                TransportInterface& getTransport();
+                TransportInterface* getTransport();
+
+                /**
+                * @brief Set the transport interface
+                * @return void
+                */
+                void setTransport(TransportInterface& transport);
 
                 /**
                 * @brief Write a packet to the serial device
                 * @param Packet* packet
+                * @param bool andWrite - If the packet isResponseExpected() and true, will read
+                * 						 the packets response packet. Defaults true
                 * @return void
                 */
-                void write(Packet* packet);
+                void write(Packet* packet, bool andRead = true);
                 
                 /**
                 * @brief Read from the serial device into a packet
                 * @param Packet* packet
-                * @param size_t size
+                * @param bool andWrite - If the packet isResponseExpected() and true, will write
+                * 						 the packets response packet. Defaults true
                 * @return void
                 */
-                void read(Packet* packet);
+                void read(Packet* packet, bool andWrite = true);
 
         };
 
         /**
         * @brief PacketOutOfRangeException
         */
-		class PacketWriterError : public std::exception
+		class PacketTransporterError : public std::exception
 		{
 			private:
-				const PacketWriterError& operator=(PacketWriterError);
+				const PacketTransporterError& operator=(PacketTransporterError);
 				std::string _what;
 			public:
-				PacketWriterError(std::string message) : 
+				PacketTransporterError(std::string message) : 
 					_what(message)  { }
-				PacketWriterError(const PacketWriterError& second) : 
+				PacketTransporterError(const PacketTransporterError& second) : 
 					_what(second._what) {}
-				virtual ~PacketWriterError() throw() {}
+				virtual ~PacketTransporterError() throw() {}
 				virtual const char* what() const throw () {
 					return _what.c_str();
 				}

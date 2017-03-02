@@ -19,7 +19,7 @@
 *
 * @file streaming_dload_partition_table_request.h
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -48,28 +48,36 @@ namespace OpenPST {
                 */
                 ~StreamingDloadPartitionTableRequest();
 
+                
                 /**
                 * @brief Get override_existing
                 * @return uint8_t
                 */
-                uint8_t getOverrideExisting();                
+                uint8_t getOverrideExisting();
+                                
+
                 /**
                 * @brief Set override_existing
                 * @param uint8_t overrideExisting
                 * @return void
                 */
-                void setOverrideExisting(uint8_t overrideExisting);                /**
+                void setOverrideExisting(uint8_t overrideExisting);
+                
+                /**
                 * @brief Get data
                 * @return uint8_t[]
                 */
-                std::vector<uint8_t> getData();                
+                std::vector<uint8_t> getData();
+                                
+
                 /**
                 * @brief Set data
                 * @param uint8_t* data
                 * @param size_t size
                 * @return void
                 */
-                void setData(uint8_t* data, size_t size);				/**
+                void setData(uint8_t* data, size_t size);
+                				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;

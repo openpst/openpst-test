@@ -19,7 +19,7 @@
 *
 * @file dm_efs_mkdir_request.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -34,6 +34,8 @@ DmEfsMkdirRequest::DmEfsMkdirRequest(PacketEndianess targetEndian) : DmEfsPacket
 	addField("path", kPacketFieldTypeVariant, 0);
 
 	setSubsysCommand(kDiagEfsMkdir);
+
+	setResponseExpected(true);
 }
 
 DmEfsMkdirRequest::~DmEfsMkdirRequest()
@@ -44,18 +46,25 @@ DmEfsMkdirRequest::~DmEfsMkdirRequest()
 uint32_t DmEfsMkdirRequest::getMode()
 {
     return read<uint32_t>(getFieldOffset("mode"));
-}                
+}
+                
+
 void DmEfsMkdirRequest::setMode(uint32_t mode)
 {
     write<uint32_t>("mode", mode);
-}std::vector<uint8_t> DmEfsMkdirRequest::getPath()
+}
+
+std::vector<uint8_t> DmEfsMkdirRequest::getPath()
 {
 	return read(getFieldSize("path"), getFieldOffset("path"));
-}                
+}
+                
+
 void DmEfsMkdirRequest::setPath(uint8_t* data, size_t size)
 {
     write("path", data, size);
 }
+
 void DmEfsMkdirRequest::prepareResponse()
 {
 	if (response == nullptr) {

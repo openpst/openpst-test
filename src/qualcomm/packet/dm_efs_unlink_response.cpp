@@ -19,7 +19,7 @@
 *
 * @file dm_efs_unlink_response.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -33,6 +33,8 @@ DmEfsUnlinkResponse::DmEfsUnlinkResponse(PacketEndianess targetEndian) : DmEfsPa
 	addField("error", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
 	setSubsysCommand(kDiagEfsUnlink);
+
+	setResponseExpected(false);
 }
 
 DmEfsUnlinkResponse::~DmEfsUnlinkResponse()
@@ -43,7 +45,9 @@ DmEfsUnlinkResponse::~DmEfsUnlinkResponse()
 uint32_t DmEfsUnlinkResponse::getError()
 {
     return read<uint32_t>(getFieldOffset("error"));
-}                
+}
+                
+
 void DmEfsUnlinkResponse::setError(uint32_t error)
 {
     write<uint32_t>("error", error);

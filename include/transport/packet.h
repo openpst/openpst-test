@@ -238,7 +238,7 @@ namespace OpenPST {
                 void setResponseExpected(bool v);
 
                 /**
-                * @brief Get the response packet, if it has been unpacked
+                * @brief Get the response packet, if it has been prepared/unpacked
                 */
                 Packet* getResponse();
 
@@ -321,11 +321,6 @@ namespace OpenPST {
                 std::vector<uint8_t>& getData();
 
                 /**
-                * @brief Validate the data in the packet buffer
-                */
-                //virtual void validate() {}
-
-                /**
                 * @brief Prepare the packet before sending, making and final adjustments, for example crc
                 */
                 virtual void prepare() {}
@@ -390,7 +385,7 @@ namespace OpenPST {
                 }
 
                 /**
-                * @brief 
+                * @brief Get a field size based of field meta, from zero-based field index
                 */
                 inline size_t getFieldSize(int index) 
                 {
@@ -409,7 +404,7 @@ namespace OpenPST {
                 }
 
                 /**
-                * @brief 
+                * @brief  Get a field size based of field meta, from field name
                 */
                 inline size_t getFieldSize(const std::string& name) 
                 {
@@ -424,7 +419,9 @@ namespace OpenPST {
 
                     throw PacketInvalidArgument("Field does not exist");
                 }
+
             protected:
+
                 /**
                 * @brief Read primitive type T from the data buffer at offset
                 * @param off_t offset
@@ -606,8 +603,9 @@ namespace OpenPST {
 
                 /**
                 * @brief Resize a field in the data buffer, for kPacketFieldTypeVariant fields only
-                * @param size_t size
+                *                
                 * @param const std::string& fieldName The field requiring size increase
+                * @param size_t size
                 * @throws std::overflow_error when size is over the declared max size (unless max size is 0)
                 * @return void
                 */
@@ -615,6 +613,14 @@ namespace OpenPST {
                     return resizeField(getField(fieldName), size);
                 }
 
+                /**
+                * @brief Resize a field in the data buffer, for kPacketFieldTypeVariant fields only
+                *
+                * @param PacketFieldMeta* field
+                * @param size_t size
+                * @throws std::overflow_error when size is over the declared max size (unless max size is 0)
+                * @return void
+                */
                 inline void resizeField(PacketFieldMeta* field, size_t size) {
                     if (field->type != kPacketFieldTypeVariant) {
                         throw PacketOutOfRange("Field resize only for kPacketFieldTypeVariant type");

@@ -19,7 +19,7 @@
 *
 * @file dm_efs_unlink_request.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -33,6 +33,8 @@ DmEfsUnlinkRequest::DmEfsUnlinkRequest(PacketEndianess targetEndian) : DmEfsPack
 	addField("path", kPacketFieldTypeVariant, 0);
 
 	setSubsysCommand(kDiagEfsUnlink);
+
+	setResponseExpected(true);
 }
 
 DmEfsUnlinkRequest::~DmEfsUnlinkRequest()
@@ -43,11 +45,14 @@ DmEfsUnlinkRequest::~DmEfsUnlinkRequest()
 std::vector<uint8_t> DmEfsUnlinkRequest::getPath()
 {
 	return read(getFieldSize("path"), getFieldOffset("path"));
-}                
+}
+                
+
 void DmEfsUnlinkRequest::setPath(uint8_t* data, size_t size)
 {
     write("path", data, size);
 }
+
 void DmEfsUnlinkRequest::prepareResponse()
 {
 	if (response == nullptr) {

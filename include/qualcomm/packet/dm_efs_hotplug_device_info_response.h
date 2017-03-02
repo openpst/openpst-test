@@ -19,7 +19,7 @@
 *
 * @file dm_efs_hotplug_device_info_response.h
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -46,79 +46,107 @@ namespace OpenPST {
                 */
                 ~DmEfsHotplugDeviceInfoResponse();
 
+                
                 /**
                 * @brief Get sequence
                 * @return uint16_t
                 */
-                uint16_t getSequence();                
+                uint16_t getSequence();
+                                
+
                 /**
                 * @brief Set sequence
                 * @param uint16_t sequence
                 * @return void
                 */
-                void setSequence(uint16_t sequence);                /**
+                void setSequence(uint16_t sequence);
+                                
+                /**
                 * @brief Get error
                 * @return uint32_t
                 */
-                uint32_t getError();                
+                uint32_t getError();
+                                
+
                 /**
                 * @brief Set error
                 * @param uint32_t error
                 * @return void
                 */
-                void setError(uint32_t error);                /**
+                void setError(uint32_t error);
+                                
+                /**
                 * @brief Get manufacturer_id
                 * @return uint32_t
                 */
-                uint32_t getManufacturerId();                
+                uint32_t getManufacturerId();
+                                
+
                 /**
                 * @brief Set manufacturer_id
                 * @param uint32_t manufacturerId
                 * @return void
                 */
-                void setManufacturerId(uint32_t manufacturerId);                /**
+                void setManufacturerId(uint32_t manufacturerId);
+                                
+                /**
                 * @brief Get oem_id
                 * @return uint32_t
                 */
-                uint32_t getOemId();                
+                uint32_t getOemId();
+                                
+
                 /**
                 * @brief Set oem_id
                 * @param uint32_t oemId
                 * @return void
                 */
-                void setOemId(uint32_t oemId);                /**
+                void setOemId(uint32_t oemId);
+                                
+                /**
                 * @brief Get product_revision
                 * @return uint32_t
                 */
-                uint32_t getProductRevision();                
+                uint32_t getProductRevision();
+                                
+
                 /**
                 * @brief Set product_revision
                 * @param uint32_t productRevision
                 * @return void
                 */
-                void setProductRevision(uint32_t productRevision);                /**
+                void setProductRevision(uint32_t productRevision);
+                
+                /**
                 * @brief Get product_name
                 * @return uint8_t[]
                 */
-                std::vector<uint8_t> getProductName();                
+                std::vector<uint8_t> getProductName();
+                                
+
                 /**
                 * @brief Set product_name
                 * @param uint8_t* productName
                 * @param size_t size
                 * @return void
                 */
-                void setProductName(uint8_t* data, size_t size);                /**
+                void setProductName(uint8_t* data, size_t size);
+                
+                /**
                 * @brief Get manufactured_date
                 * @return uint8_t[]
                 */
-                std::vector<uint8_t> getManufacturedDate();                
+                std::vector<uint8_t> getManufacturedDate();
+                                
+
                 /**
                 * @brief Set manufactured_date
                 * @param uint8_t* manufacturedDate
                 * @param size_t size
                 * @return void
                 */
-                void setManufacturedDate(uint8_t* data, size_t size);				/**
+                void setManufacturedDate(uint8_t* data, size_t size);
+                				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;

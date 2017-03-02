@@ -19,7 +19,7 @@
 *
 * @file dm_efs_sync_request.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -34,6 +34,8 @@ DmEfsSyncRequest::DmEfsSyncRequest(PacketEndianess targetEndian) : DmEfsPacket(t
 	addField("path", kPacketFieldTypeVariant, 0);
 
 	setSubsysCommand(kDiagEfsSyncNoWait);
+
+	setResponseExpected(false);
 }
 
 DmEfsSyncRequest::~DmEfsSyncRequest()
@@ -44,14 +46,20 @@ DmEfsSyncRequest::~DmEfsSyncRequest()
 uint16_t DmEfsSyncRequest::getSequence()
 {
     return read<uint16_t>(getFieldOffset("sequence"));
-}                
+}
+                
+
 void DmEfsSyncRequest::setSequence(uint16_t sequence)
 {
     write<uint16_t>("sequence", sequence);
-}std::vector<uint8_t> DmEfsSyncRequest::getPath()
+}
+
+std::vector<uint8_t> DmEfsSyncRequest::getPath()
 {
 	return read(getFieldSize("path"), getFieldOffset("path"));
-}                
+}
+                
+
 void DmEfsSyncRequest::setPath(uint8_t* data, size_t size)
 {
     write("path", data, size);

@@ -19,7 +19,7 @@
 *
 * @file dm_efs_write_file_response.h
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -46,47 +46,63 @@ namespace OpenPST {
                 */
                 ~DmEfsWriteFileResponse();
 
+                
                 /**
                 * @brief Get fp
                 * @return uint32_t
                 */
-                uint32_t getFp();                
+                uint32_t getFp();
+                                
+
                 /**
                 * @brief Set fp
                 * @param uint32_t fp
                 * @return void
                 */
-                void setFp(uint32_t fp);                /**
+                void setFp(uint32_t fp);
+                                
+                /**
                 * @brief Get offset
                 * @return uint32_t
                 */
-                uint32_t getOffset();                
+                uint32_t getOffset();
+                                
+
                 /**
                 * @brief Set offset
                 * @param uint32_t offset
                 * @return void
                 */
-                void setOffset(uint32_t offset);                /**
+                void setOffset(uint32_t offset);
+                                
+                /**
                 * @brief Get bytes_written
                 * @return uint32_t
                 */
-                uint32_t getBytesWritten();                
+                uint32_t getBytesWritten();
+                                
+
                 /**
                 * @brief Set bytes_written
                 * @param uint32_t bytesWritten
                 * @return void
                 */
-                void setBytesWritten(uint32_t bytesWritten);                /**
+                void setBytesWritten(uint32_t bytesWritten);
+                                
+                /**
                 * @brief Get error
                 * @return uint32_t
                 */
-                uint32_t getError();                
+                uint32_t getError();
+                                
+
                 /**
                 * @brief Set error
                 * @param uint32_t error
                 * @return void
                 */
-                void setError(uint32_t error);				/**
+                void setError(uint32_t error);
+                				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;

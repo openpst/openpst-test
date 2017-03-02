@@ -19,7 +19,7 @@
 *
 * @file dm_efs_read_dir_request.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -34,6 +34,8 @@ DmEfsReadDirRequest::DmEfsReadDirRequest(PacketEndianess targetEndian) : DmEfsPa
 	addField("sequence_number", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
 	setSubsysCommand(kDiagEfsReadDir);
+
+	setResponseExpected(true);
 }
 
 DmEfsReadDirRequest::~DmEfsReadDirRequest()
@@ -44,18 +46,25 @@ DmEfsReadDirRequest::~DmEfsReadDirRequest()
 uint32_t DmEfsReadDirRequest::getDp()
 {
     return read<uint32_t>(getFieldOffset("dp"));
-}                
+}
+                
+
 void DmEfsReadDirRequest::setDp(uint32_t dp)
 {
     write<uint32_t>("dp", dp);
-}uint32_t DmEfsReadDirRequest::getSequenceNumber()
+}
+
+uint32_t DmEfsReadDirRequest::getSequenceNumber()
 {
     return read<uint32_t>(getFieldOffset("sequence_number"));
-}                
+}
+                
+
 void DmEfsReadDirRequest::setSequenceNumber(uint32_t sequenceNumber)
 {
     write<uint32_t>("sequence_number", sequenceNumber);
 }
+
 void DmEfsReadDirRequest::prepareResponse()
 {
 	if (response == nullptr) {

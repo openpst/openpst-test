@@ -19,7 +19,7 @@
 *
 * @file streaming_dload_power_off_response.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -33,6 +33,8 @@ StreamingDloadPowerOffResponse::StreamingDloadPowerOffResponse(PacketEndianess t
 	addField("address", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
 	setCommand(kStreamingDloadPoweringDown);
+
+	setResponseExpected(false);
 }
 
 StreamingDloadPowerOffResponse::~StreamingDloadPowerOffResponse()
@@ -43,7 +45,9 @@ StreamingDloadPowerOffResponse::~StreamingDloadPowerOffResponse()
 uint32_t StreamingDloadPowerOffResponse::getAddress()
 {
     return read<uint32_t>(getFieldOffset("address"));
-}                
+}
+                
+
 void StreamingDloadPowerOffResponse::setAddress(uint32_t address)
 {
     write<uint32_t>("address", address);

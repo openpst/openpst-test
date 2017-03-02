@@ -19,7 +19,7 @@
 *
 * @file streaming_dload_unframed_stream_write_request.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -36,6 +36,8 @@ StreamingDloadUnframedStreamWriteRequest::StreamingDloadUnframedStreamWriteReque
 	addField("data", kPacketFieldTypeVariant, 0);
 
 	setCommand(kStreamingDloadUnframedStreamWrite);
+
+	setResponseExpected(true);
 }
 
 StreamingDloadUnframedStreamWriteRequest::~StreamingDloadUnframedStreamWriteRequest()
@@ -46,38 +48,57 @@ StreamingDloadUnframedStreamWriteRequest::~StreamingDloadUnframedStreamWriteRequ
 std::vector<uint8_t> StreamingDloadUnframedStreamWriteRequest::getAlignmentPadding()
 {
 	return read(getFieldSize("alignment_padding"), getFieldOffset("alignment_padding"));
-}                
+}
+                
+
 void StreamingDloadUnframedStreamWriteRequest::setAlignmentPadding(uint8_t* data, size_t size)
 {
     write("alignment_padding", data, size);
-}uint32_t StreamingDloadUnframedStreamWriteRequest::getAddress()
+}
+
+uint32_t StreamingDloadUnframedStreamWriteRequest::getAddress()
 {
     return read<uint32_t>(getFieldOffset("address"));
-}                
+}
+                
+
 void StreamingDloadUnframedStreamWriteRequest::setAddress(uint32_t address)
 {
     write<uint32_t>("address", address);
-}uint32_t StreamingDloadUnframedStreamWriteRequest::getLength()
+}
+
+uint32_t StreamingDloadUnframedStreamWriteRequest::getLength()
 {
     return read<uint32_t>(getFieldOffset("length"));
-}                
+}
+                
+
 void StreamingDloadUnframedStreamWriteRequest::setLength(uint32_t length)
 {
     write<uint32_t>("length", length);
-}std::vector<uint8_t> StreamingDloadUnframedStreamWriteRequest::getData()
+}
+
+std::vector<uint8_t> StreamingDloadUnframedStreamWriteRequest::getData()
 {
 	return read(getFieldSize("data"), getFieldOffset("data"));
-}                
+}
+                
+
 void StreamingDloadUnframedStreamWriteRequest::setData(std::ifstream& file, size_t size)
 {
     write("data", file, size);
-}void StreamingDloadUnframedStreamWriteRequest::setData(uint8_t* data, size_t size)
+}
+
+void StreamingDloadUnframedStreamWriteRequest::setData(uint8_t* data, size_t size)
 {
     write("data", data, size);
-}void StreamingDloadUnframedStreamWriteRequest::setData(const std::string& data)
+}
+
+void StreamingDloadUnframedStreamWriteRequest::setData(const std::string& data)
 {
     write("data", data);
 }
+
 void StreamingDloadUnframedStreamWriteRequest::prepareResponse()
 {
 	if (response == nullptr) {

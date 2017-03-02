@@ -19,7 +19,7 @@
 *
 * @file streaming_dload_security_mode_response.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -32,14 +32,14 @@ StreamingDloadSecurityModeResponse::StreamingDloadSecurityModeResponse(PacketEnd
 {
 
 	setCommand(kStreamingDloadSecurityModeReceived);
+
+	setResponseExpected(false);
 }
 
 StreamingDloadSecurityModeResponse::~StreamingDloadSecurityModeResponse()
 {
 
 }
-
-
 
 void StreamingDloadSecurityModeResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {

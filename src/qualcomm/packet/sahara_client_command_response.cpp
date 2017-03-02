@@ -19,7 +19,7 @@
 *
 * @file sahara_client_command_response.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -34,6 +34,8 @@ SaharaClientCommandResponse::SaharaClientCommandResponse(PacketEndianess targetE
 	addField("data_size", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
 	setCommand(kSaharaCommandExecuteResponse);
+
+	setResponseExpected(false);
 }
 
 SaharaClientCommandResponse::~SaharaClientCommandResponse()
@@ -44,14 +46,20 @@ SaharaClientCommandResponse::~SaharaClientCommandResponse()
 uint32_t SaharaClientCommandResponse::getClientCommand()
 {
     return read<uint32_t>(getFieldOffset("client_command"));
-}                
+}
+                
+
 void SaharaClientCommandResponse::setClientCommand(uint32_t clientCommand)
 {
     write<uint32_t>("client_command", clientCommand);
-}uint32_t SaharaClientCommandResponse::getDataSize()
+}
+
+uint32_t SaharaClientCommandResponse::getDataSize()
 {
     return read<uint32_t>(getFieldOffset("data_size"));
-}                
+}
+                
+
 void SaharaClientCommandResponse::setDataSize(uint32_t dataSize)
 {
     write<uint32_t>("data_size", dataSize);

@@ -19,7 +19,7 @@
 *
 * @file streaming_dload_security_mode_request.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -33,6 +33,8 @@ StreamingDloadSecurityModeRequest::StreamingDloadSecurityModeRequest(PacketEndia
 	addField("mode", kPacketFieldTypePrimitive, sizeof(uint8_t));
 
 	setCommand(kStreamingDloadSecurityMode);
+
+	setResponseExpected(true);
 }
 
 StreamingDloadSecurityModeRequest::~StreamingDloadSecurityModeRequest()
@@ -43,11 +45,14 @@ StreamingDloadSecurityModeRequest::~StreamingDloadSecurityModeRequest()
 uint8_t StreamingDloadSecurityModeRequest::getMode()
 {
     return read<uint8_t>(getFieldOffset("mode"));
-}                
+}
+                
+
 void StreamingDloadSecurityModeRequest::setMode(uint8_t mode)
 {
     write<uint8_t>("mode", mode);
 }
+
 void StreamingDloadSecurityModeRequest::prepareResponse()
 {
 	if (response == nullptr) {

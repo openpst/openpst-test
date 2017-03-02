@@ -19,7 +19,7 @@
 *
 * @file dm_efs_close_dir_response.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -33,6 +33,8 @@ DmEfsCloseDirResponse::DmEfsCloseDirResponse(PacketEndianess targetEndian) : DmE
 	addField("error", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
 	setSubsysCommand(kDiagEfsCloseDir);
+
+	setResponseExpected(false);
 }
 
 DmEfsCloseDirResponse::~DmEfsCloseDirResponse()
@@ -43,7 +45,9 @@ DmEfsCloseDirResponse::~DmEfsCloseDirResponse()
 uint32_t DmEfsCloseDirResponse::getError()
 {
     return read<uint32_t>(getFieldOffset("error"));
-}                
+}
+                
+
 void DmEfsCloseDirResponse::setError(uint32_t error)
 {
     write<uint32_t>("error", error);

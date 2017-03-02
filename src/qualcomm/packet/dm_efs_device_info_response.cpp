@@ -19,7 +19,7 @@
 *
 * @file dm_efs_device_info_response.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -41,6 +41,8 @@ DmEfsDeviceInfoResponse::DmEfsDeviceInfoResponse(PacketEndianess targetEndian) :
 	addField("name", kPacketFieldTypeVariant, 0);
 
 	setSubsysCommand(kDiagEfsDevInfo);
+
+	setResponseExpected(false);
 }
 
 DmEfsDeviceInfoResponse::~DmEfsDeviceInfoResponse()
@@ -51,63 +53,97 @@ DmEfsDeviceInfoResponse::~DmEfsDeviceInfoResponse()
 uint32_t DmEfsDeviceInfoResponse::getError()
 {
     return read<uint32_t>(getFieldOffset("error"));
-}                
+}
+                
+
 void DmEfsDeviceInfoResponse::setError(uint32_t error)
 {
     write<uint32_t>("error", error);
-}uint32_t DmEfsDeviceInfoResponse::getTotalBlocks()
+}
+
+uint32_t DmEfsDeviceInfoResponse::getTotalBlocks()
 {
     return read<uint32_t>(getFieldOffset("total_blocks"));
-}                
+}
+                
+
 void DmEfsDeviceInfoResponse::setTotalBlocks(uint32_t totalBlocks)
 {
     write<uint32_t>("total_blocks", totalBlocks);
-}uint32_t DmEfsDeviceInfoResponse::getPagesPerBlock()
+}
+
+uint32_t DmEfsDeviceInfoResponse::getPagesPerBlock()
 {
     return read<uint32_t>(getFieldOffset("pages_per_block"));
-}                
+}
+                
+
 void DmEfsDeviceInfoResponse::setPagesPerBlock(uint32_t pagesPerBlock)
 {
     write<uint32_t>("pages_per_block", pagesPerBlock);
-}uint32_t DmEfsDeviceInfoResponse::getPageSize()
+}
+
+uint32_t DmEfsDeviceInfoResponse::getPageSize()
 {
     return read<uint32_t>(getFieldOffset("page_size"));
-}                
+}
+                
+
 void DmEfsDeviceInfoResponse::setPageSize(uint32_t pageSize)
 {
     write<uint32_t>("page_size", pageSize);
-}uint32_t DmEfsDeviceInfoResponse::getTotalPageSize()
+}
+
+uint32_t DmEfsDeviceInfoResponse::getTotalPageSize()
 {
     return read<uint32_t>(getFieldOffset("total_page_size"));
-}                
+}
+                
+
 void DmEfsDeviceInfoResponse::setTotalPageSize(uint32_t totalPageSize)
 {
     write<uint32_t>("total_page_size", totalPageSize);
-}uint32_t DmEfsDeviceInfoResponse::getMakerId()
+}
+
+uint32_t DmEfsDeviceInfoResponse::getMakerId()
 {
     return read<uint32_t>(getFieldOffset("maker_id"));
-}                
+}
+                
+
 void DmEfsDeviceInfoResponse::setMakerId(uint32_t makerId)
 {
     write<uint32_t>("maker_id", makerId);
-}uint32_t DmEfsDeviceInfoResponse::getDeviceId()
+}
+
+uint32_t DmEfsDeviceInfoResponse::getDeviceId()
 {
     return read<uint32_t>(getFieldOffset("device_id"));
-}                
+}
+                
+
 void DmEfsDeviceInfoResponse::setDeviceId(uint32_t deviceId)
 {
     write<uint32_t>("device_id", deviceId);
-}uint8_t DmEfsDeviceInfoResponse::getDeviceType()
+}
+
+uint8_t DmEfsDeviceInfoResponse::getDeviceType()
 {
     return read<uint8_t>(getFieldOffset("device_type"));
-}                
+}
+                
+
 void DmEfsDeviceInfoResponse::setDeviceType(uint8_t deviceType)
 {
     write<uint8_t>("device_type", deviceType);
-}std::vector<uint8_t> DmEfsDeviceInfoResponse::getName()
+}
+
+std::vector<uint8_t> DmEfsDeviceInfoResponse::getName()
 {
 	return read(getFieldSize("name"), getFieldOffset("name"));
-}                
+}
+                
+
 void DmEfsDeviceInfoResponse::setName(uint8_t* data, size_t size)
 {
     write("name", data, size);

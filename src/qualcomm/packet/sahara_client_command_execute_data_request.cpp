@@ -19,7 +19,7 @@
 *
 * @file sahara_client_command_execute_data_request.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -33,6 +33,8 @@ SaharaClientCommandExecuteDataRequest::SaharaClientCommandExecuteDataRequest(Pac
 	addField("client_command", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
 	setCommand(kSaharaCommandExecuteData);
+
+	setResponseExpected(false);
 }
 
 SaharaClientCommandExecuteDataRequest::~SaharaClientCommandExecuteDataRequest()
@@ -43,7 +45,9 @@ SaharaClientCommandExecuteDataRequest::~SaharaClientCommandExecuteDataRequest()
 uint32_t SaharaClientCommandExecuteDataRequest::getClientCommand()
 {
     return read<uint32_t>(getFieldOffset("client_command"));
-}                
+}
+                
+
 void SaharaClientCommandExecuteDataRequest::setClientCommand(uint32_t clientCommand)
 {
     write<uint32_t>("client_command", clientCommand);

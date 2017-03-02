@@ -19,7 +19,7 @@
 *
 * @file dm_efs_factory_image_read_request.h
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -48,47 +48,63 @@ namespace OpenPST {
                 */
                 ~DmEfsFactoryImageReadRequest();
 
+                
                 /**
                 * @brief Get stream_state
                 * @return uint8_t
                 */
-                uint8_t getStreamState();                
+                uint8_t getStreamState();
+                                
+
                 /**
                 * @brief Set stream_state
                 * @param uint8_t streamState
                 * @return void
                 */
-                void setStreamState(uint8_t streamState);                /**
+                void setStreamState(uint8_t streamState);
+                                
+                /**
                 * @brief Get info_cluster_sent
                 * @return uint8_t
                 */
-                uint8_t getInfoClusterSent();                
+                uint8_t getInfoClusterSent();
+                                
+
                 /**
                 * @brief Set info_cluster_sent
                 * @param uint8_t infoClusterSent
                 * @return void
                 */
-                void setInfoClusterSent(uint8_t infoClusterSent);                /**
+                void setInfoClusterSent(uint8_t infoClusterSent);
+                                
+                /**
                 * @brief Get custer_map_sequence
                 * @return uint16_t
                 */
-                uint16_t getCusterMapSequence();                
+                uint16_t getCusterMapSequence();
+                                
+
                 /**
                 * @brief Set custer_map_sequence
                 * @param uint16_t custerMapSequence
                 * @return void
                 */
-                void setCusterMapSequence(uint16_t custerMapSequence);                /**
+                void setCusterMapSequence(uint16_t custerMapSequence);
+                                
+                /**
                 * @brief Get custer_data_sequence
                 * @return uint16_t
                 */
-                uint16_t getCusterDataSequence();                
+                uint16_t getCusterDataSequence();
+                                
+
                 /**
                 * @brief Set custer_data_sequence
                 * @param uint16_t custerDataSequence
                 * @return void
                 */
-                void setCusterDataSequence(uint16_t custerDataSequence);				/**
+                void setCusterDataSequence(uint16_t custerDataSequence);
+                				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;

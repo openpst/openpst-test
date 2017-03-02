@@ -19,7 +19,7 @@
 *
 * @file dm_efs_open_file_response.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -34,6 +34,8 @@ DmEfsOpenFileResponse::DmEfsOpenFileResponse(PacketEndianess targetEndian) : DmE
 	addField("error", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
 	setSubsysCommand(kDiagEfsOpen);
+
+	setResponseExpected(false);
 }
 
 DmEfsOpenFileResponse::~DmEfsOpenFileResponse()
@@ -44,14 +46,20 @@ DmEfsOpenFileResponse::~DmEfsOpenFileResponse()
 uint32_t DmEfsOpenFileResponse::getFp()
 {
     return read<uint32_t>(getFieldOffset("fp"));
-}                
+}
+                
+
 void DmEfsOpenFileResponse::setFp(uint32_t fp)
 {
     write<uint32_t>("fp", fp);
-}uint32_t DmEfsOpenFileResponse::getError()
+}
+
+uint32_t DmEfsOpenFileResponse::getError()
 {
     return read<uint32_t>(getFieldOffset("error"));
-}                
+}
+                
+
 void DmEfsOpenFileResponse::setError(uint32_t error)
 {
     write<uint32_t>("error", error);

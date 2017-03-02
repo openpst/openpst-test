@@ -19,7 +19,7 @@
 *
 * @file dm_efs_md5_sum_request.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -34,6 +34,8 @@ DmEfsMd5SumRequest::DmEfsMd5SumRequest(PacketEndianess targetEndian) : DmEfsPack
 	addField("path", kPacketFieldTypeVariant, 0);
 
 	setSubsysCommand(kDiagEfsMd5Sum);
+
+	setResponseExpected(true);
 }
 
 DmEfsMd5SumRequest::~DmEfsMd5SumRequest()
@@ -44,18 +46,25 @@ DmEfsMd5SumRequest::~DmEfsMd5SumRequest()
 uint16_t DmEfsMd5SumRequest::getSequence()
 {
     return read<uint16_t>(getFieldOffset("sequence"));
-}                
+}
+                
+
 void DmEfsMd5SumRequest::setSequence(uint16_t sequence)
 {
     write<uint16_t>("sequence", sequence);
-}std::vector<uint8_t> DmEfsMd5SumRequest::getPath()
+}
+
+std::vector<uint8_t> DmEfsMd5SumRequest::getPath()
 {
 	return read(getFieldSize("path"), getFieldOffset("path"));
-}                
+}
+                
+
 void DmEfsMd5SumRequest::setPath(uint8_t* data, size_t size)
 {
     write("path", data, size);
 }
+
 void DmEfsMd5SumRequest::prepareResponse()
 {
 	if (response == nullptr) {

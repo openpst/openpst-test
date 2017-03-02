@@ -19,7 +19,7 @@
 *
 * @file streaming_dload_stream_write_request.h
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -48,39 +48,51 @@ namespace OpenPST {
                 */
                 ~StreamingDloadStreamWriteRequest();
 
+                
                 /**
                 * @brief Get address
                 * @return uint32_t
                 */
-                uint32_t getAddress();                
+                uint32_t getAddress();
+                                
+
                 /**
                 * @brief Set address
                 * @param uint32_t address
                 * @return void
                 */
-                void setAddress(uint32_t address);                /**
+                void setAddress(uint32_t address);
+                
+                /**
                 * @brief Get data
                 * @return variable
                 */
-                std::vector<uint8_t> getData();                
+                std::vector<uint8_t> getData();
+                                
+
                 /**
                 * @brief Set data
                 * @param std::ifstream& file
                 * @param size_t size
                 * @return void
                 */
-                void setData(std::ifstream& file, size_t size);                /**
+                void setData(std::ifstream& file, size_t size);
+                
+                /**
                 * @brief Set data
                 * @param uint8_t* data
                 * @param size_t size
                 * @return void
                 */
-                void setData(uint8_t* data, size_t size);                /**
+                void setData(uint8_t* data, size_t size);
+                
+                /**
                 * @brief Set data
                 * @param const std::string& data
                 * @return void
                 */
-                void setData(const std::string& data);				/**
+                void setData(const std::string& data);
+                				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;

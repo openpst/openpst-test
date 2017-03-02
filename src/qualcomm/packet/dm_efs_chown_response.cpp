@@ -19,7 +19,7 @@
 *
 * @file dm_efs_chown_response.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -33,6 +33,8 @@ DmEfsChownResponse::DmEfsChownResponse(PacketEndianess targetEndian) : DmEfsPack
 	addField("error", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
 	setSubsysCommand(kDiagEfsChown);
+
+	setResponseExpected(false);
 }
 
 DmEfsChownResponse::~DmEfsChownResponse()
@@ -43,7 +45,9 @@ DmEfsChownResponse::~DmEfsChownResponse()
 uint32_t DmEfsChownResponse::getError()
 {
     return read<uint32_t>(getFieldOffset("error"));
-}                
+}
+                
+
 void DmEfsChownResponse::setError(uint32_t error)
 {
     write<uint32_t>("error", error);

@@ -19,7 +19,7 @@
 *
 * @file streaming_dload_open_multi_image_response.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -33,6 +33,8 @@ StreamingDloadOpenMultiImageResponse::StreamingDloadOpenMultiImageResponse(Packe
 	addField("status", kPacketFieldTypePrimitive, sizeof(uint8_t));
 
 	setCommand(kStreamingDloadOpenedMultiImage);
+
+	setResponseExpected(false);
 }
 
 StreamingDloadOpenMultiImageResponse::~StreamingDloadOpenMultiImageResponse()
@@ -43,7 +45,9 @@ StreamingDloadOpenMultiImageResponse::~StreamingDloadOpenMultiImageResponse()
 uint8_t StreamingDloadOpenMultiImageResponse::getStatus()
 {
     return read<uint8_t>(getFieldOffset("status"));
-}                
+}
+                
+
 void StreamingDloadOpenMultiImageResponse::setStatus(uint8_t status)
 {
     write<uint8_t>("status", status);

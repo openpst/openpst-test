@@ -19,7 +19,7 @@
 *
 * @file dm_efs_stat_response.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -39,6 +39,8 @@ DmEfsStatResponse::DmEfsStatResponse(PacketEndianess targetEndian) : DmEfsPacket
 	addField("ctime", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
 	setSubsysCommand(kDiagEfsStat);
+
+	setResponseExpected(false);
 }
 
 DmEfsStatResponse::~DmEfsStatResponse()
@@ -49,49 +51,75 @@ DmEfsStatResponse::~DmEfsStatResponse()
 uint32_t DmEfsStatResponse::getError()
 {
     return read<uint32_t>(getFieldOffset("error"));
-}                
+}
+                
+
 void DmEfsStatResponse::setError(uint32_t error)
 {
     write<uint32_t>("error", error);
-}uint32_t DmEfsStatResponse::getMode()
+}
+
+uint32_t DmEfsStatResponse::getMode()
 {
     return read<uint32_t>(getFieldOffset("mode"));
-}                
+}
+                
+
 void DmEfsStatResponse::setMode(uint32_t mode)
 {
     write<uint32_t>("mode", mode);
-}uint32_t DmEfsStatResponse::getSize()
+}
+
+uint32_t DmEfsStatResponse::getSize()
 {
     return read<uint32_t>(getFieldOffset("size"));
-}                
+}
+                
+
 void DmEfsStatResponse::setSize(uint32_t size)
 {
     write<uint32_t>("size", size);
-}uint32_t DmEfsStatResponse::getLinkCount()
+}
+
+uint32_t DmEfsStatResponse::getLinkCount()
 {
     return read<uint32_t>(getFieldOffset("link_count"));
-}                
+}
+                
+
 void DmEfsStatResponse::setLinkCount(uint32_t linkCount)
 {
     write<uint32_t>("link_count", linkCount);
-}uint32_t DmEfsStatResponse::getAtime()
+}
+
+uint32_t DmEfsStatResponse::getAtime()
 {
     return read<uint32_t>(getFieldOffset("atime"));
-}                
+}
+                
+
 void DmEfsStatResponse::setAtime(uint32_t atime)
 {
     write<uint32_t>("atime", atime);
-}uint32_t DmEfsStatResponse::getMtime()
+}
+
+uint32_t DmEfsStatResponse::getMtime()
 {
     return read<uint32_t>(getFieldOffset("mtime"));
-}                
+}
+                
+
 void DmEfsStatResponse::setMtime(uint32_t mtime)
 {
     write<uint32_t>("mtime", mtime);
-}uint32_t DmEfsStatResponse::getCtime()
+}
+
+uint32_t DmEfsStatResponse::getCtime()
 {
     return read<uint32_t>(getFieldOffset("ctime"));
-}                
+}
+                
+
 void DmEfsStatResponse::setCtime(uint32_t ctime)
 {
     write<uint32_t>("ctime", ctime);

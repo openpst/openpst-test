@@ -19,7 +19,7 @@
 *
 * @file streaming_dload_get_ecc_state_response.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -33,6 +33,8 @@ StreamingDloadGetEccStateResponse::StreamingDloadGetEccStateResponse(PacketEndia
 	addField("status", kPacketFieldTypePrimitive, sizeof(uint8_t));
 
 	setCommand(kStreamingDloadCurrentEccState);
+
+	setResponseExpected(false);
 }
 
 StreamingDloadGetEccStateResponse::~StreamingDloadGetEccStateResponse()
@@ -43,7 +45,9 @@ StreamingDloadGetEccStateResponse::~StreamingDloadGetEccStateResponse()
 uint8_t StreamingDloadGetEccStateResponse::getStatus()
 {
     return read<uint8_t>(getFieldOffset("status"));
-}                
+}
+                
+
 void StreamingDloadGetEccStateResponse::setStatus(uint8_t status)
 {
     write<uint8_t>("status", status);

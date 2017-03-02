@@ -28,13 +28,13 @@ default:
 		./src/transport/async_serial.cpp \
 		./src/transport/messaged_serial.cpp \
 		./src/transport/messaged_async_serial.cpp \
-		./src/transport/packet_writer.cpp \
+		./src/transport/packet_transporter.cpp \
 		./src/server/tcp_serial_server.cpp \
 		./src/qualcomm/packet/sahara_*.cpp \
 		./src/qualcomm/packet/streaming_dload_*.cpp \
 		./src/qualcomm/sahara_client.cpp \
 		./src/qualcomm/streaming_dload_client.cpp \
-		./src/all.cpp -o build/all -lpthread -lboost_system -lboost_thread
+		./src/main.cpp -o build/test -lpthread -lboost_system -lboost_thread
 
 
 		#./src/qualcomm/streaming_dload_client.cpp 

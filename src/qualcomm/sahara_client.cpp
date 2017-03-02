@@ -29,7 +29,7 @@
 using namespace OpenPST::Qualcomm;
 
 SaharaClient::SaharaClient(TransportInterface& transport, PacketEndianess deviceEndianess) :
-	transport(transport), deviceEndianess(deviceEndianess)
+	transport(transport), packetTransporter(transport), deviceEndianess(deviceEndianess)
 {
 
 }
@@ -47,6 +47,8 @@ TransportInterface* SaharaClient::getTransport()
 void SaharaClient::setTransport(TransportInterface& transport)
 {
 	this->transport = transport;
+
+	packetTransporter.setTransport(transport);
 }
 
 const SaharaState& SaharaClient::getState()

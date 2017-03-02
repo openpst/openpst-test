@@ -19,7 +19,7 @@
 *
 * @file streaming_dload_partition_table_request.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -34,6 +34,8 @@ StreamingDloadPartitionTableRequest::StreamingDloadPartitionTableRequest(PacketE
 	addField("data", kPacketFieldTypeArray, 512);
 
 	setCommand(kStreamingDloadPartitionTable);
+
+	setResponseExpected(true);
 }
 
 StreamingDloadPartitionTableRequest::~StreamingDloadPartitionTableRequest()
@@ -44,18 +46,25 @@ StreamingDloadPartitionTableRequest::~StreamingDloadPartitionTableRequest()
 uint8_t StreamingDloadPartitionTableRequest::getOverrideExisting()
 {
     return read<uint8_t>(getFieldOffset("override_existing"));
-}                
+}
+                
+
 void StreamingDloadPartitionTableRequest::setOverrideExisting(uint8_t overrideExisting)
 {
     write<uint8_t>("override_existing", overrideExisting);
-}std::vector<uint8_t> StreamingDloadPartitionTableRequest::getData()
+}
+
+std::vector<uint8_t> StreamingDloadPartitionTableRequest::getData()
 {
 	return read(getFieldSize("data"), getFieldOffset("data"));
-}                
+}
+                
+
 void StreamingDloadPartitionTableRequest::setData(uint8_t* data, size_t size)
 {
     write("data", data, size);
 }
+
 void StreamingDloadPartitionTableRequest::prepareResponse()
 {
 	if (response == nullptr) {

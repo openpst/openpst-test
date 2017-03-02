@@ -19,7 +19,7 @@
 *
 * @file dm_efs_close_dir_request.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -33,6 +33,8 @@ DmEfsCloseDirRequest::DmEfsCloseDirRequest(PacketEndianess targetEndian) : DmEfs
 	addField("dp", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
 	setSubsysCommand(kDiagEfsCloseDir);
+
+	setResponseExpected(true);
 }
 
 DmEfsCloseDirRequest::~DmEfsCloseDirRequest()
@@ -43,11 +45,14 @@ DmEfsCloseDirRequest::~DmEfsCloseDirRequest()
 uint32_t DmEfsCloseDirRequest::getDp()
 {
     return read<uint32_t>(getFieldOffset("dp"));
-}                
+}
+                
+
 void DmEfsCloseDirRequest::setDp(uint32_t dp)
 {
     write<uint32_t>("dp", dp);
 }
+
 void DmEfsCloseDirRequest::prepareResponse()
 {
 	if (response == nullptr) {

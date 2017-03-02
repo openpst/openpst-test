@@ -19,7 +19,7 @@
 *
 * @file streaming_dload_hello_request.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -40,6 +40,8 @@ StreamingDloadHelloRequest::StreamingDloadHelloRequest(PacketEndianess targetEnd
 	setVersion(0x05);
 	setCompatibleVersion(0x02);
 	setFeatureBits(0x19);
+
+	setResponseExpected(true);
 }
 
 StreamingDloadHelloRequest::~StreamingDloadHelloRequest()
@@ -50,32 +52,47 @@ StreamingDloadHelloRequest::~StreamingDloadHelloRequest()
 std::string StreamingDloadHelloRequest::getMagic()
 {
 	return getString(32, getFieldOffset("magic"));
-}                
+}
+                
+
 void StreamingDloadHelloRequest::setMagic(const std::string& magic)
 {
     write("magic", magic);
-}uint8_t StreamingDloadHelloRequest::getVersion()
+}
+
+uint8_t StreamingDloadHelloRequest::getVersion()
 {
     return read<uint8_t>(getFieldOffset("version"));
-}                
+}
+                
+
 void StreamingDloadHelloRequest::setVersion(uint8_t version)
 {
     write<uint8_t>("version", version);
-}uint8_t StreamingDloadHelloRequest::getCompatibleVersion()
+}
+
+uint8_t StreamingDloadHelloRequest::getCompatibleVersion()
 {
     return read<uint8_t>(getFieldOffset("compatible_version"));
-}                
+}
+                
+
 void StreamingDloadHelloRequest::setCompatibleVersion(uint8_t compatibleVersion)
 {
     write<uint8_t>("compatible_version", compatibleVersion);
-}uint8_t StreamingDloadHelloRequest::getFeatureBits()
+}
+
+uint8_t StreamingDloadHelloRequest::getFeatureBits()
 {
     return read<uint8_t>(getFieldOffset("feature_bits"));
-}                
+}
+                
+
 void StreamingDloadHelloRequest::setFeatureBits(uint8_t featureBits)
 {
     write<uint8_t>("feature_bits", featureBits);
 }
+
 void StreamingDloadHelloRequest::prepareResponse()
 {
 	if (response == nullptr) {

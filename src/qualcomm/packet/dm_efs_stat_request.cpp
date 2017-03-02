@@ -19,7 +19,7 @@
 *
 * @file dm_efs_stat_request.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -33,6 +33,8 @@ DmEfsStatRequest::DmEfsStatRequest(PacketEndianess targetEndian) : DmEfsPacket(t
 	addField("path", kPacketFieldTypeVariant, 0);
 
 	setSubsysCommand(kDiagEfsStat);
+
+	setResponseExpected(false);
 }
 
 DmEfsStatRequest::~DmEfsStatRequest()
@@ -43,7 +45,9 @@ DmEfsStatRequest::~DmEfsStatRequest()
 std::vector<uint8_t> DmEfsStatRequest::getPath()
 {
 	return read(getFieldSize("path"), getFieldOffset("path"));
-}                
+}
+                
+
 void DmEfsStatRequest::setPath(uint8_t* data, size_t size)
 {
     write("path", data, size);

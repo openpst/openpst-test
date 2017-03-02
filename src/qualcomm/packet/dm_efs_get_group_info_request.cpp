@@ -19,7 +19,7 @@
 *
 * @file dm_efs_get_group_info_request.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -34,6 +34,8 @@ DmEfsGetGroupInfoRequest::DmEfsGetGroupInfoRequest(PacketEndianess targetEndian)
 	addField("path", kPacketFieldTypeVariant, 0);
 
 	setSubsysCommand(kDiagEfsGetGroupInfo);
+
+	setResponseExpected(true);
 }
 
 DmEfsGetGroupInfoRequest::~DmEfsGetGroupInfoRequest()
@@ -44,18 +46,25 @@ DmEfsGetGroupInfoRequest::~DmEfsGetGroupInfoRequest()
 uint32_t DmEfsGetGroupInfoRequest::getGid()
 {
     return read<uint32_t>(getFieldOffset("gid"));
-}                
+}
+                
+
 void DmEfsGetGroupInfoRequest::setGid(uint32_t gid)
 {
     write<uint32_t>("gid", gid);
-}std::vector<uint8_t> DmEfsGetGroupInfoRequest::getPath()
+}
+
+std::vector<uint8_t> DmEfsGetGroupInfoRequest::getPath()
 {
 	return read(getFieldSize("path"), getFieldOffset("path"));
-}                
+}
+                
+
 void DmEfsGetGroupInfoRequest::setPath(uint8_t* data, size_t size)
 {
     write("path", data, size);
 }
+
 void DmEfsGetGroupInfoRequest::prepareResponse()
 {
 	if (response == nullptr) {

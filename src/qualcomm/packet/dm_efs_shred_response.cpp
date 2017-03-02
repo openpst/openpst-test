@@ -19,7 +19,7 @@
 *
 * @file dm_efs_shred_response.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -35,6 +35,8 @@ DmEfsShredResponse::DmEfsShredResponse(PacketEndianess targetEndian) : DmEfsPack
 	addField("error", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
 	setSubsysCommand(kDiagEfsShred);
+
+	setResponseExpected(false);
 }
 
 DmEfsShredResponse::~DmEfsShredResponse()
@@ -45,21 +47,31 @@ DmEfsShredResponse::~DmEfsShredResponse()
 uint16_t DmEfsShredResponse::getSequence()
 {
     return read<uint16_t>(getFieldOffset("sequence"));
-}                
+}
+                
+
 void DmEfsShredResponse::setSequence(uint16_t sequence)
 {
     write<uint16_t>("sequence", sequence);
-}uint16_t DmEfsShredResponse::getResults()
+}
+
+uint16_t DmEfsShredResponse::getResults()
 {
     return read<uint16_t>(getFieldOffset("results"));
-}                
+}
+                
+
 void DmEfsShredResponse::setResults(uint16_t results)
 {
     write<uint16_t>("results", results);
-}uint32_t DmEfsShredResponse::getError()
+}
+
+uint32_t DmEfsShredResponse::getError()
 {
     return read<uint32_t>(getFieldOffset("error"));
-}                
+}
+                
+
 void DmEfsShredResponse::setError(uint32_t error)
 {
     write<uint32_t>("error", error);

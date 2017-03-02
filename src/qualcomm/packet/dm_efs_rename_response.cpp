@@ -19,7 +19,7 @@
 *
 * @file dm_efs_rename_response.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -33,6 +33,8 @@ DmEfsRenameResponse::DmEfsRenameResponse(PacketEndianess targetEndian) : DmEfsPa
 	addField("error", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
 	setSubsysCommand(kDiagEfsRename);
+
+	setResponseExpected(false);
 }
 
 DmEfsRenameResponse::~DmEfsRenameResponse()
@@ -43,7 +45,9 @@ DmEfsRenameResponse::~DmEfsRenameResponse()
 uint32_t DmEfsRenameResponse::getError()
 {
     return read<uint32_t>(getFieldOffset("error"));
-}                
+}
+                
+
 void DmEfsRenameResponse::setError(uint32_t error)
 {
     write<uint32_t>("error", error);

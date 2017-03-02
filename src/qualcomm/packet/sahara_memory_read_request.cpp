@@ -19,7 +19,7 @@
 *
 * @file sahara_memory_read_request.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -34,6 +34,8 @@ SaharaMemoryReadRequest::SaharaMemoryReadRequest(PacketEndianess targetEndian) :
 	addField("size", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
 	setCommand(kSaharaCommandMemoryRead);
+
+	setResponseExpected(false);
 }
 
 SaharaMemoryReadRequest::~SaharaMemoryReadRequest()
@@ -44,14 +46,20 @@ SaharaMemoryReadRequest::~SaharaMemoryReadRequest()
 uint32_t SaharaMemoryReadRequest::getAddress()
 {
     return read<uint32_t>(getFieldOffset("address"));
-}                
+}
+                
+
 void SaharaMemoryReadRequest::setAddress(uint32_t address)
 {
     write<uint32_t>("address", address);
-}uint32_t SaharaMemoryReadRequest::getSize()
+}
+
+uint32_t SaharaMemoryReadRequest::getSize()
 {
     return read<uint32_t>(getFieldOffset("size"));
-}                
+}
+                
+
 void SaharaMemoryReadRequest::setSize(uint32_t size)
 {
     write<uint32_t>("size", size);

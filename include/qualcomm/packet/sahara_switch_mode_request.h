@@ -19,7 +19,7 @@
 *
 * @file sahara_switch_mode_request.h
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -46,17 +46,21 @@ namespace OpenPST {
                 */
                 ~SaharaSwitchModeRequest();
 
+                
                 /**
                 * @brief Get mode
                 * @return uint32_t
                 */
-                uint32_t getMode();                
+                uint32_t getMode();
+                                
+
                 /**
                 * @brief Set mode
                 * @param uint32_t mode
                 * @return void
                 */
-                void setMode(uint32_t mode);				/**
+                void setMode(uint32_t mode);
+                				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;

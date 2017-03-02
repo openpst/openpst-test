@@ -19,7 +19,7 @@
 *
 * @file streaming_dload_read_request.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -34,6 +34,8 @@ StreamingDloadReadRequest::StreamingDloadReadRequest(PacketEndianess targetEndia
 	addField("length", kPacketFieldTypePrimitive, sizeof(uint16_t));
 
 	setCommand(kStreamingDloadRead);
+
+	setResponseExpected(true);
 }
 
 StreamingDloadReadRequest::~StreamingDloadReadRequest()
@@ -44,18 +46,25 @@ StreamingDloadReadRequest::~StreamingDloadReadRequest()
 uint32_t StreamingDloadReadRequest::getAddress()
 {
     return read<uint32_t>(getFieldOffset("address"));
-}                
+}
+                
+
 void StreamingDloadReadRequest::setAddress(uint32_t address)
 {
     write<uint32_t>("address", address);
-}uint16_t StreamingDloadReadRequest::getLength()
+}
+
+uint16_t StreamingDloadReadRequest::getLength()
 {
     return read<uint16_t>(getFieldOffset("length"));
-}                
+}
+                
+
 void StreamingDloadReadRequest::setLength(uint16_t length)
 {
     write<uint16_t>("length", length);
 }
+
 void StreamingDloadReadRequest::prepareResponse()
 {
 	if (response == nullptr) {

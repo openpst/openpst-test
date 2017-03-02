@@ -19,7 +19,7 @@
 *
 * @file streaming_dload_read_response.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -34,6 +34,8 @@ StreamingDloadReadResponse::StreamingDloadReadResponse(PacketEndianess targetEnd
 	addField("data", kPacketFieldTypeVariant, 0);
 
 	setCommand(kStreamingDloadReadData);
+
+	setResponseExpected(false);
 }
 
 StreamingDloadReadResponse::~StreamingDloadReadResponse()
@@ -44,14 +46,20 @@ StreamingDloadReadResponse::~StreamingDloadReadResponse()
 uint32_t StreamingDloadReadResponse::getAddress()
 {
     return read<uint32_t>(getFieldOffset("address"));
-}                
+}
+                
+
 void StreamingDloadReadResponse::setAddress(uint32_t address)
 {
     write<uint32_t>("address", address);
-}std::vector<uint8_t> StreamingDloadReadResponse::getData()
+}
+
+std::vector<uint8_t> StreamingDloadReadResponse::getData()
 {
 	return read(getFieldSize("data"), getFieldOffset("data"));
-}                
+}
+                
+
 void StreamingDloadReadResponse::setData(uint8_t* data, size_t size)
 {
     write("data", data, size);

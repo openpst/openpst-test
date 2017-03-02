@@ -19,7 +19,7 @@
 *
 * @file dm_efs_close_file_request.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -33,6 +33,8 @@ DmEfsCloseFileRequest::DmEfsCloseFileRequest(PacketEndianess targetEndian) : DmE
 	addField("fp", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
 	setSubsysCommand(kDiagEfsClose);
+
+	setResponseExpected(true);
 }
 
 DmEfsCloseFileRequest::~DmEfsCloseFileRequest()
@@ -43,11 +45,14 @@ DmEfsCloseFileRequest::~DmEfsCloseFileRequest()
 uint32_t DmEfsCloseFileRequest::getFp()
 {
     return read<uint32_t>(getFieldOffset("fp"));
-}                
+}
+                
+
 void DmEfsCloseFileRequest::setFp(uint32_t fp)
 {
     write<uint32_t>("fp", fp);
 }
+
 void DmEfsCloseFileRequest::prepareResponse()
 {
 	if (response == nullptr) {

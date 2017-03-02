@@ -19,7 +19,7 @@
 *
 * @file sahara_client_command_request.h
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -48,17 +48,21 @@ namespace OpenPST {
                 */
                 ~SaharaClientCommandRequest();
 
+                
                 /**
                 * @brief Get client_command
                 * @return uint32_t
                 */
-                uint32_t getClientCommand();                
+                uint32_t getClientCommand();
+                                
+
                 /**
                 * @brief Set client_command
                 * @param uint32_t clientCommand
                 * @return void
                 */
-                void setClientCommand(uint32_t clientCommand);				/**
+                void setClientCommand(uint32_t clientCommand);
+                				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;

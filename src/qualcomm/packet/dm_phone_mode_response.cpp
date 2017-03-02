@@ -19,7 +19,7 @@
 *
 * @file dm_phone_mode_response.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -32,6 +32,7 @@ DmPhoneModeResponse::DmPhoneModeResponse(PacketEndianess targetEndian) : DmPacke
 {
 	addField("status", kPacketFieldTypePrimitive, sizeof(uint8_t));
 
+	setResponseExpected(false);
 }
 
 DmPhoneModeResponse::~DmPhoneModeResponse()
@@ -42,7 +43,9 @@ DmPhoneModeResponse::~DmPhoneModeResponse()
 uint8_t DmPhoneModeResponse::getStatus()
 {
     return read<uint8_t>(getFieldOffset("status"));
-}                
+}
+                
+
 void DmPhoneModeResponse::setStatus(uint8_t status)
 {
     write<uint8_t>("status", status);

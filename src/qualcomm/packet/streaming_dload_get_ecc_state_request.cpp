@@ -19,7 +19,7 @@
 *
 * @file streaming_dload_get_ecc_state_request.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -32,13 +32,14 @@ StreamingDloadGetEccStateRequest::StreamingDloadGetEccStateRequest(PacketEndiane
 {
 
 	setCommand(kStreamingDloadGetEccState);
+
+	setResponseExpected(true);
 }
 
 StreamingDloadGetEccStateRequest::~StreamingDloadGetEccStateRequest()
 {
 
 }
-
 
 void StreamingDloadGetEccStateRequest::prepareResponse()
 {

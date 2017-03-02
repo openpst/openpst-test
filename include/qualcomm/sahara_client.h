@@ -30,6 +30,7 @@
 #include "transport/transport_interface.h"
 #include "transport/packet.h"
 #include "transport/packet/raw_data_packet.h"
+#include "transport/packet_transporter.h"
 #include "qualcomm/sahara.h"
 #include "qualcomm/sahara_packets.h"
 #include "qualcomm/mbn.h"
@@ -80,6 +81,7 @@ namespace OpenPST {
 		class SaharaClient {
 			protected:
 				TransportInterface& transport;
+				PacketTransporter packetTransporter;
 				PacketEndianess deviceEndianess;
 				SaharaState state = {};
 				SaharaHostInfo hostInfo = {};

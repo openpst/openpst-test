@@ -19,7 +19,7 @@
 *
 * @file dm_efs_set_reservation_request.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -35,6 +35,8 @@ DmEfsSetReservationRequest::DmEfsSetReservationRequest(PacketEndianess targetEnd
 	addField("path", kPacketFieldTypeVariant, 0);
 
 	setSubsysCommand(kDiagEfsSetReservation);
+
+	setResponseExpected(true);
 }
 
 DmEfsSetReservationRequest::~DmEfsSetReservationRequest()
@@ -45,25 +47,36 @@ DmEfsSetReservationRequest::~DmEfsSetReservationRequest()
 uint32_t DmEfsSetReservationRequest::getGid()
 {
     return read<uint32_t>(getFieldOffset("gid"));
-}                
+}
+                
+
 void DmEfsSetReservationRequest::setGid(uint32_t gid)
 {
     write<uint32_t>("gid", gid);
-}uint32_t DmEfsSetReservationRequest::getAmount()
+}
+
+uint32_t DmEfsSetReservationRequest::getAmount()
 {
     return read<uint32_t>(getFieldOffset("amount"));
-}                
+}
+                
+
 void DmEfsSetReservationRequest::setAmount(uint32_t amount)
 {
     write<uint32_t>("amount", amount);
-}std::vector<uint8_t> DmEfsSetReservationRequest::getPath()
+}
+
+std::vector<uint8_t> DmEfsSetReservationRequest::getPath()
 {
 	return read(getFieldSize("path"), getFieldOffset("path"));
-}                
+}
+                
+
 void DmEfsSetReservationRequest::setPath(uint8_t* data, size_t size)
 {
     write("path", data, size);
 }
+
 void DmEfsSetReservationRequest::prepareResponse()
 {
 	if (response == nullptr) {

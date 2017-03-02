@@ -19,7 +19,7 @@
 *
 * @file streaming_dload_nop_response.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -33,6 +33,8 @@ StreamingDloadNopResponse::StreamingDloadNopResponse(PacketEndianess targetEndia
 	addField("identifier", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
 	setCommand(kStreamingDloadNopResponse);
+
+	setResponseExpected(false);
 }
 
 StreamingDloadNopResponse::~StreamingDloadNopResponse()
@@ -43,7 +45,9 @@ StreamingDloadNopResponse::~StreamingDloadNopResponse()
 uint32_t StreamingDloadNopResponse::getIdentifier()
 {
     return read<uint32_t>(getFieldOffset("identifier"));
-}                
+}
+                
+
 void StreamingDloadNopResponse::setIdentifier(uint32_t identifier)
 {
     write<uint32_t>("identifier", identifier);

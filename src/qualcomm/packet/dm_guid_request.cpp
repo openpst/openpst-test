@@ -19,7 +19,7 @@
 *
 * @file dm_guid_request.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -31,14 +31,13 @@ using namespace OpenPST::Qualcomm;
 DmGuidRequest::DmGuidRequest(PacketEndianess targetEndian) : DmPacket(targetEndian)
 {
 
+	setResponseExpected(false);
 }
 
 DmGuidRequest::~DmGuidRequest()
 {
 
 }
-
-
 
 void DmGuidRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {

@@ -19,7 +19,7 @@
 *
 * @file dm_efs_factory_image_start_request.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -32,13 +32,14 @@ DmEfsFactoryImageStartRequest::DmEfsFactoryImageStartRequest(PacketEndianess tar
 {
 
 	setSubsysCommand(kDiagEfsFactoryImageStart);
+
+	setResponseExpected(true);
 }
 
 DmEfsFactoryImageStartRequest::~DmEfsFactoryImageStartRequest()
 {
 
 }
-
 
 void DmEfsFactoryImageStartRequest::prepareResponse()
 {

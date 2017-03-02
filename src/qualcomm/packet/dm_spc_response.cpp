@@ -19,7 +19,7 @@
 *
 * @file dm_spc_response.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -33,6 +33,8 @@ DmSpcResponse::DmSpcResponse(PacketEndianess targetEndian) : DmPacket(targetEndi
 	addField("status", kPacketFieldTypePrimitive, sizeof(uint8_t));
 
 	setCommand(kDiagSpc);
+
+	setResponseExpected(false);
 }
 
 DmSpcResponse::~DmSpcResponse()
@@ -43,7 +45,9 @@ DmSpcResponse::~DmSpcResponse()
 uint8_t DmSpcResponse::getStatus()
 {
     return read<uint8_t>(getFieldOffset("status"));
-}                
+}
+                
+
 void DmSpcResponse::setStatus(uint8_t status)
 {
     write<uint8_t>("status", status);

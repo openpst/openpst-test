@@ -29,6 +29,7 @@
 #include "definitions.h"
 #include "transport/transport_interface.h"
 #include "transport/packet.h"
+#include "transport/packet_transporter.h"
 #include "qualcomm/streaming_dload.h"
 #include "qualcomm/streaming_dload_packets.h"
 
@@ -59,6 +60,7 @@ namespace OpenPST {
 		class StreamingDloadClient {
 			protected:
 				TransportInterface& transport;
+				PacketTransporter packetTransporter;
 				StreamingDloadFlashInfo flashInfo;
 				PacketEndianess deviceEndianess;
 

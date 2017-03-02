@@ -19,7 +19,7 @@
 *
 * @file dm_efs_hotplug_format_response.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -34,6 +34,8 @@ DmEfsHotplugFormatResponse::DmEfsHotplugFormatResponse(PacketEndianess targetEnd
 	addField("error", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
 	setSubsysCommand(kDiagEfsHotplugFormat);
+
+	setResponseExpected(false);
 }
 
 DmEfsHotplugFormatResponse::~DmEfsHotplugFormatResponse()
@@ -44,14 +46,20 @@ DmEfsHotplugFormatResponse::~DmEfsHotplugFormatResponse()
 uint16_t DmEfsHotplugFormatResponse::getSequence()
 {
     return read<uint16_t>(getFieldOffset("sequence"));
-}                
+}
+                
+
 void DmEfsHotplugFormatResponse::setSequence(uint16_t sequence)
 {
     write<uint16_t>("sequence", sequence);
-}uint32_t DmEfsHotplugFormatResponse::getError()
+}
+
+uint32_t DmEfsHotplugFormatResponse::getError()
 {
     return read<uint32_t>(getFieldOffset("error"));
-}                
+}
+                
+
 void DmEfsHotplugFormatResponse::setError(uint32_t error)
 {
     write<uint32_t>("error", error);

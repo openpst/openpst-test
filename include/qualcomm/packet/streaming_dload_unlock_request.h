@@ -19,7 +19,7 @@
 *
 * @file streaming_dload_unlock_request.h
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -48,17 +48,21 @@ namespace OpenPST {
                 */
                 ~StreamingDloadUnlockRequest();
 
+                
                 /**
                 * @brief Get code
                 * @return uint64_t
                 */
-                uint64_t getCode();                
+                uint64_t getCode();
+                                
+
                 /**
                 * @brief Set code
                 * @param uint64_t code
                 * @return void
                 */
-                void setCode(uint64_t code);				/**
+                void setCode(uint64_t code);
+                				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;

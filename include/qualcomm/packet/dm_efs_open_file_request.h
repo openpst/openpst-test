@@ -19,7 +19,7 @@
 *
 * @file dm_efs_open_file_request.h
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -48,38 +48,50 @@ namespace OpenPST {
                 */
                 ~DmEfsOpenFileRequest();
 
+                
                 /**
                 * @brief Get flags
                 * @return uint32_t
                 */
-                uint32_t getFlags();                
+                uint32_t getFlags();
+                                
+
                 /**
                 * @brief Set flags
                 * @param uint32_t flags
                 * @return void
                 */
-                void setFlags(uint32_t flags);                /**
+                void setFlags(uint32_t flags);
+                                
+                /**
                 * @brief Get mode
                 * @return uint32_t
                 */
-                uint32_t getMode();                
+                uint32_t getMode();
+                                
+
                 /**
                 * @brief Set mode
                 * @param uint32_t mode
                 * @return void
                 */
-                void setMode(uint32_t mode);                /**
+                void setMode(uint32_t mode);
+                
+                /**
                 * @brief Get file_path
                 * @return variable
                 */
-                std::vector<uint8_t> getFilePath();                
+                std::vector<uint8_t> getFilePath();
+                                
+
                 /**
                 * @brief Set file_path
                 * @param uint8_t* filePath
                 * @param size_t size
                 * @return void
                 */
-                void setFilePath(uint8_t* data, size_t size);				/**
+                void setFilePath(uint8_t* data, size_t size);
+                				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;

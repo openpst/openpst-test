@@ -19,7 +19,7 @@
 *
 * @file dm_efs_set_quota_response.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -33,6 +33,8 @@ DmEfsSetQuotaResponse::DmEfsSetQuotaResponse(PacketEndianess targetEndian) : DmE
 	addField("error", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
 	setSubsysCommand(kDiagEfsSetQuota);
+
+	setResponseExpected(false);
 }
 
 DmEfsSetQuotaResponse::~DmEfsSetQuotaResponse()
@@ -43,7 +45,9 @@ DmEfsSetQuotaResponse::~DmEfsSetQuotaResponse()
 uint32_t DmEfsSetQuotaResponse::getError()
 {
     return read<uint32_t>(getFieldOffset("error"));
-}                
+}
+                
+
 void DmEfsSetQuotaResponse::setError(uint32_t error)
 {
     write<uint32_t>("error", error);

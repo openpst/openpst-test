@@ -19,7 +19,7 @@
 *
 * @file sahara_memory_read_request.h
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -46,27 +46,35 @@ namespace OpenPST {
                 */
                 ~SaharaMemoryReadRequest();
 
+                
                 /**
                 * @brief Get address
                 * @return uint32_t
                 */
-                uint32_t getAddress();                
+                uint32_t getAddress();
+                                
+
                 /**
                 * @brief Set address
                 * @param uint32_t address
                 * @return void
                 */
-                void setAddress(uint32_t address);                /**
+                void setAddress(uint32_t address);
+                                
+                /**
                 * @brief Get size
                 * @return uint32_t
                 */
-                uint32_t getSize();                
+                uint32_t getSize();
+                                
+
                 /**
                 * @brief Set size
                 * @param uint32_t size
                 * @return void
                 */
-                void setSize(uint32_t size);				/**
+                void setSize(uint32_t size);
+                				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;

@@ -19,7 +19,7 @@
 *
 * @file dm_efs_sync_request.h
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -46,28 +46,36 @@ namespace OpenPST {
                 */
                 ~DmEfsSyncRequest();
 
+                
                 /**
                 * @brief Get sequence
                 * @return uint16_t
                 */
-                uint16_t getSequence();                
+                uint16_t getSequence();
+                                
+
                 /**
                 * @brief Set sequence
                 * @param uint16_t sequence
                 * @return void
                 */
-                void setSequence(uint16_t sequence);                /**
+                void setSequence(uint16_t sequence);
+                
+                /**
                 * @brief Get path
                 * @return variable
                 */
-                std::vector<uint8_t> getPath();                
+                std::vector<uint8_t> getPath();
+                                
+
                 /**
                 * @brief Set path
                 * @param uint8_t* path
                 * @param size_t size
                 * @return void
                 */
-                void setPath(uint8_t* data, size_t size);				/**
+                void setPath(uint8_t* data, size_t size);
+                				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;

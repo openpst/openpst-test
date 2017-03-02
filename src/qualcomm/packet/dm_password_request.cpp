@@ -19,7 +19,7 @@
 *
 * @file dm_password_request.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -33,6 +33,8 @@ DmPasswordRequest::DmPasswordRequest(PacketEndianess targetEndian) : DmPacket(ta
 	addField("password", kPacketFieldTypeArray, DIAG_PASSWORD_LENGTH);
 
 	setCommand(kDiagPassword);
+
+	setResponseExpected(false);
 }
 
 DmPasswordRequest::~DmPasswordRequest()
@@ -43,14 +45,20 @@ DmPasswordRequest::~DmPasswordRequest()
 std::vector<uint8_t> DmPasswordRequest::getPassword()
 {
 	return read(getFieldSize("password"), getFieldOffset("password"));
-}std::string DmPasswordRequest::getPassword()
+}
+
+std::string DmPasswordRequest::getPassword()
 {
 	return getString(8, getFieldOffset("password"));
-}                
+}
+                
+
 void DmPasswordRequest::setPassword(uint8_t* data, size_t size)
 {
     write("password", data, size);
-}void DmPasswordRequest::setPassword(const std::string& password)
+}
+
+void DmPasswordRequest::setPassword(const std::string& password)
 {
     write("password", password);
 }

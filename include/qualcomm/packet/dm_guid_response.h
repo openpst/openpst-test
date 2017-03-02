@@ -19,7 +19,7 @@
 *
 * @file dm_guid_response.h
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -50,23 +50,30 @@ namespace OpenPST {
                 * @brief Get guid
                 * @return uint8_t[]
                 */
-                std::vector<uint8_t> getGuid();                /**
+                std::vector<uint8_t> getGuid();
+                
+                /**
                 * @brief Get guid
                 * @return std::string
                 */
-                std::string getGuid();                
+                std::string getGuid();
+                                
+
                 /**
                 * @brief Set guid
                 * @param uint8_t* guid
                 * @param size_t size
                 * @return void
                 */
-                void setGuid(uint8_t* data, size_t size);                /**
+                void setGuid(uint8_t* data, size_t size);
+                
+                /**
                 * @brief Set guid
                 * @param const std::string& guid
                 * @return void
                 */
-                void setGuid(const std::string& guid);				/**
+                void setGuid(const std::string& guid);
+                				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;

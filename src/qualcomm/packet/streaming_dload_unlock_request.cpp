@@ -19,7 +19,7 @@
 *
 * @file streaming_dload_unlock_request.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -33,6 +33,8 @@ StreamingDloadUnlockRequest::StreamingDloadUnlockRequest(PacketEndianess targetE
 	addField("code", kPacketFieldTypePrimitive, sizeof(uint64_t));
 
 	setCommand(kStreamingDloadUnlock);
+
+	setResponseExpected(true);
 }
 
 StreamingDloadUnlockRequest::~StreamingDloadUnlockRequest()
@@ -43,11 +45,14 @@ StreamingDloadUnlockRequest::~StreamingDloadUnlockRequest()
 uint64_t StreamingDloadUnlockRequest::getCode()
 {
     return read<uint64_t>(getFieldOffset("code"));
-}                
+}
+                
+
 void StreamingDloadUnlockRequest::setCode(uint64_t code)
 {
     write<uint64_t>("code", code);
 }
+
 void StreamingDloadUnlockRequest::prepareResponse()
 {
 	if (response == nullptr) {

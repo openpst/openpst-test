@@ -19,7 +19,7 @@
 *
 * @file dm_phone_mode_request.h
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -46,27 +46,35 @@ namespace OpenPST {
                 */
                 ~DmPhoneModeRequest();
 
+                
                 /**
                 * @brief Get mode
                 * @return uint8_t
                 */
-                uint8_t getMode();                
+                uint8_t getMode();
+                                
+
                 /**
                 * @brief Set mode
                 * @param uint8_t mode
                 * @return void
                 */
-                void setMode(uint8_t mode);                /**
+                void setMode(uint8_t mode);
+                                
+                /**
                 * @brief Get padding
                 * @return uint8_t
                 */
-                uint8_t getPadding();                
+                uint8_t getPadding();
+                                
+
                 /**
                 * @brief Set padding
                 * @param uint8_t padding
                 * @return void
                 */
-                void setPadding(uint8_t padding);				/**
+                void setPadding(uint8_t padding);
+                				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;

@@ -19,7 +19,7 @@
 *
 * @file streaming_dload_read_response.h
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -46,28 +46,36 @@ namespace OpenPST {
                 */
                 ~StreamingDloadReadResponse();
 
+                
                 /**
                 * @brief Get address
                 * @return uint32_t
                 */
-                uint32_t getAddress();                
+                uint32_t getAddress();
+                                
+
                 /**
                 * @brief Set address
                 * @param uint32_t address
                 * @return void
                 */
-                void setAddress(uint32_t address);                /**
+                void setAddress(uint32_t address);
+                
+                /**
                 * @brief Get data
                 * @return variable
                 */
-                std::vector<uint8_t> getData();                
+                std::vector<uint8_t> getData();
+                                
+
                 /**
                 * @brief Set data
                 * @param uint8_t* data
                 * @param size_t size
                 * @return void
                 */
-                void setData(uint8_t* data, size_t size);				/**
+                void setData(uint8_t* data, size_t size);
+                				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;

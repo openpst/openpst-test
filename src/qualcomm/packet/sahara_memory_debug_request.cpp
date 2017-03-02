@@ -19,7 +19,7 @@
 *
 * @file sahara_memory_debug_request.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -34,6 +34,8 @@ SaharaMemoryDebugRequest::SaharaMemoryDebugRequest(PacketEndianess targetEndian)
 	addField("size", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
 	setCommand(kSaharaCommandMemoryDebug);
+
+	setResponseExpected(true);
 }
 
 SaharaMemoryDebugRequest::~SaharaMemoryDebugRequest()
@@ -44,18 +46,25 @@ SaharaMemoryDebugRequest::~SaharaMemoryDebugRequest()
 uint32_t SaharaMemoryDebugRequest::getAddress()
 {
     return read<uint32_t>(getFieldOffset("address"));
-}                
+}
+                
+
 void SaharaMemoryDebugRequest::setAddress(uint32_t address)
 {
     write<uint32_t>("address", address);
-}uint32_t SaharaMemoryDebugRequest::getSize()
+}
+
+uint32_t SaharaMemoryDebugRequest::getSize()
 {
     return read<uint32_t>(getFieldOffset("size"));
-}                
+}
+                
+
 void SaharaMemoryDebugRequest::setSize(uint32_t size)
 {
     write<uint32_t>("size", size);
 }
+
 void SaharaMemoryDebugRequest::prepareResponse()
 {
 	if (response == nullptr) {

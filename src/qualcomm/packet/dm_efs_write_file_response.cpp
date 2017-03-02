@@ -19,7 +19,7 @@
 *
 * @file dm_efs_write_file_response.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -36,6 +36,8 @@ DmEfsWriteFileResponse::DmEfsWriteFileResponse(PacketEndianess targetEndian) : D
 	addField("error", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
 	setSubsysCommand(kDiagEfsWrite);
+
+	setResponseExpected(false);
 }
 
 DmEfsWriteFileResponse::~DmEfsWriteFileResponse()
@@ -46,28 +48,42 @@ DmEfsWriteFileResponse::~DmEfsWriteFileResponse()
 uint32_t DmEfsWriteFileResponse::getFp()
 {
     return read<uint32_t>(getFieldOffset("fp"));
-}                
+}
+                
+
 void DmEfsWriteFileResponse::setFp(uint32_t fp)
 {
     write<uint32_t>("fp", fp);
-}uint32_t DmEfsWriteFileResponse::getOffset()
+}
+
+uint32_t DmEfsWriteFileResponse::getOffset()
 {
     return read<uint32_t>(getFieldOffset("offset"));
-}                
+}
+                
+
 void DmEfsWriteFileResponse::setOffset(uint32_t offset)
 {
     write<uint32_t>("offset", offset);
-}uint32_t DmEfsWriteFileResponse::getBytesWritten()
+}
+
+uint32_t DmEfsWriteFileResponse::getBytesWritten()
 {
     return read<uint32_t>(getFieldOffset("bytes_written"));
-}                
+}
+                
+
 void DmEfsWriteFileResponse::setBytesWritten(uint32_t bytesWritten)
 {
     write<uint32_t>("bytes_written", bytesWritten);
-}uint32_t DmEfsWriteFileResponse::getError()
+}
+
+uint32_t DmEfsWriteFileResponse::getError()
 {
     return read<uint32_t>(getFieldOffset("error"));
-}                
+}
+                
+
 void DmEfsWriteFileResponse::setError(uint32_t error)
 {
     write<uint32_t>("error", error);

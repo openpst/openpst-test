@@ -19,7 +19,7 @@
 *
 * @file dm_efs_ftruncate_response.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -34,6 +34,8 @@ DmEfsFtruncateResponse::DmEfsFtruncateResponse(PacketEndianess targetEndian) : D
 	addField("error", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
 	setSubsysCommand(kDiagEfsFtruncate);
+
+	setResponseExpected(false);
 }
 
 DmEfsFtruncateResponse::~DmEfsFtruncateResponse()
@@ -44,14 +46,20 @@ DmEfsFtruncateResponse::~DmEfsFtruncateResponse()
 uint16_t DmEfsFtruncateResponse::getSequence()
 {
     return read<uint16_t>(getFieldOffset("sequence"));
-}                
+}
+                
+
 void DmEfsFtruncateResponse::setSequence(uint16_t sequence)
 {
     write<uint16_t>("sequence", sequence);
-}uint32_t DmEfsFtruncateResponse::getError()
+}
+
+uint32_t DmEfsFtruncateResponse::getError()
 {
     return read<uint32_t>(getFieldOffset("error"));
-}                
+}
+                
+
 void DmEfsFtruncateResponse::setError(uint32_t error)
 {
     write<uint32_t>("error", error);

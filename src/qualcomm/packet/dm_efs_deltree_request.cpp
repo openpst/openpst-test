@@ -19,7 +19,7 @@
 *
 * @file dm_efs_deltree_request.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -34,6 +34,8 @@ DmEfsDeltreeRequest::DmEfsDeltreeRequest(PacketEndianess targetEndian) : DmEfsPa
 	addField("path", kPacketFieldTypeVariant, 0);
 
 	setSubsysCommand(kDiagEfsDeltree);
+
+	setResponseExpected(true);
 }
 
 DmEfsDeltreeRequest::~DmEfsDeltreeRequest()
@@ -44,18 +46,25 @@ DmEfsDeltreeRequest::~DmEfsDeltreeRequest()
 uint16_t DmEfsDeltreeRequest::getSequence()
 {
     return read<uint16_t>(getFieldOffset("sequence"));
-}                
+}
+                
+
 void DmEfsDeltreeRequest::setSequence(uint16_t sequence)
 {
     write<uint16_t>("sequence", sequence);
-}std::vector<uint8_t> DmEfsDeltreeRequest::getPath()
+}
+
+std::vector<uint8_t> DmEfsDeltreeRequest::getPath()
 {
 	return read(getFieldSize("path"), getFieldOffset("path"));
-}                
+}
+                
+
 void DmEfsDeltreeRequest::setPath(uint8_t* data, size_t size)
 {
     write("path", data, size);
 }
+
 void DmEfsDeltreeRequest::prepareResponse()
 {
 	if (response == nullptr) {

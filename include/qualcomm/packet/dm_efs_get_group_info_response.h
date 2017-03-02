@@ -19,7 +19,7 @@
 *
 * @file dm_efs_get_group_info_response.h
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -46,47 +46,63 @@ namespace OpenPST {
                 */
                 ~DmEfsGetGroupInfoResponse();
 
+                
                 /**
                 * @brief Get error
                 * @return uint32_t
                 */
-                uint32_t getError();                
+                uint32_t getError();
+                                
+
                 /**
                 * @brief Set error
                 * @param uint32_t error
                 * @return void
                 */
-                void setError(uint32_t error);                /**
+                void setError(uint32_t error);
+                                
+                /**
                 * @brief Get quota_size
                 * @return uint32_t
                 */
-                uint32_t getQuotaSize();                
+                uint32_t getQuotaSize();
+                                
+
                 /**
                 * @brief Set quota_size
                 * @param uint32_t quotaSize
                 * @return void
                 */
-                void setQuotaSize(uint32_t quotaSize);                /**
+                void setQuotaSize(uint32_t quotaSize);
+                                
+                /**
                 * @brief Get reservation_size
                 * @return uint32_t
                 */
-                uint32_t getReservationSize();                
+                uint32_t getReservationSize();
+                                
+
                 /**
                 * @brief Set reservation_size
                 * @param uint32_t reservationSize
                 * @return void
                 */
-                void setReservationSize(uint32_t reservationSize);                /**
+                void setReservationSize(uint32_t reservationSize);
+                                
+                /**
                 * @brief Get space_used
                 * @return uint32_t
                 */
-                uint32_t getSpaceUsed();                
+                uint32_t getSpaceUsed();
+                                
+
                 /**
                 * @brief Set space_used
                 * @param uint32_t spaceUsed
                 * @return void
                 */
-                void setSpaceUsed(uint32_t spaceUsed);				/**
+                void setSpaceUsed(uint32_t spaceUsed);
+                				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;

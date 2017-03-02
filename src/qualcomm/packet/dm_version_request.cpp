@@ -19,7 +19,7 @@
 *
 * @file dm_version_request.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -33,6 +33,8 @@ DmVersionRequest::DmVersionRequest(PacketEndianess targetEndian) : DmPacket(targ
 	addField("version", kPacketFieldTypePrimitive, sizeof(uint16_t));
 
 	setCommand(kDiagDiagVer);
+
+	setResponseExpected(false);
 }
 
 DmVersionRequest::~DmVersionRequest()
@@ -43,7 +45,9 @@ DmVersionRequest::~DmVersionRequest()
 uint16_t DmVersionRequest::getVersion()
 {
     return read<uint16_t>(getFieldOffset("version"));
-}                
+}
+                
+
 void DmVersionRequest::setVersion(uint16_t version)
 {
     write<uint16_t>("version", version);

@@ -19,7 +19,7 @@
 *
 * @file streaming_dload_set_ecc_state_response.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -32,14 +32,14 @@ StreamingDloadSetEccStateResponse::StreamingDloadSetEccStateResponse(PacketEndia
 {
 
 	setCommand(kStreamingDloadSetEccResponse);
+
+	setResponseExpected(false);
 }
 
 StreamingDloadSetEccStateResponse::~StreamingDloadSetEccStateResponse()
 {
 
 }
-
-
 
 void StreamingDloadSetEccStateResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {

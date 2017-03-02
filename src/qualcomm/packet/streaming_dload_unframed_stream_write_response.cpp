@@ -19,7 +19,7 @@
 *
 * @file streaming_dload_unframed_stream_write_response.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -33,6 +33,8 @@ StreamingDloadUnframedStreamWriteResponse::StreamingDloadUnframedStreamWriteResp
 	addField("address", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
 	setCommand(kStreamingDloadUnframedStreamWriteResponse);
+
+	setResponseExpected(false);
 }
 
 StreamingDloadUnframedStreamWriteResponse::~StreamingDloadUnframedStreamWriteResponse()
@@ -43,7 +45,9 @@ StreamingDloadUnframedStreamWriteResponse::~StreamingDloadUnframedStreamWriteRes
 uint32_t StreamingDloadUnframedStreamWriteResponse::getAddress()
 {
     return read<uint32_t>(getFieldOffset("address"));
-}                
+}
+                
+
 void StreamingDloadUnframedStreamWriteResponse::setAddress(uint32_t address)
 {
     write<uint32_t>("address", address);

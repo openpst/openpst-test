@@ -19,7 +19,7 @@
 *
 * @file dm_efs_chmod_request.h
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -48,28 +48,36 @@ namespace OpenPST {
                 */
                 ~DmEfsChmodRequest();
 
+                
                 /**
                 * @brief Get mode
                 * @return uint32_t
                 */
-                uint32_t getMode();                
+                uint32_t getMode();
+                                
+
                 /**
                 * @brief Set mode
                 * @param uint32_t mode
                 * @return void
                 */
-                void setMode(uint32_t mode);                /**
+                void setMode(uint32_t mode);
+                
+                /**
                 * @brief Get path
                 * @return variable
                 */
-                std::vector<uint8_t> getPath();                
+                std::vector<uint8_t> getPath();
+                                
+
                 /**
                 * @brief Set path
                 * @param uint8_t* path
                 * @param size_t size
                 * @return void
                 */
-                void setPath(uint8_t* data, size_t size);				/**
+                void setPath(uint8_t* data, size_t size);
+                				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;

@@ -19,7 +19,7 @@
 *
 * @file dm_efs_open_dir_request.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -33,6 +33,8 @@ DmEfsOpenDirRequest::DmEfsOpenDirRequest(PacketEndianess targetEndian) : DmEfsPa
 	addField("path", kPacketFieldTypeVariant, 0);
 
 	setSubsysCommand(kDiagEfsOpenDir);
+
+	setResponseExpected(true);
 }
 
 DmEfsOpenDirRequest::~DmEfsOpenDirRequest()
@@ -43,11 +45,14 @@ DmEfsOpenDirRequest::~DmEfsOpenDirRequest()
 std::vector<uint8_t> DmEfsOpenDirRequest::getPath()
 {
 	return read(getFieldSize("path"), getFieldOffset("path"));
-}                
+}
+                
+
 void DmEfsOpenDirRequest::setPath(uint8_t* data, size_t size)
 {
     write("path", data, size);
 }
+
 void DmEfsOpenDirRequest::prepareResponse()
 {
 	if (response == nullptr) {

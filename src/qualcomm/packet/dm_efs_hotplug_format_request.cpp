@@ -19,7 +19,7 @@
 *
 * @file dm_efs_hotplug_format_request.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -34,6 +34,8 @@ DmEfsHotplugFormatRequest::DmEfsHotplugFormatRequest(PacketEndianess targetEndia
 	addField("path", kPacketFieldTypeVariant, 0);
 
 	setSubsysCommand(kDiagEfsHotplugFormat);
+
+	setResponseExpected(true);
 }
 
 DmEfsHotplugFormatRequest::~DmEfsHotplugFormatRequest()
@@ -44,18 +46,25 @@ DmEfsHotplugFormatRequest::~DmEfsHotplugFormatRequest()
 uint16_t DmEfsHotplugFormatRequest::getSequence()
 {
     return read<uint16_t>(getFieldOffset("sequence"));
-}                
+}
+                
+
 void DmEfsHotplugFormatRequest::setSequence(uint16_t sequence)
 {
     write<uint16_t>("sequence", sequence);
-}std::vector<uint8_t> DmEfsHotplugFormatRequest::getPath()
+}
+
+std::vector<uint8_t> DmEfsHotplugFormatRequest::getPath()
 {
 	return read(getFieldSize("path"), getFieldOffset("path"));
-}                
+}
+                
+
 void DmEfsHotplugFormatRequest::setPath(uint8_t* data, size_t size)
 {
     write("path", data, size);
 }
+
 void DmEfsHotplugFormatRequest::prepareResponse()
 {
 	if (response == nullptr) {

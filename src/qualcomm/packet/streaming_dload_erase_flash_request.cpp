@@ -19,7 +19,7 @@
 *
 * @file streaming_dload_erase_flash_request.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -32,13 +32,14 @@ StreamingDloadEraseFlashRequest::StreamingDloadEraseFlashRequest(PacketEndianess
 {
 
 	setCommand(kStreamingDloadEraseFlash);
+
+	setResponseExpected(true);
 }
 
 StreamingDloadEraseFlashRequest::~StreamingDloadEraseFlashRequest()
 {
 
 }
-
 
 void StreamingDloadEraseFlashRequest::prepareResponse()
 {

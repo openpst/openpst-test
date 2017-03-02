@@ -1,19 +1,18 @@
 #include "transport/serial.h"
-#include "transport/async_serial.h"
-#include "transport/messaged_serial.h"
-#include "transport/messaged_async_serial.h"
-#include "server/tcp_serial_server.h"
-#include "transport/packet_writer.h"
+//#include "transport/async_serial.h"
+//#include "transport/messaged_serial.h"
+//#include "transport/messaged_async_serial.h"
+//#include "server/tcp_serial_server.h"
 #include "qualcomm/sahara_client.h"
 #include "qualcomm/streaming_dload_client.h"
-#include "qualcomm/hdlc_encoder.h"
+//#include "qualcomm/hdlc_encoder.h"
 #include <iostream>
 #include <fstream>
 #include <time.h> 
 
 using namespace OpenPST::Transport;
 using namespace OpenPST::Qualcomm;
-using namespace OpenPST::QC;
+//using namespace OpenPST::QC;
 
 int main_sahara(int argc, char* argv[])
 {

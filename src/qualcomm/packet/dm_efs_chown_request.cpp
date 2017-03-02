@@ -19,7 +19,7 @@
 *
 * @file dm_efs_chown_request.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -35,6 +35,8 @@ DmEfsChownRequest::DmEfsChownRequest(PacketEndianess targetEndian) : DmEfsPacket
 	addField("path", kPacketFieldTypeVariant, 0);
 
 	setSubsysCommand(kDiagEfsChown);
+
+	setResponseExpected(true);
 }
 
 DmEfsChownRequest::~DmEfsChownRequest()
@@ -45,25 +47,36 @@ DmEfsChownRequest::~DmEfsChownRequest()
 uint32_t DmEfsChownRequest::getUid()
 {
     return read<uint32_t>(getFieldOffset("uid"));
-}                
+}
+                
+
 void DmEfsChownRequest::setUid(uint32_t uid)
 {
     write<uint32_t>("uid", uid);
-}uint32_t DmEfsChownRequest::getGid()
+}
+
+uint32_t DmEfsChownRequest::getGid()
 {
     return read<uint32_t>(getFieldOffset("gid"));
-}                
+}
+                
+
 void DmEfsChownRequest::setGid(uint32_t gid)
 {
     write<uint32_t>("gid", gid);
-}std::vector<uint8_t> DmEfsChownRequest::getPath()
+}
+
+std::vector<uint8_t> DmEfsChownRequest::getPath()
 {
 	return read(getFieldSize("path"), getFieldOffset("path"));
-}                
+}
+                
+
 void DmEfsChownRequest::setPath(uint8_t* data, size_t size)
 {
     write("path", data, size);
 }
+
 void DmEfsChownRequest::prepareResponse()
 {
 	if (response == nullptr) {

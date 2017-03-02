@@ -19,7 +19,7 @@
 *
 * @file dm_version_request.h
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -46,17 +46,21 @@ namespace OpenPST {
                 */
                 ~DmVersionRequest();
 
+                
                 /**
                 * @brief Get version
                 * @return uint16_t
                 */
-                uint16_t getVersion();                
+                uint16_t getVersion();
+                                
+
                 /**
                 * @brief Set version
                 * @param uint16_t version
                 * @return void
                 */
-                void setVersion(uint16_t version);				/**
+                void setVersion(uint16_t version);
+                				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;

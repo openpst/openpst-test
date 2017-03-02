@@ -19,7 +19,7 @@
 *
 * @file dm_efs_statfs_response.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -42,6 +42,8 @@ DmEfsStatfsResponse::DmEfsStatfsResponse(PacketEndianess targetEndian) : DmEfsPa
 	addField("max_file_count", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
 	setSubsysCommand(kDiagEfsStatFS);
+
+	setResponseExpected(false);
 }
 
 DmEfsStatfsResponse::~DmEfsStatfsResponse()
@@ -52,70 +54,108 @@ DmEfsStatfsResponse::~DmEfsStatfsResponse()
 uint32_t DmEfsStatfsResponse::getError()
 {
     return read<uint32_t>(getFieldOffset("error"));
-}                
+}
+                
+
 void DmEfsStatfsResponse::setError(uint32_t error)
 {
     write<uint32_t>("error", error);
-}std::vector<uint8_t> DmEfsStatfsResponse::getFilesystemId()
+}
+
+std::vector<uint8_t> DmEfsStatfsResponse::getFilesystemId()
 {
 	return read(getFieldSize("filesystem_id"), getFieldOffset("filesystem_id"));
-}                
+}
+                
+
 void DmEfsStatfsResponse::setFilesystemId(uint8_t* data, size_t size)
 {
     write("filesystem_id", data, size);
-}uint32_t DmEfsStatfsResponse::getFilesystemType()
+}
+
+uint32_t DmEfsStatfsResponse::getFilesystemType()
 {
     return read<uint32_t>(getFieldOffset("filesystem_type"));
-}                
+}
+                
+
 void DmEfsStatfsResponse::setFilesystemType(uint32_t filesystemType)
 {
     write<uint32_t>("filesystem_type", filesystemType);
-}uint32_t DmEfsStatfsResponse::getBlockSize()
+}
+
+uint32_t DmEfsStatfsResponse::getBlockSize()
 {
     return read<uint32_t>(getFieldOffset("block_size"));
-}                
+}
+                
+
 void DmEfsStatfsResponse::setBlockSize(uint32_t blockSize)
 {
     write<uint32_t>("block_size", blockSize);
-}uint32_t DmEfsStatfsResponse::getTotalBlocks()
+}
+
+uint32_t DmEfsStatfsResponse::getTotalBlocks()
 {
     return read<uint32_t>(getFieldOffset("total_blocks"));
-}                
+}
+                
+
 void DmEfsStatfsResponse::setTotalBlocks(uint32_t totalBlocks)
 {
     write<uint32_t>("total_blocks", totalBlocks);
-}uint32_t DmEfsStatfsResponse::getAvailableBlocks()
+}
+
+uint32_t DmEfsStatfsResponse::getAvailableBlocks()
 {
     return read<uint32_t>(getFieldOffset("available_blocks"));
-}                
+}
+                
+
 void DmEfsStatfsResponse::setAvailableBlocks(uint32_t availableBlocks)
 {
     write<uint32_t>("available_blocks", availableBlocks);
-}uint32_t DmEfsStatfsResponse::getFreeBlocks()
+}
+
+uint32_t DmEfsStatfsResponse::getFreeBlocks()
 {
     return read<uint32_t>(getFieldOffset("free_blocks"));
-}                
+}
+                
+
 void DmEfsStatfsResponse::setFreeBlocks(uint32_t freeBlocks)
 {
     write<uint32_t>("free_blocks", freeBlocks);
-}uint32_t DmEfsStatfsResponse::getMaxFileSize()
+}
+
+uint32_t DmEfsStatfsResponse::getMaxFileSize()
 {
     return read<uint32_t>(getFieldOffset("max_file_size"));
-}                
+}
+                
+
 void DmEfsStatfsResponse::setMaxFileSize(uint32_t maxFileSize)
 {
     write<uint32_t>("max_file_size", maxFileSize);
-}uint32_t DmEfsStatfsResponse::getFileCount()
+}
+
+uint32_t DmEfsStatfsResponse::getFileCount()
 {
     return read<uint32_t>(getFieldOffset("file_count"));
-}                
+}
+                
+
 void DmEfsStatfsResponse::setFileCount(uint32_t fileCount)
 {
     write<uint32_t>("file_count", fileCount);
-}uint32_t DmEfsStatfsResponse::getMaxFileCount()
+}
+
+uint32_t DmEfsStatfsResponse::getMaxFileCount()
 {
     return read<uint32_t>(getFieldOffset("max_file_count"));
-}                
+}
+                
+
 void DmEfsStatfsResponse::setMaxFileCount(uint32_t maxFileCount)
 {
     write<uint32_t>("max_file_count", maxFileCount);

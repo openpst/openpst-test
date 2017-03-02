@@ -19,7 +19,7 @@
 *
 * @file dm_guid_response.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -32,6 +32,7 @@ DmGuidResponse::DmGuidResponse(PacketEndianess targetEndian) : DmPacket(targetEn
 {
 	addField("guid", kPacketFieldTypeArray, 16);
 
+	setResponseExpected(false);
 }
 
 DmGuidResponse::~DmGuidResponse()
@@ -42,14 +43,20 @@ DmGuidResponse::~DmGuidResponse()
 std::vector<uint8_t> DmGuidResponse::getGuid()
 {
 	return read(getFieldSize("guid"), getFieldOffset("guid"));
-}std::string DmGuidResponse::getGuid()
+}
+
+std::string DmGuidResponse::getGuid()
 {
 	return getString(16, getFieldOffset("guid"));
-}                
+}
+                
+
 void DmGuidResponse::setGuid(uint8_t* data, size_t size)
 {
     write("guid", data, size);
-}void DmGuidResponse::setGuid(const std::string& guid)
+}
+
+void DmGuidResponse::setGuid(const std::string& guid)
 {
     write("guid", guid);
 }

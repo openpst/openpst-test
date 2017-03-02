@@ -19,7 +19,7 @@
 *
 * @file dm_efs_factory_image_prepare_request.h
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */

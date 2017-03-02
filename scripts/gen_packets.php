@@ -88,6 +88,9 @@ foreach ($packets as $group => $pkts) {
 		$header = $twig->render('packet_header.twig', $packet);
 		$source = $twig->render('packet_source.twig', $packet);
 
+		$header = preg_replace('/\n{3,}/', "\n\n", $header);
+		$source = preg_replace('/\n{3,}/', "\n\n", $source);
+
 		file_put_contents(sprintf('%s/%s.h', $file_inc_dir, to_lower_name($name)), $header);
 		file_put_contents(sprintf('%s/%s.cpp', $file_src_dir, to_lower_name($name)), $source);
 	}

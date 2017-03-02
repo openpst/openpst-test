@@ -19,7 +19,7 @@
 *
 * @file dm_efs_create_link_response.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -33,6 +33,8 @@ DmEfsCreateLinkResponse::DmEfsCreateLinkResponse(PacketEndianess targetEndian) :
 	addField("error", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
 	setSubsysCommand(kDiagEfsSymlink);
+
+	setResponseExpected(false);
 }
 
 DmEfsCreateLinkResponse::~DmEfsCreateLinkResponse()
@@ -43,7 +45,9 @@ DmEfsCreateLinkResponse::~DmEfsCreateLinkResponse()
 uint32_t DmEfsCreateLinkResponse::getError()
 {
     return read<uint32_t>(getFieldOffset("error"));
-}                
+}
+                
+
 void DmEfsCreateLinkResponse::setError(uint32_t error)
 {
     write<uint32_t>("error", error);

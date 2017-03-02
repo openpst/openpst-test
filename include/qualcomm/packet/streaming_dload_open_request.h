@@ -19,7 +19,7 @@
 *
 * @file streaming_dload_open_request.h
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -48,17 +48,21 @@ namespace OpenPST {
                 */
                 ~StreamingDloadOpenRequest();
 
+                
                 /**
                 * @brief Get mode
                 * @return uint8_t
                 */
-                uint8_t getMode();                
+                uint8_t getMode();
+                                
+
                 /**
                 * @brief Set mode
                 * @param uint8_t mode
                 * @return void
                 */
-                void setMode(uint8_t mode);				/**
+                void setMode(uint8_t mode);
+                				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;

@@ -19,7 +19,7 @@
 *
 * @file streaming_dload_hello_request.h
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -52,43 +52,58 @@ namespace OpenPST {
                 * @brief Get magic
                 * @return std::string
                 */
-                std::string getMagic();                
+                std::string getMagic();
+                                
+
                 /**
                 * @brief Set magic
                 * @param const std::string& magic
                 * @return void
                 */
-                void setMagic(const std::string& magic);                /**
+                void setMagic(const std::string& magic);
+                                
+                /**
                 * @brief Get version
                 * @return uint8_t
                 */
-                uint8_t getVersion();                
+                uint8_t getVersion();
+                                
+
                 /**
                 * @brief Set version
                 * @param uint8_t version
                 * @return void
                 */
-                void setVersion(uint8_t version);                /**
+                void setVersion(uint8_t version);
+                                
+                /**
                 * @brief Get compatible_version
                 * @return uint8_t
                 */
-                uint8_t getCompatibleVersion();                
+                uint8_t getCompatibleVersion();
+                                
+
                 /**
                 * @brief Set compatible_version
                 * @param uint8_t compatibleVersion
                 * @return void
                 */
-                void setCompatibleVersion(uint8_t compatibleVersion);                /**
+                void setCompatibleVersion(uint8_t compatibleVersion);
+                                
+                /**
                 * @brief Get feature_bits
                 * @return uint8_t
                 */
-                uint8_t getFeatureBits();                
+                uint8_t getFeatureBits();
+                                
+
                 /**
                 * @brief Set feature_bits
                 * @param uint8_t featureBits
                 * @return void
                 */
-                void setFeatureBits(uint8_t featureBits);				/**
+                void setFeatureBits(uint8_t featureBits);
+                				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;

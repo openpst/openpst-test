@@ -19,7 +19,7 @@
 *
 * @file dm_efs_read_link_response.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -34,6 +34,8 @@ DmEfsReadLinkResponse::DmEfsReadLinkResponse(PacketEndianess targetEndian) : DmE
 	addField("path", kPacketFieldTypeVariant, 0);
 
 	setSubsysCommand(kDiagEfsReadLink);
+
+	setResponseExpected(false);
 }
 
 DmEfsReadLinkResponse::~DmEfsReadLinkResponse()
@@ -44,14 +46,20 @@ DmEfsReadLinkResponse::~DmEfsReadLinkResponse()
 uint32_t DmEfsReadLinkResponse::getError()
 {
     return read<uint32_t>(getFieldOffset("error"));
-}                
+}
+                
+
 void DmEfsReadLinkResponse::setError(uint32_t error)
 {
     write<uint32_t>("error", error);
-}std::vector<uint8_t> DmEfsReadLinkResponse::getPath()
+}
+
+std::vector<uint8_t> DmEfsReadLinkResponse::getPath()
 {
 	return read(getFieldSize("path"), getFieldOffset("path"));
-}                
+}
+                
+
 void DmEfsReadLinkResponse::setPath(uint8_t* data, size_t size)
 {
     write("path", data, size);

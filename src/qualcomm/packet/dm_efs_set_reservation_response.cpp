@@ -19,7 +19,7 @@
 *
 * @file dm_efs_set_reservation_response.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -33,6 +33,8 @@ DmEfsSetReservationResponse::DmEfsSetReservationResponse(PacketEndianess targetE
 	addField("error", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
 	setSubsysCommand(kDiagEfsSetReservation);
+
+	setResponseExpected(false);
 }
 
 DmEfsSetReservationResponse::~DmEfsSetReservationResponse()
@@ -43,7 +45,9 @@ DmEfsSetReservationResponse::~DmEfsSetReservationResponse()
 uint32_t DmEfsSetReservationResponse::getError()
 {
     return read<uint32_t>(getFieldOffset("error"));
-}                
+}
+                
+
 void DmEfsSetReservationResponse::setError(uint32_t error)
 {
     write<uint32_t>("error", error);

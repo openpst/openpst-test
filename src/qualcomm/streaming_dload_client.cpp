@@ -29,14 +29,14 @@
 using namespace OpenPST::Qualcomm;
 
 StreamingDloadClient::StreamingDloadClient(TransportInterface& transport, const StreamingDloadFlashInfo& flashInfo, PacketEndianess deviceEndianess) :
-	transport(transport), deviceEndianess(deviceEndianess)
+	transport(transport), packetTransporter(transport), deviceEndianess(deviceEndianess)
 {
 	this->flashInfo.sectorSize = flashInfo.sectorSize;
 	this->flashInfo.maxSectors = flashInfo.maxSectors;
 }
 
 StreamingDloadClient::StreamingDloadClient(TransportInterface& transport, PacketEndianess deviceEndianess) :
-	transport(transport), deviceEndianess(deviceEndianess)
+	transport(transport), packetTransporter(transport), deviceEndianess(deviceEndianess)
 {
 	this->flashInfo.sectorSize = 512;
 	this->flashInfo.maxSectors = 0;
@@ -55,6 +55,7 @@ TransportInterface* StreamingDloadClient::getTransport()
 void StreamingDloadClient::setTransport(TransportInterface& transport)
 {
 	this->transport = transport;
+	packetTransporter.setTransport(transport);
 }
 
 StreamingDloadDeviceInfo StreamingDloadClient::hello(std::string magic, uint8_t version, uint8_t compatibleVersion, uint8_t featureBits)

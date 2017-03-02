@@ -19,7 +19,7 @@
 *
 * @file dm_efs_factory_image_prepare_response.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -33,6 +33,8 @@ DmEfsFactoryImagePrepareResponse::DmEfsFactoryImagePrepareResponse(PacketEndiane
 	addField("error", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
 	setSubsysCommand(kDiagEfsPrepareFactoryImage);
+
+	setResponseExpected(false);
 }
 
 DmEfsFactoryImagePrepareResponse::~DmEfsFactoryImagePrepareResponse()
@@ -43,7 +45,9 @@ DmEfsFactoryImagePrepareResponse::~DmEfsFactoryImagePrepareResponse()
 uint32_t DmEfsFactoryImagePrepareResponse::getError()
 {
     return read<uint32_t>(getFieldOffset("error"));
-}                
+}
+                
+
 void DmEfsFactoryImagePrepareResponse::setError(uint32_t error)
 {
     write<uint32_t>("error", error);

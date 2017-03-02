@@ -24,42 +24,47 @@
 * @author Gassan Idriss <ghassani@gmail.com>
 */
 
-#include "transport/packet_writer.h"
-#ifdef PACKET_WRITER_DEBUG
+#include "transport/packet_transporter.h"
+#ifdef PACKET_TRANSPORTER_DEBUG
 #include "util/hexdump.h"
 #endif
 
 using namespace OpenPST::Transport;
 
-PacketWriter::PacketWriter(TransportInterface& transport) : 
+PacketTransporter::PacketTransporter(TransportInterface& transport) : 
 transport(transport)
 {
 
 }
 
 
-PacketWriter::~PacketWriter()
+PacketTransporter::~PacketTransporter()
 {
 	
 }
 
-TransportInterface& PacketWriter::getTransport()
+TransportInterface* PacketTransporter::getTransport()
 {
-	return transport;
+	return &transport;
 }
 
-void PacketWriter::write(Packet* packet)
+void PacketTransporter::setTransport(TransportInterface& transport)
+{
+	this->transport = transport;
+}
+
+void PacketTransporter::write(Packet* packet, bool andRead)
 {
 	if (!transport.isOpen()) {
-		throw PacketWriterError("Transport not open");
+		throw PacketTransporterError("Transport not open");
 	}
 
 	packet->prepare();
 
-#ifdef PACKET_WRITER_DEBUG_TX
-	std::cout << "[PacketWriter] Attempting to write " << packet->size() << " bytes" << std::endl;
-	hexdump((uint8_t*)&packet->getData()[0], packet->size());
-#endif
+	#ifdef PACKET_TRANSPORTER_DEBUG_TX
+		std::cout << "PacketTransporter: Attempting to write " << packet->size() << " bytes" << std::endl;
+		hexdump((uint8_t*)&packet->getData()[0], packet->size());
+	#endif
 
 	transport.write(packet->getData());
 
@@ -72,32 +77,36 @@ void PacketWriter::write(Packet* packet)
 		Packet* response = packet->getResponse();
 
 		if (response == nullptr) {
-			throw PacketWriterError("Response packet has not been allocated");
+			throw PacketTransporterError("Response packet has not been allocated");
 		}
 		
-#ifdef PACKET_WRITER_DEBUG
-		std::cout << __PRETTY_FUNCTION__ << std::endl << "Attempting to read " << response->getMaxDataSize() << " bytes" << std::endl;
-#endif
+		#ifdef PACKET_TRANSPORTER_DEBUG
+			std::cout << std::endl << "PacketTransporter: Attempting to read " << response->getMaxDataSize() << " bytes" << std::endl;
+		#endif
+
 		transport.read(rbuffer, response->getMaxDataSize());
 	
-#ifdef PACKET_WRITER_DEBUG
-		std::cout << __PRETTY_FUNCTION__ << std::endl << "Read " << rbuffer.size() << " bytes" << std::endl;
+		#ifdef PACKET_TRANSPORTER_DEBUG_RX
+			std::cout << std::endl << "PacketTransporter: Read " << rbuffer.size() << " bytes" << std::endl;
 
-		hexdump((uint8_t*)&rbuffer[0], rbuffer.size());
+			hexdump((uint8_t*)&rbuffer[0], rbuffer.size());
+		#endif
 
-		if (transport.available()) {
-			std::cout << transport.available() << " bytes of data is still waiting to be read!" << std::endl;
-		}
-#endif
+		#ifdef PACKET_TRANSPORTER_DEBUG
+			if (transport.available()) {
+				std::cout << "PacketTransporter: " << transport.available() << " bytes of data is still waiting to be read!" << std::endl;
+			}
+		#endif
+
 		response->unpack(rbuffer, &transport);
 	}
 }
 
-void PacketWriter::read(Packet* packet)
+void PacketTransporter::read(Packet* packet, bool andWrite)
 {
 
 	if (!transport.isOpen()) {
-		throw PacketWriterError("Device not open");
+		throw PacketTransporterError("Device not open");
 	}
 
 	std::vector<uint8_t> rbuffer;
@@ -113,7 +122,7 @@ void PacketWriter::read(Packet* packet)
 		Packet* response = packet->getResponse();
 		
 		if (response == nullptr) {
-			throw PacketWriterError("Response packet has not been allocated");
+			throw PacketTransporterError("Response packet has not been allocated");
 		}
 
 		response->prepare();

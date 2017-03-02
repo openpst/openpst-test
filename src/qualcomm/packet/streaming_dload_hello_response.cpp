@@ -19,7 +19,7 @@
 *
 * @file streaming_dload_hello_response.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -43,6 +43,8 @@ StreamingDloadHelloResponse::StreamingDloadHelloResponse(PacketEndianess targetE
 	addField("feature_bits", kPacketFieldTypePrimitive, sizeof(uint8_t));
 
 	setCommand(kStreamingDloadHelloResponse);
+
+	setResponseExpected(false);
 }
 
 StreamingDloadHelloResponse::~StreamingDloadHelloResponse()
@@ -53,77 +55,119 @@ StreamingDloadHelloResponse::~StreamingDloadHelloResponse()
 std::string StreamingDloadHelloResponse::getMagic()
 {
 	return getString(32, getFieldOffset("magic"));
-}                
+}
+                
+
 void StreamingDloadHelloResponse::setMagic(uint8_t* data, size_t size)
 {
     write("magic", data, size);
-}uint8_t StreamingDloadHelloResponse::getVersion()
+}
+
+uint8_t StreamingDloadHelloResponse::getVersion()
 {
     return read<uint8_t>(getFieldOffset("version"));
-}                
+}
+                
+
 void StreamingDloadHelloResponse::setVersion(uint8_t version)
 {
     write<uint8_t>("version", version);
-}uint8_t StreamingDloadHelloResponse::getCompatibleVersion()
+}
+
+uint8_t StreamingDloadHelloResponse::getCompatibleVersion()
 {
     return read<uint8_t>(getFieldOffset("compatible_version"));
-}                
+}
+                
+
 void StreamingDloadHelloResponse::setCompatibleVersion(uint8_t compatibleVersion)
 {
     write<uint8_t>("compatible_version", compatibleVersion);
-}uint32_t StreamingDloadHelloResponse::getPreferredBlockSize()
+}
+
+uint32_t StreamingDloadHelloResponse::getPreferredBlockSize()
 {
     return read<uint32_t>(getFieldOffset("preferred_block_size"));
-}                
+}
+                
+
 void StreamingDloadHelloResponse::setPreferredBlockSize(uint32_t preferredBlockSize)
 {
     write<uint32_t>("preferred_block_size", preferredBlockSize);
-}uint32_t StreamingDloadHelloResponse::getBaseFlashAddress()
+}
+
+uint32_t StreamingDloadHelloResponse::getBaseFlashAddress()
 {
     return read<uint32_t>(getFieldOffset("base_flash_address"));
-}                
+}
+                
+
 void StreamingDloadHelloResponse::setBaseFlashAddress(uint32_t baseFlashAddress)
 {
     write<uint32_t>("base_flash_address", baseFlashAddress);
-}uint8_t StreamingDloadHelloResponse::getFlashIdLength()
+}
+
+uint8_t StreamingDloadHelloResponse::getFlashIdLength()
 {
     return read<uint8_t>(getFieldOffset("flash_id_length"));
-}                
+}
+                
+
 void StreamingDloadHelloResponse::setFlashIdLength(uint8_t flashIdLength)
 {
     write<uint8_t>("flash_id_length", flashIdLength);
-}std::string StreamingDloadHelloResponse::getFlashId()
+}
+
+std::string StreamingDloadHelloResponse::getFlashId()
 {
 	return getString(0, getFieldOffset("flash_id"));
-}                
+}
+                
+
 void StreamingDloadHelloResponse::setFlashId(uint8_t* data, size_t size)
 {
     write("flash_id", data, size);
-}uint16_t StreamingDloadHelloResponse::getWindowSize()
+}
+
+uint16_t StreamingDloadHelloResponse::getWindowSize()
 {
     return read<uint16_t>(getFieldOffset("window_size"));
-}                
+}
+                
+
 void StreamingDloadHelloResponse::setWindowSize(uint16_t windowSize)
 {
     write<uint16_t>("window_size", windowSize);
-}uint16_t StreamingDloadHelloResponse::getNumberOfSectors()
+}
+
+uint16_t StreamingDloadHelloResponse::getNumberOfSectors()
 {
     return read<uint16_t>(getFieldOffset("number_of_sectors"));
-}                
+}
+                
+
 void StreamingDloadHelloResponse::setNumberOfSectors(uint16_t numberOfSectors)
 {
     write<uint16_t>("number_of_sectors", numberOfSectors);
-}std::vector<uint8_t> StreamingDloadHelloResponse::getSectorSizes()
+}
+
+std::vector<uint8_t> StreamingDloadHelloResponse::getSectorSizes()
 {
 	return read(getFieldSize("sector_sizes"), getFieldOffset("sector_sizes"));
-}                
+}
+                
+
 void StreamingDloadHelloResponse::setSectorSizes(uint8_t* data, size_t size)
 {
     write("sector_sizes", data, size);
-}uint8_t StreamingDloadHelloResponse::getFeatureBits()
+}
+
+uint8_t StreamingDloadHelloResponse::getFeatureBits()
 {
     return read<uint8_t>(getFieldOffset("feature_bits"));
-}                
+}
+                
+
 void StreamingDloadHelloResponse::setFeatureBits(uint8_t featureBits)
 {
     write<uint8_t>("feature_bits", featureBits);

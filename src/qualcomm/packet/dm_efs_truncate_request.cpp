@@ -19,7 +19,7 @@
 *
 * @file dm_efs_truncate_request.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -35,6 +35,8 @@ DmEfsTruncateRequest::DmEfsTruncateRequest(PacketEndianess targetEndian) : DmEfs
 	addField("path", kPacketFieldTypeVariant, 0);
 
 	setSubsysCommand(kDiagEfsTruncate);
+
+	setResponseExpected(true);
 }
 
 DmEfsTruncateRequest::~DmEfsTruncateRequest()
@@ -45,25 +47,36 @@ DmEfsTruncateRequest::~DmEfsTruncateRequest()
 uint16_t DmEfsTruncateRequest::getSequence()
 {
     return read<uint16_t>(getFieldOffset("sequence"));
-}                
+}
+                
+
 void DmEfsTruncateRequest::setSequence(uint16_t sequence)
 {
     write<uint16_t>("sequence", sequence);
-}uint32_t DmEfsTruncateRequest::getLength()
+}
+
+uint32_t DmEfsTruncateRequest::getLength()
 {
     return read<uint32_t>(getFieldOffset("length"));
-}                
+}
+                
+
 void DmEfsTruncateRequest::setLength(uint32_t length)
 {
     write<uint32_t>("length", length);
-}std::vector<uint8_t> DmEfsTruncateRequest::getPath()
+}
+
+std::vector<uint8_t> DmEfsTruncateRequest::getPath()
 {
 	return read(getFieldSize("path"), getFieldOffset("path"));
-}                
+}
+                
+
 void DmEfsTruncateRequest::setPath(uint8_t* data, size_t size)
 {
     write("path", data, size);
 }
+
 void DmEfsTruncateRequest::prepareResponse()
 {
 	if (response == nullptr) {

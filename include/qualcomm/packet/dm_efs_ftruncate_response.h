@@ -19,7 +19,7 @@
 *
 * @file dm_efs_ftruncate_response.h
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -46,27 +46,35 @@ namespace OpenPST {
                 */
                 ~DmEfsFtruncateResponse();
 
+                
                 /**
                 * @brief Get sequence
                 * @return uint16_t
                 */
-                uint16_t getSequence();                
+                uint16_t getSequence();
+                                
+
                 /**
                 * @brief Set sequence
                 * @param uint16_t sequence
                 * @return void
                 */
-                void setSequence(uint16_t sequence);                /**
+                void setSequence(uint16_t sequence);
+                                
+                /**
                 * @brief Get error
                 * @return uint32_t
                 */
-                uint32_t getError();                
+                uint32_t getError();
+                                
+
                 /**
                 * @brief Set error
                 * @param uint32_t error
                 * @return void
                 */
-                void setError(uint32_t error);				/**
+                void setError(uint32_t error);
+                				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;

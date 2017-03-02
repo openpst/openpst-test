@@ -19,7 +19,7 @@
 *
 * @file dm_efs_mkdir_response.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -33,6 +33,8 @@ DmEfsMkdirResponse::DmEfsMkdirResponse(PacketEndianess targetEndian) : DmEfsPack
 	addField("error", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
 	setSubsysCommand(kDiagEfsMkdir);
+
+	setResponseExpected(false);
 }
 
 DmEfsMkdirResponse::~DmEfsMkdirResponse()
@@ -43,7 +45,9 @@ DmEfsMkdirResponse::~DmEfsMkdirResponse()
 uint32_t DmEfsMkdirResponse::getError()
 {
     return read<uint32_t>(getFieldOffset("error"));
-}                
+}
+                
+
 void DmEfsMkdirResponse::setError(uint32_t error)
 {
     write<uint32_t>("error", error);

@@ -19,7 +19,7 @@
 *
 * @file dm_efs_read_file_request.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -35,6 +35,8 @@ DmEfsReadFileRequest::DmEfsReadFileRequest(PacketEndianess targetEndian) : DmEfs
 	addField("offset", kPacketFieldTypePrimitive, sizeof(uint32_t));
 
 	setSubsysCommand(kDiagEfsRead);
+
+	setResponseExpected(true);
 }
 
 DmEfsReadFileRequest::~DmEfsReadFileRequest()
@@ -45,25 +47,36 @@ DmEfsReadFileRequest::~DmEfsReadFileRequest()
 uint32_t DmEfsReadFileRequest::getFp()
 {
     return read<uint32_t>(getFieldOffset("fp"));
-}                
+}
+                
+
 void DmEfsReadFileRequest::setFp(uint32_t fp)
 {
     write<uint32_t>("fp", fp);
-}uint32_t DmEfsReadFileRequest::getSize()
+}
+
+uint32_t DmEfsReadFileRequest::getSize()
 {
     return read<uint32_t>(getFieldOffset("size"));
-}                
+}
+                
+
 void DmEfsReadFileRequest::setSize(uint32_t size)
 {
     write<uint32_t>("size", size);
-}uint32_t DmEfsReadFileRequest::getOffset()
+}
+
+uint32_t DmEfsReadFileRequest::getOffset()
 {
     return read<uint32_t>(getFieldOffset("offset"));
-}                
+}
+                
+
 void DmEfsReadFileRequest::setOffset(uint32_t offset)
 {
     write<uint32_t>("offset", offset);
 }
+
 void DmEfsReadFileRequest::prepareResponse()
 {
 	if (response == nullptr) {

@@ -19,7 +19,7 @@
 *
 * @file dm_efs_shred_request.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -34,6 +34,8 @@ DmEfsShredRequest::DmEfsShredRequest(PacketEndianess targetEndian) : DmEfsPacket
 	addField("path", kPacketFieldTypeVariant, 0);
 
 	setSubsysCommand(kDiagEfsShred);
+
+	setResponseExpected(true);
 }
 
 DmEfsShredRequest::~DmEfsShredRequest()
@@ -44,18 +46,25 @@ DmEfsShredRequest::~DmEfsShredRequest()
 uint16_t DmEfsShredRequest::getSequence()
 {
     return read<uint16_t>(getFieldOffset("sequence"));
-}                
+}
+                
+
 void DmEfsShredRequest::setSequence(uint16_t sequence)
 {
     write<uint16_t>("sequence", sequence);
-}std::vector<uint8_t> DmEfsShredRequest::getPath()
+}
+
+std::vector<uint8_t> DmEfsShredRequest::getPath()
 {
 	return read(getFieldSize("path"), getFieldOffset("path"));
-}                
+}
+                
+
 void DmEfsShredRequest::setPath(uint8_t* data, size_t size)
 {
     write("path", data, size);
 }
+
 void DmEfsShredRequest::prepareResponse()
 {
 	if (response == nullptr) {

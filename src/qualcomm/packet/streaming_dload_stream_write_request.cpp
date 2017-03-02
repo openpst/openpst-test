@@ -19,7 +19,7 @@
 *
 * @file streaming_dload_stream_write_request.cpp
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -34,6 +34,8 @@ StreamingDloadStreamWriteRequest::StreamingDloadStreamWriteRequest(PacketEndiane
 	addField("data", kPacketFieldTypeVariant, 0);
 
 	setCommand(kStreamingDloadStreamWrite);
+
+	setResponseExpected(true);
 }
 
 StreamingDloadStreamWriteRequest::~StreamingDloadStreamWriteRequest()
@@ -44,24 +46,35 @@ StreamingDloadStreamWriteRequest::~StreamingDloadStreamWriteRequest()
 uint32_t StreamingDloadStreamWriteRequest::getAddress()
 {
     return read<uint32_t>(getFieldOffset("address"));
-}                
+}
+                
+
 void StreamingDloadStreamWriteRequest::setAddress(uint32_t address)
 {
     write<uint32_t>("address", address);
-}std::vector<uint8_t> StreamingDloadStreamWriteRequest::getData()
+}
+
+std::vector<uint8_t> StreamingDloadStreamWriteRequest::getData()
 {
 	return read(getFieldSize("data"), getFieldOffset("data"));
-}                
+}
+                
+
 void StreamingDloadStreamWriteRequest::setData(std::ifstream& file, size_t size)
 {
     write("data", file, size);
-}void StreamingDloadStreamWriteRequest::setData(uint8_t* data, size_t size)
+}
+
+void StreamingDloadStreamWriteRequest::setData(uint8_t* data, size_t size)
 {
     write("data", data, size);
-}void StreamingDloadStreamWriteRequest::setData(const std::string& data)
+}
+
+void StreamingDloadStreamWriteRequest::setData(const std::string& data)
 {
     write("data", data);
 }
+
 void StreamingDloadStreamWriteRequest::prepareResponse()
 {
 	if (response == nullptr) {

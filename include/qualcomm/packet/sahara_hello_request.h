@@ -19,7 +19,7 @@
 *
 * @file sahara_hello_request.h
 * @package openpst/libopenpst
-* @brief 
+* @brief  This file was auto generated on 03/01/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -48,68 +48,92 @@ namespace OpenPST {
                 */
                 ~SaharaHelloRequest();
 
+                
                 /**
                 * @brief Get version
                 * @return uint32_t
                 */
-                uint32_t getVersion();                
+                uint32_t getVersion();
+                                
+
                 /**
                 * @brief Set version
                 * @param uint32_t version
                 * @return void
                 */
-                void setVersion(uint32_t version);                /**
+                void setVersion(uint32_t version);
+                                
+                /**
                 * @brief Get min_version
                 * @return uint32_t
                 */
-                uint32_t getMinVersion();                
+                uint32_t getMinVersion();
+                                
+
                 /**
                 * @brief Set min_version
                 * @param uint32_t minVersion
                 * @return void
                 */
-                void setMinVersion(uint32_t minVersion);                /**
+                void setMinVersion(uint32_t minVersion);
+                                
+                /**
                 * @brief Get max_command_packet_size
                 * @return uint32_t
                 */
-                uint32_t getMaxCommandPacketSize();                
+                uint32_t getMaxCommandPacketSize();
+                                
+
                 /**
                 * @brief Set max_command_packet_size
                 * @param uint32_t maxCommandPacketSize
                 * @return void
                 */
-                void setMaxCommandPacketSize(uint32_t maxCommandPacketSize);                /**
+                void setMaxCommandPacketSize(uint32_t maxCommandPacketSize);
+                                
+                /**
                 * @brief Get status
                 * @return uint32_t
                 */
-                uint32_t getStatus();                
+                uint32_t getStatus();
+                                
+
                 /**
                 * @brief Set status
                 * @param uint32_t status
                 * @return void
                 */
-                void setStatus(uint32_t status);                /**
+                void setStatus(uint32_t status);
+                                
+                /**
                 * @brief Get mode
                 * @return uint32_t
                 */
-                uint32_t getMode();                
+                uint32_t getMode();
+                                
+
                 /**
                 * @brief Set mode
                 * @param uint32_t mode
                 * @return void
                 */
-                void setMode(uint32_t mode);                /**
+                void setMode(uint32_t mode);
+                
+                /**
                 * @brief Get reserved
                 * @return uint8_t[]
                 */
-                std::vector<uint8_t> getReserved();                
+                std::vector<uint8_t> getReserved();
+                                
+
                 /**
                 * @brief Set reserved
                 * @param uint8_t* reserved
                 * @param size_t size
                 * @return void
                 */
-                void setReserved(uint8_t* data, size_t size);				/**
+                void setReserved(uint8_t* data, size_t size);
+                				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;
