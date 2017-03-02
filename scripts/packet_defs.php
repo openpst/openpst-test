@@ -432,7 +432,7 @@ $packets['streaming_dload'] = [
 				'type' => FIELD_TYPE_UARRAY,
 				'size' => $fieldSizes[FIELD_TYPE_UINT8] * 32,
 				'size_const' => 'STREAMING_DLOAD_MAGIC_SIZE',
-				'default_string' => 'QualcommOM fast download protocol host',
+				'default_string' => 'QCOM fast download protocol host',
 				'allowed_getters' => ['string'],
 				'allowed_setters' => ['string'],
 			],

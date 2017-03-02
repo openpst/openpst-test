@@ -28,7 +28,7 @@
 
 #include "qualcomm/dm_efs_manager.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 /**
 * @brief DmEfsManager - Constructor

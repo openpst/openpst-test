@@ -22,6 +22,8 @@ $inc_dir = sprintf('%s/include', $out_dir);
 
 // genereate
 
+$excludeUnpackReplace = explode(PHP_EOL, file_get_contents(dirname(__FILE__).'/.ignore_unpack_replace'));
+
 foreach ($packets as $group => $pkts) {
 	foreach ($pkts as $name => $packet) {
 		if (isset($packet['skip'])) {
@@ -77,8 +79,8 @@ foreach ($packets as $group => $pkts) {
 		}
 
 		$realSrcFile = sprintf('%s/%s/%s.cpp', REAL_SRC_DIR, $packet['path'], to_lower_name($name));
-
-		if (file_exists($realSrcFile)) {
+		
+		if (file_exists($realSrcFile) && in_array($name, $excludeUnpackReplace)) {
 			$cust = extract_unpack_method($realSrcFile);
 			if (trim($cust)) {
 				$packet['unpacked_custom'] = $cust;

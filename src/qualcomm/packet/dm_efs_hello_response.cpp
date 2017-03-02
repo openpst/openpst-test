@@ -19,7 +19,7 @@
 *
 * @file dm_efs_hello_response.cpp
 * @package openpst/libopenpst
-* @brief  This file was auto generated on 03/01/2017
+* @brief  This file was auto generated on 03/02/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -151,7 +151,6 @@ void DmEfsHelloResponse::setFeatureBits(uint32_t featureBits)
 
 void DmEfsHelloResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	DmEfsPacket::unpack(data, transport);
 	setTargetPacketWindowSize(read<uint32_t>(data, getFieldOffset("target_packet_window_size")));
 	setTargetPacketWindowByteSize(read<uint32_t>(data, getFieldOffset("target_packet_window_byte_size")));

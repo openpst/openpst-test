@@ -29,7 +29,7 @@
 #include <string>
 #include <sstream>
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 RawProgramXmlReader::RawProgramXmlReader()
 {

@@ -19,7 +19,7 @@
 *
 * @file sahara_client_command_request.cpp
 * @package openpst/libopenpst
-* @brief  This file was auto generated on 03/01/2017
+* @brief  This file was auto generated on 03/02/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -63,6 +63,5 @@ void SaharaClientCommandRequest::prepareResponse()
 
 void SaharaClientCommandRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	setClientCommand(read<uint32_t>(data, getFieldOffset("client_command")));
 }

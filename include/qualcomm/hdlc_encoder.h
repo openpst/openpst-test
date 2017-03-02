@@ -45,7 +45,7 @@
 #define HDLC_LEADING_LENGTH     1
 
 namespace OpenPST {
-	namespace QC {
+	namespace Qualcomm {
 		class HdlcEncoder {
 			private:
 				/* Table of CRCs for each possible byte, with a generator polynomial of 0x8408 */

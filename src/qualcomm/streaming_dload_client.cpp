@@ -64,11 +64,18 @@ StreamingDloadDeviceInfo StreamingDloadClient::hello(std::string magic, uint8_t 
 
 	StreamingDloadHelloRequest request;
 
+	request.setMagic(magic);
+	request.setVersion(version);
+	request.setCompatibleVersion(compatibleVersion);
+	request.setFeatureBits(featureBits);
+
 	request.prepareResponse();
 	
-	transport.write(&request);
-	
+	writeEncoded(&request);
+
 	auto response = reinterpret_cast<StreamingDloadHelloResponse*>(request.getResponse());
+
+	readEncoded(response);
 
 	ret.version 				= response->getVersion();
 	ret.compatibleVersion 		= response->getCompatibleVersion();
@@ -230,10 +237,28 @@ size_t StreamingDloadClient::writeEncoded(uint8_t* data, size_t amount)
 
 size_t StreamingDloadClient::readEncoded(Packet* packet)
 {
-	return 0;
+	std::vector<uint8_t> encodedData;
+
+	encodedData.reserve(packet->getMaxDataSize());
+
+	transport.read(encodedData, packet->getMaxDataSize());
+
+	encoder.decode(encodedData);
+
+	packet->unpack(encodedData, &transport);
+
+	return packet->size();
 }
 
 size_t StreamingDloadClient::writeEncoded(Packet* packet)
 {
-	return 0;
+	if (!packet->size()) {
+		return 0;
+	}
+
+	std::vector<uint8_t> encodedData = packet->getData();
+
+	encoder.encode(encodedData);
+
+	return transport.write(encodedData);
 }

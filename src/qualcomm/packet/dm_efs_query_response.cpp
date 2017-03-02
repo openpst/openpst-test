@@ -19,7 +19,7 @@
 *
 * @file dm_efs_query_response.cpp
 * @package openpst/libopenpst
-* @brief  This file was auto generated on 03/01/2017
+* @brief  This file was auto generated on 03/02/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -115,7 +115,6 @@ void DmEfsQueryResponse::setMaxMounts(uint32_t maxMounts)
 
 void DmEfsQueryResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	DmEfsPacket::unpack(data, transport);
 	setMaxFileNameLength(read<uint32_t>(data, getFieldOffset("max_file_name_length")));
 	setMaxPathnameLength(read<uint32_t>(data, getFieldOffset("max_pathname_length")));

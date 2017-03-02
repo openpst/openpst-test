@@ -28,7 +28,7 @@
 #include "qualcomm/sahara_xml_reader.h"
 #include <iostream>
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 SaharaXmlReader::SaharaXmlReader()
 {

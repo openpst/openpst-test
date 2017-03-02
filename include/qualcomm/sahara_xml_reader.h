@@ -34,7 +34,7 @@
 using OpenPST::StringHelper;
 
 namespace OpenPST {
-	namespace QC {
+	namespace Qualcomm {
 		
 		struct SaharaXmlEntry {
 			uint32_t imageId;

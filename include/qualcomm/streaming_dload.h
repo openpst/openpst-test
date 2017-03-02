@@ -67,53 +67,54 @@ enum StreamingDloadPartitionTableState {
 enum StreamingDloadCommand {
 	// 0x00 - Illegal
 	kStreamingDloadHello                        = 0x01,
-	kStreamingDloadHelloResponse               = 0x02,
+	kStreamingDloadHelloResponse               	= 0x02,
 	kStreamingDloadRead                         = 0x03,
-	kStreamingDloadReadData                    = 0x04,
-	kStreamingDloadSimpleWrite                 = 0x05,
-	kStreamingDloadWriteOk                     = 0x06,
-	kStreamingDloadStreamWrite                 = 0x07,
-	kStreamingDloadBlockWritten                = 0x08,
+	kStreamingDloadReadData                    	= 0x04,
+	kStreamingDloadSimpleWrite                 	= 0x05,
+	kStreamingDloadWriteOk                     	= 0x06,
+	kStreamingDloadStreamWrite                 	= 0x07,
+	kStreamingDloadBlockWritten                	= 0x08,
 	kStreamingDloadNop                          = 0x09,
-	kStreamingDloadNopResponse                 = 0x0A,
+	kStreamingDloadNopResponse                 	= 0x0A,
 	kStreamingDloadReset                        = 0x0B,
-	kStreamingDloadResetAck                    = 0x0C,
+	kStreamingDloadResetAck                    	= 0x0C,
 	kStreamingDloadError                        = 0x0D,
 	kStreamingDloadLog                          = 0x0E,
 	kStreamingDloadUnlock                       = 0x0F,
 	kStreamingDloadUnlocked                     = 0x10,
-	kStreamingDloadPowerOff                    = 0x11,
-	kStreamingDloadPoweringDown                = 0x12,
+	kStreamingDloadPowerOff                    	= 0x11,
+	kStreamingDloadPoweringDown                	= 0x12,
 	kStreamingDloadOpen                         = 0x13,
 	kStreamingDloadOpened                       = 0x14,
 	kStreamingDloadClose                        = 0x15,
 	kStreamingDloadClosed                       = 0x16,
-	kStreamingDloadSecurityMode                = 0x17,
-	kStreamingDloadSecurityModeReceived       = 0x18,
-	kStreamingDloadPartitionTable              = 0x19,
-	kStreamingDloadPartitionTableReceived     = 0x1A,
-	kStreamingDloadOpenMultiImage             = 0x1B,
-	kStreamingDloadOpenedMultiImage           = 0x1C,
-	kStreamingDloadEraseFlash                  = 0x1D,
-	kStreamingDloadFlashErased                 = 0x1E,
-	kStreamingDloadGetEccState                = 0x1F,
-	kStreamingDloadCurrentEccState            = 0x20,
-	kStreamingDloadSetEcc                      = 0x21,
-	kStreamingDloadSetEccResponse             = 0x22,
-	kStreamingDloadCalculateSha1          	= 0x23, // depreciated - doesnt appear to be used
-	kStreamingDloadCalculateSha1Response 	= 0x24, // depreciated - doesnt appear to be used
-	kStreamingDloadInfoResponse                = 0x24, 
+	kStreamingDloadSecurityMode                	= 0x17,
+	kStreamingDloadSecurityModeReceived       	= 0x18,
+	kStreamingDloadPartitionTable              	= 0x19,
+	kStreamingDloadPartitionTableReceived     	= 0x1A,
+	kStreamingDloadOpenMultiImage             	= 0x1B,
+	kStreamingDloadOpenedMultiImage           	= 0x1C,
+	kStreamingDloadEraseFlash                  	= 0x1D,
+	kStreamingDloadFlashErased                 	= 0x1E,
+	kStreamingDloadGetEccState                	= 0x1F,
+	kStreamingDloadCurrentEccState            	= 0x20,
+	kStreamingDloadSetEcc                      	= 0x21,
+	kStreamingDloadSetEccResponse             	= 0x22,
+	kStreamingDloadCalculateSha1          		= 0x23, // depreciated - doesnt appear to be used
+	kStreamingDloadInfoRequest 					= 0x23,
+	kStreamingDloadCalculateSha1Response		= 0x24, // depreciated - doesnt appear to be used
+	kStreamingDloadInfoResponse                	= 0x24, 
 
 	//25-2F commands described in [Q2]
 
-	kStreamingDloadUnframedStreamWrite           = 0x29,
-	kStreamingDloadUnframedStreamWriteResponse   = 0x31,
+	kStreamingDloadUnframedStreamWrite          = 0x29,
+	kStreamingDloadUnframedStreamWriteResponse  = 0x31,
 
 	// havent tested on a device that these is supported but is mentioned in a document
-	kStreamingDloadWfpromWrite                   = 0x32, 
-	kStreamingDloadWfpromWriteResponse           = 0x33, 
-	kStreamingDloadQfpromRead                    = 0x34, 
-	kStreamingDloadQfpromReadResponse            = 0x35  
+	kStreamingDloadWfpromWrite                  = 0x32, 
+	kStreamingDloadWfpromWriteResponse          = 0x33, 
+	kStreamingDloadQfpromRead                   = 0x34, 
+	kStreamingDloadQfpromReadResponse           = 0x35  
 
 	//36-FE Reserved
 };

@@ -43,7 +43,7 @@ using OpenPST::QC::QcdmSerialInvalidArgument;
 using OpenPST::Serial::SerialError;
 
 namespace OpenPST {
-	namespace QC {
+	namespace Qualcomm {
 		/**
 		* @brief OpenPST::DmEfsManager
 		*/

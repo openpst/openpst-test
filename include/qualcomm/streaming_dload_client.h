@@ -32,6 +32,7 @@
 #include "transport/packet_transporter.h"
 #include "qualcomm/streaming_dload.h"
 #include "qualcomm/streaming_dload_packets.h"
+#include "qualcomm/hdlc_encoder.h"
 
 namespace OpenPST {
 	namespace Qualcomm {
@@ -63,6 +64,7 @@ namespace OpenPST {
 				PacketTransporter packetTransporter;
 				StreamingDloadFlashInfo flashInfo;
 				PacketEndianess deviceEndianess;
+				HdlcEncoder encoder;
 
 			public:
 				StreamingDloadClient(TransportInterface& transport, const StreamingDloadFlashInfo& flashInfo, PacketEndianess deviceEndianess = kPacketEndianessLittle);

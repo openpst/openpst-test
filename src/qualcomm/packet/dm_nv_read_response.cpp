@@ -19,7 +19,7 @@
 *
 * @file dm_nv_read_response.cpp
 * @package openpst/libopenpst
-* @brief  This file was auto generated on 03/01/2017
+* @brief  This file was auto generated on 03/02/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -77,7 +77,6 @@ void DmNvReadResponse::setData(const std::string& data)
 
 void DmNvReadResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	DmPacket::unpack(data, transport);
 	setNvItem(read<uint16_t>(data, getFieldOffset("nv_item")));
 	//uint8_t[]

@@ -27,7 +27,7 @@
 
 #include "qualcomm/dm_efs_node.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 /**
 * @brief DmEfsNode - Constructor

@@ -19,7 +19,7 @@
 *
 * @file streaming_dload_partition_table_response.cpp
 * @package openpst/libopenpst
-* @brief  This file was auto generated on 03/01/2017
+* @brief  This file was auto generated on 03/02/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -55,7 +55,6 @@ void StreamingDloadPartitionTableResponse::setStatus(uint8_t status)
 
 void StreamingDloadPartitionTableResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	StreamingDloadPacket::unpack(data, transport);
 	setStatus(read<uint8_t>(data, getFieldOffset("status")));
 }

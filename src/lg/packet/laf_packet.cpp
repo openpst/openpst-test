@@ -19,7 +19,7 @@
 *
 * @file laf_packet.cpp
 * @package openpst/libopenpst
-* @brief  This file was auto generated on 03/01/2017
+* @brief  This file was auto generated on 03/02/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -157,7 +157,6 @@ void LafPacket::prepareResponse()
 
 void LafPacket::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	setCommand(read<uint32_t>(data, getFieldOffset("command")));
 	setArg0(read<uint32_t>(data, getFieldOffset("arg0")));
 	setArg1(read<uint32_t>(data, getFieldOffset("arg1")));

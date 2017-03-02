@@ -19,7 +19,7 @@
 *
 * @file sahara_client_command_response.cpp
 * @package openpst/libopenpst
-* @brief  This file was auto generated on 03/01/2017
+* @brief  This file was auto generated on 03/02/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -67,7 +67,6 @@ void SaharaClientCommandResponse::setDataSize(uint32_t dataSize)
 
 void SaharaClientCommandResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	SaharaPacket::unpack(data, transport);
 	setClientCommand(read<uint32_t>(data, getFieldOffset("client_command")));
 	setDataSize(read<uint32_t>(data, getFieldOffset("data_size")));

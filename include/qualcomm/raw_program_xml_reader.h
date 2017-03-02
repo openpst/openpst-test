@@ -37,7 +37,7 @@ using OpenPST::MathStringEvaluator;
 using OpenPST::MathStringEvaluatorError;
 
 namespace OpenPST {
-	namespace QC {
+	namespace Qualcomm {
 
 		struct RawProgramXmlEntry {
 			size_t sectorSize;

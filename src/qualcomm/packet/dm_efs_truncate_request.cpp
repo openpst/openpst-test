@@ -19,7 +19,7 @@
 *
 * @file dm_efs_truncate_request.cpp
 * @package openpst/libopenpst
-* @brief  This file was auto generated on 03/01/2017
+* @brief  This file was auto generated on 03/02/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -87,7 +87,6 @@ void DmEfsTruncateRequest::prepareResponse()
 
 void DmEfsTruncateRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	DmEfsPacket::unpack(data, transport);
 	setSequence(read<uint16_t>(data, getFieldOffset("sequence")));
 	setLength(read<uint32_t>(data, getFieldOffset("length")));

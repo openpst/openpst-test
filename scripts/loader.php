@@ -60,7 +60,7 @@ function to_lower_name($str)
 
 function extract_unpack_method($filePath) {
 	
-	return "";
+	//return "";
 
 	$file = file_get_contents($filePath);
 

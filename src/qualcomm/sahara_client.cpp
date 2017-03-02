@@ -277,9 +277,9 @@ SaharaImageRequestInfo SaharaClient::sendImage(const std::string& filePath, Saha
 			transport.write(&response);
 
 			sent += next.size;
-
+						
 			next = readNextImageOffset();
-			
+						
 			if ((!next.offset && !next.size) || 
 				requestInfo.imageId != next.imageId) {
 				break;

@@ -19,7 +19,7 @@
 *
 * @file sahara_memory_read_request.cpp
 * @package openpst/libopenpst
-* @brief  This file was auto generated on 03/01/2017
+* @brief  This file was auto generated on 03/02/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -67,7 +67,6 @@ void SaharaMemoryReadRequest::setSize(uint32_t size)
 
 void SaharaMemoryReadRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	setAddress(read<uint32_t>(data, getFieldOffset("address")));
 	setSize(read<uint32_t>(data, getFieldOffset("size")));
 }

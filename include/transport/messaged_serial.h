@@ -19,7 +19,8 @@
 *
 * @file messaged_serial.h
 * @package openpst/libopenpst
-* @brief Read and write serial data. Read data are parsed messages based on control character(s)
+* @brief Read and write serial data. Read data are parsed messages based on control character(s).
+*		Ideal for protocols like AT which end in \r\n or HDLC framed in 0x7E
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */

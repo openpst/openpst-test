@@ -17,9 +17,10 @@
 * You should have received a copy of the GNU General Public License
 * along with libopenpst. If not, see <http://www.gnu.org/licenses/>.
 *
-* @file 
-* @package 
-* @brief 
+* @file messaged_serial.cpp
+* @package openpst/libopenpst
+* @brief Read and write serial data. Read data are parsed messages based on control character(s).
+*		Ideal for protocols like AT which end in \r\n or HDLC framed in 0x7E
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */

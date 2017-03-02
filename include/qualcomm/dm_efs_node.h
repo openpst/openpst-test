@@ -32,7 +32,7 @@
 #include "qualcomm/dm_efs.h"
 
 namespace OpenPST {
-	namespace QC {
+	namespace Qualcomm {
 		class DmEfsNode {
 			public:
 				std::string name;

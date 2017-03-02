@@ -19,7 +19,7 @@
 *
 * @file dm_efs_rename_request.cpp
 * @package openpst/libopenpst
-* @brief  This file was auto generated on 03/01/2017
+* @brief  This file was auto generated on 03/02/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -67,7 +67,6 @@ void DmEfsRenameRequest::setNewPath(uint8_t* data, size_t size)
 
 void DmEfsRenameRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	DmEfsPacket::unpack(data, transport);
 	//variable
 	//variable

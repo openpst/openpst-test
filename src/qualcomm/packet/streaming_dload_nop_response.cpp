@@ -19,7 +19,7 @@
 *
 * @file streaming_dload_nop_response.cpp
 * @package openpst/libopenpst
-* @brief  This file was auto generated on 03/01/2017
+* @brief  This file was auto generated on 03/02/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -55,7 +55,6 @@ void StreamingDloadNopResponse::setIdentifier(uint32_t identifier)
 
 void StreamingDloadNopResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	StreamingDloadPacket::unpack(data, transport);
 	setIdentifier(read<uint32_t>(data, getFieldOffset("identifier")));
 }

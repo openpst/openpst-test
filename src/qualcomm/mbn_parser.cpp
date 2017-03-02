@@ -27,7 +27,7 @@
 
 #include "qualcomm/mbn_parser.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 Mbn::Mbn(std::string filePath, int parserFlags) : filePath(filePath), parserFlags(parserFlags)
 {

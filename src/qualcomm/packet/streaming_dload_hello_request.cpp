@@ -19,7 +19,7 @@
 *
 * @file streaming_dload_hello_request.cpp
 * @package openpst/libopenpst
-* @brief  This file was auto generated on 03/01/2017
+* @brief  This file was auto generated on 03/02/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -36,7 +36,7 @@ StreamingDloadHelloRequest::StreamingDloadHelloRequest(PacketEndianess targetEnd
 	addField("feature_bits", kPacketFieldTypePrimitive, sizeof(uint8_t));
 
 	setCommand(kStreamingDloadHello);
-	setMagic("QualcommOM fast download protocol host");
+	setMagic("QCOM fast download protocol host");
 	setVersion(0x05);
 	setCompatibleVersion(0x02);
 	setFeatureBits(0x19);
@@ -103,7 +103,6 @@ void StreamingDloadHelloRequest::prepareResponse()
 
 void StreamingDloadHelloRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	StreamingDloadPacket::unpack(data, transport);
 	//uint8_t[]
 	setVersion(read<uint8_t>(data, getFieldOffset("version")));

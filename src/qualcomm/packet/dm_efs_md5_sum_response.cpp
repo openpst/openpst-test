@@ -19,7 +19,7 @@
 *
 * @file dm_efs_md5_sum_response.cpp
 * @package openpst/libopenpst
-* @brief  This file was auto generated on 03/01/2017
+* @brief  This file was auto generated on 03/02/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -79,7 +79,6 @@ void DmEfsMd5SumResponse::setHash(uint8_t* data, size_t size)
 
 void DmEfsMd5SumResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	DmEfsPacket::unpack(data, transport);
 	setSequence(read<uint16_t>(data, getFieldOffset("sequence")));
 	setError(read<uint32_t>(data, getFieldOffset("error")));

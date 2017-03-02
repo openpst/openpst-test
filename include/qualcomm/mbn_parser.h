@@ -36,7 +36,7 @@
 #include "qualcomm/mbn.h"
 
 namespace OpenPST {
-	namespace QC {
+	namespace Qualcomm {
 
 		enum MbnParserFlag {
 			kMbnParserFlagNone 			   = 0x00,

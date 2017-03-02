@@ -25,7 +25,7 @@
 */
 #include "qualcomm/hdlc_encoder.h"
 
-using namespace OpenPST::QC;
+using namespace OpenPST::Qualcomm;
 
 size_t HdlcEncoder::encode(uint8_t* data, size_t size, uint8_t** out) {
 

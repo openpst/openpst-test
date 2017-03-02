@@ -19,7 +19,7 @@
 *
 * @file dm_version_request.cpp
 * @package openpst/libopenpst
-* @brief  This file was auto generated on 03/01/2017
+* @brief  This file was auto generated on 03/02/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -55,7 +55,6 @@ void DmVersionRequest::setVersion(uint16_t version)
 
 void DmVersionRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
-	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	DmPacket::unpack(data, transport);
 	setVersion(read<uint16_t>(data, getFieldOffset("version")));
 }
