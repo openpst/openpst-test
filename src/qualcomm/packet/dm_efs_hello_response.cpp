@@ -151,6 +151,7 @@ void DmEfsHelloResponse::setFeatureBits(uint32_t featureBits)
 
 void DmEfsHelloResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	DmEfsPacket::unpack(data, transport);
 	setTargetPacketWindowSize(read<uint32_t>(data, getFieldOffset("target_packet_window_size")));
 	setTargetPacketWindowByteSize(read<uint32_t>(data, getFieldOffset("target_packet_window_byte_size")));

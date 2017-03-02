@@ -43,5 +43,6 @@ StreamingDloadEraseFlashResponse::~StreamingDloadEraseFlashResponse()
 
 void StreamingDloadEraseFlashResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	StreamingDloadPacket::unpack(data, transport);
 }

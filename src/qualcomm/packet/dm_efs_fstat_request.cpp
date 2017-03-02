@@ -63,6 +63,7 @@ void DmEfsFstatRequest::prepareResponse()
 
 void DmEfsFstatRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	DmEfsPacket::unpack(data, transport);
 	setFp(read<uint32_t>(data, getFieldOffset("fp")));
 }

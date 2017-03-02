@@ -63,6 +63,7 @@ void StreamingDloadUnlockRequest::prepareResponse()
 
 void StreamingDloadUnlockRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	StreamingDloadPacket::unpack(data, transport);
 	setCode(read<uint64_t>(data, getFieldOffset("code")));
 }

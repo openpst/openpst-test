@@ -67,6 +67,7 @@ void DmEfsDeltreeResponse::setError(uint32_t error)
 
 void DmEfsDeltreeResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	DmEfsPacket::unpack(data, transport);
 	setSequence(read<uint16_t>(data, getFieldOffset("sequence")));
 	setError(read<uint32_t>(data, getFieldOffset("error")));

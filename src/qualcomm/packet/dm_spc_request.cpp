@@ -63,6 +63,7 @@ void DmSpcRequest::prepareResponse()
 
 void DmSpcRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	DmPacket::unpack(data, transport);
 	//uint8_t[]
 }

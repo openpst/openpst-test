@@ -77,6 +77,7 @@ void SaharaReadDataRequest::setAmount(uint32_t amount)
 
 void SaharaReadDataRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	SaharaPacket::unpack(data, transport);
 	setImageId(read<uint32_t>(data, getFieldOffset("image_id")));
 	setOffset(read<uint32_t>(data, getFieldOffset("offset")));

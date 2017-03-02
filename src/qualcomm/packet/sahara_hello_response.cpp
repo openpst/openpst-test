@@ -103,6 +103,7 @@ void SaharaHelloResponse::setReserved(uint8_t* data, size_t size)
 
 void SaharaHelloResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	setVersion(read<uint32_t>(data, getFieldOffset("version")));
 	setMinVersion(read<uint32_t>(data, getFieldOffset("min_version")));
 	setStatus(read<uint32_t>(data, getFieldOffset("status")));

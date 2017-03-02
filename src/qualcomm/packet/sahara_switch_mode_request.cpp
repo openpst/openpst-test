@@ -55,5 +55,6 @@ void SaharaSwitchModeRequest::setMode(uint32_t mode)
 
 void SaharaSwitchModeRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	setMode(read<uint32_t>(data, getFieldOffset("mode")));
 }

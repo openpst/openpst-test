@@ -272,7 +272,7 @@ SaharaImageRequestInfo SaharaClient::sendImage(const std::string& filePath, Saha
 
 			file.seekg(next.offset, file.beg);
 			
-			response.setData(file, next.size);
+			response.setRawData(file, next.size);
 
 			transport.write(&response);
 

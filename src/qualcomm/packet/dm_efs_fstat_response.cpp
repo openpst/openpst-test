@@ -127,6 +127,7 @@ void DmEfsFstatResponse::setCtime(uint32_t ctime)
 
 void DmEfsFstatResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	DmEfsPacket::unpack(data, transport);
 	setError(read<uint32_t>(data, getFieldOffset("error")));
 	setMode(read<uint32_t>(data, getFieldOffset("mode")));

@@ -67,6 +67,7 @@ void DmEfsOpenDirResponse::setError(uint32_t error)
 
 void DmEfsOpenDirResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	DmEfsPacket::unpack(data, transport);
 	setDp(read<uint32_t>(data, getFieldOffset("dp")));
 	setError(read<uint32_t>(data, getFieldOffset("error")));

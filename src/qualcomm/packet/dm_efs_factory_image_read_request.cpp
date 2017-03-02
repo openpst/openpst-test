@@ -99,6 +99,7 @@ void DmEfsFactoryImageReadRequest::prepareResponse()
 
 void DmEfsFactoryImageReadRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	DmEfsPacket::unpack(data, transport);
 	setStreamState(read<uint8_t>(data, getFieldOffset("stream_state")));
 	setInfoClusterSent(read<uint8_t>(data, getFieldOffset("info_cluster_sent")));

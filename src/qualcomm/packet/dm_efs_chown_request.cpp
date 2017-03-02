@@ -87,6 +87,7 @@ void DmEfsChownRequest::prepareResponse()
 
 void DmEfsChownRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	DmEfsPacket::unpack(data, transport);
 	setUid(read<uint32_t>(data, getFieldOffset("uid")));
 	setGid(read<uint32_t>(data, getFieldOffset("gid")));

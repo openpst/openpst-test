@@ -67,6 +67,7 @@ void SaharaMemoryReadRequest::setSize(uint32_t size)
 
 void SaharaMemoryReadRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	setAddress(read<uint32_t>(data, getFieldOffset("address")));
 	setSize(read<uint32_t>(data, getFieldOffset("size")));
 }

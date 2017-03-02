@@ -53,6 +53,7 @@ void DmPhoneModeResponse::setStatus(uint8_t status)
 
 void DmPhoneModeResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	DmPacket::unpack(data, transport);
 	setStatus(read<uint8_t>(data, getFieldOffset("status")));
 }

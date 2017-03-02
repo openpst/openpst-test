@@ -123,6 +123,7 @@ void SaharaHelloRequest::prepareResponse()
 
 void SaharaHelloRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	SaharaPacket::unpack(data, transport);
 	setVersion(read<uint32_t>(data, getFieldOffset("version")));
 	setMinVersion(read<uint32_t>(data, getFieldOffset("min_version")));

@@ -327,6 +327,7 @@ void DmVersionResponse::setPower(uint8_t power)
 
 void DmVersionResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	DmPacket::unpack(data, transport);
 	setDemod(read<uint8_t>(data, getFieldOffset("demod")));
 	setDecode(read<uint8_t>(data, getFieldOffset("decode")));

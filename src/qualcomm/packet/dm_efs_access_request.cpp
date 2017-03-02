@@ -75,6 +75,7 @@ void DmEfsAccessRequest::prepareResponse()
 
 void DmEfsAccessRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	DmEfsPacket::unpack(data, transport);
 	setPermissionMask(read<uint32_t>(data, getFieldOffset("permission_mask")));
 	//variable

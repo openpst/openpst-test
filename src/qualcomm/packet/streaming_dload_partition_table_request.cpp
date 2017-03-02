@@ -75,6 +75,7 @@ void StreamingDloadPartitionTableRequest::prepareResponse()
 
 void StreamingDloadPartitionTableRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	StreamingDloadPacket::unpack(data, transport);
 	setOverrideExisting(read<uint8_t>(data, getFieldOffset("override_existing")));
 	//uint8_t[]

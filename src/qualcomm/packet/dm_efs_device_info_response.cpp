@@ -151,6 +151,7 @@ void DmEfsDeviceInfoResponse::setName(uint8_t* data, size_t size)
 
 void DmEfsDeviceInfoResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	DmEfsPacket::unpack(data, transport);
 	setError(read<uint32_t>(data, getFieldOffset("error")));
 	setTotalBlocks(read<uint32_t>(data, getFieldOffset("total_blocks")));

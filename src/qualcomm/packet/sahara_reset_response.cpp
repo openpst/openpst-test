@@ -43,5 +43,6 @@ SaharaResetResponse::~SaharaResetResponse()
 
 void SaharaResetResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	SaharaPacket::unpack(data, transport);
 }

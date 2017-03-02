@@ -103,6 +103,7 @@ void DmEfsReadFileResponse::setData(uint8_t* data, size_t size)
 
 void DmEfsReadFileResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	DmEfsPacket::unpack(data, transport);
 	setFp(read<uint32_t>(data, getFieldOffset("fp")));
 	setOffset(read<uint32_t>(data, getFieldOffset("offset")));

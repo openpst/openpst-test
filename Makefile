@@ -5,11 +5,8 @@
 all: default
 
 default:
-	if [ ! -d "./build" ]; then mkdir -p build;  fi
+	if [ ! -d "./build" ]; then mkdir build;  fi
 	$(CXX) -I./include \
-		-I./scripts/out/ \
-		-I./../libopenpst/include \
-		-I./src \
 		-std=gnu++11 $(CXX_FLAGS) \
 		-DNO_POD_PACKET_STRUCTURES \
 		-DBOOST_SYSTEM_NO_DEPRECATED \
@@ -21,8 +18,8 @@ default:
 		-DSERIAL_DEBUG_RX \
 		-DSAHARA_CLIENT_DEBUG \
 		-DSTREAMING_DLOAD_CLIENT_DEBUG \
-		./../libopenpst/src/qualcomm/hdlc_encoder.cpp \
-		./../libopenpst/src/util/hexdump.cpp \
+		./src/qualcomm/hdlc_encoder.cpp \
+		./src/util/hexdump.cpp \
 		./src/transport/packet.cpp \
 		./src/transport/serial.cpp \
 		./src/transport/async_serial.cpp \
@@ -37,8 +34,6 @@ default:
 		./src/main.cpp -o build/test -lpthread -lboost_system -lboost_thread
 
 
-		#./src/qualcomm/streaming_dload_client.cpp 
-		#
 		#./src/transport/tcp_serial_client.cpp
 clean:
 	rm -rf build/*

@@ -63,6 +63,7 @@ void DmGuidResponse::setGuid(const std::string& guid)
 
 void DmGuidResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	DmPacket::unpack(data, transport);
 	//uint8_t[]
 }

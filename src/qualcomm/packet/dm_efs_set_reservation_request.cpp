@@ -87,6 +87,7 @@ void DmEfsSetReservationRequest::prepareResponse()
 
 void DmEfsSetReservationRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	DmEfsPacket::unpack(data, transport);
 	setGid(read<uint32_t>(data, getFieldOffset("gid")));
 	setAmount(read<uint32_t>(data, getFieldOffset("amount")));

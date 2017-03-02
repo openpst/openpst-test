@@ -109,6 +109,7 @@ void StreamingDloadUnframedStreamWriteRequest::prepareResponse()
 
 void StreamingDloadUnframedStreamWriteRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	StreamingDloadPacket::unpack(data, transport);
 	//uint8_t[]
 	setAddress(read<uint32_t>(data, getFieldOffset("address")));

@@ -87,6 +87,7 @@ void DmEfsOpenFileRequest::prepareResponse()
 
 void DmEfsOpenFileRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	DmEfsPacket::unpack(data, transport);
 	setFlags(read<uint32_t>(data, getFieldOffset("flags")));
 	setMode(read<uint32_t>(data, getFieldOffset("mode")));

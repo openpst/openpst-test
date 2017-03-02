@@ -55,6 +55,7 @@ void StreamingDloadPartitionTableResponse::setStatus(uint8_t status)
 
 void StreamingDloadPartitionTableResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	StreamingDloadPacket::unpack(data, transport);
 	setStatus(read<uint8_t>(data, getFieldOffset("status")));
 }

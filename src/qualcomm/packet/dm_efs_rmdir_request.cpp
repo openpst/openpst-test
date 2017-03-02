@@ -63,5 +63,6 @@ void DmEfsRmdirRequest::prepareResponse()
 
 void DmEfsRmdirRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	//variable
 }

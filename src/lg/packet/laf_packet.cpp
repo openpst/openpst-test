@@ -157,6 +157,7 @@ void LafPacket::prepareResponse()
 
 void LafPacket::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	setCommand(read<uint32_t>(data, getFieldOffset("command")));
 	setArg0(read<uint32_t>(data, getFieldOffset("arg0")));
 	setArg1(read<uint32_t>(data, getFieldOffset("arg1")));

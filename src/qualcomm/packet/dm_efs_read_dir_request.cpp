@@ -75,6 +75,7 @@ void DmEfsReadDirRequest::prepareResponse()
 
 void DmEfsReadDirRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	DmEfsPacket::unpack(data, transport);
 	setDp(read<uint32_t>(data, getFieldOffset("dp")));
 	setSequenceNumber(read<uint32_t>(data, getFieldOffset("sequence_number")));

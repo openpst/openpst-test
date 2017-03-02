@@ -75,6 +75,7 @@ void DmEfsGetGroupInfoRequest::prepareResponse()
 
 void DmEfsGetGroupInfoRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	DmEfsPacket::unpack(data, transport);
 	setGid(read<uint32_t>(data, getFieldOffset("gid")));
 	//variable

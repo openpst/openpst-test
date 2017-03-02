@@ -63,6 +63,7 @@ void StreamingDloadNopRequest::prepareResponse()
 
 void StreamingDloadNopRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	StreamingDloadPacket::unpack(data, transport);
 	setIdentifier(read<uint32_t>(data, getFieldOffset("identifier")));
 }

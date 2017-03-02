@@ -642,9 +642,7 @@ namespace OpenPST {
                         size_t diff = size - field->size;
 
                         data.insert(
-                        	data.begin() + offset + field->size, 
-                        	diff, 
-                        	0x00
+                        	data.begin() + offset + field->size, diff, 0x00
                         );
                     }
 

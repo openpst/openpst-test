@@ -163,6 +163,7 @@ void DmEfsReadDirResponse::setName(uint8_t* data, size_t size)
 
 void DmEfsReadDirResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	DmEfsPacket::unpack(data, transport);
 	setDp(read<uint32_t>(data, getFieldOffset("dp")));
 	setSequenceNumber(read<uint32_t>(data, getFieldOffset("sequence_number")));

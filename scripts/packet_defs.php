@@ -139,6 +139,7 @@ $packets['sahara'] = [
 		'extends_namespace' => 'OpenPST::Transport',
 		'source'  => 'local',
 		'expects_response' => '',
+		'unpack_base' => true,
 		'fields'  => [
 		],
 		'default_exends' => [

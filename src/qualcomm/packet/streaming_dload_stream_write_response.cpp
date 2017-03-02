@@ -55,6 +55,7 @@ void StreamingDloadStreamWriteResponse::setAddress(uint32_t address)
 
 void StreamingDloadStreamWriteResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	StreamingDloadPacket::unpack(data, transport);
 	setAddress(read<uint32_t>(data, getFieldOffset("address")));
 }

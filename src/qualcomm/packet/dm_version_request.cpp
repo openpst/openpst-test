@@ -55,6 +55,7 @@ void DmVersionRequest::setVersion(uint16_t version)
 
 void DmVersionRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	DmPacket::unpack(data, transport);
 	setVersion(read<uint16_t>(data, getFieldOffset("version")));
 }

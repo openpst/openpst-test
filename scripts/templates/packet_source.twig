@@ -86,6 +86,10 @@ void {{class_name}}::prepareResponse()
 {% else %}
 void {{class_name}}::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
+{% if extends == 'RawDataPacket' %}
+//LOl
+{% endif %}
 {% if unpack_base %}
 	{{extends_class_name}}::unpack(data, transport);
 {% endif %}

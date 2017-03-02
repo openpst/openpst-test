@@ -175,6 +175,7 @@ void StreamingDloadHelloResponse::setFeatureBits(uint8_t featureBits)
 
 void StreamingDloadHelloResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	StreamingDloadPacket::unpack(data, transport);
 	//uint8_t[]
 	setVersion(read<uint8_t>(data, getFieldOffset("version")));

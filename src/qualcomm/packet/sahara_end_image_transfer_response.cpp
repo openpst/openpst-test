@@ -67,6 +67,7 @@ void SaharaEndImageTransferResponse::setStatus(uint32_t status)
 
 void SaharaEndImageTransferResponse::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	SaharaPacket::unpack(data, transport);
 	setImageId(read<uint32_t>(data, getFieldOffset("image_id")));
 	setStatus(read<uint32_t>(data, getFieldOffset("status")));
