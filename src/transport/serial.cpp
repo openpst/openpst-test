@@ -231,6 +231,14 @@ size_t Serial::read(uint8_t* in, size_t amount)
 
 size_t Serial::read(Packet* packet, size_t amount)
 {
+	if (!isOpen()) {
+		throw SerialError("Not open");
+	}
+
+	#ifdef SERIAL_DEBUG_RX
+		std::cout << "Reading into Packet. Reading at max " << packet->getMaxDataSize() << " (Override: " << amount << ") bytes" << std::endl;
+	#endif
+
 	std::vector<uint8_t> rbuffer;
 
 	if (amount > 0) {
@@ -241,6 +249,7 @@ size_t Serial::read(Packet* packet, size_t amount)
 
 	packet->unpack(rbuffer, this);
 	
+	return packet->size();
 }
 
 size_t Serial::available()
@@ -294,6 +303,10 @@ void Serial::onReadReady(const boost::system::error_code& error, size_t requeste
 
 void Serial::doAsyncRead(size_t amount)
 {
+	#ifdef SERIAL_DEBUG_RX
+		std::cout << "doAsyncRead " << amount << " bytes" << std::endl;
+	#endif
+		
 	port.async_read_some(
 		boost::asio::null_buffers(),
 		boost::bind(

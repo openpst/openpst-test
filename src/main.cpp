@@ -1,6 +1,6 @@
 #include "transport/serial.h"
 //#include "transport/async_serial.h"
-//#include "transport/messaged_serial.h"
+#include "transport/messaged_serial.h"
 //#include "transport/messaged_async_serial.h"
 //#include "server/tcp_serial_server.h"
 #include "qualcomm/sahara_client.h"
@@ -117,7 +117,9 @@ int main_streaming_dload(int argc, char* argv[]) {
 
 	try {
 
-		Serial port(argv[1]);
+		std::string delim;
+		delim.push_back(HDLC_CONTROL_CHAR);
+		MessagedSerial port(argv[1], delim);
 
 		if (port.isOpen()) {
 			std::cout << "Opened " << port.getDevice() << " - Data Waiting: " << port.available() << std::endl;
@@ -166,51 +168,10 @@ int main_streaming_dload(int argc, char* argv[]) {
 
 int main(int argc, char* argv[])
 {
-	//if (main_sahara(argc, argv)) {
-	//	return 1;
-	//}
-
-	main_streaming_dload(argc, argv);
-
-	/*if (argc < 2) {
-		std::cout << "Provide device as argument" << std::endl;
+	if (main_sahara(argc, argv)) {
 		return 1;
 	}
 
-	std::string atDelim = "\r\n";
-	std::string hdlcDelim;
-	hdlcDelim.push_back(HDLC_CONTROL_CHAR);
-	time_t stime;
-	time_t etime;
-	
-	time(&stime);
-		
-	try {
-		Serial port(argv[1]);
-		//MessagedSerial port(argv[1], atDelim);
-		//MessagedSerial port(argv[1], hdlcDelim);
-		//MessagedAsynSerial port(argv[1], atDelim);
-		//MessagedAsynSerial port(argv[1], hdlcDelim);
+	main_streaming_dload(argc, argv);
 
-
-		PacketWriter writer(port);
-
-		if (port.isOpen()) {
-			std::cout << "Opened " << port.getDevice() << std::endl;
-		}
-
-		//hello(port, writer, argc, argv);
-		//security_mode(port, writer, argc, argv);
-		//open_multi(port, writer, argc, argv);
-		//read_emmc(port, writer, argc, argv);
-		diag_test(port, writer, argc, argv);
-
-	} catch (SerialError& e) {
-		std::cout << e.what() << std::endl;
-	} catch (PacketError& e) {
-		std::cout << e.what() << std::endl;
-	}
-
-	time(&etime);
-	std::cout << "Time: " << difftime(etime, stime) << std::endl;*/
 }

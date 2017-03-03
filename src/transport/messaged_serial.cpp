@@ -165,7 +165,9 @@ size_t MessagedSerial::write(uint8_t* out, size_t amount)
 
 size_t MessagedSerial::write(Packet* packet)
 {
-	return 0;
+	packet->prepare();
+
+	return write(packet->getData());
 }
 
 size_t MessagedSerial::read(std::vector<uint8_t>& in, size_t amount)
@@ -173,6 +175,10 @@ size_t MessagedSerial::read(std::vector<uint8_t>& in, size_t amount)
 	if (!isOpen()) {
 		throw SerialError("Not open");
 	}
+
+	#ifdef SERIAL_DEBUG
+		std::cout << "MessagedSerial::read. Reading at max " << amount << " bytes" << std::endl;
+	#endif
 
 	if (!messages.size()) {
 		doAsyncRead();
@@ -210,6 +216,10 @@ size_t MessagedSerial::read(uint8_t* in, size_t amount)
 		throw SerialError("Not open");
 	}
 
+	#ifdef SERIAL_DEBUG
+		std::cout << "MessagedSerial::read. Reading at max " << amount << " bytes" << std::endl;
+	#endif
+
 	if (!messages.size()) {
 		doAsyncRead();
 
@@ -244,7 +254,25 @@ size_t MessagedSerial::read(uint8_t* in, size_t amount)
 
 size_t MessagedSerial::read(Packet* packet, size_t amount)
 {
-	return 0;
+	if (!isOpen()) {
+		throw SerialError("Not open");
+	}
+
+	#ifdef SERIAL_DEBUG
+		std::cout << "MessagedSerial::read into Packet. Reading at max " << packet->getMaxDataSize() << " (Override: " << amount << ") bytes" << std::endl;
+	#endif
+
+	std::vector<uint8_t> rbuffer;
+
+	if (amount > 0) {
+		read(rbuffer, amount);
+	} else {
+		read(rbuffer, packet->getMaxDataSize());
+	}
+
+	packet->unpack(rbuffer, this);
+
+	return packet->size();
 }
 
 size_t MessagedSerial::available()
@@ -261,6 +289,10 @@ void MessagedSerial::onReadComplete(const boost::system::error_code& error, size
 		}
 		throw SerialError(error.message());
 	}
+
+	#ifdef SERIAL_DEBUG_RX
+		std::cout << "MessagedSerial::onReadComplete - Received " << received << " - AV: " << port.available() << std::endl;
+	#endif
 
 	if (received && received != messageEnd.size()) {
 
@@ -298,6 +330,7 @@ void MessagedSerial::onReadComplete(const boost::system::error_code& error, size
 			return; 
 		}
 	} else if (received == messageEnd.size()) {
+
 		buffer.consume(buffer.size());
 	}
 
