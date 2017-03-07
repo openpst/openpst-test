@@ -95,7 +95,15 @@ bool StreamingDloadClient::unlock(uint64_t code)
 
 bool StreamingDloadClient::setSecurityMode(StreamingDloadSecurityMode mode)
 {
-	return true;
+	StreamingDloadSecurityModeRequest request;
+
+	request.prepareResponse();
+
+	request.setMode(mode);
+
+	writeEncoded(&request);
+
+	readEncoded(request.getResponse());
 }
 
 void StreamingDloadClient::nop()
@@ -106,14 +114,14 @@ void StreamingDloadClient::nop()
 
 	request.setIdentifier(10);
 
-	transport.write(&request);
+	writeEncoded(&request);
 
 	auto response = reinterpret_cast<StreamingDloadNopResponse*>(request.getResponse());
 
-	transport.read(response);
+	readEncoded(response);
 
 	if (response->getIdentifier() != request.getIdentifier()) {
-
+		std::cout << "NOP Response Identifier differes from request";
 	}
 }
 
@@ -123,11 +131,11 @@ void StreamingDloadClient::reset()
 
 	request.prepareResponse();
 
-	transport.write(&request);
+	writeEncoded(&request);
 
 	auto response = reinterpret_cast<StreamingDloadResetResponse*>(request.getResponse());
 
-	transport.read(response);
+	readEncoded(response);
 }
 
 void StreamingDloadClient::powerOff()

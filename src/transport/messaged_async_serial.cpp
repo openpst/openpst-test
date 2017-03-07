@@ -274,7 +274,6 @@ void MessagedAsyncSerial::doAsyncWrite()
 void MessagedAsyncSerial::onWriteComplete(const boost::system::error_code& error, size_t written)
 {
 	if (error) {
-		std::cout << __FUNCTION__ << " " << error.message() << std::endl;
 		throw SerialError(error.message());
 	}
 	

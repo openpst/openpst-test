@@ -47,9 +47,20 @@ namespace OpenPST {
                         throw PacketError("No data to unpack");
                     }
 
-                    if (getCommand() && resp[0] != getCommand()) {
-                        throw PacketError("Unexpected Response");
+                    uint8_t expected = (getCommand() > 0) ? getCommand() : 0;
+                    uint8_t received = resp[0];
+
+                    if (expected && received != expected) {
+                    	if (received == kStreamingDloadError) {
+                    		throw PacketError("Unexpected Response: Error Response");
+                    	} else if (received == kStreamingDloadLog) {
+                    		throw PacketError("Unexpected Response: Log Response");
+                    	} else {
+                    		throw PacketError("Unexpected Response");
+                    	}
                     }
+
+                    setCommand(read<uint8_t>(data, getFieldOffset("command")));
                 }
 
                 void prepare() override {

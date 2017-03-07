@@ -128,10 +128,10 @@ size_t MessagedSerial::write(std::vector<uint8_t>& out)
 		throw SerialError(error.message());
 	}
 
-#ifdef SERIAL_DEBUG_TX
-	std::cout << "Wrote " << ret << " bytes" << std::endl;
-	hexdump(reinterpret_cast<uint8_t*>(&out[0]), ret);
-#endif
+	#ifdef SERIAL_DEBUG_TX
+		std::cout << "Wrote " << ret << " bytes" << std::endl;
+		hexdump(reinterpret_cast<uint8_t*>(&out[0]), ret);
+	#endif
 
 	return ret;
 }
@@ -155,10 +155,10 @@ size_t MessagedSerial::write(uint8_t* out, size_t amount)
 		throw SerialError(error.message());
 	}
 
-#ifdef SERIAL_DEBUG_TX
-	std::cout << "Wrote " << ret << " bytes" << std::endl;
-	hexdump(out, ret);
-#endif
+	#ifdef SERIAL_DEBUG_TX
+		std::cout << "Wrote " << ret << " bytes" << std::endl;
+		hexdump(out, ret);
+	#endif
 
 	return ret;
 }
@@ -177,7 +177,7 @@ size_t MessagedSerial::read(std::vector<uint8_t>& in, size_t amount)
 	}
 
 	#ifdef SERIAL_DEBUG
-		std::cout << "MessagedSerial::read. Reading at max " << amount << " bytes" << std::endl;
+		std::cout << "MessagedSerial::read. Reading at max " << amount << " bytes w/ timeout of " << getTimeout() << " ms" << std::endl;
 	#endif
 
 	if (!messages.size()) {
@@ -217,10 +217,15 @@ size_t MessagedSerial::read(uint8_t* in, size_t amount)
 	}
 
 	#ifdef SERIAL_DEBUG
-		std::cout << "MessagedSerial::read. Reading at max " << amount << " bytes" << std::endl;
+		std::cout << "MessagedSerial::read. Reading at max " << amount << " bytes w/ timeout of " << getTimeout() << " ms" << std::endl;
 	#endif
 
 	if (!messages.size()) {
+		
+		#ifdef SERIAL_DEBUG
+			std::cout << "No messages available in buffer. Reading for more" << std::endl;
+		#endif
+
 		doAsyncRead();
 
 		timer.expires_from_now(boost::posix_time::milliseconds(getTimeout()));
@@ -231,6 +236,11 @@ size_t MessagedSerial::read(uint8_t* in, size_t amount)
 		io.run();
 		io.reset();
 	}
+	#ifdef SERIAL_DEBUG
+	else {
+		std::cout << "Messages available in buffer. Sending existing top of " << messages.size() << " messages" << std::endl;
+	}
+	#endif
 
 	size_t ret = 0;
 
@@ -290,10 +300,6 @@ void MessagedSerial::onReadComplete(const boost::system::error_code& error, size
 		throw SerialError(error.message());
 	}
 
-	#ifdef SERIAL_DEBUG_RX
-		std::cout << "MessagedSerial::onReadComplete - Received " << received << " - AV: " << port.available() << std::endl;
-	#endif
-
 	if (received && received != messageEnd.size()) {
 
 		std::vector<uint8_t> message;
@@ -327,11 +333,11 @@ void MessagedSerial::onReadComplete(const boost::system::error_code& error, size
 		
 		// exit here unless we have more messages we can consume for users next read request
 		if (!port.available()) {
+			timer.cancel();
 			return; 
 		}
 	} else if (received == messageEnd.size()) {
-
-		buffer.consume(buffer.size());
+		buffer.consume(messageEnd.size());
 	}
 
 	doAsyncRead();
@@ -357,7 +363,7 @@ void MessagedSerial::onTimeout(const boost::system::error_code& error)
 	timedOut = true;
 
 	port.cancel();
-
+	
 	if (error && error.value() != ECANCELED) {
 		throw SerialError(error.message());
 	}
@@ -373,12 +379,10 @@ const std::string& MessagedSerial::getMessageEnd()
 	return messageEnd;
 }
 
-
 const std::vector<std::vector<uint8_t>>& MessagedSerial::getMessages()
 {
 	return messages;
 }
-
 
 void MessagedSerial::setTimeout(int timeout)
 {

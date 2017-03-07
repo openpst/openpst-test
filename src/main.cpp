@@ -120,42 +120,46 @@ int main_streaming_dload(int argc, char* argv[]) {
 		std::string delim;
 		delim.push_back(HDLC_CONTROL_CHAR);
 		MessagedSerial port(argv[1], delim);
+		//Serial port(argv[1]);
 
 		if (port.isOpen()) {
 			std::cout << "Opened " << port.getDevice() << " - Data Waiting: " << port.available() << std::endl;
 		}
 		
-		StreamingDloadClient sdClient(port);
+		for (int i = 0; i < 10; i++) {
+			StreamingDloadClient sdClient(port);
 
-		StreamingDloadDeviceInfo sdHello = sdClient.hello();
+			StreamingDloadDeviceInfo sdHello = sdClient.hello();
 
-		std::cout << "[!] Version: " 			 << (int)sdHello.version << std::endl;
-		std::cout << "[!] Compatible Version: "  << (int)sdHello.compatibleVersion << std::endl;
-		std::cout << "[!] Preferred Block Size " << sdHello.maxPreferredBlockSize << std::endl;
-		std::cout << "[!] Base Flash Address "   << sdHello.baseFlashAddress << std::endl;
-		std::cout << "[!] Flash ID " 			 << sdHello.flashId << std::endl;
-		
-		if (sdHello.featureBits & STREAMING_DLOAD_FEATURE_BIT_UNCOMPRESSED_DOWNLOAD) {
-			std::cout << "[!] Device requires an uncompressed download" << std::endl;
+			std::cout << "[!] Version: " 			 << (int)sdHello.version << std::endl;
+			std::cout << "[!] Compatible Version: "  << (int)sdHello.compatibleVersion << std::endl;
+			std::cout << "[!] Preferred Block Size " << sdHello.maxPreferredBlockSize << std::endl;
+			std::cout << "[!] Base Flash Address "   << sdHello.baseFlashAddress << std::endl;
+			std::cout << "[!] Flash ID " 			 << sdHello.flashId << std::endl;
+			
+			if (sdHello.featureBits & STREAMING_DLOAD_FEATURE_BIT_UNCOMPRESSED_DOWNLOAD) {
+				std::cout << "[!] Device requires an uncompressed download" << std::endl;
+			}
+
+			if (sdHello.featureBits & STREAMING_DLOAD_FEATURE_BIT_NAND_BOOTABLE_IMAGE) {
+				std::cout << "[!] Device features NAND Bootable Image" << std::endl;
+			}
+
+			if (sdHello.featureBits & STREAMING_DLOAD_FEATURE_BIT_NAND_BOOT_LOADER) {
+				std::cout << "[!] Device features NAND Bootloader" << std::endl;
+			}
+
+			if (sdHello.featureBits & STREAMING_DLOAD_FEATURE_BIT_MULTI_IMAGE) {
+				std::cout << "[!] Supports multi-image" << std::endl;
+			}
+
+			if (sdHello.featureBits & STREAMING_DLOAD_FEATURE_BIT_SECTOR_ADDRESSES) {
+				std::cout << "[!] Device features sector addresses" << std::endl;
+			}
+
 		}
 
-		if (sdHello.featureBits & STREAMING_DLOAD_FEATURE_BIT_NAND_BOOTABLE_IMAGE) {
-			std::cout << "[!] Device features NAND Bootable Image" << std::endl;
-		}
-
-		if (sdHello.featureBits & STREAMING_DLOAD_FEATURE_BIT_NAND_BOOT_LOADER) {
-			std::cout << "[!] Device features NAND Bootloader" << std::endl;
-		}
-
-		if (sdHello.featureBits & STREAMING_DLOAD_FEATURE_BIT_MULTI_IMAGE) {
-			std::cout << "[!] Supports multi-image" << std::endl;
-		}
-
-		if (sdHello.featureBits & STREAMING_DLOAD_FEATURE_BIT_SECTOR_ADDRESSES) {
-			std::cout << "[!] Device features sector addresses" << std::endl;
-		}
-
-	} catch (SaharaClientError& e) {		
+	} catch (StreamingDloadClientError& e) {		
 		std::cout << "SaharaClientError: " << e.what() << std::endl;		
 	} catch (SerialError& e) {
 		std::cout << "SerialError: " << e.what() << std::endl;
