@@ -165,6 +165,8 @@ namespace OpenPST {
 				*/
 				int getTimeout();
 
+				// void setOnReadCallback(std::function<void(std::vector<uint8_t>& data, size_t amount) cb);
+
 			private:
 				void doAsyncRead();
 				void doAsyncWrite();

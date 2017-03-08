@@ -17,21 +17,13 @@
 * You should have received a copy of the GNU General Public License
 * along with libopenpst. If not, see <http://www.gnu.org/licenses/>.
 *
-* @file
-* @package libopenpst
-* @brief 
+* @file usb.cpp
+* @package openpst/libopenpst
+* @brief Read and write from usb endpoint(s)
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
 
-#include "qualcomm/hdlc_packet_transporter.h"
+#include "transport/usb.h"
 
-void HdlcPacketTransporter::write(Packet* packet, bool andRead)
-{
-	return PacketTransporter::write(packet, andRead);
-}
-
-void HdlcPacketTransporter::read(Packet* packet, bool andWrite)
-{
-	return PacketTransporter::read(packet, andWrite);
-}
+using namespace OpenPST::Transport;

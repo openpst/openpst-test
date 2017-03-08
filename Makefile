@@ -31,7 +31,6 @@ default:
 		./src/qualcomm/packet/streaming_dload_*.cpp \
 		./src/qualcomm/sahara_client.cpp \
 		./src/qualcomm/streaming_dload_client.cpp \
-		./src/qualcomm/hdlc_packet_transporter.cpp \
 		./src/main.cpp -o build/test -lpthread -lboost_system -lboost_thread
 
 

@@ -117,11 +117,11 @@ namespace OpenPST {
 
 				size_t getSectorSize();
 
-				void setMaxDiskSectors(size_t maxDiskSector);
+				void setMaxDiskSectors(size_t maxDiskSectors);
 
 				size_t getMaxDiskSectors();
 
-				size_t readEncoded(const std::vector<uint8_t>& data);
+				size_t readEncoded(std::vector<uint8_t>& data, size_t amount);
 
 				size_t readEncoded(uint8_t* data, size_t amount);
 				
@@ -132,6 +132,9 @@ namespace OpenPST {
 				size_t writeEncoded(uint8_t* data, size_t amount);
 
 				size_t writeEncoded(Packet* packet);
+
+				void writeAndReadEncoded(Packet* packet);
+
 		};
 
 		class StreamingDloadClientError : public std::exception

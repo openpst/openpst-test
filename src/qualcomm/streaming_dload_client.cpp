@@ -69,13 +69,9 @@ StreamingDloadDeviceInfo StreamingDloadClient::hello(std::string magic, uint8_t 
 	request.setCompatibleVersion(compatibleVersion);
 	request.setFeatureBits(featureBits);
 
-	request.prepareResponse();
-	
-	writeEncoded(&request);
+	writeAndReadEncoded(&request);
 
 	auto response = reinterpret_cast<StreamingDloadHelloResponse*>(request.getResponse());
-
-	readEncoded(response);
 
 	ret.version 				= response->getVersion();
 	ret.compatibleVersion 		= response->getCompatibleVersion();
@@ -97,13 +93,9 @@ bool StreamingDloadClient::setSecurityMode(StreamingDloadSecurityMode mode)
 {
 	StreamingDloadSecurityModeRequest request;
 
-	request.prepareResponse();
-
 	request.setMode(mode);
 
-	writeEncoded(&request);
-
-	readEncoded(request.getResponse());
+	writeAndReadEncoded(&request);
 }
 
 void StreamingDloadClient::nop()
@@ -114,13 +106,11 @@ void StreamingDloadClient::nop()
 
 	request.setIdentifier(10);
 
-	writeEncoded(&request);
+	writeAndReadEncoded(&request);
 
 	auto response = reinterpret_cast<StreamingDloadNopResponse*>(request.getResponse());
 
-	readEncoded(response);
-
-	if (response->getIdentifier() != request.getIdentifier()) {
+	if (response != nullptr && response->getIdentifier() != request.getIdentifier()) {
 		std::cout << "NOP Response Identifier differes from request";
 	}
 }
@@ -131,11 +121,7 @@ void StreamingDloadClient::reset()
 
 	request.prepareResponse();
 
-	writeEncoded(&request);
-
-	auto response = reinterpret_cast<StreamingDloadResetResponse*>(request.getResponse());
-
-	readEncoded(response);
+	writeAndReadEncoded(&request);
 }
 
 void StreamingDloadClient::powerOff()
@@ -205,55 +191,93 @@ void StreamingDloadClient::eraseFlash()
 
 void StreamingDloadClient::setSectorSize(size_t size)
 {
-
+	flashInfo.sectorSize = size;
 }
 
 size_t StreamingDloadClient::getSectorSize()
 {
-	return 0;
+	return flashInfo.sectorSize;
 }
 
-void StreamingDloadClient::setMaxDiskSectors(size_t maxDiskSector)
+void StreamingDloadClient::setMaxDiskSectors(size_t maxDiskSectors)
 {
-
+	flashInfo.maxSectors = maxDiskSectors;
 }
 
 size_t StreamingDloadClient::getMaxDiskSectors()
 {
-	return 0;
+	return flashInfo.maxSectors;
 }
 
-size_t StreamingDloadClient::readEncoded(const std::vector<uint8_t>& data)
+size_t StreamingDloadClient::readEncoded(std::vector<uint8_t>& data, size_t amount)
 {
-	return 0;
+	std::vector<uint8_t> tmp;
+
+	tmp.reserve(amount);
+
+	transport.read(tmp, amount);
+
+	encoder.decode(tmp);
+
+	return tmp.size();
 }
 
 size_t StreamingDloadClient::readEncoded(uint8_t* data, size_t amount)
 {
-	return 0;
+	std::vector<uint8_t> tmp;
+
+	tmp.reserve(amount);
+
+	size_t amountRead = transport.read(tmp, amount);
+
+	encoder.decode(tmp);
+
+	if (tmp.size() > amountRead) {
+
+	}
+
+	std::copy(tmp.begin(), tmp.begin() + amountRead, data);
+
+	return read;
 }
 
 size_t StreamingDloadClient::writeEncoded(const std::vector<uint8_t>& data)
 {
-	return 0;
+	if (!data.size()) {
+		return 0;
+	}
+
+	std::vector<uint8_t> tmp = data;
+
+	encoder.encode(tmp);
+
+	return transport.write(tmp);
 }
 
 size_t StreamingDloadClient::writeEncoded(uint8_t* data, size_t amount)
 {
-	return 0;
+	if (!data.size()) {
+		return 0;
+	}
+
+	std::vector<uint8_t> tmp = data;
+
+	encoder.encode(tmp);
+
+	return transport.write(tmp);
 }
 
 size_t StreamingDloadClient::readEncoded(Packet* packet)
 {
-	std::vector<uint8_t> encodedData;
+	std::vector<uint8_t> tmp;
 
-	encodedData.reserve(packet->getMaxDataSize());
+	tmp.reserve(packet->getMaxDataSize());
 
-	transport.read(encodedData, packet->getMaxDataSize());
+	transport.read(tmp, packet->getMaxDataSize());
 
-	encoder.decode(encodedData);
+	encoder.decode(tmp);
 
-	packet->unpack(encodedData, &transport);
+	packet->unpack(tmp, &transport);
 
 	return packet->size();
 }
@@ -264,9 +288,32 @@ size_t StreamingDloadClient::writeEncoded(Packet* packet)
 		return 0;
 	}
 
-	std::vector<uint8_t> encodedData = packet->getData();
+	std::vector<uint8_t> tmp = packet->getData();
 
-	encoder.encode(encodedData);
+	encoder.encode(tmp);
 
-	return transport.write(encodedData);
+	return transport.write(tmp);
+}
+
+
+void StreamingDloadClient::writeAndReadEncoded(Packet* packet)
+{
+	if (!transport.isOpen()) {
+		throw StreamingDloadClientError("Transport not open");
+	}
+
+	packet->prepare();
+
+	writeEncoded(packet);
+
+	if (packet->isResponseExpected()) {
+		
+		packet->prepareResponse();
+
+		if (packet->getResponse() == nullptr) {
+			throw StreamingDloadClient("Response packet has not been allocated");
+		}
+
+		readEncoded(packet->getResponse());
+	}
 }
