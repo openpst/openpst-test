@@ -27,7 +27,7 @@
 #pragma once
 
 #include "definitions.h"
-#include "transport/transport_interface.h"
+#include "transport/messaged_transport_interface.h"
 #include "transport/packet.h"
 #include "transport/packet_transporter.h"
 #include "qualcomm/streaming_dload.h"
@@ -60,7 +60,7 @@ namespace OpenPST {
 
 		class StreamingDloadClient {
 			protected:
-				TransportInterface& transport;
+				MessagedTransportInterface& transport;
 				PacketTransporter packetTransporter;
 				StreamingDloadFlashInfo flashInfo;
 				PacketEndianess deviceEndianess;
@@ -73,17 +73,17 @@ namespace OpenPST {
 
 				~StreamingDloadClient();
 
-				TransportInterface* getTransport();
+				MessagedTransportInterface* getTransport();
 				
-				void setTransport(TransportInterface& transport);
+				void setTransport(MessagedTransportInterface& transport);
 
-				StreamingDloadDeviceInfo hello(std::string magic = "QCOM fast download protocol host", uint8_t version = 0x05, uint8_t compatibleVersion = 0x02, uint8_t featureBits = STREAMING_DLOAD_FEATURE_ALL);
+				StreamingDloadDeviceInfo hello(const std::string& magic = "QCOM fast download protocol host", uint8_t version = 0x04, uint8_t compatibleVersion = 0x02, uint8_t featureBits = STREAMING_DLOAD_FEATURE_ALL);
 
 				bool unlock(uint64_t code);
 
 				bool setSecurityMode(StreamingDloadSecurityMode mode);
 
-				void nop();
+				void nop(uint32_t identifier);
 
 				void reset();
 
@@ -103,7 +103,7 @@ namespace OpenPST {
 
 				size_t readFlash(uint32_t lba, size_t amount, std::ofstream& out);
 
-				uint8_t writePartitionTable(std::string filePath, bool overwrite = false);
+				uint8_t writePartitionTable(const std::string& filePath, bool overwrite = false);
 
 				size_t writeFlash(uint32_t lba, std::ifstream& file, size_t amount);
 

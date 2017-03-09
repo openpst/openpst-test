@@ -19,7 +19,7 @@
 *
 * @file streaming_dload_close_request.h
 * @package openpst/libopenpst
-* @brief  This file was auto generated on 03/02/2017
+* @brief  This file was auto generated on 03/09/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -48,21 +48,7 @@ namespace OpenPST {
                 */
                 ~StreamingDloadCloseRequest();
 
-                
-                /**
-                * @brief Get mode
-                * @return uint8_t
-                */
-                uint8_t getMode();
-                                
-
-                /**
-                * @brief Set mode
-                * @param uint8_t mode
-                * @return void
-                */
-                void setMode(uint8_t mode);
-                				/**
+				/**
 				* @overload Packet::unpack
 				*/
 	            void unpack(std::vector<uint8_t>& data, TransportInterface* transport) override;

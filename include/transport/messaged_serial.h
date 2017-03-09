@@ -27,7 +27,7 @@
 
 #pragma once
 
-#include "transport/transport_interface.h"
+#include "transport/messaged_transport_interface.h"
 #include "transport/serial.h"
 #include <boost/asio.hpp>
 #include <boost/asio/serial_port.hpp>
@@ -45,7 +45,7 @@ using boost::posix_time::time_duration;
 namespace OpenPST {
 	namespace Transport {
 
-		class MessagedSerial : public TransportInterface
+		class MessagedSerial : public MessagedTransportInterface
 		{
 			protected:
 				io_service     io;

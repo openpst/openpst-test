@@ -17,44 +17,26 @@
 * You should have received a copy of the GNU General Public License
 * along with libopenpst. If not, see <http://www.gnu.org/licenses/>.
 *
-* @file dm_efs_lstat_request.cpp
+* @file messaged_transport_interface.h
 * @package openpst/libopenpst
-* @brief  This file was auto generated on 03/09/2017
-*
+* @brief Extends TransportInterface for protocols which are messaged, like AT or HDLC
 * @author Gassan Idriss <ghassani@gmail.com>
 */
 
-#include "qualcomm/packet/dm_efs_lstat_request.h"
+#pragma once
 
-using namespace OpenPST::Qualcomm;
+#include "definitions.h"
+#include "transport/transport_interface.h"
+#include <vector>
 
-DmEfsLstatRequest::DmEfsLstatRequest(PacketEndianess targetEndian) : DmEfsPacket(targetEndian)
-{
-	addField("path", kPacketFieldTypeVariant, 0);
+namespace OpenPST {
+	namespace Transport {
 
-	setSubsysCommand(kDiagEfsLstat);
+		class MessagedTransportInterface : public TransportInterface
+		{
+			public:
+				virtual const std::vector<std::vector<uint8_t>>& getMessages() = 0;
 
-	setResponseExpected(false);
-}
-
-DmEfsLstatRequest::~DmEfsLstatRequest()
-{
-
-}
-
-std::vector<uint8_t> DmEfsLstatRequest::getPath()
-{
-	return read(getFieldSize("path"), getFieldOffset("path"));
-}
-                
-
-void DmEfsLstatRequest::setPath(uint8_t* data, size_t size)
-{
-    write("path", data, size);
-}
-
-void DmEfsLstatRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
-{
-	DmEfsPacket::unpack(data, transport);
-	//variable
+		};
+	}
 }

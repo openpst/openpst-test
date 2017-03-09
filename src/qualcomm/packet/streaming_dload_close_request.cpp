@@ -19,7 +19,7 @@
 *
 * @file streaming_dload_close_request.cpp
 * @package openpst/libopenpst
-* @brief  This file was auto generated on 03/02/2017
+* @brief  This file was auto generated on 03/09/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -30,7 +30,6 @@ using namespace OpenPST::Qualcomm;
 
 StreamingDloadCloseRequest::StreamingDloadCloseRequest(PacketEndianess targetEndian) : StreamingDloadPacket(targetEndian)
 {
-	addField("mode", kPacketFieldTypePrimitive, sizeof(uint8_t));
 
 	setCommand(kStreamingDloadClose);
 
@@ -40,17 +39,6 @@ StreamingDloadCloseRequest::StreamingDloadCloseRequest(PacketEndianess targetEnd
 StreamingDloadCloseRequest::~StreamingDloadCloseRequest()
 {
 
-}
-
-uint8_t StreamingDloadCloseRequest::getMode()
-{
-    return read<uint8_t>(getFieldOffset("mode"));
-}
-                
-
-void StreamingDloadCloseRequest::setMode(uint8_t mode)
-{
-    write<uint8_t>("mode", mode);
 }
 
 void StreamingDloadCloseRequest::prepareResponse()
@@ -64,5 +52,4 @@ void StreamingDloadCloseRequest::prepareResponse()
 void StreamingDloadCloseRequest::unpack(std::vector<uint8_t>& data, TransportInterface* transport)
 {
 	StreamingDloadPacket::unpack(data, transport);
-	setMode(read<uint8_t>(data, getFieldOffset("mode")));
 }

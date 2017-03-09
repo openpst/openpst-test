@@ -19,7 +19,7 @@
 *
 * @file dm_efs_close_file_request.cpp
 * @package openpst/libopenpst
-* @brief  This file was auto generated on 03/02/2017
+* @brief  This file was auto generated on 03/09/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */

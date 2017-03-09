@@ -754,10 +754,6 @@ $packets['streaming_dload'] = [
 		'expects_response' => 'StreamingDloadCloseResponse',
 		'unpack_base' => true,
 		'fields'  => [
-			'mode' => [ 
-				'type' => FIELD_TYPE_UINT8,
-				'size' => $fieldSizes[FIELD_TYPE_UINT8],
-			]
 		],
 		'default_exends' => [
 			'command' => 'kStreamingDloadClose'

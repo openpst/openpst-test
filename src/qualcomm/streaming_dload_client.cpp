@@ -28,14 +28,14 @@
 
 using namespace OpenPST::Qualcomm;
 
-StreamingDloadClient::StreamingDloadClient(TransportInterface& transport, const StreamingDloadFlashInfo& flashInfo, PacketEndianess deviceEndianess) :
+StreamingDloadClient::StreamingDloadClient(MessagedTransportInterface& transport, const StreamingDloadFlashInfo& flashInfo, PacketEndianess deviceEndianess) :
 	transport(transport), packetTransporter(transport), deviceEndianess(deviceEndianess)
 {
 	this->flashInfo.sectorSize = flashInfo.sectorSize;
 	this->flashInfo.maxSectors = flashInfo.maxSectors;
 }
 
-StreamingDloadClient::StreamingDloadClient(TransportInterface& transport, PacketEndianess deviceEndianess) :
+StreamingDloadClient::StreamingDloadClient(MessagedTransportInterface& transport, PacketEndianess deviceEndianess) :
 	transport(transport), packetTransporter(transport), deviceEndianess(deviceEndianess)
 {
 	this->flashInfo.sectorSize = 512;
@@ -47,18 +47,18 @@ StreamingDloadClient::~StreamingDloadClient()
 
 }
 
-TransportInterface* StreamingDloadClient::getTransport()
+MessagedTransportInterface* StreamingDloadClient::getTransport()
 {
 	return &transport;
 }
 
-void StreamingDloadClient::setTransport(TransportInterface& transport)
+void StreamingDloadClient::setTransport(MessagedTransportInterface& transport)
 {
 	this->transport = transport;
 	packetTransporter.setTransport(transport);
 }
 
-StreamingDloadDeviceInfo StreamingDloadClient::hello(std::string magic, uint8_t version, uint8_t compatibleVersion, uint8_t featureBits)
+StreamingDloadDeviceInfo StreamingDloadClient::hello(const std::string& magic, uint8_t version, uint8_t compatibleVersion, uint8_t featureBits)
 {
 	StreamingDloadDeviceInfo ret = {};
 
@@ -98,13 +98,13 @@ bool StreamingDloadClient::setSecurityMode(StreamingDloadSecurityMode mode)
 	writeAndReadEncoded(&request);
 }
 
-void StreamingDloadClient::nop()
+void StreamingDloadClient::nop(uint32_t identifier)
 {
 	StreamingDloadNopRequest request;
 
 	request.prepareResponse();
 
-	request.setIdentifier(10);
+	request.setIdentifier(identifier);
 
 	writeAndReadEncoded(&request);
 
@@ -118,39 +118,50 @@ void StreamingDloadClient::nop()
 void StreamingDloadClient::reset()
 {
 	StreamingDloadResetRequest request;
-
-	request.prepareResponse();
-
 	writeAndReadEncoded(&request);
 }
 
 void StreamingDloadClient::powerOff()
 {
-
+	StreamingDloadPowerOffRequest request;
+	writeAndReadEncoded(&request);
 }
 
 uint8_t StreamingDloadClient::getEcc()
 {
+	StreamingDloadGetEccStateRequest request;
+	writeAndReadEncoded(&request);
 	return 0;
 }
 
 bool StreamingDloadClient::setEcc(uint8_t status)
 {
+	StreamingDloadSetEccStateRequest request;
+	request.setStatus(status);
+	writeAndReadEncoded(&request);
 	return true;
 }
 
 bool StreamingDloadClient::openMode(StreamingDloadOpenMode mode)
 {
+	StreamingDloadOpenRequest request;
+	request.setMode(mode);
+	writeAndReadEncoded(&request);
 	return true;
 }
 
 bool StreamingDloadClient::closeMode()
 {
+	StreamingDloadCloseRequest request;
+	writeAndReadEncoded(&request);
 	return true;
 }
 
 bool StreamingDloadClient::openMultiImage(StreamingDloadOpenMultiMode imageType)
 {
+	StreamingDloadOpenMultiImageRequest request;
+	request.setType(imageType);
+	writeAndReadEncoded(&request);
 	return true;
 }
 
@@ -164,7 +175,7 @@ size_t StreamingDloadClient::readFlash(uint32_t lba, size_t amount, std::ofstrea
 	return 0;
 }
 
-uint8_t StreamingDloadClient::writePartitionTable(std::string filePath, bool overwrite)
+uint8_t StreamingDloadClient::writePartitionTable(const std::string& filePath, bool overwrite)
 {
 	return 0;
 }
@@ -186,7 +197,8 @@ size_t StreamingDloadClient::writeFlash(uint32_t lba, uint8_t* data, size_t amou
 
 void StreamingDloadClient::eraseFlash()
 {
-
+	StreamingDloadEraseFlashRequest request;
+	writeAndReadEncoded(&request);
 }
 
 void StreamingDloadClient::setSectorSize(size_t size)
@@ -238,7 +250,7 @@ size_t StreamingDloadClient::readEncoded(uint8_t* data, size_t amount)
 
 	std::copy(tmp.begin(), tmp.begin() + amountRead, data);
 
-	return read;
+	return amountRead;
 }
 
 size_t StreamingDloadClient::writeEncoded(const std::vector<uint8_t>& data)
@@ -256,11 +268,15 @@ size_t StreamingDloadClient::writeEncoded(const std::vector<uint8_t>& data)
 
 size_t StreamingDloadClient::writeEncoded(uint8_t* data, size_t amount)
 {
-	if (!data.size()) {
+	if (!amount) {
 		return 0;
 	}
 
-	std::vector<uint8_t> tmp = data;
+	std::vector<uint8_t> tmp;
+
+	tmp.reserve(amount);
+
+	tmp.insert(tmp.begin(), data, data + amount);
 
 	encoder.encode(tmp);
 
@@ -311,7 +327,7 @@ void StreamingDloadClient::writeAndReadEncoded(Packet* packet)
 		packet->prepareResponse();
 
 		if (packet->getResponse() == nullptr) {
-			throw StreamingDloadClient("Response packet has not been allocated");
+			throw StreamingDloadClientError("Response packet has not been allocated");
 		}
 
 		readEncoded(packet->getResponse());
