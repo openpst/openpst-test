@@ -5,6 +5,8 @@
 {% include 'getters/method_get_vector.twig' %}
 {% elseif getter == 'string' %}
 {% include 'getters/method_get_string.twig' %}
+{% elseif getter == 'file' %}
+{% include 'getters/method_get_file.twig' %}
 {% endif %}
 {% endfor %}
 {% else %}
@@ -17,6 +19,8 @@
 {% include 'getters/method_get_vector.twig' %}
 {% elseif getter == 'string' %}
 {% include 'getters/method_get_string.twig' %}
+{% elseif getter == 'file' %}
+{% include 'getters/method_get_file.twig' %}
 {% endif %}
 {% endfor %}
 {% else %}

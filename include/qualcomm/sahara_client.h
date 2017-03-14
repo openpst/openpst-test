@@ -131,6 +131,10 @@ namespace OpenPST {
 
 				void reset();
 
+				//void setImageTransferCallback(std::function<void(size_t, off_t)>);
+
+				//void setMemoryReadCallback(std::function<void(uint32_t, size_t)>);
+
 				const std::string getRequestedImageName(uint32_t imageId);
 				
 				const std::string getModeName(uint32_t mode);

@@ -19,7 +19,7 @@
 *
 * @file streaming_dload_read_response.h
 * @package openpst/libopenpst
-* @brief  This file was auto generated on 03/09/2017
+* @brief  This file was auto generated on 03/14/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -60,6 +60,13 @@ namespace OpenPST {
                 * @return void
                 */
                 void setAddress(uint32_t address);
+                                
+                /**
+                * @brief Get data
+                * @param std::ofstream& file
+                * @return size_t
+                */
+                size_t getData(std::ofstream& file);
                 
                 /**
                 * @brief Get data

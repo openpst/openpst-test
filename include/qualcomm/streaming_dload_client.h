@@ -120,6 +120,10 @@ namespace OpenPST {
 
 				size_t getMaxDiskSectors();
 
+				//void setReadBlockCallback(std::function<void(uint32_t, size_t)>);
+
+				//void setWriteBlockCallback(std::function<void(uint32_t, size_t)>);
+
 				size_t readEncoded(std::vector<uint8_t>& data, size_t amount);
 
 				size_t readEncoded(uint8_t* data, size_t amount);

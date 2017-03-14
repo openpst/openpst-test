@@ -159,9 +159,9 @@ int main_streaming_dload(int argc, char* argv[]) {
 		sdClient.setSecurityMode(kStreamingDloadSecurityModeUntrusted);
 		
 		// test NOP
-		for (int i = 0; i < 20; i++) {
+		/*for (int i = 0; i < 20; i++) {
 			sdClient.nop(static_cast<uint32_t>(i));
-		}
+		}*/
 
 		// test Open Mode
 		for (int i = 0; i < 20; i++) {
@@ -182,7 +182,12 @@ int main_streaming_dload(int argc, char* argv[]) {
 		if (!ofile.is_open()) {
 			std::cout << "Could not open " << outFilePath << " for writing" << std::endl;
 			return 1;
-		}*/
+		}
+
+		sdClient.read(0x00000000, 1024 * 1024 * 1024, ofile);
+		
+		
+		*/
 
 
 

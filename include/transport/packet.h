@@ -500,6 +500,26 @@ namespace OpenPST {
                 }
 
                 /**
+                * @brief Read field data into ofstream
+                * @param std::ofstream&
+                * @param size_t
+                * @param off_t
+                * @return void
+                */
+                inline size_t read(const std::string& fieldName, std::ofstream& file)
+                {   
+                    auto field = getField(fieldName);
+                    
+                    if (!file.is_open()) {
+                    	throw PacketInvalidArgument("File is not open for writing");
+                    }
+
+                    file.write(reinterpret_cast<char*>(&data[getFieldOffset(fieldName)]), field->size);
+
+                    return field->size;
+                }
+
+                /**
                 * @brief Write primitive type T into the data buffer at offset
                 * @param const T& value
                 * @param off_t offset

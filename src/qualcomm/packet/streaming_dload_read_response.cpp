@@ -19,7 +19,7 @@
 *
 * @file streaming_dload_read_response.cpp
 * @package openpst/libopenpst
-* @brief  This file was auto generated on 03/09/2017
+* @brief  This file was auto generated on 03/14/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -52,6 +52,11 @@ uint32_t StreamingDloadReadResponse::getAddress()
 void StreamingDloadReadResponse::setAddress(uint32_t address)
 {
     write<uint32_t>("address", address);
+}
+
+size_t StreamingDloadReadResponse::getData(std::ofstream& file)
+{
+    return read("data", file);
 }
 
 std::vector<uint8_t> StreamingDloadReadResponse::getData()

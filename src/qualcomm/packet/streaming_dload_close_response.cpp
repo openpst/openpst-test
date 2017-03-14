@@ -19,7 +19,7 @@
 *
 * @file streaming_dload_close_response.cpp
 * @package openpst/libopenpst
-* @brief  This file was auto generated on 03/09/2017
+* @brief  This file was auto generated on 03/14/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */

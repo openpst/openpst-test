@@ -19,7 +19,7 @@
 *
 * @file streaming_dload_stream_write_request.h
 * @package openpst/libopenpst
-* @brief  This file was auto generated on 03/09/2017
+* @brief  This file was auto generated on 03/14/2017
 *
 * @author Gassan Idriss <ghassani@gmail.com>
 */
@@ -68,6 +68,13 @@ namespace OpenPST {
                 * @return variable
                 */
                 std::vector<uint8_t> getData();
+                                
+                /**
+                * @brief Get data
+                * @param std::ofstream& file
+                * @return size_t
+                */
+                size_t getData(std::ofstream& file);
                                 
 
                 /**
