@@ -61,15 +61,14 @@ namespace OpenPST {
 		class StreamingDloadClient {
 			protected:
 				MessagedTransportInterface& transport;
-				PacketTransporter packetTransporter;
 				StreamingDloadFlashInfo flashInfo;
 				PacketEndianess deviceEndianess;
 				HdlcEncoder encoder;
 
 			public:
-				StreamingDloadClient(TransportInterface& transport, const StreamingDloadFlashInfo& flashInfo, PacketEndianess deviceEndianess = kPacketEndianessLittle);
+				StreamingDloadClient(MessagedTransportInterface& transport, const StreamingDloadFlashInfo& flashInfo, PacketEndianess deviceEndianess = kPacketEndianessLittle);
 
-				StreamingDloadClient(TransportInterface& transport, PacketEndianess deviceEndianess = kPacketEndianessLittle);
+				StreamingDloadClient(MessagedTransportInterface& transport, PacketEndianess deviceEndianess = kPacketEndianessLittle);
 
 				~StreamingDloadClient();
 
